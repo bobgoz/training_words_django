@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <a href="{% url "index" %}">На главную</a>
+
+  {% if page_obj %}
+
+    <ul>
+      Всего активных слов: {{ page_obj.paginator.count }}
+      {% for item in page_obj %}
+        <div>
+          {{ forloop.counter }}) 
+          {{ item.word }}
+          <a href="{% url "detail" pk_word=item.pk %}">Подробнее</a>
+        </div>
+      {% endfor %}
+    </ul>
+    <div class="pagination">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo;В начало</a>
+          <a href="?page={{ page_obj.previous_page_number  }}">Назад</a>
+        {% endif %}
+        <span class="current">
+          Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">Вперед</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">В конец&raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+  {% comment %} Рандомные слова {% endcomment %}
+  {% elif random_words %}
+    {% for word in random_words %}
+      <div>
+        {{ forloop.counter }}) 
+        {{ word.word }}
+        <a href="{% url "edit_word" pk_word=word.pk %}">Редактировать</a>
+      </div>
+    {% endfor %}
+    <p>
+      <form action="{% url "training" %}" method="get">
+        <button type="submit">Вернуться в обычный режим тренировки</button>
+      </form>
+    </p>
+  {% else %}
+      <div>
+        Слов нет
+      </div>
+  {% endif %}
+  {% if page_obj or random_words %}
+  <p>
+    <form action="{% url "random" %}" method="get">
+      <button type="submit">Рандом</button>
+    </form>
+  </p>
+  {% endif %}
+  {% if not random_words %}
+    <form action="{% url "mark_as_active" %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Добавить 10 новых слов</button>
+    </form>
+  {% endif %}
+{% endblock content %}

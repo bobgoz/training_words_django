@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div style="text-align: center; margin-top: 50px;">
+    {% if user.is_authenticated %}
+        <h1>Привет, {{ user.first_name }}!</h1>
+        <p>Ты успешно вошёл в систему.</p>
+        
+        <div style="margin-top: 30px;">
+            <a href="{% url 'add_word' %}" style="
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-right: 10px;
+            ">Добавить слово</a>
+
+        <div style="margin-top: 30px;">
+            <a href="{% url 'training' %}" style="
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-right: 10px;
+            ">Тренироваться</a>
+            
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="
+                    padding: 10px 20px;
+                    background-color: #f44336;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                ">Выйти</button>
+            </form>
+        </div>
+        
+    {% else %}
+        <h1>Добро пожаловать в тренажёр слов!</h1>
+        <p>Пожалуйста, войди или зарегистрируйся, чтобы начать.</p>
+        
+        <div style="margin-top: 30px;">
+            <a href="{% url 'login' %}" style="
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-right: 10px;
+            ">Войти</a>
+            
+            <a href="{% url 'registration' %}" style="
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #2196F3;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+            ">Регистрация</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

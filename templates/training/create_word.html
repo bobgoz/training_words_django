@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить новое слово{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <h1>Добавить новое слово</h1>
+
+  <form method="post" autocomplete="off">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Сохранить</button>
+  </form>
+  <p><a href="{% url "index" %}">На главную</a></p>
+  <p><a href="{% url "training" %}">Тренироваться</a></p>
+{% else %}
+    <h1>Увы, надо зарегаться</h1>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,7049 @@
+[
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 1,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Упрекать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 2,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Придираться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 4,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Проще"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 5,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отвлекаться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 6,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Герметик"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 7,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Герметизация"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 8,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Хрупкий"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 9,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сконцетрироваться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 10,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Повесить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 11,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Висит"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 12,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Определить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 13,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Определённый"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 14,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Концетрация"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 15,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сконцетрирован"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 16,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Четверть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 17,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Подошва"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 18,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Миниатюрный"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 19,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Мало Не Покажется"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 20,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Треть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 21,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Аналог"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 22,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Криптовалюта"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 23,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Прикидываться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 24,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Клевать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 25,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Клевать Мозги"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 26,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Растеряться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 27,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Примитивно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 28,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Застыть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 29,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Трагедия"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 30,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Организация"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 31,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отреагировать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 32,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Органы Опеки"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 33,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Присев на корточки"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 34,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Напоследок"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 35,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Щуриться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 36,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Удаляется"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 37,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Окутывает"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 38,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Витает"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 39,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дотошный"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 40,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сковать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 41,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Колоть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 42,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Колит"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 43,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Разложенные"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 44,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Запустить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 45,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Послевкусие"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 46,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пропал"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 47,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Имеет значение"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 48,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Абсурд"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 49,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Упёртая"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 50,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ликовать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 51,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Клешня"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 52,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Перевернуться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 53,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Горбатиться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 54,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Манипуляция"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 55,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Осилить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 56,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Упорный"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 57,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Стремительно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 58,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Олицетворение"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 59,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Трапеза"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 60,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Оппозиция"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 61,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Судя (По Чему-То)"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 62,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Переборщить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 63,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Параноик (Паранояй)"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 64,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Зацикливаться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 65,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Тащить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 66,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Перетащить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 67,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Расчленение"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 68,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Свайп"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 69,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Цикл"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 70,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Атрофия"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 71,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Интерфейс"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 72,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Виртуальный"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 73,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Уместно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 74,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сценарий"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 75,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Авантюрист"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 76,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Эталон"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 77,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Мачо"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 78,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Исекай"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 79,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пересечь"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 80,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Польщена"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 81,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сарказм"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 82,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Заманчиво"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 83,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Самовнушение"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 84,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Генератор"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 85,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ностальгия"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 86,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сгенерировал"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 87,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Вероятно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 88,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Большинство"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 89,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Подавляющее большинство"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 90,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Подавление"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 91,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Перекрыть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 92,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Избалованная"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 93,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пропорция"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 94,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Лишать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 95,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Стремиться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 96,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Кроется"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 97,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Расстройство"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 98,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рывок"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 99,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Совершить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 100,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пригодится"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 101,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Резкий"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 102,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Потребность"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 103,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Симптомы"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 104,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Емкость"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 105,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Не помню, сколько номер кабинет"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 106,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Естественно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 107,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Вследствие"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 108,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Персональные данные"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 109,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Утечка"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 110,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Душнила"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 111,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Завис"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 112,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Телесный контакт"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 113,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Половой контакт"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 114,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Избавиться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 115,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Наизнанку"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 116,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Побочный эффект"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 117,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Утомительно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 118,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Эскалация"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 119,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Умышленно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 120,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Коммуникация"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 121,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Облегчит"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 122,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Грабеж"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 123,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Приходится"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 124,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Лопну"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 125,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Орбита"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 126,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Капитализм"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 127,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Критично"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 128,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Менталитет"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 129,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обострение"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 130,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Спровоцировала"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 131,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сожрал"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 132,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Активация"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 133,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Буллинг"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 134,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Действовать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 135,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Будучи"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 136,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Огорчает"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 137,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Лояльно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 138,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Разгребать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 139,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Учесть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 140,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сознательно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 141,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Загугли"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 142,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Мизерный"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 143,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Действительно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 144,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Выручка"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 145,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Чутье"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 146,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отражает"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 147,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Исходя"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 148,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обеспечивать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 149,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Симуляция"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 150,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Выручить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 151,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Симулянт"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 152,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Доверенность"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 153,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отчитывать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 154,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Миновать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 155,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Котёл"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 156,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Намекать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 157,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пресса"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 158,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пачка"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 159,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Купюра"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 160,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Прокрастинатор"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 161,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Потерпевший"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 162,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Терпеливый"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 163,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сорваться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 164,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Раскрытие"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 165,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Проехать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 166,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Лидер"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 167,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Косметический ремонт"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 168,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Освещать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 169,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Публика"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 170,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Утвердительно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 171,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Класть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 172,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Капитальный ремонт"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 173,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Расследование"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 174,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сиять"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 175,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Напомнить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 176,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Корректно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 177,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Просрочка"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 178,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Распределять"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 179,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Нету такого SKU"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 180,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Столкновение"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 181,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Впредь"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 182,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Оставить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 183,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дождались"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 184,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Полно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 185,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Абсолютно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 186,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Банкротство"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 187,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Разобралась?"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 188,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Попал"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 189,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Предупреждение"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 190,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Демография"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 191,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Подложить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 192,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Экспорт"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 193,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Импорт"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 194,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Размещение"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 195,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Порыться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 196,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Косяк"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 197,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "В рамках"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 198,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Скорректировать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 199,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сдох"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 200,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Букашка"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 201,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рыться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 202,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рыть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 203,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Необходимо"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 204,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Значительно"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 205,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Аномальный"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 206,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Париться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 207,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Скупой"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 208,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Приступить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 209,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Актуальный"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 210,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Не парься"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 211,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Мышление"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 212,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Нейтральный"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 213,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Целая"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 214,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Интуиция"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 215,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Инстинкт"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 216,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Смекалка"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 217,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Мочить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 218,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Тянуть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 219,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Вряд ли"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 220,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "В меру"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 221,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ход"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 222,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Снаружи"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 223,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Контрабанда"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 224,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Бюджет"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 225,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сделка"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 226,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Провокация"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 227,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Жрать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 228,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Доесть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 229,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Майдан"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 230,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Стык"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 231,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Верёвка"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 232,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Адекватный"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 233,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Иметь ввиду"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 235,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Карма"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 236,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Край"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 237,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Крайность"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 238,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Избивать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 239,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Залезать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 240,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Нормально дела"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 241,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Остыть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 242,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Подтвердить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 243,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Вылезать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 244,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Выгореть"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 245,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Любоваться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 246,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Доделать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 247,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Кроме"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 248,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Контакты"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 249,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Криво"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 250,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Мог"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 251,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Удалось"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 252,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ерунда"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 253,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Списание"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 254,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Куча"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 255,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Здание"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 256,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Зависимость"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 257,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Основной"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 258,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Абьюзер"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 259,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Догадаться"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 260,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Густой"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 261,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сходи"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 262,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Исключение"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 263,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Конкурент"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 264,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Накручивать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 265,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Навоз"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 266,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Уточнить"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 267,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Бумеранг"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 268,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рабочая ставка"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 269,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Снос"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 270,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Зона ответственности"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 271,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Влезать"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 272,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Фальсификация"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 273,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Скорее всего"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 274,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Преображение"
+  },
+  {
+    "added_at": "2026-01-06 23:06:00",
+    "description": null,
+    "id": 275,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Предусмотреть"
+  },
+  {
+    "added_at": "2026-01-10 19:47:57",
+    "description": null,
+    "id": 276,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Особенность"
+  },
+  {
+    "added_at": "2026-01-10 19:47:57",
+    "description": null,
+    "id": 277,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Непереносимость"
+  },
+  {
+    "added_at": "2026-01-10 19:47:57",
+    "description": null,
+    "id": 278,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Недопустимо"
+  },
+  {
+    "added_at": "2026-01-10 19:47:57",
+    "description": null,
+    "id": 279,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Загнать"
+  },
+  {
+    "added_at": "2026-01-11 18:37:57",
+    "description": null,
+    "id": 280,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Экспотенциально"
+  },
+  {
+    "added_at": "2026-01-11 18:37:57",
+    "description": null,
+    "id": 281,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Замер"
+  },
+  {
+    "added_at": "2026-01-11 18:37:57",
+    "description": null,
+    "id": 282,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Контактный"
+  },
+  {
+    "added_at": "2026-01-11 18:37:57",
+    "description": null,
+    "id": 283,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Танкер"
+  },
+  {
+    "added_at": "2026-01-11 18:44:14",
+    "description": null,
+    "id": 284,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Намеренно"
+  },
+  {
+    "added_at": "2026-01-11 18:44:14",
+    "description": null,
+    "id": 285,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сельское Хазяйство"
+  },
+  {
+    "added_at": "2026-01-11 18:44:14",
+    "description": null,
+    "id": 286,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Финансирование"
+  },
+  {
+    "added_at": "2026-01-11 18:44:14",
+    "description": null,
+    "id": 287,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Интенсивно"
+  },
+  {
+    "added_at": "2026-01-11 18:44:14",
+    "description": null,
+    "id": 288,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Полуфабрикат"
+  },
+  {
+    "added_at": "2026-01-11 18:44:14",
+    "description": null,
+    "id": 289,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Гипотеза"
+  },
+  {
+    "added_at": "2026-01-13 22:52:18",
+    "description": null,
+    "id": 290,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Санитария"
+  },
+  {
+    "added_at": "2026-01-13 22:52:18",
+    "description": null,
+    "id": 291,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Брезгливый"
+  },
+  {
+    "added_at": "2026-01-13 22:52:18",
+    "description": null,
+    "id": 292,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Брезгливость"
+  },
+  {
+    "added_at": "2026-01-13 22:52:18",
+    "description": null,
+    "id": 293,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Так как"
+  },
+  {
+    "added_at": "2026-01-13 22:52:18",
+    "description": null,
+    "id": 294,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Адаптация"
+  },
+  {
+    "added_at": "2026-01-13 22:52:18",
+    "description": null,
+    "id": 295,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Колет"
+  },
+  {
+    "added_at": "2026-01-13 22:52:18",
+    "description": null,
+    "id": 296,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Интеллигент"
+  },
+  {
+    "added_at": "2026-01-13 22:52:18",
+    "description": null,
+    "id": 297,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Насыщенность  \nкомандовать"
+  },
+  {
+    "added_at": "2026-01-13 22:52:18",
+    "description": null,
+    "id": 298,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дистанция"
+  },
+  {
+    "added_at": "2026-01-14 22:25:25",
+    "description": null,
+    "id": 299,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ориентироваться"
+  },
+  {
+    "added_at": "2026-01-14 22:25:25",
+    "description": null,
+    "id": 300,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ориентир"
+  },
+  {
+    "added_at": "2026-01-14 22:25:25",
+    "description": null,
+    "id": 301,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Фиксация"
+  },
+  {
+    "added_at": "2026-01-14 22:25:25",
+    "description": null,
+    "id": 302,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Зафиксировать"
+  },
+  {
+    "added_at": "2026-01-14 22:25:25",
+    "description": null,
+    "id": 303,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Насыщенный день"
+  },
+  {
+    "added_at": "2026-01-14 22:25:25",
+    "description": null,
+    "id": 304,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обладание"
+  },
+  {
+    "added_at": "2026-01-14 22:25:25",
+    "description": null,
+    "id": 305,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Расстояние"
+  },
+  {
+    "added_at": "2026-01-14 22:25:25",
+    "description": null,
+    "id": 306,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Легла"
+  },
+  {
+    "added_at": "2026-01-14 22:25:25",
+    "description": null,
+    "id": 307,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Поражений"
+  },
+  {
+    "added_at": "2026-01-14 22:25:25",
+    "description": null,
+    "id": 308,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Возражать"
+  },
+  {
+    "added_at": "2026-01-17 13:57:34",
+    "description": null,
+    "id": 309,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обременение"
+  },
+  {
+    "added_at": "2026-01-17 13:57:34",
+    "description": null,
+    "id": 310,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Трезвый"
+  },
+  {
+    "added_at": "2026-01-17 13:57:34",
+    "description": null,
+    "id": 311,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Протрезветь"
+  },
+  {
+    "added_at": "2026-01-17 13:57:34",
+    "description": null,
+    "id": 312,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рассчитывать"
+  },
+  {
+    "added_at": "2026-01-17 13:57:34",
+    "description": null,
+    "id": 313,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сосредоточиться"
+  },
+  {
+    "added_at": "2026-01-17 13:57:34",
+    "description": null,
+    "id": 314,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Герметичный"
+  },
+  {
+    "added_at": "2026-01-17 13:57:34",
+    "description": null,
+    "id": 315,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сосредоточенность"
+  },
+  {
+    "added_at": "2026-01-18 15:58:29",
+    "description": null,
+    "id": 316,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Организовать"
+  },
+  {
+    "added_at": "2026-01-18 15:58:29",
+    "description": null,
+    "id": 317,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Переворот"
+  },
+  {
+    "added_at": "2026-01-18 15:58:29",
+    "description": null,
+    "id": 318,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Текущий"
+  },
+  {
+    "added_at": "2026-01-18 15:58:29",
+    "description": null,
+    "id": 319,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Развивать"
+  },
+  {
+    "added_at": "2026-01-18 15:58:29",
+    "description": null,
+    "id": 320,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Лоджия"
+  },
+  {
+    "added_at": "2026-01-18 15:58:29",
+    "description": null,
+    "id": 321,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Напряжение"
+  },
+  {
+    "added_at": "2026-01-18 15:58:29",
+    "description": null,
+    "id": 322,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Упоминание"
+  },
+  {
+    "added_at": "2026-01-18 15:58:29",
+    "description": null,
+    "id": 323,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Щиток"
+  },
+  {
+    "added_at": "2026-01-18 15:58:29",
+    "description": null,
+    "id": 324,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отбросил коньки"
+  },
+  {
+    "added_at": "2026-01-18 15:58:29",
+    "description": null,
+    "id": 325,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "За гранью"
+  },
+  {
+    "added_at": "2026-01-21 07:38:28",
+    "description": null,
+    "id": 326,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рыхлость"
+  },
+  {
+    "added_at": "2026-01-21 07:38:28",
+    "description": null,
+    "id": 327,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "На что боролся на то и напоролся"
+  },
+  {
+    "added_at": "2026-01-21 07:38:28",
+    "description": null,
+    "id": 328,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Человек-овощ"
+  },
+  {
+    "added_at": "2026-01-21 07:38:28",
+    "description": null,
+    "id": 329,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Поверхность"
+  },
+  {
+    "added_at": "2026-01-21 07:38:28",
+    "description": null,
+    "id": 330,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Сбой"
+  },
+  {
+    "added_at": "2026-01-21 07:38:28",
+    "description": null,
+    "id": 331,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Манипулятор"
+  },
+  {
+    "added_at": "2026-01-21 07:38:28",
+    "description": null,
+    "id": 332,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ориентация"
+  },
+  {
+    "added_at": "2026-01-21 07:38:28",
+    "description": null,
+    "id": 333,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Субъективно"
+  },
+  {
+    "added_at": "2026-01-25 11:22:21",
+    "description": null,
+    "id": 334,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Манифест"
+  },
+  {
+    "added_at": "2026-01-25 11:22:21",
+    "description": null,
+    "id": 335,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Нострадамус"
+  },
+  {
+    "added_at": "2026-01-25 11:22:21",
+    "description": null,
+    "id": 336,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Спорадический"
+  },
+  {
+    "added_at": "2026-01-25 11:22:21",
+    "description": null,
+    "id": 337,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Осточертели"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 338,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Подвыдные камни (скрытый смысл)"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 339,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Пялиться"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 340,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Закрыть глаза\n(на проблему)"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 341,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Переубедить"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 342,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Геноцид"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 343,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "\"по плечу\""
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 344,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Приобрести"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 345,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Регулировка"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 346,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Краткосрочная перспектива"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 347,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Долгосрочная перспектива"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 348,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Топить"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 349,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Само собой разумеется"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 350,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Динамичный"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 351,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Статичный"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 352,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пасхалка"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 353,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Покушение"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 354,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дезинформация"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 355,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Совесть"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 356,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Трясти"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 357,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Проходит"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 358,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дефект"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 359,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обслуживать"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 360,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ожидание"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 361,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отречься"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 362,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Импровизация"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 364,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Увлечение"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 365,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Шероховатость"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 366,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Додумать"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 367,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дуться"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 368,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Эстетика"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 369,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Замечание"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 370,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Шуровать"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 371,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Признать"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 372,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рациональный"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 373,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Почем?"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 374,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Резонанс"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 375,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Наискосок"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 376,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Перенести"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 377,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Предположение"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 378,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Угодить"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 379,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Не подавать виду"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 380,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Самый раз"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 381,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Подвох"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 382,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Рожа"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 383,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Изолировать"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 384,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Изоляция"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 385,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Популяризация"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 386,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Подавиться"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 387,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обслуживание"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 388,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Струбцина"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 389,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Пила"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 390,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Дисковая пила"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 391,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Расстроил"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 392,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Заморачиваться"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 393,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Заморочка"
+  },
+  {
+    "added_at": "2026-01-06 22:52:31",
+    "description": null,
+    "id": 394,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Плакса"
+  },
+  {
+    "added_at": "2026-01-11 22:24:40",
+    "description": null,
+    "id": 395,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Авантюра"
+  },
+  {
+    "added_at": "2026-01-11 22:24:40",
+    "description": null,
+    "id": 398,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "критика"
+  },
+  {
+    "added_at": "2026-01-11 23:06:42",
+    "description": null,
+    "id": 400,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 1,
+    "word": "Заметки"
+  },
+  {
+    "added_at": "2026-01-11 23:07:38",
+    "description": null,
+    "id": 401,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Эвтаназия"
+  },
+  {
+    "added_at": "2026-01-12 16:29:13",
+    "description": null,
+    "id": 402,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Кайфуешь"
+  },
+  {
+    "added_at": "2026-01-12 16:29:13",
+    "description": null,
+    "id": 403,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "кайф"
+  },
+  {
+    "added_at": "2026-01-12 18:59:52",
+    "description": null,
+    "id": 404,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Совать"
+  },
+  {
+    "added_at": "2026-01-13 00:05:42",
+    "description": null,
+    "id": 405,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ожидаешь"
+  },
+  {
+    "added_at": "2026-01-13 00:08:14",
+    "description": null,
+    "id": 406,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Впечатление"
+  },
+  {
+    "added_at": "2026-01-13 00:08:14",
+    "description": null,
+    "id": 407,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Оптимально"
+  },
+  {
+    "added_at": "2026-01-13 00:08:14",
+    "description": null,
+    "id": 408,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Помешан"
+  },
+  {
+    "added_at": "2026-01-13 00:08:14",
+    "description": null,
+    "id": 409,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Достижение"
+  },
+  {
+    "added_at": "2026-01-13 00:08:14",
+    "description": null,
+    "id": 410,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Щель"
+  },
+  {
+    "added_at": "2026-01-13 00:08:14",
+    "description": null,
+    "id": 411,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Губить"
+  },
+  {
+    "added_at": "2026-01-13 00:08:14",
+    "description": null,
+    "id": 412,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Контекст"
+  },
+  {
+    "added_at": "2026-01-13 00:08:14",
+    "description": null,
+    "id": 413,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Процесс"
+  },
+  {
+    "added_at": "2026-01-13 00:08:14",
+    "description": null,
+    "id": 414,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Прогрузить"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 415,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Индикатор"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 416,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Индивидуально"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 417,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Выкрасть (кража)"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 418,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Определиться"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 419,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пиршество"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 420,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обуза"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 421,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Колется"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 422,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Прибавилось"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 423,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отменно"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 424,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пощипывать"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 425,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Растерялась"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 426,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Жмот"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 427,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Тужиться (а контексте беременности)"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 428,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сделать крюк"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 429,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Огрызок"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 430,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Тщательно"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 431,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Скреплен \nвоенное положение"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 432,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Выкрутимся"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 433,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Кандидат"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 434,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Халтура"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 435,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пнуть"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 436,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Миллениалы"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 437,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пни"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 438,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Лоток для кошки"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 439,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Залетела (беременность)"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 440,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Испускать"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 441,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Изготовление"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 442,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Переработка"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 443,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Миниатюра"
+  },
+  {
+    "added_at": "2026-01-13 00:15:05",
+    "description": null,
+    "id": 444,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Завал"
+  },
+  {
+    "added_at": "2026-01-14 23:21:14",
+    "description": null,
+    "id": 445,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Динамика"
+  },
+  {
+    "added_at": "2026-01-14 23:21:14",
+    "description": null,
+    "id": 446,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Динамичность"
+  },
+  {
+    "added_at": "2026-01-15 13:13:56",
+    "description": null,
+    "id": 447,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Индексация пенсий и зарплат"
+  },
+  {
+    "added_at": "2026-01-15 15:14:59",
+    "description": null,
+    "id": 448,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Оправдание"
+  },
+  {
+    "added_at": "2026-01-15 15:14:59",
+    "description": null,
+    "id": 449,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Оправдываться"
+  },
+  {
+    "added_at": "2026-01-15 18:49:15",
+    "description": null,
+    "id": 450,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Урезать"
+  },
+  {
+    "added_at": "2026-01-15 19:31:59",
+    "description": null,
+    "id": 451,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Усвоила"
+  },
+  {
+    "added_at": "2026-01-15 20:15:08",
+    "description": null,
+    "id": 452,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Шантаж"
+  },
+  {
+    "added_at": "2026-01-15 20:15:08",
+    "description": null,
+    "id": 453,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Криворукий"
+  },
+  {
+    "added_at": "2026-01-15 23:32:27",
+    "description": null,
+    "id": 454,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Источник"
+  },
+  {
+    "added_at": "2026-01-16 09:44:38",
+    "description": null,
+    "id": 455,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Кадидант"
+  },
+  {
+    "added_at": "2026-01-16 11:58:56",
+    "description": null,
+    "id": 456,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Поманить"
+  },
+  {
+    "added_at": "2026-01-16 12:31:58",
+    "description": null,
+    "id": 457,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дипломат"
+  },
+  {
+    "added_at": "2026-01-16 12:31:58",
+    "description": null,
+    "id": 458,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дипломатия"
+  },
+  {
+    "added_at": "2026-01-16 15:44:07",
+    "description": null,
+    "id": 459,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дирижабль"
+  },
+  {
+    "added_at": "2026-01-16 17:59:44",
+    "description": null,
+    "id": 460,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пинцет"
+  },
+  {
+    "added_at": "2026-01-16 18:51:45",
+    "description": null,
+    "id": 461,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Как рукой подать"
+  },
+  {
+    "added_at": "2026-01-16 22:22:30",
+    "description": null,
+    "id": 462,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Здравый"
+  },
+  {
+    "added_at": "2026-01-16 22:22:30",
+    "description": null,
+    "id": 463,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Подход"
+  },
+  {
+    "added_at": "2026-01-16 22:22:30",
+    "description": null,
+    "id": 464,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Доход"
+  },
+  {
+    "added_at": "2026-01-16 22:22:30",
+    "description": null,
+    "id": 465,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Расход"
+  },
+  {
+    "added_at": "2026-01-16 22:37:01",
+    "description": null,
+    "id": 466,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Распространение"
+  },
+  {
+    "added_at": "2026-01-17 10:44:19",
+    "description": null,
+    "id": 467,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Прикончить"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 468,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Намерение"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 469,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дрова"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 470,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Не наломай дров"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 471,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Туговато"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 472,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Слечь"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 473,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Подобрать"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 474,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Доступный"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 475,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Детализация"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 476,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Неимоверно"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 477,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Соображать"
+  },
+  {
+    "added_at": "2026-01-17 13:55:14",
+    "description": null,
+    "id": 478,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рационально"
+  },
+  {
+    "added_at": "2026-01-17 15:20:29",
+    "description": null,
+    "id": 479,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Предчувствие"
+  },
+  {
+    "added_at": "2026-01-17 18:00:23",
+    "description": null,
+    "id": 480,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Статистика"
+  },
+  {
+    "added_at": "2026-01-17 18:00:23",
+    "description": null,
+    "id": 481,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Реконструкция"
+  },
+  {
+    "added_at": "2026-01-17 19:18:01",
+    "description": null,
+    "id": 482,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Совершенствоваться"
+  },
+  {
+    "added_at": "2026-01-17 20:39:08",
+    "description": null,
+    "id": 483,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Клонить (к чему-то)"
+  },
+  {
+    "added_at": "2026-01-18 10:56:01",
+    "description": null,
+    "id": 484,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Шевелить булками"
+  },
+  {
+    "added_at": "2026-01-18 14:17:18",
+    "description": null,
+    "id": 485,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Запать (на кого-то)"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 486,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Напечатайте"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 487,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Арка"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 488,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Халтурщик"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 489,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обыск"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 490,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Свайпнуть"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 491,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дежавю"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 492,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Польза"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 493,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ликвидировать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 494,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Заблудилась"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 495,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Черта"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 496,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Фокусироваться"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 497,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Замешан"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 498,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Определять"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 499,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Прагматичный"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 500,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Громадина"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 501,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Приводить"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 502,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Приникнуть"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 503,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Свинец (элемент)"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 504,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Состоит (из чего?)"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 505,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Влиться"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 506,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обретает"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 507,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Нынешний"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 508,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Поскольку"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 509,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Одно за другим"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 510,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Воспринимать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 511,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Вытащить"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 512,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Наружу"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 513,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обходить"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 514,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Комплексный"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 515,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Плоть"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 516,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Само собой"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 517,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Коллекционер"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 518,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Раздражительность"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 519,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Перенести (время встречи"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 520,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Объект)"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 521,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отсев"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 522,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Накидаю"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 523,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отвес"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 524,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Коррупция"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 525,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ботокс"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 526,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пафос"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 527,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Скептически"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 528,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Степень"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 529,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Принести"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 530,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Укладывать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 531,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Предоплата"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 532,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Тебе на руку"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 533,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Повышение"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 534,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Прелюдия"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 535,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Неверно"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 536,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Похлеще"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 537,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отличаться"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 538,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Позволять"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 539,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Засучить"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 540,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Досьоен"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 541,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ингредиент"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 542,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Достоин"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 543,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обоснованный"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 544,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Походу"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 545,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Последствие"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 546,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рассудок"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 547,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рассуждать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 548,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Эпилепсия"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 549,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Аннулировать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 550,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Неужели?"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 551,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Разве?"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 552,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ухмылка"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 553,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Выработка"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 554,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Хлопот"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 555,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ограничение"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 556,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Писать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 557,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Следует"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 558,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Убеждение"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 559,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Юность"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 560,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Реже"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 561,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обстоятельство"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 562,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Как правило"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 563,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Психоматика"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 564,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Индивидуальный"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 565,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Заслуженно"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 566,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сострадание"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 567,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Втянуть"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 568,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Объект"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 569,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Помещение"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 570,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Докладывать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 571,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Содрать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 572,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Глюк"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 573,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Поправить"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 574,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Отвыкать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 575,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Аналогично"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 576,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ирония"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 577,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Интерпретация"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 578,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Красоваться"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 579,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Стабильно"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 580,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ценно"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 581,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Проктолог"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 582,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обойдется"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 583,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Скреплен"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 584,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Военное положение"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 585,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Насыщенность"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 586,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Командовать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 587,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Валяй"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 588,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Вспять"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 589,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Регенерация"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 590,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Преждевременно"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 591,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Поощрение"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 592,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обоснованность"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 593,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Срать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 594,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Консервы"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 595,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Капец"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 596,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Положил глаз"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 597,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Цензура"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 598,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Мокрота"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 599,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дополнительно"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 600,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Координация"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 601,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Синхронизация"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 602,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Приснилось"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 603,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дно"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 604,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Хвастовство"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 605,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Абстракция"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 606,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Тот свет"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 607,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обронила"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 608,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Банально"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 609,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Завораживает"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 610,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Колиться (колись)"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 611,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сыщик"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 612,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Жратва"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 613,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Полегчало"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 614,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Базар"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 615,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Побаливает"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 616,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Замочить (убить"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 617,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Намочить)"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 618,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Экономика"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 619,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Стремление"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 620,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Привлекать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 621,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Данный"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 622,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Допустимо (разрешено)"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 623,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Дискомфорт"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 624,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Озадачен"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 625,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Поделишься"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 626,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Зуб даю"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 627,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Обратная связь"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 628,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Впитать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 629,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Инструкция"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 630,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Крупно"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 631,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Проработать"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 632,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Выразительно (говорить)"
+  },
+  {
+    "added_at": "2026-01-18 15:08:52",
+    "description": null,
+    "id": 633,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Остерегаться"
+  },
+  {
+    "added_at": "2026-01-18 17:32:16",
+    "description": null,
+    "id": 634,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Изолента"
+  },
+  {
+    "added_at": "2026-01-18 17:37:14",
+    "description": null,
+    "id": 635,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Субъект"
+  },
+  {
+    "added_at": "2026-01-21 13:10:13",
+    "description": null,
+    "id": 636,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Полет нормальный"
+  },
+  {
+    "added_at": "2026-01-23 19:09:50",
+    "description": null,
+    "id": 637,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пошлый"
+  },
+  {
+    "added_at": "2026-01-23 19:43:25",
+    "description": null,
+    "id": 638,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Фасовщик"
+  },
+  {
+    "added_at": "2026-01-24 17:02:14",
+    "description": null,
+    "id": 639,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Руководство"
+  },
+  {
+    "added_at": "2026-01-25 14:17:29",
+    "description": null,
+    "id": 640,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Координировать"
+  },
+  {
+    "added_at": "2026-01-25 14:17:29",
+    "description": null,
+    "id": 641,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Основать"
+  },
+  {
+    "added_at": "2026-01-25 15:33:43",
+    "description": null,
+    "id": 642,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Мероприятие"
+  },
+  {
+    "added_at": "2026-01-25 15:58:26",
+    "description": null,
+    "id": 643,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Воздействие"
+  },
+  {
+    "added_at": "2026-01-25 16:04:40",
+    "description": null,
+    "id": 644,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Щекотно"
+  },
+  {
+    "added_at": "2026-01-25 16:19:26",
+    "description": null,
+    "id": 645,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Сдержанный"
+  },
+  {
+    "added_at": "2026-01-25 16:19:26",
+    "description": null,
+    "id": 646,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Озабоченный"
+  },
+  {
+    "added_at": "2026-01-25 16:23:55",
+    "description": null,
+    "id": 647,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Чертовски (на этом месте прилагательное)"
+  },
+  {
+    "added_at": "2026-01-25 16:31:58",
+    "description": null,
+    "id": 648,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Гобелен"
+  },
+  {
+    "added_at": "2026-01-25 16:50:45",
+    "description": null,
+    "id": 649,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Балахон"
+  },
+  {
+    "added_at": "2026-01-26 10:43:31",
+    "description": null,
+    "id": 650,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Торцовочная пила"
+  },
+  {
+    "added_at": "2026-01-26 13:27:45",
+    "description": null,
+    "id": 651,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Выгодно"
+  },
+  {
+    "added_at": "2026-01-26 13:27:45",
+    "description": null,
+    "id": 652,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Выгода"
+  },
+  {
+    "added_at": "2026-02-02 08:32:04",
+    "description": null,
+    "id": 653,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Discard"
+  },
+  {
+    "added_at": "2026-02-02 09:59:56",
+    "description": null,
+    "id": 654,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Расплющить"
+  },
+  {
+    "added_at": "2026-02-02 10:09:16",
+    "description": null,
+    "id": 655,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Вытащить из болота"
+  },
+  {
+    "added_at": "2026-02-02 10:09:16",
+    "description": null,
+    "id": 656,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Презентабельный"
+  },
+  {
+    "added_at": "2026-02-02 10:12:22",
+    "description": null,
+    "id": 657,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Переносный смысл"
+  },
+  {
+    "added_at": "2026-02-02 10:12:22",
+    "description": null,
+    "id": 658,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Буквальный смысл"
+  },
+  {
+    "added_at": "2026-02-02 11:05:04",
+    "description": null,
+    "id": 659,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Эрозия"
+  },
+  {
+    "added_at": "2026-02-02 13:25:07",
+    "description": null,
+    "id": 660,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Входит в стоимость"
+  },
+  {
+    "added_at": "2026-02-02 15:39:37",
+    "description": null,
+    "id": 661,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Входит в стоимость."
+  },
+  {
+    "added_at": "2026-02-03 11:03:26",
+    "description": null,
+    "id": 662,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Объективно"
+  },
+  {
+    "added_at": "2026-02-04 08:29:52",
+    "description": null,
+    "id": 663,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Тк рф"
+  },
+  {
+    "added_at": "2026-02-04 21:41:50",
+    "description": null,
+    "id": 664,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Коэффициент"
+  },
+  {
+    "added_at": "2026-02-05 06:56:57",
+    "description": null,
+    "id": 665,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Ядрёна вошь"
+  },
+  {
+    "added_at": "2026-02-05 06:56:57",
+    "description": null,
+    "id": 666,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Междометие"
+  },
+  {
+    "added_at": "2026-02-05 09:59:10",
+    "description": null,
+    "id": 667,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Растягивать"
+  },
+  {
+    "added_at": "2026-02-05 14:30:40",
+    "description": null,
+    "id": 668,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Мелочиться"
+  },
+  {
+    "added_at": "2026-02-05 17:44:31",
+    "description": null,
+    "id": 669,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Лестничная клетка"
+  },
+  {
+    "added_at": "2026-02-05 17:44:31",
+    "description": null,
+    "id": 670,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Лестничная площадка"
+  },
+  {
+    "added_at": "2026-02-05 20:13:47",
+    "description": null,
+    "id": 671,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Визуализация"
+  },
+  {
+    "added_at": "2026-02-05 20:16:24",
+    "description": null,
+    "id": 672,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Других"
+  },
+  {
+    "added_at": "2026-02-06 00:20:18",
+    "description": null,
+    "id": 673,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Формальное общение"
+  },
+  {
+    "added_at": "2026-02-06 00:20:18",
+    "description": null,
+    "id": 674,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Неформальное общение"
+  },
+  {
+    "added_at": "2026-02-06 00:20:18",
+    "description": null,
+    "id": 675,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Формальности"
+  },
+  {
+    "added_at": "2026-02-06 21:11:43",
+    "description": null,
+    "id": 676,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Данность"
+  },
+  {
+    "added_at": "2026-02-06 21:14:18",
+    "description": null,
+    "id": 677,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Закралась"
+  },
+  {
+    "added_at": "2026-02-06 22:06:00",
+    "description": null,
+    "id": 678,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Разместить"
+  },
+  {
+    "added_at": "2026-02-06 22:06:00",
+    "description": null,
+    "id": 679,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Компоновка"
+  },
+  {
+    "added_at": "2026-02-06 22:07:23",
+    "description": null,
+    "id": 680,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Энциклопедия"
+  },
+  {
+    "added_at": "2026-02-06 22:07:23",
+    "description": null,
+    "id": 681,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Циклоп"
+  },
+  {
+    "added_at": "2026-02-06 22:09:47",
+    "description": null,
+    "id": 682,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Какие-либо"
+  },
+  {
+    "added_at": "2026-02-07 11:13:51",
+    "description": null,
+    "id": 683,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Пиратская версия"
+  },
+  {
+    "added_at": "2026-02-07 11:13:51",
+    "description": null,
+    "id": 684,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Лицензия"
+  },
+  {
+    "added_at": "2026-02-07 16:51:24",
+    "description": null,
+    "id": 685,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Истощение"
+  },
+  {
+    "added_at": "2026-02-07 18:04:32",
+    "description": null,
+    "id": 686,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Present"
+  },
+  {
+    "added_at": "2026-02-09 19:59:39",
+    "description": null,
+    "id": 687,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Слюны"
+  },
+  {
+    "added_at": "2026-02-09 19:59:39",
+    "description": null,
+    "id": 688,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Потекли"
+  },
+  {
+    "added_at": "2026-02-09 19:59:39",
+    "description": null,
+    "id": 689,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Потечь"
+  },
+  {
+    "added_at": "2026-02-09 20:27:31",
+    "description": null,
+    "id": 690,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Подставлять"
+  },
+  {
+    "added_at": "2026-02-09 22:08:51",
+    "description": null,
+    "id": 691,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Маникальность"
+  },
+  {
+    "added_at": "2026-02-09 22:12:12",
+    "description": null,
+    "id": 692,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Вялость"
+  },
+  {
+    "added_at": "2026-02-11 16:37:58",
+    "description": null,
+    "id": 693,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Unless"
+  },
+  {
+    "added_at": "2026-02-11 17:33:22",
+    "description": null,
+    "id": 694,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Trespassing"
+  },
+  {
+    "added_at": "2026-02-11 17:33:37",
+    "description": null,
+    "id": 695,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Violators"
+  },
+  {
+    "added_at": "2026-02-11 18:33:19",
+    "description": null,
+    "id": 696,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Агрессор"
+  },
+  {
+    "added_at": "2026-02-11 20:06:24",
+    "description": null,
+    "id": 697,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Property"
+  },
+  {
+    "added_at": "2026-02-11 20:07:21",
+    "description": null,
+    "id": 698,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Ensure"
+  },
+  {
+    "added_at": "2026-02-11 20:28:15",
+    "description": null,
+    "id": 699,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Assign"
+  },
+  {
+    "added_at": "2026-02-11 20:47:37",
+    "description": null,
+    "id": 700,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Between"
+  },
+  {
+    "added_at": "2026-02-11 20:47:37",
+    "description": null,
+    "id": 701,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Quote"
+  },
+  {
+    "added_at": "2026-02-11 20:47:37",
+    "description": null,
+    "id": 702,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Surrounded"
+  },
+  {
+    "added_at": "2026-02-11 21:42:13",
+    "description": null,
+    "id": 703,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Структура"
+  },
+  {
+    "added_at": "2026-02-11 22:23:35",
+    "description": null,
+    "id": 704,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Tip"
+  },
+  {
+    "added_at": "2026-02-11 22:24:08",
+    "description": null,
+    "id": 705,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Established"
+  },
+  {
+    "added_at": "2026-02-11 22:24:08",
+    "description": null,
+    "id": 706,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Refer"
+  },
+  {
+    "added_at": "2026-02-11 22:25:39",
+    "description": null,
+    "id": 707,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Secondary"
+  },
+  {
+    "added_at": "2026-02-11 22:36:59",
+    "description": null,
+    "id": 708,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Legacy"
+  },
+  {
+    "added_at": "2026-02-12 11:11:59",
+    "description": null,
+    "id": 709,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Спустя какое-то время"
+  },
+  {
+    "added_at": "2026-02-12 12:19:31",
+    "description": null,
+    "id": 710,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Кондиционный"
+  },
+  {
+    "added_at": "2026-02-12 17:11:18",
+    "description": null,
+    "id": 711,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Мораль"
+  },
+  {
+    "added_at": "2026-02-12 17:11:18",
+    "description": null,
+    "id": 712,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Аморальность"
+  },
+  {
+    "added_at": "2026-02-13 12:34:52",
+    "description": null,
+    "id": 713,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Субтильный"
+  },
+  {
+    "added_at": "2026-02-14 15:16:57",
+    "description": null,
+    "id": 714,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Шарить"
+  },
+  {
+    "added_at": "2026-02-14 17:06:08",
+    "description": null,
+    "id": 715,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Доки"
+  },
+  {
+    "added_at": "2026-02-15 12:04:21",
+    "description": null,
+    "id": 716,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Консерватор"
+  },
+  {
+    "added_at": "2026-02-15 12:08:33",
+    "description": null,
+    "id": 717,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Укореняться"
+  },
+  {
+    "added_at": "2026-02-16 22:29:14",
+    "description": "Прерывать",
+    "id": 718,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Interrupt"
+  },
+  {
+    "added_at": "2026-02-16 22:29:14",
+    "description": "Указанный, заданный, требуемый",
+    "id": 719,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Specified"
+  },
+  {
+    "added_at": "2026-02-17 06:08:39",
+    "description": "Сборщик податей в Иудее",
+    "id": 720,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Мытарь"
+  },
+  {
+    "added_at": "2026-02-18 17:46:20",
+    "description": "Важность, первенство",
+    "id": 721,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Приоритет"
+  },
+  {
+    "added_at": "2026-02-18 18:50:00",
+    "description": "Отмеченный",
+    "id": 722,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Marked"
+  },
+  {
+    "added_at": "2026-02-18 19:27:43",
+    "description": "В общем понимании - мусор, свалка. В программировании - сбросить, выгрузить",
+    "id": 723,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Dump"
+  },
+  {
+    "added_at": "2026-02-18 19:38:45",
+    "description": "Необрабатываемый",
+    "id": 724,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Unprocessable"
+  },
+  {
+    "added_at": "2026-02-18 20:37:56",
+    "description": "Злоупотребление, неправильное использование",
+    "id": 725,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Misuse"
+  },
+  {
+    "added_at": "2026-02-18 20:45:31",
+    "description": "Выражение",
+    "id": 726,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Expression"
+  },
+  {
+    "added_at": "2026-02-18 20:47:59",
+    "description": "Автономный, самостоятельный",
+    "id": 727,
+    "is_new": false,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Standalone"
+  },
+  {
+    "added_at": "2026-02-18 20:52:41",
+    "description": "который",
+    "id": 728,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Which"
+  },
+  {
+    "added_at": "2026-02-18 20:53:24",
+    "description": "Производит",
+    "id": 729,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Produces"
+  },
+  {
+    "added_at": "2026-02-18 20:54:55",
+    "description": "для данного случая, для этой цели, специально созданный под задачу",
+    "id": 730,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Ad-hoc"
+  },
+  {
+    "added_at": "2026-02-19 17:48:07",
+    "description": "Неизменность, живучесть, настойчивость, постоянство",
+    "id": 731,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Persistence"
+  },
+  {
+    "added_at": "2026-02-19 17:50:34",
+    "description": "Псевдоним",
+    "id": 732,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Alias"
+  },
+  {
+    "added_at": "2026-02-20 06:31:34",
+    "description": "Кресло для отдыха",
+    "id": 733,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Шезлонг"
+  },
+  {
+    "added_at": "2026-02-20 12:09:09",
+    "description": "Самый высокий результат",
+    "id": 734,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Рекорд"
+  },
+  {
+    "added_at": "2026-02-21 10:22:42",
+    "description": "Метафора: Очень много",
+    "id": 735,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Выше крыши"
+  },
+  {
+    "added_at": "2026-02-22 21:38:18",
+    "description": "Повторно выбросить уже выброшенное исключение (в программировании)",
+    "id": 736,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Reraises"
+  },
+  {
+    "added_at": "2026-02-22 21:39:56",
+    "description": "Необходимо иметь",
+    "id": 737,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Must have"
+  },
+  {
+    "added_at": "2026-02-23 21:17:47",
+    "description": "Тишина",
+    "id": 738,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Silence"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "объясняет",
+    "id": 739,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Explains"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "Развился, эволюционировал",
+    "id": 740,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Has evolved"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "служить, обслуживать, подавать",
+    "id": 741,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Serve"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "обработка, обращение (с чем-л.)",
+    "id": 742,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Handling"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "разумно, достаточно, сносно",
+    "id": 743,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Reasonably"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "широкий",
+    "id": 744,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Wide"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "осторожный, тщательный",
+    "id": 745,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Careful"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "внедрение, реализация, осуществление",
+    "id": 746,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Implementation"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "отличаться, различаться",
+    "id": 747,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Differ"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "оба",
+    "id": 748,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Both"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "вместе",
+    "id": 749,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Together"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "обычно, в целом",
+    "id": 750,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Generally"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "referred to as: называемый, упоминаемый как",
+    "id": 751,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Referred"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "до некоторой степени, отчасти",
+    "id": 752,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Somewhat"
+  },
+  {
+    "added_at": "2026-02-23 22:10:20",
+    "description": "связанный, соединенный (часто: coupled with — в сочетании с)",
+    "id": 753,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Coupled"
+  },
+  {
+    "added_at": "2026-02-23 22:15:25",
+    "description": "Хук, перехватчик (механизм, позволяющий перехватывать или изменять поведение системы/программы)",
+    "id": 754,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Hook"
+  },
+  {
+    "added_at": "2026-02-23 22:16:41",
+    "description": "принимает",
+    "id": 755,
+    "is_new": false,
+    "is_unknown": true,
+    "user_id": 2,
+    "word": "Takes"
+  },
+  {
+    "added_at": "2026-02-25 20:07:35",
+    "description": "Осуждать",
+    "id": 756,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Deprecated"
+  },
+  {
+    "added_at": "2026-02-27 18:49:30",
+    "description": "Удивиться сильно",
+    "id": 757,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Онеметь"
+  },
+  {
+    "added_at": "2026-02-27 18:49:30",
+    "description": "Когда затрудняется кровоток в какой-то части тела, эта часть тела теряет чувствительность",
+    "id": 758,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Онемела (часть тела)"
+  },
+  {
+    "added_at": "2026-02-28 16:09:05",
+    "description": "Поговорка",
+    "id": 759,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Скупой платит дважды"
+  },
+  {
+    "added_at": "2026-02-28 16:09:05",
+    "description": ".",
+    "id": 760,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "А то и трижды"
+  },
+  {
+    "added_at": "2026-02-28 16:18:24",
+    "description": "откровенное, вызывающе-пренебрежительное и презрительное отношение к нормам морали, культурным ценностям и представлениям о благопристойности",
+    "id": 761,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Цинизм"
+  },
+  {
+    "added_at": "2026-03-01 09:37:35",
+    "description": "Появиться, показаться",
+    "id": 762,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Appear"
+  },
+  {
+    "added_at": "2026-03-01 21:51:16",
+    "description": "Воображать",
+    "id": 763,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Imagine"
+  },
+  {
+    "added_at": "2026-03-01 21:53:18",
+    "description": "Вперед",
+    "id": 764,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Forward"
+  },
+  {
+    "added_at": "2026-03-01 21:57:56",
+    "description": "хорошо зарекомендовавший себя",
+    "id": 765,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Well-proven"
+  },
+  {
+    "added_at": "2026-03-01 22:01:03",
+    "description": "Мгновенный",
+    "id": 766,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Instant"
+  },
+  {
+    "added_at": "2026-03-01 22:01:03",
+    "description": "Удобный",
+    "id": 767,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Convenient"
+  },
+  {
+    "added_at": "2026-03-01 22:01:34",
+    "description": "Некоторые",
+    "id": 768,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Some"
+  },
+  {
+    "added_at": "2026-03-01 22:02:30",
+    "description": "Скорее всего",
+    "id": 769,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Likely"
+  },
+  {
+    "added_at": "2026-03-01 22:02:57",
+    "description": "Заголовок",
+    "id": 770,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Heading"
+  },
+  {
+    "added_at": "2026-03-02 10:53:07",
+    "description": "Сущность",
+    "id": 771,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Entity"
+  },
+  {
+    "added_at": "2026-03-02 13:00:23",
+    "description": "Почти",
+    "id": 772,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Almost"
+  },
+  {
+    "added_at": "2026-03-02 17:25:13",
+    "description": "Ниже",
+    "id": 773,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Infra"
+  },
+  {
+    "added_at": "2026-03-02 17:32:15",
+    "description": "Отсоединить",
+    "id": 774,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Detach"
+  },
+  {
+    "added_at": "2026-03-02 17:37:29",
+    "description": "Позади",
+    "id": 775,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Behind"
+  },
+  {
+    "added_at": "2026-03-02 17:40:11",
+    "description": "Каждый",
+    "id": 776,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Each"
+  },
+  {
+    "added_at": "2026-03-02 17:40:11",
+    "description": "Соответственно",
+    "id": 777,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Respectively."
+  },
+  {
+    "added_at": "2026-03-02 17:40:46",
+    "description": "Расхождение",
+    "id": 778,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Diverged"
+  },
+  {
+    "added_at": "2026-03-02 17:42:06",
+    "description": "Впереди",
+    "id": 779,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Ahead"
+  },
+  {
+    "added_at": "2026-03-02 18:52:36",
+    "description": "Потребляемый",
+    "id": 780,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Consumed"
+  },
+  {
+    "added_at": "2026-03-02 18:53:13",
+    "description": "Означает",
+    "id": 781,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Means"
+  },
+  {
+    "added_at": "2026-03-02 19:12:44",
+    "description": "Возможный",
+    "id": 782,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Possible"
+  },
+  {
+    "added_at": "2026-03-02 21:34:11",
+    "description": "Непосредственно",
+    "id": 783,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Directly"
+  },
+  {
+    "added_at": "2026-03-03 20:30:05",
+    "description": "\"Понял\"",
+    "id": 784,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Got it"
+  },
+  {
+    "added_at": "2026-03-06 11:35:16",
+    "description": "Отсутствие всех видов микроорганизмов на поверхностях",
+    "id": 785,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Стерильность"
+  },
+  {
+    "added_at": "2026-03-08 20:36:55",
+    "description": "Отклонить",
+    "id": 786,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Dismiss"
+  },
+  {
+    "added_at": "2026-03-10 10:35:30",
+    "description": "Интервью — это форма коммуникации, в ходе которой один человек (интервьюер) задаёт вопросы другому (интервьюируемому) с целью получения информации,",
+    "id": 787,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Интервью"
+  },
+  {
+    "added_at": "2026-03-11 14:13:29",
+    "description": "Это добавка для пищи",
+    "id": 788,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 1,
+    "word": "Ароматизатор"
+  },
+  {
+    "added_at": "2026-03-11 22:02:41",
+    "description": "Вместо",
+    "id": 789,
+    "is_new": true,
+    "is_unknown": false,
+    "user_id": 2,
+    "word": "Instead"
+  }
+]

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form action={% url "index" %} method='get'>
+    <button type="submit">На главную</button>
+  </form>
+  <p>Слово: {{ word.word }}</p>
+  <p>Определение: {{ word.definition }}</p>
+  <p>Создано {{ word.created_at }}</p>
+  <form action={% url "edit_word" pk_word=word.pk %} method="get">
+    <button type="submit">Редактировать</button>
+  </form>
+  <div>
+    <a href="{% url "training" %}">Назад</a>
+  </div>
+</div>
+
+{% endblock content %}

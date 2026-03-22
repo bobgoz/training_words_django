@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if words %}
+    {% for word in words %}
+      <p>{{ word.word }}</p>
+    {% endfor %}
+  {% endif %}
+{% endblock content %}
+
