@@ -1,18 +1,353 @@
 {% extends "base.html" %}
 
+{% block title %}{{ word.word }} — детали слова{% endblock %}
+
 {% block content %}
-  <form action={% url "index" %} method='get'>
-    <button type="submit">На главную</button>
-  </form>
-  <p>Слово: {{ word.word }}</p>
-  <p>Определение: {{ word.definition }}</p>
-  <p>Создано {{ word.created_at }}</p>
-  <form action={% url "edit_word" pk_word=word.pk %} method="get">
-    <button type="submit">Редактировать</button>
-  </form>
-  <div>
-    <a href="{% url "training" %}">Назад</a>
-  </div>
+<div class="detail-section">
+    <!-- Навигация -->
+    <div class="detail-nav">
+        <a href="{% url 'index' %}" class="nav-back">
+            <span class="nav-icon">←</span> На главную
+        </a>
+        <a href="{% url 'training' %}" class="nav-back">
+            <span class="nav-icon">📚</span> К тренировке
+        </a>
+    </div>
+
+    <!-- Карточка слова -->
+    <div class="word-detail-card">
+        <div class="word-header">
+            <div class="word-badge">Слово</div>
+            <h1 class="word-title">{{ word.word }}</h1>
+        </div>
+        
+        <div class="detail-section-divider"></div>
+        
+        <div class="word-info">
+            <div class="info-row">
+                <div class="info-label">
+                    <span class="info-icon">📖</span>
+                    Определение:
+                </div>
+                <div class="info-value">
+                    {% if word.definition %}
+                        {{ word.definition }}
+                    {% else %}
+                        <span class="empty-value">не указано</span>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-label">
+                    <span class="info-icon">📅</span>
+                    Дата создания:
+                </div>
+                <div class="info-value">
+                    {{ word.created_at|date:"d.m.Y H:i" }}
+                </div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-label">
+                    <span class="info-icon">🏷️</span>
+                    Статус:
+                </div>
+                <div class="info-value">
+                    {% if word.is_active %}
+                        <span class="status-badge status-active">✅ Активно</span>
+                    {% else %}
+                        <span class="status-badge status-inactive">⏸️ Неактивно</span>
+                    {% endif %}
+                    
+                    {% if word.is_new %}
+                        <span class="status-badge status-new">🆕 Новое</span>
+                    {% endif %}
+                    
+                    {% if word.is_unknown %}
+                        <span class="status-badge status-unknown">❓ Неизвестное</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="detail-actions">
+            <a href="{% url 'edit_word' pk_word=word.pk %}" class="btn btn-edit">
+                ✏️ Редактировать слово
+            </a>
+            <a href="{% url 'training' %}" class="btn btn-secondary">
+                ← Вернуться к тренировке
+            </a>
+        </div>
+    </div>
 </div>
 
-{% endblock content %}
+<style>
+    .detail-section {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Навигация */
+    .detail-nav {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .nav-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        background: #f0f0f0;
+    }
+
+    .nav-back:hover {
+        background: #e0e0e0;
+        transform: translateX(-3px);
+    }
+
+    .nav-icon {
+        font-size: 1.2rem;
+    }
+
+    /* Карточка слова */
+    .word-detail-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 0.5s ease;
+    }
+
+    .word-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .word-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
+    .word-title {
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin: 0;
+        word-break: break-word;
+    }
+
+    .detail-section-divider {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #667eea, transparent);
+        margin: 1.5rem 0;
+    }
+
+    /* Информация */
+    .word-info {
+        margin-bottom: 2rem;
+    }
+
+    .info-row {
+        display: flex;
+        padding: 1rem 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .info-row:last-child {
+        border-bottom: none;
+    }
+
+    .info-label {
+        width: 140px;
+        font-weight: 600;
+        color: #666;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .info-icon {
+        font-size: 1.1rem;
+    }
+
+    .info-value {
+        flex: 1;
+        color: #333;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+
+    .empty-value {
+        color: #999;
+        font-style: italic;
+    }
+
+    /* Бейджи статусов */
+    .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .status-active {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .status-inactive {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .status-new {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .status-unknown {
+        background: #d1ecf1;
+        color: #0c5460;
+    }
+
+    /* Кнопки действий */
+    .detail-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-edit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+
+    /* Анимации */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .detail-section {
+            padding: 0 1rem;
+        }
+
+        .word-detail-card {
+            padding: 1.5rem;
+        }
+
+        .word-title {
+            font-size: 2rem;
+        }
+
+        .info-row {
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem 0;
+        }
+
+        .info-label {
+            width: 100%;
+        }
+
+        .detail-actions {
+            flex-direction: column;
+        }
+
+        .btn {
+            justify-content: center;
+        }
+
+        .detail-nav {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .word-detail-card {
+            padding: 1rem;
+        }
+
+        .word-title {
+            font-size: 1.5rem;
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+        }
+    }
+</style>
+{% endblock %}

@@ -1,20 +1,418 @@
 {% extends "base.html" %}
 
-{% block content %}
-  <a href="{% url "index" %}" class="text-link">На главную</a>
+{% block title %}Редактирование слова{% endblock %}
 
-<div class="container">
-  <form method="post">
-    {% csrf_token %}
-    <p>
-      Слово: {{ form.word }}
-    </p>
-    <p>
-      Определение: {{ form.definition }}
-    </p>
-    <p>
-      Активное ли: {{ form.is_active }}
-    </p>
-    <button type="submit">Сохранить</button>
-  </form>
-{% endblock content %}
+{% block content %}
+<div class="edit-section">
+    <!-- Навигация -->
+    <div class="edit-nav">
+        <a href="{% url 'index' %}" class="nav-back">
+            <span class="nav-icon">←</span> На главную
+        </a>
+        <a href="{% url 'training' %}" class="nav-back">
+            <span class="nav-icon">📚</span> К тренировке
+        </a>
+        <a href="{% url 'detail' pk_word=word.pk %}" class="nav-back">
+            <span class="nav-icon">👁️</span> К деталям
+        </a>
+    </div>
+
+    <!-- Карточка редактирования -->
+    <div class="edit-card">
+        <div class="edit-header">
+            <div class="edit-icon">✏️</div>
+            <h1 class="edit-title">Редактирование слова</h1>
+            <p class="edit-subtitle">Измените данные и сохраните изменения</p>
+        </div>
+
+        <form method="post" class="edit-form">
+            {% csrf_token %}
+            
+            <!-- Поле Слово -->
+            <div class="form-group">
+                <label for="{{ form.word.id_for_label }}" class="form-label">
+                    <span class="label-icon">📝</span>
+                    Слово
+                </label>
+                {{ form.word }}
+                {% if form.word.errors %}
+                    <div class="form-error">
+                        {{ form.word.errors }}
+                    </div>
+                {% endif %}
+                {% if form.word.help_text %}
+                    <div class="form-help">{{ form.word.help_text }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Поле Определение -->
+            <div class="form-group">
+                <label for="{{ form.definition.id_for_label }}" class="form-label">
+                    <span class="label-icon">📖</span>
+                    Определение
+                </label>
+                {{ form.definition }}
+                {% if form.definition.errors %}
+                    <div class="form-error">
+                        {{ form.definition.errors }}
+                    </div>
+                {% endif %}
+                {% if form.definition.help_text %}
+                    <div class="form-help">{{ form.definition.help_text }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Поле Активности -->
+            <div class="form-group checkbox-group">
+                <div class="checkbox-wrapper">
+                    {{ form.is_active }}
+                    <label for="{{ form.is_active.id_for_label }}" class="checkbox-label">
+                        <span class="checkbox-icon">✅</span>
+                        Слово активно (будет участвовать в тренировках)
+                    </label>
+                </div>
+                {% if form.is_active.errors %}
+                    <div class="form-error">
+                        {{ form.is_active.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Кнопки действий -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-save">
+                    💾 Сохранить изменения
+                </button>
+                <a href="{% url 'detail' pk_word=word.pk %}" class="btn btn-cancel">
+                    ❌ Отмена
+                </a>
+            </div>
+        </form>
+
+        <!-- Дополнительная информация -->
+        <div class="info-note">
+            <div class="note-icon">ℹ️</div>
+            <div class="note-text">
+                <strong>Информация:</strong> Слово было создано {{ word.created_at|date:"d.m.Y H:i" }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .edit-section {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    /* Навигация */
+    .edit-nav {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .nav-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        background: #f0f0f0;
+    }
+
+    .nav-back:hover {
+        background: #e0e0e0;
+        transform: translateX(-3px);
+    }
+
+    .nav-icon {
+        font-size: 1.2rem;
+    }
+
+    /* Карточка редактирования */
+    .edit-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 0.5s ease;
+    }
+
+    .edit-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .edit-icon {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .edit-title {
+        font-size: 1.8rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 0.5rem;
+    }
+
+    .edit-subtitle {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    /* Форма */
+    .edit-form {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .label-icon {
+        font-size: 1rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        box-sizing: border-box;
+    }
+
+    .form-group input[type="text"]:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    /* Чекбокс */
+    .checkbox-group {
+        margin: 1.5rem 0;
+    }
+
+    .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+    }
+
+    .checkbox-wrapper:hover {
+        background: #f0f0f0;
+        border-color: #667eea;
+    }
+
+    .checkbox-wrapper input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #667eea;
+    }
+
+    .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        font-weight: 500;
+        color: #555;
+        margin: 0;
+    }
+
+    .checkbox-icon {
+        font-size: 1rem;
+    }
+
+    /* Ошибки */
+    .form-error {
+        color: #f44336;
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+    }
+
+    .form-help {
+        color: #999;
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+    }
+
+    /* Кнопки действий */
+    .form-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-cancel {
+        background: #6c757d;
+        color: white;
+    }
+
+    .btn-cancel:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+
+    /* Информационная заметка */
+    .info-note {
+        display: flex;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 12px;
+        border-left: 4px solid #667eea;
+        margin-top: 1rem;
+    }
+
+    .note-icon {
+        font-size: 1.2rem;
+    }
+
+    .note-text {
+        flex: 1;
+        color: #666;
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .note-text strong {
+        color: #333;
+    }
+
+    /* Анимации */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .edit-section {
+            padding: 0 1rem;
+        }
+
+        .edit-card {
+            padding: 1.5rem;
+        }
+
+        .edit-title {
+            font-size: 1.5rem;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .btn {
+            justify-content: center;
+        }
+
+        .edit-nav {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .edit-card {
+            padding: 1rem;
+        }
+
+        .edit-title {
+            font-size: 1.3rem;
+        }
+
+        .edit-subtitle {
+            font-size: 0.8rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            padding: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .checkbox-wrapper {
+            padding: 0.6rem;
+        }
+
+        .checkbox-label {
+            font-size: 0.85rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+        }
+    }
+</style>
+{% endblock %}

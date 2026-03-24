@@ -3,70 +3,357 @@
 {% block title %}Главная страница{% endblock %}
 
 {% block content %}
-<div style="text-align: center; margin-top: 50px;">
+<div class="welcome-section">
     {% if user.is_authenticated %}
-        <h1>Привет, {{ user.first_name }}!</h1>
-        <p>Ты успешно вошёл в систему.</p>
+        <div class="greeting-card">
+            <div class="greeting-icon">🎉</div>
+            <h1 class="greeting-title">Привет, {{ user.first_name|default:user.username }}!</h1>
+            <p class="greeting-text">Ты успешно вошёл в систему. Готов пополнить словарный запас?</p>
+        </div>
         
-        <div style="margin-top: 30px;">
-            <a href="{% url 'add_word' %}" style="
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #4CAF50;
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-right: 10px;
-            ">Добавить слово</a>
-
-        <div style="margin-top: 30px;">
-            <a href="{% url 'training' %}" style="
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #4CAF50;
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-right: 10px;
-            ">Тренироваться</a>
-            
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number">{{ total_words|default:"0" }}</div>
+                <div class="stat-label">всего слов</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-number">{{ active_words|default:"0" }}</div>
+                <div class="stat-label">активных слов</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✨</div>
+                <div class="stat-number">{{ new_words|default:"0" }}</div>
+                <div class="stat-label">новых слов</div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="{% url 'add_word' %}" class="btn btn-primary btn-large">
+                <span class="btn-icon">➕</span>
+                Добавить слово
+            </a>
+            <a href="{% url 'training' %}" class="btn btn-primary btn-large">
+                <span class="btn-icon">🎯</span>
+                Тренироваться
+            </a>
             <form method="post" action="{% url 'logout' %}" style="display: inline;">
                 {% csrf_token %}
-                <button type="submit" style="
-                    padding: 10px 20px;
-                    background-color: #f44336;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                ">Выйти</button>
+                <button type="submit" class="btn btn-danger btn-large">
+                    <span class="btn-icon">🚪</span>
+                    Выйти
+                </button>
             </form>
         </div>
         
-    {% else %}
-        <h1>Добро пожаловать в тренажёр слов!</h1>
-        <p>Пожалуйста, войди или зарегистрируйся, чтобы начать.</p>
+        <div class="motivation-card">
+            <p class="motivation-text">
+                💡 Маленький шаг каждый день — большой прогресс в изучении языка!
+            </p>
+        </div>
         
-        <div style="margin-top: 30px;">
-            <a href="{% url 'login' %}" style="
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #4CAF50;
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-right: 10px;
-            ">Войти</a>
-            
-            <a href="{% url 'registration' %}" style="
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #2196F3;
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-            ">Регистрация</a>
+    {% else %}
+        <div class="hero-section">
+            <div class="hero-icon">📚</div>
+            <h1 class="hero-title">Добро пожаловать в тренажёр слов!</h1>
+            <p class="hero-description">
+                Учи новые слова эффективно с помощью интервальных повторений.<br>
+                Добавляй слова, тренируйся и отслеживай свой прогресс!
+            </p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">➕</div>
+                <h3 class="feature-title">Добавляй слова</h3>
+                <p class="feature-description">Создавай свой личный словарь с переводами и определениями</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Тренируйся</h3>
+                <p class="feature-description">Учи слова с помощью умных алгоритмов повторения</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Отслеживай прогресс</h3>
+                <p class="feature-description">Следи за статистикой и улучшай результаты</p>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-large">
+                <span class="btn-icon">🔑</span>
+                Войти
+            </a>
+            <a href="{% url 'register' %}" class="btn btn-secondary btn-large">
+                <span class="btn-icon">📝</span>
+                Регистрация
+            </a>
+        </div>
+        
+        <div class="info-card">
+            <p class="info-text">
+                🌟 Бесплатный тренажёр для изучения иностранных слов.<br>
+                Создай аккаунт и начни учить слова прямо сейчас!
+            </p>
         </div>
     {% endif %}
 </div>
+
+<style>
+    /* Секции */
+    .welcome-section {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* Приветственная карточка */
+    .greeting-card {
+        text-align: center;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.6s ease;
+    }
+
+    .greeting-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    .greeting-title {
+        font-size: 2.2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 0.5rem;
+    }
+
+    .greeting-text {
+        color: #666;
+        font-size: 1.1rem;
+    }
+
+    /* Статистика */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1.5rem;
+        border-radius: 20px;
+        text-align: center;
+        color: white;
+        transition: transform 0.3s ease;
+        animation: fadeInUp 0.6s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    /* Кнопки действий */
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-large {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-icon {
+        font-size: 1.2rem;
+    }
+
+    /* Мотивационная карточка */
+    .motivation-card {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+        animation: fadeInUp 0.6s ease;
+    }
+
+    .motivation-text {
+        color: #555;
+        font-size: 1rem;
+        font-style: italic;
+    }
+
+    /* Hero секция для неавторизованных */
+    .hero-section {
+        text-align: center;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.6s ease;
+    }
+
+    .hero-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 1rem;
+    }
+
+    .hero-description {
+        color: #666;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    /* Карточки преимуществ */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .feature-card {
+        text-align: center;
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.6s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+
+    .feature-description {
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    /* Информационная карточка */
+    .info-card {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+        margin-top: 1rem;
+        animation: fadeInUp 0.6s ease;
+    }
+
+    .info-text {
+        color: #555;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    /* Анимации */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .greeting-title {
+            font-size: 1.8rem;
+        }
+        
+        .hero-title {
+            font-size: 1.6rem;
+        }
+        
+        .stats-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .features-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .btn-large {
+            justify-content: center;
+        }
+        
+        .greeting-text,
+        .hero-description {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .greeting-title {
+            font-size: 1.5rem;
+        }
+        
+        .hero-title {
+            font-size: 1.3rem;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1rem;
+        }
+    }
+</style>
 {% endblock %}
