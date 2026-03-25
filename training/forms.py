@@ -11,6 +11,7 @@ class CreateWordForm(forms.ModelForm):
         fields = (
             'word',
             'definition',
+            'example',
         )
 
 
@@ -23,4 +24,5 @@ class EditWordForm(forms.ModelForm):
             'word',
             'definition',
             'is_active',
+            'is_hard',
         )

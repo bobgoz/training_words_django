@@ -27,9 +27,6 @@ class WordCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.word = form.instance.word.capitalize()
-        form.instance.word = form.instance.word.strip()
-        form.instance.definition = form.instance.definition.capitalize()
         return super().form_valid(form)
 
 
@@ -124,4 +121,22 @@ class ShowRandomView(LoginRequiredMixin, View):
             request,
             template_name='training/training.html',
             context={'random_words': random_words},
+        )
+
+
+class TrainingHardView(ListView):
+    """
+    Отображение слов с флагом is_hard
+    (которые вызывают трудности).
+    """
+
+    template_name = 'training/training.html'
+    context_object_name = 'hard_words'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Word.objects.filter(
+            user=self.request.user,
+            is_active=True,
+            is_hard=True,
         )

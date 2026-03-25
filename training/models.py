@@ -43,13 +43,15 @@ class Word(models.Model):
     definition = models.CharField(
         'Определение слова',
         max_length=DEFINITION_FIELD_MAX_LENGTH,
-        help_text='Опциональное поле. Определение слова.'
-        f' Количество символов не более {DEFINITION_FIELD_MAX_LENGTH}',
+        help_text='Определение слова.'
+        f' Количество символов не более {DEFINITION_FIELD_MAX_LENGTH}. '
+        'Можно заполнить позже.',
         blank=True,
     )
     example = models.TextField(
         'Пример использования',
         blank=True,
+        help_text='Пример использования слова. Можно заполнить позже.'
     )
 
     class Meta:
@@ -62,3 +64,13 @@ class Word(models.Model):
         verbose_name = 'слово'
         verbose_name_plural = 'слова'
         ordering = ('-created_at',)
+
+    def clean(self):
+        """
+        Автоматическая заглавная
+        буква в начале слова и очистка
+        от лишних пробелов.
+        """
+        self.word = self.word.capitalize().strip()
+        self.definition = self.definition.capitalize().strip()
+        return super().clean()

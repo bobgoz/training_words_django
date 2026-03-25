@@ -3,357 +3,85 @@
 {% block title %}Главная страница{% endblock %}
 
 {% block content %}
-<div class="welcome-section">
+<div class="max-w-4xl mx-auto">
     {% if user.is_authenticated %}
-        <div class="greeting-card">
-            <div class="greeting-icon">🎉</div>
-            <h1 class="greeting-title">Привет, {{ user.first_name|default:user.username }}!</h1>
-            <p class="greeting-text">Ты успешно вошёл в систему. Готов пополнить словарный запас?</p>
-        </div>
-        
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon">📊</div>
-                <div class="stat-number">{{ total_words|default:"0" }}</div>
-                <div class="stat-label">всего слов</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">🎯</div>
-                <div class="stat-number">{{ active_words|default:"0" }}</div>
-                <div class="stat-label">активных слов</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">✨</div>
-                <div class="stat-number">{{ new_words|default:"0" }}</div>
-                <div class="stat-label">новых слов</div>
-            </div>
-        </div>
-        
-        <div class="action-buttons">
-            <a href="{% url 'add_word' %}" class="btn btn-primary btn-large">
-                <span class="btn-icon">➕</span>
-                Добавить слово
-            </a>
-            <a href="{% url 'training' %}" class="btn btn-primary btn-large">
-                <span class="btn-icon">🎯</span>
-                Тренироваться
-            </a>
-            <form method="post" action="{% url 'logout' %}" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger btn-large">
-                    <span class="btn-icon">🚪</span>
-                    Выйти
-                </button>
-            </form>
-        </div>
-        
-        <div class="motivation-card">
-            <p class="motivation-text">
-                💡 Маленький шаг каждый день — большой прогресс в изучении языка!
+        <!-- Приветственный блок -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl font-bold text-gray-900 mb-3">
+                Добро пожаловать, {{ user.first_name|default:user.username }}
+            </h1>
+            <p class="text-lg text-gray-600">
+                Продолжайте изучение слов, чтобы улучшить свой словарный запас
             </p>
         </div>
-        
+
+        <!-- Статистика -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+                <div class="text-3xl font-bold text-gray-900 mb-1">{{ total_words|default:"0" }}</div>
+                <div class="text-sm text-gray-500">всего слов</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+                <div class="text-3xl font-bold text-gray-900 mb-1">{{ active_words|default:"0" }}</div>
+                <div class="text-sm text-gray-500">активных слов</div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
+                <div class="text-3xl font-bold text-gray-900 mb-1">{{ hard_words|default:"0" }}</div>
+                <div class="text-sm text-gray-500">сложных слов</div>
+            </div>
+        </div>
+
+        <!-- Кнопки действий -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="{% url 'training' %}" 
+               class="block bg-gray-900 text-white text-center py-4 px-6 rounded-xl font-medium hover:bg-gray-800 transition duration-200">
+                Начать тренировку
+            </a>
+            <a href="{% url 'training_hard' %}" 
+               class="block bg-white border border-gray-300 text-gray-700 text-center py-4 px-6 rounded-xl font-medium hover:bg-gray-50 transition duration-200">
+                Тренировка сложных слов
+            </a>
+            <a href="{% url 'add_word' %}" 
+               class="block bg-white border border-gray-300 text-gray-700 text-center py-4 px-6 rounded-xl font-medium hover:bg-gray-50 transition duration-200">
+                Добавить новое слово
+            </a>
+        </div>
     {% else %}
-        <div class="hero-section">
-            <div class="hero-icon">📚</div>
-            <h1 class="hero-title">Добро пожаловать в тренажёр слов!</h1>
-            <p class="hero-description">
-                Учи новые слова эффективно с помощью интервальных повторений.<br>
-                Добавляй слова, тренируйся и отслеживай свой прогресс!
+        <!-- Hero блок для неавторизованных -->
+        <div class="text-center py-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                Тренажёр слов
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Эффективный способ учить новые слова. Добавляйте слова, тренируйтесь и отслеживайте прогресс.
             </p>
-        </div>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">➕</div>
-                <h3 class="feature-title">Добавляй слова</h3>
-                <p class="feature-description">Создавай свой личный словарь с переводами и определениями</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3 class="feature-title">Тренируйся</h3>
-                <p class="feature-description">Учи слова с помощью умных алгоритмов повторения</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3 class="feature-title">Отслеживай прогресс</h3>
-                <p class="feature-description">Следи за статистикой и улучшай результаты</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'register' %}" 
+                   class="bg-gray-900 text-white px-8 py-3 rounded-xl font-medium hover:bg-gray-800 transition duration-200">
+                    Начать бесплатно
+                </a>
+                <a href="{% url 'login' %}" 
+                   class="bg-white border border-gray-300 text-gray-700 px-8 py-3 rounded-xl font-medium hover:bg-gray-50 transition duration-200">
+                    Войти в аккаунт
+                </a>
             </div>
         </div>
-        
-        <div class="action-buttons">
-            <a href="{% url 'login' %}" class="btn btn-primary btn-large">
-                <span class="btn-icon">🔑</span>
-                Войти
-            </a>
-            <a href="{% url 'register' %}" class="btn btn-secondary btn-large">
-                <span class="btn-icon">📝</span>
-                Регистрация
-            </a>
-        </div>
-        
-        <div class="info-card">
-            <p class="info-text">
-                🌟 Бесплатный тренажёр для изучения иностранных слов.<br>
-                Создай аккаунт и начни учить слова прямо сейчас!
-            </p>
+
+        <!-- Преимущества -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-200">
+            <div class="text-center">
+                <div class="text-gray-900 font-semibold mb-2">Добавляйте слова</div>
+                <div class="text-gray-500 text-sm">Создавайте свой личный словарь с переводами и примерами</div>
+            </div>
+            <div class="text-center">
+                <div class="text-gray-900 font-semibold mb-2">Тренируйтесь</div>
+                <div class="text-gray-500 text-sm">Учите слова с помощью эффективной системы повторений</div>
+            </div>
+            <div class="text-center">
+                <div class="text-gray-900 font-semibold mb-2">Следите за прогрессом</div>
+                <div class="text-gray-500 text-sm">Отслеживайте статистику и улучшайте результаты</div>
+            </div>
         </div>
     {% endif %}
 </div>
-
-<style>
-    /* Секции */
-    .welcome-section {
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-    /* Приветственная карточка */
-    .greeting-card {
-        text-align: center;
-        margin-bottom: 2rem;
-        animation: fadeInUp 0.6s ease;
-    }
-
-    .greeting-icon {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-    }
-
-    .greeting-title {
-        font-size: 2.2rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        margin-bottom: 0.5rem;
-    }
-
-    .greeting-text {
-        color: #666;
-        font-size: 1.1rem;
-    }
-
-    /* Статистика */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2.5rem;
-    }
-
-    .stat-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 1.5rem;
-        border-radius: 20px;
-        text-align: center;
-        color: white;
-        transition: transform 0.3s ease;
-        animation: fadeInUp 0.6s ease;
-    }
-
-    .stat-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .stat-icon {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .stat-number {
-        font-size: 2rem;
-        font-weight: bold;
-        margin-bottom: 0.25rem;
-    }
-
-    .stat-label {
-        font-size: 0.9rem;
-        opacity: 0.9;
-    }
-
-    /* Кнопки действий */
-    .action-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
-    }
-
-    .btn-large {
-        padding: 1rem 2rem;
-        font-size: 1.1rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .btn-icon {
-        font-size: 1.2rem;
-    }
-
-    /* Мотивационная карточка */
-    .motivation-card {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        text-align: center;
-        animation: fadeInUp 0.6s ease;
-    }
-
-    .motivation-text {
-        color: #555;
-        font-size: 1rem;
-        font-style: italic;
-    }
-
-    /* Hero секция для неавторизованных */
-    .hero-section {
-        text-align: center;
-        margin-bottom: 2rem;
-        animation: fadeInUp 0.6s ease;
-    }
-
-    .hero-icon {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-    }
-
-    .hero-title {
-        font-size: 2rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        margin-bottom: 1rem;
-    }
-
-    .hero-description {
-        color: #666;
-        font-size: 1.1rem;
-        line-height: 1.6;
-    }
-
-    /* Карточки преимуществ */
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2.5rem;
-    }
-
-    .feature-card {
-        text-align: center;
-        padding: 1.5rem;
-        background: #f8f9fa;
-        border-radius: 15px;
-        transition: all 0.3s ease;
-        animation: fadeInUp 0.6s ease;
-    }
-
-    .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .feature-icon {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .feature-title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 0.5rem;
-    }
-
-    .feature-description {
-        color: #666;
-        font-size: 0.9rem;
-        line-height: 1.5;
-    }
-
-    /* Информационная карточка */
-    .info-card {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        text-align: center;
-        margin-top: 1rem;
-        animation: fadeInUp 0.6s ease;
-    }
-
-    .info-text {
-        color: #555;
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-    /* Анимации */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Адаптивность */
-    @media (max-width: 768px) {
-        .greeting-title {
-            font-size: 1.8rem;
-        }
-        
-        .hero-title {
-            font-size: 1.6rem;
-        }
-        
-        .stats-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-        
-        .features-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-        
-        .action-buttons {
-            flex-direction: column;
-            align-items: stretch;
-        }
-        
-        .btn-large {
-            justify-content: center;
-        }
-        
-        .greeting-text,
-        .hero-description {
-            font-size: 1rem;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .greeting-title {
-            font-size: 1.5rem;
-        }
-        
-        .hero-title {
-            font-size: 1.3rem;
-        }
-        
-        .stat-number {
-            font-size: 1.5rem;
-        }
-        
-        .feature-title {
-            font-size: 1rem;
-        }
-    }
-</style>
 {% endblock %}
