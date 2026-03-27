@@ -10,7 +10,6 @@ urlpatterns = [
         name='mark_as_active',
     ),
     path('training/', views.TrainingView.as_view(), name='training'),
-    path('training_hard/', views.TrainingHardView.as_view(), name='training_hard'),
     path(
         '<int:pk_word>/detail/',
         views.DetailWordView.as_view(),
@@ -31,5 +30,4 @@ urlpatterns = [
         views.ConfirmDeleteWordView.as_view(),
         name='conf_delete_word',
     ),
-    path('random/', views.ShowRandomView.as_view(), name='random'),
 ]

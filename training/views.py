@@ -1,20 +1,35 @@
-from django.shortcuts import render
+from random import shuffle
+
+from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
+from django.http import Http404
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import (
     CreateView,
-    ListView,
-    DetailView,
-    UpdateView,
     DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
 )
-from random import shuffle
-from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.shortcuts import render
 
 from .forms import CreateWordForm, EditWordForm
 from .models import Word
-from django.shortcuts import redirect
+
+COUNT_RANDOM_WORDS = 10
+
+
+class WordAcessMixin(AccessMixin):
+    """
+    Проверка доступа к слову.
+    Если объект не принадлежит пользователю, возвращается ошибка 404.
+    """
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.user != request.user:
+            raise Http404('Запрашиваемого слова не существует.')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class WordCreateView(LoginRequiredMixin, CreateView):
@@ -38,24 +53,32 @@ class TrainingView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Word.objects.filter(
-            user=self.request.user,
-            is_active=True,
-        )
+        """
+        Определяет вывод списка слов
+        в зависимости от режима.
+        """
+
+        user = self.request.user
+        words = Word.words
+        action = self.request.GET.get('action')
+
+        if action == 'hard':
+            return words.hard(user)
+        if action == 'random':
+            return words.random_words(user, COUNT_RANDOM_WORDS)
+        return words.active(user)
 
 
-class DetailWordView(LoginRequiredMixin, DetailView):
+class DetailWordView(LoginRequiredMixin, WordAcessMixin, DetailView):
     """Вью для детального отображения и редактирования слов"""
 
+    model = Word
     template_name = 'training/detail_word.html'
     success_url = reverse_lazy('training')
     pk_url_kwarg = 'pk_word'
 
-    def get_queryset(self):
-        return Word.objects.filter(user=self.request.user)
 
-
-class DeleteWordView(LoginRequiredMixin, DeleteView):
+class DeleteWordView(LoginRequiredMixin, WordAcessMixin, DeleteView):
     """Вью для удаление слов"""
 
     model = Word
@@ -73,14 +96,6 @@ class ConfirmDeleteWordView(LoginRequiredMixin, DetailView):
     pk_url_kwarg = 'pk_word'
 
 
-class WordsView(LoginRequiredMixin, ListView):
-    """Отображение списка слов"""
-
-    queryset = Word.objects.all().order_by('pk')
-    template_name = 'training/words.html'
-    context_object_name = 'words'
-
-
 class MarkAsActiveView(LoginRequiredMixin, View):
     """Помечает 10 слов как активные"""
 
@@ -93,12 +108,13 @@ class MarkAsActiveView(LoginRequiredMixin, View):
             .order_by('pk')
             .values_list('pk', flat=True)[:10]
         )
-        Word.objects.filter(id__in=words_idx).update(is_active=True)
+        Word.words.filter(id__in=words_idx).update(is_active=True)
+        print(words_idx)
 
         return redirect('training')
 
 
-class EditWordView(UpdateView):
+class EditWordView(WordAcessMixin, UpdateView):
     """Редактирование слов"""
 
     model = Word
@@ -106,37 +122,3 @@ class EditWordView(UpdateView):
     form_class = EditWordForm
     success_url = reverse_lazy('training')
     pk_url_kwarg = 'pk_word'
-
-
-class ShowRandomView(LoginRequiredMixin, View):
-    """Рандомизирует слова"""
-
-    def get(self, request, *args, **kwargs):
-        random_words = Word.objects.filter(
-            user=self.request.user,
-            is_active=True,
-        ).order_by('?')[:10]
-
-        return render(
-            request,
-            template_name='training/training.html',
-            context={'random_words': random_words},
-        )
-
-
-class TrainingHardView(ListView):
-    """
-    Отображение слов с флагом is_hard
-    (которые вызывают трудности).
-    """
-
-    template_name = 'training/training.html'
-    context_object_name = 'hard_words'
-    paginate_by = 10
-
-    def get_queryset(self):
-        return Word.objects.filter(
-            user=self.request.user,
-            is_active=True,
-            is_hard=True,
-        )

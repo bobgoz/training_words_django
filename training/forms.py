@@ -23,6 +23,7 @@ class EditWordForm(forms.ModelForm):
         fields = (
             'word',
             'definition',
+            'example',
             'is_active',
             'is_hard',
         )

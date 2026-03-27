@@ -1,87 +1,176 @@
 {% extends "base.html" %}
+{% load bootstrap5 %}
 
 {% block title %}Главная страница{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto">
+<div class="row justify-content-center">
+  <div class="col-lg-8 col-md-10">
     {% if user.is_authenticated %}
-        <!-- Приветственный блок -->
-        <div class="text-center mb-12">
-            <h1 class="text-3xl font-bold text-gray-900 mb-3">
-                Добро пожаловать, {{ user.first_name|default:user.username }}
-            </h1>
-            <p class="text-lg text-gray-600">
-                Продолжайте изучение слов, чтобы улучшить свой словарный запас
-            </p>
-        </div>
+      <!-- Приветствие для авторизованных -->
+      <div class="mb-4 text-center">
+        <h1 class="display-4 mb-3" style="font-weight: 700; color: #1f2937;">
+          👋 Привет, {{ user.first_name|default:user.username }}!
+        </h1>
+        <p class="lead text-secondary" style="font-weight: 500;">
+          Продолжай учить слова и улучшать свой словарный запас
+        </p>
+      </div>
 
-        <!-- Статистика -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
-                <div class="text-3xl font-bold text-gray-900 mb-1">{{ total_words|default:"0" }}</div>
-                <div class="text-sm text-gray-500">всего слов</div>
+      <!-- Статистика -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="card shadow-sm border-0 text-center">
+            <div class="card-body">
+              <div class="display-4 mb-2" style="font-weight: 700; color: #0d6efd;">{{ total_words }}</div>
+              <div class="text-secondary" style="font-weight: 600;">Всего слов</div>
             </div>
-            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
-                <div class="text-3xl font-bold text-gray-900 mb-1">{{ active_words|default:"0" }}</div>
-                <div class="text-sm text-gray-500">активных слов</div>
-            </div>
-            <div class="bg-white rounded-xl border border-gray-200 p-6 text-center">
-                <div class="text-3xl font-bold text-gray-900 mb-1">{{ hard_words|default:"0" }}</div>
-                <div class="text-sm text-gray-500">сложных слов</div>
-            </div>
+          </div>
         </div>
+        <div class="col-md-4">
+          <div class="card shadow-sm border-0 text-center">
+            <div class="card-body">
+              <div class="display-4 mb-2" style="font-weight: 700; color: #198754;">{{ active_words }}</div>
+              <div class="text-secondary" style="font-weight: 600;">Активных слов</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow-sm border-0 text-center">
+            <div class="card-body">
+              <div class="display-4 mb-2" style="font-weight: 700; color: #ffc107;">{{ hard_words }}</div>
+              <div class="text-secondary" style="font-weight: 600;">Сложных слов</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <!-- Кнопки действий -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <a href="{% url 'training' %}" 
-               class="block bg-gray-900 text-white text-center py-4 px-6 rounded-xl font-medium hover:bg-gray-800 transition duration-200">
-                Начать тренировку
-            </a>
-            <a href="{% url 'training_hard' %}" 
-               class="block bg-white border border-gray-300 text-gray-700 text-center py-4 px-6 rounded-xl font-medium hover:bg-gray-50 transition duration-200">
-                Тренировка сложных слов
-            </a>
-            <a href="{% url 'add_word' %}" 
-               class="block bg-white border border-gray-300 text-gray-700 text-center py-4 px-6 rounded-xl font-medium hover:bg-gray-50 transition duration-200">
-                Добавить новое слово
-            </a>
+      <!-- Кнопки действий -->
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="{% url 'training' %}" class="btn btn-primary px-4 py-2" style="font-weight: 600;">
+          🎯 Начать тренировку
+        </a>
+        <a href="{% url 'add_word' %}" class="btn btn-outline-primary px-4 py-2" style="font-weight: 600;">
+          ➕ Добавить слово
+        </a>
+        <a href="{% url 'training' %}?action=hard" class="btn btn-outline-warning px-4 py-2" style="font-weight: 600;">
+          ⚡ Сложные слова
+        </a>
+        <a href="{% url 'training' %}?action=random" class="btn btn-outline-info px-4 py-2" style="font-weight: 600;">
+          🎲 Случайные слова
+        </a>
+      </div>
+
+      <!-- Мотивация -->
+      <div class="alert alert-light border-start border-4 border-primary mt-4" style="background: #f8f9fa; border-color: #667eea !important;">
+        <div class="d-flex gap-3 align-items-center">
+          <span class="fs-2">💪</span>
+          <div>
+            <strong class="d-block" style="font-weight: 700; color: #1f2937;">Держи темп!</strong>
+            <small class="text-secondary" style="font-weight: 500;">Регулярные тренировки помогают запоминать слова быстрее. Сегодня уже занимался?</small>
+          </div>
         </div>
+      </div>
+
     {% else %}
-        <!-- Hero блок для неавторизованных -->
-        <div class="text-center py-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">
-                Тренажёр слов
-            </h1>
-            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                Эффективный способ учить новые слова. Добавляйте слова, тренируйтесь и отслеживайте прогресс.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{% url 'register' %}" 
-                   class="bg-gray-900 text-white px-8 py-3 rounded-xl font-medium hover:bg-gray-800 transition duration-200">
-                    Начать бесплатно
-                </a>
-                <a href="{% url 'login' %}" 
-                   class="bg-white border border-gray-300 text-gray-700 px-8 py-3 rounded-xl font-medium hover:bg-gray-50 transition duration-200">
-                    Войти в аккаунт
-                </a>
+      <!-- Приветствие для неавторизованных -->
+      <div class="text-center">
+        <h1 class="display-4 mb-3" style="font-weight: 700; color: #1f2937;">
+          📚 Тренажёр слов
+        </h1>
+        <p class="lead text-secondary mb-4" style="font-weight: 500;">
+          Учи новые слова эффективно с помощью интервальных повторений
+        </p>
+        
+        <!-- Преимущества -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body text-center">
+                <div class="fs-1 mb-2">➕</div>
+                <h5 class="fw-bold" style="color: #1f2937;">Добавляй слова</h5>
+                <p class="text-secondary small" style="font-weight: 500;">Создавай свой личный словарь</p>
+              </div>
             </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body text-center">
+                <div class="fs-1 mb-2">🎯</div>
+                <h5 class="fw-bold" style="color: #1f2937;">Тренируйся</h5>
+                <p class="text-secondary small" style="font-weight: 500;">Учи слова с умными алгоритмами</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body text-center">
+                <div class="fs-1 mb-2">📊</div>
+                <h5 class="fw-bold" style="color: #1f2937;">Отслеживай прогресс</h5>
+                <p class="text-secondary small" style="font-weight: 500;">Следи за своей статистикой</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Преимущества -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-200">
-            <div class="text-center">
-                <div class="text-gray-900 font-semibold mb-2">Добавляйте слова</div>
-                <div class="text-gray-500 text-sm">Создавайте свой личный словарь с переводами и примерами</div>
-            </div>
-            <div class="text-center">
-                <div class="text-gray-900 font-semibold mb-2">Тренируйтесь</div>
-                <div class="text-gray-500 text-sm">Учите слова с помощью эффективной системы повторений</div>
-            </div>
-            <div class="text-center">
-                <div class="text-gray-900 font-semibold mb-2">Следите за прогрессом</div>
-                <div class="text-gray-500 text-sm">Отслеживайте статистику и улучшайте результаты</div>
-            </div>
+        <!-- Кнопки входа/регистрации -->
+        <div class="d-flex gap-3 justify-content-center flex-wrap mt-4">
+          <a href="{% url 'login' %}" class="btn btn-primary px-4 py-2" style="font-weight: 600;">
+            🔑 Войти
+          </a>
+          <a href="{% url 'register' %}" class="btn btn-outline-primary px-4 py-2" style="font-weight: 600;">
+            📝 Регистрация
+          </a>
         </div>
+
+        <!-- Мотивация для регистрации -->
+        <div class="alert alert-light border-start border-4 border-primary mt-4" style="background: #f8f9fa; border-color: #667eea !important;">
+          <div class="d-flex gap-3 align-items-center">
+            <span class="fs-2">✨</span>
+            <div>
+              <strong class="d-block" style="font-weight: 700; color: #1f2937;">Начни учить слова уже сегодня!</strong>
+              <small class="text-secondary" style="font-weight: 500;">Зарегистрируйся и создай свой первый словарь</small>
+            </div>
+          </div>
+        </div>
+      </div>
     {% endif %}
+  </div>
 </div>
+
+<style>
+  .card {
+    border-radius: 1rem;
+    transition: all 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-3px);
+  }
+  
+  .btn {
+    transition: all 0.2s;
+    border-radius: 0.5rem;
+  }
+  
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  
+  .btn-outline-primary, .btn-outline-warning, .btn-outline-info {
+    border-width: 1.5px;
+  }
+  
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  
+  .alert {
+    border-radius: 0.75rem;
+  }
+  
+  .text-secondary {
+    color: #495057 !important;
+  }
+</style>
 {% endblock %}

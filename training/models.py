@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+from .managers import WordManager
+
 User = get_user_model()
 
 WORD_FIELD_MAX_LENGTH = 150
@@ -19,6 +21,7 @@ class Word(models.Model):
     word = models.CharField(
         'Слово',
         max_length=WORD_FIELD_MAX_LENGTH,
+        help_text='Обязательное поле',
     )
 
     created_at = models.DateTimeField(
@@ -28,6 +31,7 @@ class Word(models.Model):
     updated_at = models.DateTimeField(
         'Дата и время обновления слова',
         auto_now=True,
+        null=True,
     )
 
     is_active = models.BooleanField(
@@ -47,12 +51,17 @@ class Word(models.Model):
         f' Количество символов не более {DEFINITION_FIELD_MAX_LENGTH}. '
         'Можно заполнить позже.',
         blank=True,
+        null=True,
     )
     example = models.TextField(
         'Пример использования',
         blank=True,
-        help_text='Пример использования слова. Можно заполнить позже.'
+        null=True,
+        help_text='Пример использования слова. Можно заполнить позже.',
     )
+
+    words = WordManager()
+    objects = models.Manager()
 
     class Meta:
         constraints = [
@@ -63,7 +72,7 @@ class Word(models.Model):
         ]
         verbose_name = 'слово'
         verbose_name_plural = 'слова'
-        ordering = ('-created_at',)
+        ordering = ('-pk',)
 
     def clean(self):
         """
@@ -72,5 +81,9 @@ class Word(models.Model):
         от лишних пробелов.
         """
         self.word = self.word.capitalize().strip()
-        self.definition = self.definition.capitalize().strip()
+        if self.definition:
+            self.definition = self.definition.capitalize().strip()
+        elif self.example:
+            self.example = self.example.capitalize().strip()
+
         return super().clean()
