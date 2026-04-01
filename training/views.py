@@ -14,7 +14,12 @@ from django.views.generic import (
 )
 
 from .forms import CreateWordForm, EditWordForm
-from .mixins import BaseTrainingViewMixin, WordAcessMixin
+from .mixins import (
+    BaseTrainingViewMixin,
+    WordAcessMixin,
+    NextUrlMixin,
+    GetSuccessUrlMixin,
+)
 from .models import Word
 
 from .constants import COUNT_RANDOM_WORDS
@@ -72,34 +77,30 @@ class TrainingRandomView(BaseTrainingViewMixin):
         return Word.words.random_words(self.request.user)[:COUNT_RANDOM_WORDS]
 
 
-class DetailWordView(LoginRequiredMixin, WordAcessMixin, DetailView):
+class DetailWordView(
+    LoginRequiredMixin,
+    WordAcessMixin,
+    NextUrlMixin,
+    DetailView,
+):
     """Вью для детального отображения"""
 
     model = Word
     template_name = 'training/detail_word.html'
-    success_url = reverse_lazy('training')
     pk_url_kwarg = 'pk_word'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['next'] = self.request.GET.get('next')
-        return context
 
-
-class DeleteWordView(LoginRequiredMixin, WordAcessMixin, DeleteView):
+class DeleteWordView(
+    LoginRequiredMixin,
+    WordAcessMixin,
+    GetSuccessUrlMixin,
+    DeleteView,
+):
     """Вью для удаление слов"""
 
     model = Word
     pk_url_kwarg = 'pk_word'
     context_object_name = 'word'
-    # success_url = reverse_lazy('training')
-
-    def get_success_url(self):
-        next_url = self.request.GET.get('next')
-        if next_url:
-            return next_url
-        return reverse_lazy('training')
-
 
 
 class MarkAsActiveView(LoginRequiredMixin, View):
@@ -117,16 +118,15 @@ class MarkAsActiveView(LoginRequiredMixin, View):
         return redirect('training')
 
 
-class EditWordView(WordAcessMixin, UpdateView):
+class EditWordView(
+    WordAcessMixin,
+    NextUrlMixin,
+    GetSuccessUrlMixin,
+    UpdateView,
+):
     """Редактирование слов"""
 
     model = Word
     template_name = 'training/edit_word.html'
     form_class = EditWordForm
     pk_url_kwarg = 'pk_word'
-
-    def get_success_url(self):
-        next_url = self.request.GET.get('next')
-        if next_url:
-            return next_url
-        return reverse_lazy('detail', kwargs={'pk_word': self.object.pk})
