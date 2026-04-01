@@ -45,6 +45,14 @@ class TrainingView(BaseTrainingViewMixin):
         return Word.words.is_active(self.request.user)
 
 
+class TrainingLearnedView(BaseTrainingViewMixin):
+    """Вью для отображения только изученных слов"""
+
+    def get_queryset(self):
+        """Возвращает список изученных слов"""
+        return Word.words.is_learned(self.request.users)
+
+
 class TrainingNoActiveView(BaseTrainingViewMixin):
     """Вью для отображения неактивных слов"""
 
@@ -101,7 +109,6 @@ class DeleteWordView(LoginRequiredMixin, WordAcessMixin, DeleteView):
         return reverse_lazy('training')
 
 
-
 class MarkAsActiveView(LoginRequiredMixin, View):
     """Помечает 10 слов как активные"""
 
@@ -130,3 +137,16 @@ class EditWordView(WordAcessMixin, UpdateView):
         if next_url:
             return next_url
         return reverse_lazy('detail', kwargs={'pk_word': self.object.pk})
+
+
+class MakeAsLearnedView(View):
+    """Помечает слово как изученное"""
+
+    def post(self, request, *args, **kwargs):
+        word_id = request.POST.get('word_id')
+        next_url = request.POST.get('next', reverse_lazy('training'))
+        word = Word.objects.get(pk=word_id, user=request.user)
+        word.is_learned = True
+        word.save()
+
+        return redirect(next_url)

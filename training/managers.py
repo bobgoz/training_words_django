@@ -9,7 +9,7 @@ class WordManager(models.Manager):
 
     def is_active(self, user):
         """Только активные слова"""
-        return self.all_self(user).filter(is_active=True)
+        return self.all_self(user).filter(is_active=True, is_learned=False)
 
     def is_not_active(self, user):
         """Только неактивные слова"""
@@ -18,6 +18,10 @@ class WordManager(models.Manager):
     def is_hard(self, user):
         """Только сложные слова"""
         return self.is_active(user).filter(is_hard=True)
+
+    def is_learned(self, user):
+        """Только изученные словаз"""
+        return self.all_self(user).filter(is_learned=True)
 
     def count_active(self, user):
         """Количество активных слов"""
