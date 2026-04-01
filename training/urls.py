@@ -9,6 +9,11 @@ urlpatterns = [
         views.MarkAsActiveView.as_view(),
         name='mark_as_active',
     ),
+    path(
+        'mark_as_learned/',
+        views.MakeAsLearnedView.as_view(),
+        name='mark_as_learned',
+    ),
     path('training/', views.TrainingView.as_view(), name='training'),
     path('training_hard/', views.TrainingHardView.as_view(), name='training_hard'),
     path(

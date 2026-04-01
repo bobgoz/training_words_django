@@ -1,2 +1,3 @@
 gunicorn.ctl
 backups/*.json
+__pycache__

@@ -41,6 +41,11 @@ class Word(models.Model):
         default=False,
         help_text='Отметьте, если слово вызывает трудности',
     )
+    is_learned = models.BooleanField(
+        'Изученное слово',
+        default=False,
+        help_text='Отметьте, если слово хорошо усвоили',
+    )
     definition = models.CharField(
         'Определение слова',
         max_length=DEFINITION_FIELD_MAX_LENGTH,

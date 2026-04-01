@@ -50,6 +50,14 @@ class TrainingView(BaseTrainingViewMixin):
         return Word.words.is_active(self.request.user)
 
 
+class TrainingLearnedView(BaseTrainingViewMixin):
+    """Вью для отображения только изученных слов"""
+
+    def get_queryset(self):
+        """Возвращает список изученных слов"""
+        return Word.words.is_learned(self.request.users)
+
+
 class TrainingNoActiveView(BaseTrainingViewMixin):
     """Вью для отображения неактивных слов"""
 
