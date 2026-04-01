@@ -17,18 +17,12 @@
 
     <div class="card shadow-sm border-0" style="background: #ffffff;">
       <div class="card-body p-4">
-        <form method="post" class="form" autocomplete="off">
+        <form method="post" class="form" enctype="multipart/form-data"  autocomplete="off">
           {% csrf_token %}
           
           <!-- Поле Слово -->
           <div class="mb-4">
-            <label for="{{ form.word.id_for_label }}" class="form-label fw-semibold" style="font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">
-              📝 Слово <span class="text-danger">*</span>
-            </label>
-            {% bootstrap_field form.word show_label=False %}
-            {% if form.word.help_text %}
-              <small class="text-secondary" style="font-weight: 500;">{{ form.word.help_text }}</small>
-            {% endif %}
+            {% bootstrap_field form.word %}
             {% if form.word.errors %}
               <div class="text-danger mt-1" style="font-weight: 600;">{{ form.word.errors }}</div>
             {% endif %}
@@ -53,6 +47,20 @@
             {% bootstrap_field form.example show_label=False %}
             {% if form.example.errors %}
               <div class="text-danger mt-1" style="font-weight: 600;">{{ form.example.errors }}</div>
+            {% endif %}
+          </div>
+
+          <!-- Изображение -->
+          <div class="mb-4">
+            <label for="{{ form.image.id_for_label }}" class="form-label fw-semibold">
+              🖼️ Изображение
+            </label>
+            {{ form.image }}
+            <small class="text-muted d-block mt-1">
+              Поддерживаемые форматы: JPG, PNG, GIF. Максимум 5MB.
+            </small>
+            {% if form.image.errors %}
+              <div class="text-danger mt-1">{{ form.image.errors }}</div>
             {% endif %}
           </div>
 

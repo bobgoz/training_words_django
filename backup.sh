@@ -1,4 +1,5 @@
 #!/bin/bash
+#Делает бекап содержимого базы данных Postgres в контейнере на ВМ
 
 # Конфигурация
 SERVER_USER="root"
@@ -13,7 +14,7 @@ DUMPDATA_COMMAND="python manage.py dumpdata \
   --exclude sessions \
   --exclude admin.logentry \
   --indent 2"
-CONTAINER_NAME="training_beta"
+CONTAINER_NAME="training_web"
 
 # Создаём папку для бэкапов
 mkdir -p $LOCAL_BACKUP_DIR

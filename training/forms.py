@@ -12,7 +12,20 @@ class CreateWordForm(forms.ModelForm):
             'word',
             'definition',
             'example',
+            'image',
+            'is_active',
         )
+        widgets = {
+            'image': forms.FileInput(attrs={'class': 'form-control'}),
+            'word': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'autofocus': True,
+                    'autocomplete': 'off',
+                    'placeholder': 'Введите слово',
+                }
+            ),
+        }
 
 
 class EditWordForm(forms.ModelForm):
@@ -26,4 +39,5 @@ class EditWordForm(forms.ModelForm):
             'example',
             'is_active',
             'is_hard',
+            'image',
         )

@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+.mypy_cache/
+
+# Git
+.git/
+.gitignore
+
+# Скрипты
+*.sh
+backup.sh
+build_docker_images.sh
+copy_file_to_vm.sh
+prod/
+
+# База данных (SQLite)
+*.sqlite3
+*.db
+db.sqlite3
+
+# Бэкапы
+*.json
+*.sql
+
+# Docker
+docker-compose.yml
+docker-compose.prod.yml
+Dockerfile
+.dockerignore
+gunicorn.ctl
+
+# Статика и медиа
+staticfiles/
+media/
+
+# Окружение
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Логи
+*.log

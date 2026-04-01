@@ -2,12 +2,9 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from .managers import WordManager
+from .constants import DEFINITION_FIELD_MAX_LENGTH, WORD_FIELD_MAX_LENGTH
 
 User = get_user_model()
-
-WORD_FIELD_MAX_LENGTH = 150
-
-DEFINITION_FIELD_MAX_LENGTH = 200
 
 
 class Word(models.Model):
@@ -58,6 +55,13 @@ class Word(models.Model):
         blank=True,
         null=True,
         help_text='Пример использования слова. Можно заполнить позже.',
+    )
+    image = models.ImageField(
+        'Изображение',
+        upload_to='images/',
+        blank=True,
+        null=True,
+        help_text='Загрузить изображение для слова',
     )
 
     words = WordManager()

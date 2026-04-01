@@ -1,0 +1,113 @@
+.my-error-class {
+    border: 2px solid #f44336 !important;
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.my-error-class:focus {
+    border-color: #d32f2f;
+    box-shadow: 0 0 8px rgba(211, 47, 47, 0.3);
+}
+
+/* Общие стили */
+.transition {
+transition: all 0.2s ease;
+}
+
+/* Карточки */
+.card {
+border-radius: 1rem;
+transition: all 0.2s ease;
+}
+
+.hover-shadow:hover {
+transform: translateY(-2px);
+box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Нумерация */
+.badge.bg-primary {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+font-weight: 600;
+font-size: 0.9rem;
+}
+
+/* Кнопки */
+.btn {
+font-weight: 600;
+transition: all 0.2s;
+}
+
+.btn-outline-info {
+border-width: 1.5px;
+}
+
+.btn-outline-info:hover {
+transform: translateY(-1px);
+}
+
+.btn-outline-warning {
+border-width: 1.5px;
+}
+
+.btn-outline-warning:hover {
+transform: translateY(-1px);
+}
+
+.btn-outline-success {
+border-width: 1.5px;
+font-weight: 600;
+}
+
+.btn-outline-success:hover {
+transform: translateY(-1px);
+}
+
+/* Пагинация */
+.pagination .page-link {
+font-weight: 500;
+border-radius: 0.5rem;
+margin: 0 0.2rem;
+border: 1px solid #dee2e6;
+color: #4b5563;
+transition: all 0.2s;
+}
+
+.pagination .page-link:hover {
+background-color: #f3f4f6;
+border-color: #667eea;
+color: #667eea;
+transform: translateY(-1px);
+}
+
+.pagination .active .page-link {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+border-color: #667eea;
+color: white;
+}
+
+.pagination .disabled .page-link {
+color: #adb5bd;
+cursor: not-allowed;
+}
+
+/* Текст */
+.card-title {
+font-weight: 700;
+color: #1f2937;
+}
+
+.text-muted, .text-secondary {
+color: #6c757d !important;
+font-weight: 500;
+}
+
+/* Заголовок */
+.h3 {
+font-weight: 700;
+color: #1f2937;
+}
+
+/* Пустое состояние */
+.text-center svg {
+opacity: 0.6;
+}

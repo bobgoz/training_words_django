@@ -1,3 +1,4 @@
+{% load static %}
 {% load bootstrap5 %}
 
 <!DOCTYPE html>
@@ -7,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% bootstrap_css %}
   {% bootstrap_javascript %}
+  <link rel="stylesheet" href={% static "css/style.css" %}>
   <title>{% block title %}Тренажёр слов{% endblock %}</title>
   <style>
     .navbar-brand {
@@ -38,31 +40,37 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto">
           {% if user.is_authenticated %}
-          {% with action=request.GET.action %}
+          {% with action=request.resolver_match.url_name %}
             <li class="nav-item">
-              <a class="nav-link {% if action  == 'normal' %}active{% endif %}" 
-                href="{% url 'training' %}?action=normal">
+              <a class="nav-link {% if action  == 'training' %}active{% endif %}" 
+                href="{% url 'training' %}">
                 Тренировка
               </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link {% if action == 'hard' %}active{% endif %}" 
-              href="{% url 'training' %}?action=hard ">
+            <a class="nav-link {% if action == 'training_hard' %}active{% endif %}" 
+              href="{% url 'training_hard' %}">
               Сложные слова
             </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if action == 'random' %}active{% endif %}" 
-                href="{% url 'training' %}?action=random ">
+              <a class="nav-link {% if action == 'training_random' %}active{% endif %}" 
+                href="{% url 'training_random' %}">
                 Случайные
               </a>
             </li>
-          {% endwith %}
-             <li class="nav-item">
-              <a class="nav-link {% if request.resolver_match.url_name == 'add_word' %}active{% endif %}" 
-                 href="{% url 'add_word' %}">
-                Добавить слово
+            <li class="nav-item">
+              <a class="nav-link {% if action == 'training_no_active' %}active{% endif %}" 
+                href="{% url 'training_no_active' %}">
+                Неактивные слова
               </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active == 'add_word' %}active{% endif %}" 
+              href="{% url 'add_word' %}">
+              Добавить слово
+            </a>
+            {% endwith %}
             </li>
           {% endif %}
         </ul>

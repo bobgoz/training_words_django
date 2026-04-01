@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load bootstrap5 %}
+{% load static %}
 
 {% block title %}Тренировка{% endblock %}
 
@@ -8,13 +9,15 @@
   <div class="col-12">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 mb-0" style="font-weight: 700; color: #1f2937;">
-        {% with action=request.GET.action %}
-          {% if not action or action == 'normal' %}
+        {% with action=request.resolver_match.url_name %}
+          {% if action == 'training' %}
             🎯 Тренировка слов
-          {% elif action == 'hard' %}
+          {% elif action == 'training_hard' %}
             ⚡ Повторение сложных слов
-          {% elif action == 'random' %}
+          {% elif action == 'training_random' %}
             🎲 Рандомные слова
+          {% elif action == 'training_no_active' %}
+            Просмотр Неактивных слов
           {% endif %}
         {% endwith %}
       </h1>
@@ -41,17 +44,39 @@
                     {{ forloop.counter }}
                   </span>
                   <div>
-                    <h5 class="card-title mb-1" style="font-weight: 700; color: #1f2937;">{{ word.word }}</h5>
+                    <h7 class="card-title mb-1" style="font-weight: 700; color: #1f2937;">{{ word.word }}</h7>
                     {% if word.definition %}
-                      <small class="text-secondary" style="font-weight: 500;">{{ word.definition|truncatechars:60 }}</small>
-                    {% endif %}
+                      <!-- Триггер — иконка или текст -->
+                      <span style="cursor: pointer;" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#definition-{{ word.pk }}"
+                            aria-expanded="false" 
+                            aria-controls="definition-{{ word.pk }}">
+                        ▶️
+                      </span>
+                    
+                    <!-- Сворачиваемый блок -->
+                    <div class="collapse mt-2" id="definition-{{ word.pk }}">
+                      <div class="text-secondary" style="font-weight: 500;">
+                        {{ word.definition }}
+                      </div>
+                      <!-- Картинка (маленькая) -->
+                      {% if word.image %}
+                        <div class="mt-2">
+                          <img src="{{ word.image.url }}" 
+                              alt="{{ word.word }}" 
+                              style="max-width: 100px; max-height: 100px; border-radius: 8px; object-fit: cover;">
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
                   </div>
                 </div>
                 <div class="d-flex gap-2">
-                  <a href="{% url 'detail' pk_word=word.pk %}" class="btn btn-sm btn-outline-info" style="font-weight: 500;">
+                  <a href="{% url 'detail' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}" class="btn btn-sm btn-outline-info" style="font-weight: 500;">
                     🔍 Подробно
                   </a>
-                  <a href="{% url 'edit_word' pk_word=word.pk %}" class="btn btn-sm btn-outline-warning" style="font-weight: 500;">
+                  <a href="{% url 'edit_word' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}" class="btn btn-sm btn-outline-warning" style="font-weight: 500;">
                     ✏️ Редактировать
                   </a>
                 </div>
@@ -118,117 +143,8 @@
         </div>
         <h3 class="h4 mb-3" style="font-weight: 600; color: #374151;">Слов пока нет</h3>
         <p class="mb-4" style="font-weight: 500; color: #6c757d;">Добавьте свои первые слова, чтобы начать тренировку</p>
-        <a href="{% url 'add_word' %}" class="btn btn-primary" style="font-weight: 600;">
-          ➕ Добавить слово
-        </a>
       </div>
     {% endif %}
   </div>
 </div>
-
-<style>
-  /* Общие стили */
-  .transition {
-    transition: all 0.2s ease;
-  }
-  
-  /* Карточки */
-  .card {
-    border-radius: 1rem;
-    transition: all 0.2s ease;
-  }
-  
-  .hover-shadow:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1) !important;
-  }
-  
-  /* Нумерация */
-  .badge.bg-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-  
-  /* Кнопки */
-  .btn {
-    font-weight: 600;
-    transition: all 0.2s;
-  }
-  
-  .btn-outline-info {
-    border-width: 1.5px;
-  }
-  
-  .btn-outline-info:hover {
-    transform: translateY(-1px);
-  }
-  
-  .btn-outline-warning {
-    border-width: 1.5px;
-  }
-  
-  .btn-outline-warning:hover {
-    transform: translateY(-1px);
-  }
-  
-  .btn-outline-success {
-    border-width: 1.5px;
-    font-weight: 600;
-  }
-  
-  .btn-outline-success:hover {
-    transform: translateY(-1px);
-  }
-  
-  /* Пагинация */
-  .pagination .page-link {
-    font-weight: 500;
-    border-radius: 0.5rem;
-    margin: 0 0.2rem;
-    border: 1px solid #dee2e6;
-    color: #4b5563;
-    transition: all 0.2s;
-  }
-  
-  .pagination .page-link:hover {
-    background-color: #f3f4f6;
-    border-color: #667eea;
-    color: #667eea;
-    transform: translateY(-1px);
-  }
-  
-  .pagination .active .page-link {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-color: #667eea;
-    color: white;
-  }
-  
-  .pagination .disabled .page-link {
-    color: #adb5bd;
-    cursor: not-allowed;
-  }
-  
-  /* Текст */
-  .card-title {
-    font-weight: 700;
-    color: #1f2937;
-  }
-  
-  .text-muted, .text-secondary {
-    color: #6c757d !important;
-    font-weight: 500;
-  }
-  
-  /* Заголовок */
-  .h3 {
-    font-weight: 700;
-    color: #1f2937;
-  }
-  
-  /* Пустое состояние */
-  .text-center svg {
-    opacity: 0.6;
-  }
-</style>
 {% endblock %}

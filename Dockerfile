@@ -8,4 +8,4 @@ RUN pip install -r requirements.prod.txt --no-cache-dir
 
 COPY . .
 
-CMD [ "gunicorn", "--bind", "0.0.0.0:8000", "training_words.wsgi" ]
+CMD [ "gunicorn", "--bind", "0.0.0.0:8000", "training_words.wsgi"]

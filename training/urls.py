@@ -10,6 +10,17 @@ urlpatterns = [
         name='mark_as_active',
     ),
     path('training/', views.TrainingView.as_view(), name='training'),
+    path('training_hard/', views.TrainingHardView.as_view(), name='training_hard'),
+    path(
+        'training_no_active/',
+        views.TrainingNoActiveView.as_view(),
+        name='training_no_active',
+    ),
+    path(
+        'training_random/',
+        views.TrainingRandomView.as_view(),
+        name='training_random',
+    ),
     path(
         '<int:pk_word>/detail/',
         views.DetailWordView.as_view(),
@@ -24,10 +35,5 @@ urlpatterns = [
         '<int:pk_word>/delete/',
         views.DeleteWordView.as_view(),
         name='delete_word',
-    ),
-    path(
-        '<int:pk_word>/confirm_delete/',
-        views.ConfirmDeleteWordView.as_view(),
-        name='conf_delete_word',
     ),
 ]

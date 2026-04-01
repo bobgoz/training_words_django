@@ -16,14 +16,38 @@ services:
     build: .
     container_name: web
     env_file:
-      - .env
+      - .env.prod
     volumes:
-      - .:/app
-    ports:
-      - "80:8000"
+      - media:/app/media
+      - static:/app/staticfiles
+    expose:
+      - "8000"
     depends_on:
       - db
     restart: unless-stopped
 
+  gateway:
+    build: ./nginx
+    container_name: gateway
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    volumes:
+      - media:/media:ro
+      - static:/static:ro
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+
 volumes:
   postgres_data:
+  media:
+  static:
+  redis_data:

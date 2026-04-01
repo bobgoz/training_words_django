@@ -9,4 +9,4 @@ class RegistrationView(CreateView):
 
     template_name = 'registration/registration.html'
     form_class = RegisterForm
-    success_url = '/'
+    success_url = 'login'

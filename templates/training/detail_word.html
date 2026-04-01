@@ -8,14 +8,7 @@
   <div class="col-lg-8 col-md-10">
     <!-- Навигация назад -->
     <div class="mb-4">
-      <a href="
-        {% if request.GET.action == 'hard' %}
-          {% url 'training' %}?action=hard
-        {% elif request.GET.action == 'random' %}
-          {% url 'training' %}?action=random
-        {% else %}
-          {% url 'training' %}
-        {% endif %}
+      <a href="{{ next|default:request.META.HTTP_REFERER|default:"/" }}
       " class="btn btn-outline-secondary btn-sm" style="font-weight: 600;">
         ← Назад к тренировке
       </a>
@@ -44,23 +37,20 @@
           </div>
         </div>
       </div>
-
-      <!-- Содержимое -->
-      <div class="card-body">
-        <!-- Определение -->
-        <div class="mb-4">
-          <h3 class="h6 text-uppercase fw-semibold mb-2" style="font-weight: 700; color: #374151; letter-spacing: 0.5px;">
-            📖 Определение
-          </h3>
-          <p class="mb-0" style="font-weight: 500; color: #1f2937; line-height: 1.6;">
-            {% if word.definition %}
-              {{ word.definition }}
-            {% else %}
-              <span class="text-secondary fst-italic" style="font-weight: 500;">Не указано</span>
-            {% endif %}
-          </p>
-        </div>
-
+      
+              <!-- Определение -->
+        {% if word.definition %}
+          <div class="mb-4">
+            <h3 class="h6 text-uppercase fw-semibold mb-2" style="font-weight: 700; color: #374151; letter-spacing: 0.5px;">
+              📖 Определение
+            </h3>
+            <div class="rounded-3 p-3" style="background: #f8f9fa; border: 1px solid #dee2e6;">
+              <p class="mb-0" style="font-weight: 500; color: #1f2937;">
+                {{ word.definition }}
+              </p>
+            </div>
+          </div>
+        {% endif %}
         <!-- Пример использования -->
         <div class="mb-4">
           <h3 class="h6 text-uppercase fw-semibold mb-2" style="font-weight: 700; color: #374151; letter-spacing: 0.5px;">
@@ -69,13 +59,21 @@
           <div class="rounded-3 p-3" style="background: #f8f9fa; border: 1px solid #dee2e6;">
             <p class="mb-0 fst-italic" style="font-weight: 500; color: #1f2937;">
               {% if word.example %}
-                «{{ word.example }}»
+                {{ word.example }}
               {% else %}
                 <span class="text-secondary" style="font-weight: 500;">Пример не добавлен</span>
               {% endif %}
             </p>
           </div>
         </div>
+
+        <!-- Изображение -->
+        {% if word.image %}
+          <div class="mb-4 text-center">
+            <img src="{{ word.image.url }}" alt="{{ word.word }}" 
+                style="max-width: 100%; max-height: 300px; border-radius: 0.75rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+          </div>
+        {% endif %}
 
         <!-- Дополнительная информация -->
         <div class="pt-3 border-top" style="border-color: #dee2e6 !important;">
