@@ -12,8 +12,17 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         if self.request.user.is_authenticated:
-            context['total_words'] = Word.words.count_all_words(self.request.user)
-            context['active_words'] = Word.words.count_active(self.request.user)
-            context['hard_words'] = Word.words.count_hard(self.request.user)
+            context['learned_words'] = Word.words.count_all_learned(
+                self.request.user,
+            )
+            context['total_words'] = Word.words.count_all_words(
+                self.request.user,
+            )
+            context['active_words'] = Word.words.count_active(
+                self.request.user,
+            )
+            context['hard_words'] = Word.words.count_hard(
+                self.request.user,
+            )
 
         return context

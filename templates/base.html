@@ -8,114 +8,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% bootstrap_css %}
   {% bootstrap_javascript %}
-  <link rel="stylesheet" href={% static "css/style.css" %}>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <title>{% block title %}Тренажёр слов{% endblock %}</title>
-  <style>
-    .navbar-brand {
-      font-weight: normal;
-      font-size: 1rem;
-    }
-    .navbar-nav .nav-link.active {
-      font-weight: bold;
-      color: #2f94ff !important;
-    }
-    footer {
-      margin-top: 50px;
-      padding: 20px 0;
-      text-align: center;
-      color: #5c6770;
-      border-top: 1px solid #dee2e6;
-    }
-  </style>
 </head>
 <body>
-  <!-- Шапка сайта -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-    <div class="container d-flex justify-content-evenly">
-      <a class="navbar-brand" href="{% url 'index' %}">📚 Тренажёр слов</a>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          {% if user.is_authenticated %}
-          {% with action=request.resolver_match.url_name %}
-            <li class="nav-item">
-              <a class="nav-link {% if action  == 'training' %}active{% endif %}" 
-                href="{% url 'training' %}">
-                Тренировка
-              </a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link {% if action == 'training_hard' %}active{% endif %}" 
-              href="{% url 'training_hard' %}">
-              Сложные слова
-            </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {% if action == 'training_random' %}active{% endif %}" 
-                href="{% url 'training_random' %}">
-                Случайные
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {% if action == 'training_no_active' %}active{% endif %}" 
-                href="{% url 'training_no_active' %}">
-                Неактивные слова
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {% if active == 'add_word' %}active{% endif %}" 
-              href="{% url 'add_word' %}">
-              Добавить слово
-            </a>
-            {% endwith %}
-            </li>
-          {% endif %}
-        </ul>
-        <ul class="navbar-nav">
-          {% if user.is_authenticated %}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                👤 {{ user.username }}
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><span class="dropdown-item-text text-muted">{{ user.email }}</span></li>
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                  <form method="post" action="{% url 'logout' %}" class="dropdown-item p-0">
-                    {% csrf_token %}
-                    <button type="submit" class="dropdown-item text-danger">🚪 Выйти</button>
-                  </form>
+  <div class="app-shell">
+    <nav class="navbar navbar-expand-lg navbar-dark app-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">Тренажер слов</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+            {% if user.is_authenticated %}
+              {% with action=request.resolver_match.url_name %}
+                <li class="nav-item">
+                  <a class="nav-link {% if action == 'training' %}active{% endif %}" href="{% url 'training' %}">Тренировка</a>
                 </li>
-              </ul>
-            </li>
-          {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">🔑 Войти</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'register' %}">📝 Регистрация</a>
-            </li>
-          {% endif %}
-        </ul>
+                <li class="nav-item">
+                  <a class="nav-link {% if action == 'training_hard' %}active{% endif %}" href="{% url 'training_hard' %}">Сложные слова</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link {% if action == 'training_random' %}active{% endif %}" href="{% url 'training_random' %}">Случайные</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link {% if action == 'training_no_active' %}active{% endif %}" href="{% url 'training_no_active' %}">Неактивные</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link {% if action == 'add_word' %}active{% endif %}" href="{% url 'add_word' %}">Добавить слово</a>
+                </li>
+              {% endwith %}
+            {% endif %}
+          </ul>
+
+          <ul class="navbar-nav align-items-lg-center gap-lg-2">
+            {% if user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ user.username }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                  <li><span class="dropdown-item-text text-muted">{{ user.email|default:'Без email' }}</span></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <form method="post" action="{% url 'logout' %}" class="px-2">
+                      {% csrf_token %}
+                      <button type="submit" class="dropdown-item text-danger">Выйти</button>
+                    </form>
+                  </li>
+                </ul>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Войти</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Основной контент -->
-  <div class="container mt-4">
-    {% bootstrap_messages %}
-    {% block content %}{% endblock %}
+    <main class="app-main">
+      <div class="container page-section">
+        {% bootstrap_messages %}
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <div class="container">
+        <p class="mb-0">Тренажер слов для ежедневной практики и повторения.</p>
+      </div>
+    </footer>
   </div>
-
-  <!-- Подвал -->
-  <footer>
-    <div class="container">
-      <p class="mb-0">📖 Тренажёр слов — учи новые слова каждый день</p>
-    </div>
-  </footer>
 
   {% block extra_js %}{% endblock %}
 </body>

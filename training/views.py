@@ -118,11 +118,28 @@ class MarkAsActiveView(LoginRequiredMixin, View):
         words_idx = list(
             Word.words.is_not_active(
                 self.request.user,
-            ).values_list(
-                'pk', flat=True
-            )[:10],
+            )
+            .values_list('pk', flat=True)
+            .order_by('pk')[:10],
         )
+        print(words_idx)
         Word.words.filter(id__in=words_idx).update(is_active=True)
+        return redirect('training')
+
+
+class DeactivateWordView(LoginRequiredMixin, View):
+    """Деактивирует 10 первых слов."""
+
+    def post(self, request, *args, **kwargs):
+        words_ids = list(
+            Word.words.is_active(
+                request.user,
+            )
+            .order_by('updated_at')
+            .values_list('pk', flat=True)[:10]
+        )
+        Word.words.filter(pk__in=words_ids).update(is_active=False)
+
         return redirect('training')
 
 
@@ -138,3 +155,16 @@ class EditWordView(
     template_name = 'training/edit_word.html'
     form_class = EditWordForm
     pk_url_kwarg = 'pk_word'
+
+
+class MakeAsLearnedView(LoginRequiredMixin, View):
+    """Помечает слово как изученное"""
+
+    def post(self, request, *args, **kwargs):
+        word_id = request.POST.get('word_id')
+        next_url = request.POST.get('next', reverse_lazy('training'))
+        word = Word.objects.get(pk=word_id, user=request.user)
+        word.is_learned = True
+        word.save()
+
+        return redirect(next_url)

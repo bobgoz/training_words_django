@@ -4,200 +4,64 @@
 {% block title %}Добавить новое слово{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-  <div class="col-lg-8 col-md-10">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h2 mb-0" style="font-weight: 700; color: #1f2937;">
-        <span class="me-2">➕</span> Добавить новое слово
-      </h1>
-      <a href="{% url 'training' %}" class="btn btn-outline-secondary btn-sm" style="font-weight: 600;">
-        ← Назад к тренировке
-      </a>
+<div class="form-panel">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title-sm">Добавить новое слово</h1>
+      <p class="page-subtitle">Можно сразу заполнить определение, пример и изображение, а можно вернуться к этому позже.</p>
     </div>
+    <a href="{% url 'training' %}" class="back-link">Назад к списку</a>
+  </div>
 
-    <div class="card shadow-sm border-0" style="background: #ffffff;">
-      <div class="card-body p-4">
-        <form method="post" class="form" enctype="multipart/form-data"  autocomplete="off">
-          {% csrf_token %}
-          
-          <!-- Поле Слово -->
-          <div class="mb-4">
-            {% bootstrap_field form.word %}
-            {% if form.word.errors %}
-              <div class="text-danger mt-1" style="font-weight: 600;">{{ form.word.errors }}</div>
-            {% endif %}
-          </div>
+  <div class="surface-card form-card">
+    <div class="surface-card__body">
+      <form method="post" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token %}
 
-          <!-- Поле Определение -->
-          <div class="mb-4">
-            <label for="{{ form.definition.id_for_label }}" class="form-label fw-semibold" style="font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">
-              📖 Определение
-            </label>
-            {% bootstrap_field form.definition show_label=False %}
-            {% if form.definition.errors %}
-              <div class="text-danger mt-1" style="font-weight: 600;">{{ form.definition.errors }}</div>
-            {% endif %}
-          </div>
+        <div class="mb-4">
+          {% bootstrap_field form.word %}
+        </div>
 
-          <!-- Поле Пример использования -->
-          <div class="mb-4">
-            <label for="{{ form.example.id_for_label }}" class="form-label fw-semibold" style="font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">
-              💡 Пример использования
-            </label>
-            {% bootstrap_field form.example show_label=False %}
-            {% if form.example.errors %}
-              <div class="text-danger mt-1" style="font-weight: 600;">{{ form.example.errors }}</div>
-            {% endif %}
-          </div>
+        <div class="mb-4">
+          <label for="{{ form.definition.id_for_label }}" class="form-label">Определение</label>
+          {% bootstrap_field form.definition show_label=False %}
+        </div>
 
-          <!-- Изображение -->
-          <div class="mb-4">
-            <label for="{{ form.image.id_for_label }}" class="form-label fw-semibold">
-              🖼️ Изображение
-            </label>
-            {{ form.image }}
-            <small class="text-muted d-block mt-1">
-              Поддерживаемые форматы: JPG, PNG, GIF. Максимум 5MB.
-            </small>
-            {% if form.image.errors %}
-              <div class="text-danger mt-1">{{ form.image.errors }}</div>
-            {% endif %}
-          </div>
+        <div class="mb-4">
+          <label for="{{ form.example.id_for_label }}" class="form-label">Пример использования</label>
+          {% bootstrap_field form.example show_label=False %}
+        </div>
 
-          <!-- Чекбоксы (если есть в форме) -->
-          {% if form.is_active or form.is_hard %}
-            <div class="row g-3 mb-4">
-              {% if form.is_active %}
-                <div class="col-md-6">
-                  <div class="form-check">
-                    {% bootstrap_field form.is_active show_label=True %}
-                  </div>
-                </div>
-              {% endif %}
-              {% if form.is_hard %}
-                <div class="col-md-6">
-                  <div class="form-check">
-                    {% bootstrap_field form.is_hard show_label=True %}
-                  </div>
-                </div>
-              {% endif %}
-            </div>
+        <div class="mb-4">
+          <label for="{{ form.image.id_for_label }}" class="form-label">Изображение</label>
+          {{ form.image }}
+          <small class="form-text d-block mt-2">Можно загрузить изображение, которое поможет быстрее запомнить слово.</small>
+          {% if form.image.errors %}
+            <div class="text-danger mt-1">{{ form.image.errors }}</div>
           {% endif %}
+        </div>
 
-          <!-- Кнопки -->
-          <div class="d-flex gap-2 mt-4">
-            <button type="submit" class="btn btn-primary px-4" style="font-weight: 600;">
-              💾 Сохранить слово
-            </button>
-            <a href="{% url 'training' %}" class="btn btn-outline-secondary px-4" style="font-weight: 600;">
-              ❌ Отмена
-            </a>
+        {% if form.is_active or form.is_hard %}
+          <div class="row g-3 mb-4">
+            {% if form.is_active %}
+              <div class="col-md-6">
+                {% bootstrap_field form.is_active show_label=True %}
+              </div>
+            {% endif %}
+            {% if form.is_hard %}
+              <div class="col-md-6">
+                {% bootstrap_field form.is_hard show_label=True %}
+              </div>
+            {% endif %}
           </div>
-        </form>
-      </div>
+        {% endif %}
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary px-4">Сохранить слово</button>
+          <a href="{% url 'training' %}" class="btn btn-outline-secondary px-4">Отмена</a>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
-<style>
-  .card {
-    border-radius: 1rem;
-    overflow: hidden;
-  }
-  
-  /* Увеличенная контрастность полей ввода */
-  .form-control, .form-select {
-    border: 1.5px solid #6c757d;
-    background-color: #ffffff;
-    color: #1a1a1a;
-    font-weight: 500;
-    transition: all 0.2s;
-    border-radius: 0.5rem;
-    padding: 0.6rem 1rem;
-  }
-  
-  .form-control:hover, .form-select:hover {
-    border-color: #495057;
-  }
-  
-  .form-control:focus, .form-select:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.3);
-  }
-  
-  /* Чекбоксы */
-  .form-check-input {
-    border: 1.5px solid #6c757d;
-    width: 1.1rem;
-    height: 1.1rem;
-    cursor: pointer;
-  }
-  
-  .form-check-input:checked {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-  }
-  
-  .form-check-input:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.3);
-  }
-  
-  .form-check-label {
-    font-weight: 600;
-    color: #1f2937;
-    margin-left: 0.5rem;
-    cursor: pointer;
-  }
-  
-  /* Кнопки */
-  .btn {
-    transition: all 0.2s;
-    border-radius: 0.5rem;
-  }
-  
-  .btn-primary {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-    font-weight: 600;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0b5ed7;
-    border-color: #0a58ca;
-    transform: translateY(-1px);
-  }
-  
-  .btn-outline-secondary {
-    border-width: 1.5px;
-    font-weight: 600;
-  }
-  
-  .btn-outline-secondary:hover {
-    transform: translateY(-1px);
-  }
-  
-  /* Метки */
-  .form-label {
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Подсказки */
-  .text-muted, .text-secondary {
-    color: #495057 !important;
-    font-weight: 500;
-  }
-  
-  /* Ошибки */
-  .text-danger {
-    font-weight: 600;
-  }
-  
-  /* Алерт */
-  .alert {
-    border-radius: 0.75rem;
-  }
-</style>
 {% endblock %}

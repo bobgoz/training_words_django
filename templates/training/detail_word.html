@@ -5,166 +5,80 @@
 
 {% block content %}
 <div class="row justify-content-center">
-  <div class="col-lg-8 col-md-10">
-    <!-- Навигация назад -->
+  <div class="col-lg-8 col-xl-7">
     <div class="mb-4">
-      <a href="{{ next|default:"/" }}
-      " class="btn btn-outline-secondary btn-sm" style="font-weight: 600;">
-        ← Назад к тренировке
-      </a>
+      <a href="{{ next|default:'/' }}" class="back-link">Назад к списку</a>
     </div>
 
-    <!-- Карточка слова -->
-    <div class="card shadow-sm border-0" style="background: #ffffff;">
-      <!-- Заголовок -->
-      <div class="card-header bg-light border-0 py-3" style="background: #f8f9fa !important;">
+    <article class="surface-card">
+      <header class="surface-card__header">
         <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
           <div>
-            <h1 class="h2 mb-1" style="font-weight: 700; color: #1f2937;">{{ word.word }}</h1>
-            <small class="text-secondary" style="font-weight: 500;">
-              Добавлено {{ word.created_at|date:"d.m.Y" }}
-            </small>
+            <h1 class="page-title-sm">{{ word.word }}</h1>
+            <p class="page-subtitle">Добавлено {{ word.created_at|date:"d.m.Y" }}</p>
           </div>
-          <div class="d-flex gap-2">
+
+          <div class="d-flex flex-wrap gap-2">
             {% if word.is_active %}
-              <span class="badge bg-success" style="font-weight: 600; padding: 0.4rem 0.8rem;">✅ Активно</span>
+              <span class="badge-soft badge-soft--success">Активно</span>
             {% else %}
-              <span class="badge bg-secondary" style="font-weight: 600; padding: 0.4rem 0.8rem;">⏸️ Неактивно</span>
+              <span class="badge-soft badge-soft--secondary">Неактивно</span>
             {% endif %}
+
             {% if word.is_hard %}
-              <span class="badge bg-warning text-dark" style="font-weight: 600; padding: 0.4rem 0.8rem;">⚡ Сложное</span>
+              <span class="badge-soft badge-soft--warning">Сложное</span>
             {% endif %}
           </div>
         </div>
-      </div>
-      
-              <!-- Определение -->
+      </header>
+
+      <div class="surface-card__body section-stack">
         {% if word.definition %}
-          <div class="mb-4">
-            <h3 class="h6 text-uppercase fw-semibold mb-2" style="font-weight: 700; color: #374151; letter-spacing: 0.5px;">
-              📖 Определение
-            </h3>
-            <div class="rounded-3 p-3" style="background: #f8f9fa; border: 1px solid #dee2e6;">
-              <p class="mb-0" style="font-weight: 500; color: #1f2937;">
-                {{ word.definition }}
-              </p>
-            </div>
-          </div>
+          <section class="content-block">
+            <h2 class="content-block__title">Определение</h2>
+            <p class="content-block__text">{{ word.definition }}</p>
+          </section>
         {% endif %}
-        <!-- Пример использования -->
-        <div class="mb-4">
-          <h3 class="h6 text-uppercase fw-semibold mb-2" style="font-weight: 700; color: #374151; letter-spacing: 0.5px;">
-            💡 Пример использования
-          </h3>
-          <div class="rounded-3 p-3" style="background: #f8f9fa; border: 1px solid #dee2e6;">
-            <p class="mb-0 fst-italic" style="font-weight: 500; color: #1f2937;">
-              {% if word.example %}
-                {{ word.example }}
-              {% else %}
-                <span class="text-secondary" style="font-weight: 500;">Пример не добавлен</span>
-              {% endif %}
-            </p>
-          </div>
-        </div>
 
-        <!-- Изображение -->
+        <section class="content-block">
+          <h2 class="content-block__title">Пример использования</h2>
+          <p class="content-block__text">
+            {% if word.example %}
+              {{ word.example }}
+            {% else %}
+              <span class="text-muted">Пример пока не добавлен.</span>
+            {% endif %}
+          </p>
+        </section>
+
         {% if word.image %}
-          <div class="mb-4 text-center">
-            <img src="{{ word.image.url }}" alt="{{ word.word }}" 
-                style="max-width: 100%; max-height: 300px; border-radius: 0.75rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-          </div>
+          <section class="text-center">
+            <img src="{{ word.image.url }}" alt="{{ word.word }}" class="detail-image">
+          </section>
         {% endif %}
 
-        <!-- Дополнительная информация -->
-        <div class="pt-3 border-top" style="border-color: #dee2e6 !important;">
-          <div class="row g-3">
-            <div class="col-sm-6">
-              <small class="text-secondary d-block" style="font-weight: 600;">📅 Дата создания</small>
-              <span style="font-weight: 500; color: #1f2937;">{{ word.created_at|date:"d.m.Y H:i" }}</span>
-            </div>
-            <div class="col-sm-6">
-              <small class="text-secondary d-block" style="font-weight: 600;">🔄 Последнее обновление</small>
-              <span style="font-weight: 500; color: #1f2937;">{{ word.updated_at|date:"d.m.Y H:i" }}</span>
-            </div>
+        <section class="meta-grid">
+          <div>
+            <span class="meta-label">Дата создания</span>
+            <span class="meta-value">{{ word.created_at|date:"d.m.Y H:i" }}</span>
           </div>
-        </div>
+          <div>
+            <span class="meta-label">Последнее обновление</span>
+            <span class="meta-value">{{ word.updated_at|date:"d.m.Y H:i" }}</span>
+          </div>
+        </section>
       </div>
 
-      <!-- Кнопки действий -->
-      <div class="card-footer border-0 py-3" style="background: #f8f9fa;">
-        <div class="d-flex gap-3 justify-content-end">
-          <a href="{% url 'edit_word' pk_word=word.pk %}" 
-             class="btn btn-outline-primary" style="font-weight: 600; border-width: 1.5px;">
-            ✏️ Редактировать
-          </a>
+      <footer class="surface-card__footer">
+        <div class="action-row justify-content-end">
+          <a href="{% url 'edit_word' pk_word=word.pk %}" class="btn btn-outline-primary">Редактировать</a>
           <form action="{% url 'delete_word' pk_word=word.pk %}" method="post" class="d-inline">
             {% csrf_token %}
-            <button type="submit" 
-                    onclick="return confirm('Вы уверены, что хотите удалить слово «{{ word.word }}»?')"
-                    class="btn btn-outline-danger" style="font-weight: 600; border-width: 1.5px;">
-              🗑️ Удалить
-            </button>
+            <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить слово «{{ word.word }}»?')" class="btn btn-outline-danger">Удалить</button>
           </form>
         </div>
-      </div>
-    </div>
+      </footer>
+    </article>
   </div>
 </div>
-
-<style>
-  .card {
-    border-radius: 1rem;
-    overflow: hidden;
-  }
-  
-  .card-header {
-    border-radius: 1rem 1rem 0 0;
-    border-bottom: 1px solid #dee2e6;
-  }
-  
-  .card-footer {
-    border-radius: 0 0 1rem 1rem;
-    border-top: 1px solid #dee2e6;
-  }
-  
-  .badge {
-    font-weight: 600;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.5rem;
-  }
-  
-  .btn {
-    transition: all 0.2s;
-    border-radius: 0.5rem;
-  }
-  
-  .btn:hover {
-    transform: translateY(-1px);
-  }
-  
-  .btn-outline-primary {
-    border-width: 1.5px;
-  }
-  
-  .btn-outline-danger {
-    border-width: 1.5px;
-  }
-  
-  .alert {
-    border-radius: 0.75rem;
-  }
-  
-  /* Улучшенная контрастность */
-  .bg-light {
-    background-color: #f8f9fa !important;
-  }
-  
-  .text-secondary {
-    color: #495057 !important;
-  }
-  
-  .border-top, .border {
-    border-color: #dee2e6 !important;
-  }
-</style>
 {% endblock %}

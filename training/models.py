@@ -81,7 +81,7 @@ class Word(models.Model):
         ]
         verbose_name = 'слово'
         verbose_name_plural = 'слова'
-        ordering = ('-pk',)
+        ordering = ('-updated_at',)
 
     def clean(self):
         """
@@ -96,3 +96,6 @@ class Word(models.Model):
             self.example = self.example.capitalize().strip()
 
         return super().clean()
+
+    def __str__(self):
+        return f'{self.word}, -> {self.user}'

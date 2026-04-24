@@ -35,6 +35,10 @@ class WordManager(models.Manager):
         """Количество всех слов пользователя"""
         return self.all_self(user).count()
 
+    def count_all_learned(self, user):
+        """Количество всех изученных слов"""
+        return self.is_learned(user).count()
+
     def random_words(self, user):
         """Рандомные слова"""
         return self.is_active(user).order_by('?')

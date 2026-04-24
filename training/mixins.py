@@ -41,7 +41,6 @@ class NextUrlMixin:
             self.request.session['saved_next'] = next_url
         else:
             next_url = self.request.session.get('saved_next')
-        print(next_url)
         context['next'] = next_url
         return context
 

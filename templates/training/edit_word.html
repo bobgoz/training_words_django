@@ -4,218 +4,89 @@
 {% block title %}Редактирование слова — {{ word.word }}{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-  <div class="col-lg-8 col-md-10">
-
-    <div class="mb-4">
-      <h1 class="h2 mb-1" style="font-weight: 700;">✏️ Редактирование слова</h1>
-      <p class="text-secondary" style="font-weight: 500;">Изменение данных для слова «{{ word.word }}»</p>
+<div class="form-panel">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title-sm">Редактирование слова</h1>
+      <p class="page-subtitle">Измени карточку слова, обнови изображение или скорректируй параметры тренировки.</p>
     </div>
+    <a href="{% url 'detail' pk_word=word.pk %}" class="back-link">К карточке слова</a>
+  </div>
 
-    <!-- Карточка формы -->
-    <div class="card shadow-sm border-0" style="background: #ffffff;">
-      <div class="card-body p-4">
-        <form method="post" enctype="multipart/form-data" autocomplete="off">
-          {% csrf_token %}
-          
-          <!-- Поле Слово -->
-          <div class="mb-4">
-            <label for="{{ form.word.id_for_label }}" class="form-label fw-semibold" style="font-weight: 600; color: #1f2937;">
-              Слово <span class="text-danger">*</span>
-            </label>
-            {% bootstrap_field form.word show_label=False %}
-            {% if form.word.errors %}
-              <div class="text-danger mt-1" style="font-weight: 500;">{{ form.word.errors }}</div>
-            {% endif %}
-          </div>
-
-          <!-- Поле Определение -->
-          <div class="mb-4">
-            <label for="{{ form.definition.id_for_label }}" class="form-label fw-semibold" style="font-weight: 600; color: #1f2937;">
-              Определение
-            </label>
-            {% bootstrap_field form.definition show_label=False %}
-            {% if form.definition.errors %}
-              <div class="text-danger mt-1" style="font-weight: 500;">{{ form.definition.errors }}</div>
-            {% endif %}
-            {% if form.definition.help_text %}
-              <small class="text-secondary" style="font-weight: 500;">{{ form.definition.help_text }}</small>
-            {% endif %}
-          </div>
-
-          <!-- Поле Пример использования -->
-          <div class="mb-4">
-            <label for="{{ form.example.id_for_label }}" class="form-label fw-semibold" style="font-weight: 600; color: #1f2937;">
-              Пример использования
-            </label>
-            {% bootstrap_field form.example show_label=False %}
-            {% if form.example.errors %}
-              <div class="text-danger mt-1" style="font-weight: 500;">{{ form.example.errors }}</div>
-            {% endif %}
-          </div>
-
-          <!-- Чекбоксы -->
-          <div class="row g-3 mb-4">
-            <div class="col-md-6">
-              <div class="form-check">
-                {% bootstrap_field form.is_active show_label=True %}
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-check">
-                {% bootstrap_field form.is_hard show_label=True %}
-              </div>
-            </div>
-          </div>
-
-            <!-- Текущее изображение -->
-          {% if word.image %}
-          <div class="mb-2">
-              <img src="{{ word.image.url }}" alt="{{ word.word }}" 
-                style="max-width: 200px; max-height: 150px; border-radius: 0.5rem;">
-              <div class="form-check mt-2">
-              <input type="checkbox" name="image-clear" id="image-clear" class="form-check-input">
-              <label for="image-clear" class="form-check-label text-danger">
-                🗑️ Удалить текущее изображение
-              </label>
-            </div>
-          </div>
-          {% endif %}
-  
-            {{ form.image }}
-            <small class="text-muted d-block mt-1">
-              Загрузите новое изображение (заменит текущее)
-            </small>
-          </div>
-
-
-
-          <!-- Кнопки -->
-          <div class="d-flex gap-3 pt-3">
-            <button type="submit" class="btn btn-primary px-4" style="font-weight: 600;">
-              Сохранить изменения
-            </button>
-            <a href="{% url 'detail' pk_word=word.pk %}" class="btn btn-outline-secondary px-4" style="font-weight: 600;">
-              Отмена
-            </a>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Дополнительная информация -->
-    <div class="mt-4 text-center">
-      <small class="text-secondary" style="font-weight: 500;">
-        📅 Создано: {{ word.created_at|date:"d.m.Y H:i" }} | 
-        🔄 Последнее изменение: {{ word.updated_at|date:"d.m.Y H:i" }}
-      </small>
-    </div>
-
-
-    <!-- Кнопка удаления (отдельно) -->
-    <div class="mt-3 text-center">
-      <form action="{% url 'delete_word' pk_word=word.pk %}" method="post" class="d-inline">
+  <div class="surface-card form-card">
+    <div class="surface-card__body">
+      <form method="post" enctype="multipart/form-data" autocomplete="off">
         {% csrf_token %}
-        <button type="submit" 
-                onclick="return confirm('Вы уверены, что хотите удалить слово «{{ word.word }}»?')"
-                class="btn btn-link text-danger text-decoration-none" style="font-weight: 600;">
-          Удалить слово
-        </button>
+
+        <div class="mb-4">
+          <label for="{{ form.word.id_for_label }}" class="form-label">Слово</label>
+          {% bootstrap_field form.word show_label=False %}
+        </div>
+
+        <div class="mb-4">
+          <label for="{{ form.definition.id_for_label }}" class="form-label">Определение</label>
+          {% bootstrap_field form.definition show_label=False %}
+          {% if form.definition.help_text %}
+            <small class="form-text">{{ form.definition.help_text }}</small>
+          {% endif %}
+        </div>
+
+        <div class="mb-4">
+          <label for="{{ form.example.id_for_label }}" class="form-label">Пример использования</label>
+          {% bootstrap_field form.example show_label=False %}
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            {% bootstrap_field form.is_active show_label=True %}
+          </div>
+          <div class="col-md-6">
+            {% bootstrap_field form.is_hard show_label=True %}
+          </div>
+        </div>
+
+        <div class="mb-4">
+          {% if word.image %}
+            <div class="image-preview">
+              <img src="{{ word.image.url }}" alt="{{ word.word }}">
+              <div class="form-check">
+                <input type="checkbox" name="image-clear" id="image-clear" class="form-check-input">
+                <label for="image-clear" class="form-check-label text-danger">Удалить текущее изображение</label>
+              </div>
+            </div>
+          {% endif %}
+
+          <label for="{{ form.image.id_for_label }}" class="form-label">Новое изображение</label>
+          {{ form.image }}
+          <small class="form-text d-block mt-2">Новое изображение заменит текущее, если оно уже задано.</small>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary px-4">Сохранить изменения</button>
+          <a href="{% url 'detail' pk_word=word.pk %}" class="btn btn-outline-secondary px-4">Отмена</a>
+        </div>
       </form>
     </div>
   </div>
-</div>
 
-<style>
-  .card {
-    border-radius: 1rem;
-  }
-  
-  /* Увеличенная контрастность полей ввода */
-  .form-control, .form-select {
-    border: 1.5px solid #6c757d;
-    background-color: #ffffff;
-    color: #1a1a1a;
-    font-weight: 500;
-    transition: all 0.2s;
-  }
-  
-  .form-control:hover, .form-select:hover {
-    border-color: #495057;
-  }
-  
-  .form-control:focus, .form-select:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.3);
-  }
-  
-  /* Чекбоксы */
-  .form-check-input {
-    border: 1.5px solid #6c757d;
-    width: 1.1rem;
-    height: 1.1rem;
-  }
-  
-  .form-check-input:checked {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-  }
-  
-  .form-check-input:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.3);
-  }
-  
-  .form-check-label {
-    font-weight: 600;
-    color: #1f2937;
-  }
-  
-  /* Кнопки */
-  .btn {
-    transition: all 0.2s;
-    font-weight: 600;
-  }
-  
-  .btn-primary {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0b5ed7;
-    border-color: #0a58ca;
-    transform: translateY(-1px);
-  }
-  
-  .btn-outline-secondary {
-    border-width: 1.5px;
-  }
-  
-  .btn-outline-secondary:hover {
-    transform: translateY(-1px);
-  }
-  
-  .btn-link:hover {
-    transform: none;
-  }
-  
-  /* Подсказки */
-  .text-muted, .text-secondary {
-    color: #495057 !important;
-    font-weight: 500;
-  }
-  
-  /* Метки */
-  .form-label {
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Ошибки */
-  .text-danger {
-    font-weight: 600;
-  }
-</style>
+  <div class="surface-card surface-card__body mt-4">
+    <div class="meta-grid">
+      <div>
+        <span class="meta-label">Создано</span>
+        <span class="meta-value">{{ word.created_at|date:"d.m.Y H:i" }}</span>
+      </div>
+      <div>
+        <span class="meta-label">Последнее изменение</span>
+        <span class="meta-value">{{ word.updated_at|date:"d.m.Y H:i" }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-3">
+    <form action="{% url 'delete_word' pk_word=word.pk %}" method="post" class="d-inline">
+      {% csrf_token %}
+      <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить слово «{{ word.word }}»?')" class="btn btn-link text-danger text-decoration-none">Удалить слово</button>
+    </form>
+  </div>
+</div>
 {% endblock %}
