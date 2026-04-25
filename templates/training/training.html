@@ -31,6 +31,24 @@
         </form>
       </div>
     </div>
+    {% with action=request.resolver_match.url_name %}
+    {% if words and action != 'training_random' and action != 'training_no_active'%}
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        {% with action=request.GET.lang %}
+          <a href="?lang=all" class="btn btn-outline-primary {% if action == 'all' or not action %}active{% endif %}">
+            Все слова
+          </a>
+          <a href="?lang=ru" class="btn btn-outline-primary {% if action == 'ru' %}active{% endif %}">
+            🇷🇺 Русские
+          </a>
+          <a href="?lang=en" class="btn btn-outline-primary {% if action == 'en' %}active{% endif %}">
+            EN Английские
+          </a>
+        {% endwith %}
+      </div>
+    {% endif %}
+    {% endwith %}
+
 
     {% if words %}
       <div class="list-stack mb-4">
