@@ -72,8 +72,8 @@ class Word(models.Model):
         'Язык слова',
         choices=LANGUAGE_CHOICES,
         max_length=10,
-        # default='unknown',
-        # blank=True,
+        blank=True,
+        null=True,
     )
     image = models.ImageField(
         'Изображение',
