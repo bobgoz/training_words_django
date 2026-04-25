@@ -42,3 +42,20 @@ class WordManager(models.Manager):
     def random_words(self, user):
         """Рандомные слова"""
         return self.is_active(user).order_by('?')
+
+    # ----------Локализация----------
+    def language_ru(self, user):
+        """Только русские слова (активные, не изученные)"""
+        return self.is_active(user).filter(language='ru')
+
+    def language_en(self, user):
+        """Только английские слова (активные, не изученные)"""
+        return self.is_active(user).filter(language='en')
+
+    def hard_language_ru(self, user):
+        """Сложные русские слова"""
+        return self.is_hard(user).filter(language='ru')
+
+    def hard_language_en(self, user):
+        """Сложные английские слова"""
+        return self.is_hard(user).filter(language='en')

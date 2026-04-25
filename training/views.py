@@ -47,7 +47,14 @@ class TrainingView(BaseTrainingViewMixin):
 
     def get_queryset(self):
         """Возвращает список активных слов"""
-        return Word.words.is_active(self.request.user)
+        user = self.request.user
+        lang = self.request.GET.get('lang', 'all')
+        if lang == 'ru':
+            return Word.words.language_ru(user)
+        elif lang == 'en':
+            return Word.words.language_en(user)
+        else:
+            return Word.words.is_active(user)
 
 
 class TrainingLearnedView(BaseTrainingViewMixin):
