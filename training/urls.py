@@ -10,6 +10,11 @@ urlpatterns = [
         name='mark_as_active',
     ),
     path(
+        'mark_as_inactive/',
+        views.DeactivateWordView.as_view(),
+        name='mark_as_inactive',
+    ),
+    path(
         'mark_as_learned/',
         views.MakeAsLearnedView.as_view(),
         name='mark_as_learned',
@@ -40,5 +45,10 @@ urlpatterns = [
         '<int:pk_word>/delete/',
         views.DeleteWordView.as_view(),
         name='delete_word',
+    ),
+    path(
+        'search',
+        views.SearchView.as_view(),
+        name='search',
     ),
 ]

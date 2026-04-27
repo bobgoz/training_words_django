@@ -22,7 +22,7 @@ from .mixins import (
 )
 from .models import Word
 
-from .constants import COUNT_RANDOM_WORDS
+from .constants import COUNT_RANDOM_WORDS, COUNT_WORDS_FOR_ACTIVATE
 
 
 class WordCreateView(LoginRequiredMixin, CreateView):
@@ -87,7 +87,7 @@ class TrainingNoActiveView(BaseTrainingViewMixin):
 
     def get_queryset(self):
         """Возвращает список неактивных слов"""
-        return Word.words.is_not_active(self.request.user)
+        return Word.words.is_not_active(self.request.user).order_by('-created_at')
 
 
 class TrainingHardView(BaseTrainingViewMixin):
@@ -144,9 +144,8 @@ class MarkAsActiveView(LoginRequiredMixin, View):
                 self.request.user,
             )
             .values_list('pk', flat=True)
-            .order_by('pk')[:10],
+            .order_by('-updated_at')[:COUNT_WORDS_FOR_ACTIVATE],
         )
-        print(words_idx)
         Word.words.filter(id__in=words_idx).update(is_active=True)
         return redirect('training')
 
@@ -159,8 +158,8 @@ class DeactivateWordView(LoginRequiredMixin, View):
             Word.words.is_active(
                 request.user,
             )
-            .order_by('updated_at')
-            .values_list('pk', flat=True)[:10]
+            .order_by('-updated_at')
+            .values_list('pk', flat=True)[:COUNT_WORDS_FOR_ACTIVATE]
         )
         Word.words.filter(pk__in=words_ids).update(is_active=False)
 
@@ -192,3 +191,18 @@ class MakeAsLearnedView(LoginRequiredMixin, View):
         word.save()
 
         return redirect(next_url)
+
+
+class SearchView(BaseTrainingViewMixin):
+    """Вью для поиска"""
+
+    def get_queryset(self):
+        query = self.request.GET.get('q', '').strip()
+        print(query)
+
+        if query:
+            return Word.objects.filter(
+                word__icontains=query,
+                user=self.request.user,
+            )
+        return Word.objects.none()

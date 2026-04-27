@@ -24,10 +24,14 @@
         <p class="page-subtitle">Открывай карточки, повторяй слова и отмечай уже изученные.</p>
       </div>
 
-      <div class="action-row">
+      <div class="justify-content-end">
         <form action="{% url 'mark_as_active' %}" method="post">
           {% csrf_token %}
           <button type="submit" class="btn btn-outline-success">Активировать 10 слов</button>
+        </form>
+        <form action="{% url 'mark_as_inactive' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-success">Деактивировать 10 слов</button>
         </form>
       </div>
     </div>
