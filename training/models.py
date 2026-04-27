@@ -35,7 +35,6 @@ class Word(models.Model):
     updated_at = models.DateTimeField(
         'Дата и время обновления слова',
         auto_now=True,
-        null=True,
     )
 
     is_active = models.BooleanField(
@@ -72,8 +71,6 @@ class Word(models.Model):
         'Язык слова',
         choices=LANGUAGE_CHOICES,
         max_length=10,
-        blank=True,
-        null=True,
     )
     image = models.ImageField(
         'Изображение',

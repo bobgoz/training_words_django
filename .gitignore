@@ -211,3 +211,4 @@ gunicorn.ctl
 backups/
 prod/
 deploy.sh
+ex.py
