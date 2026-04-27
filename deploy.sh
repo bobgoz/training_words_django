@@ -17,6 +17,6 @@ docker push $IMAGE_TAG_WEB
 
 ssh root@2.59.161.253 "cd $PATH_TO_TRAINING && \
     docker-compose -f docker-compose.prod.yml down && \
-    docker rmi bobgoze/training_word:latest && \
+    docker rmi bobgoze/training_word:latest | true && \
     docker-compose -f docker-compose.prod.yml up -d
     "
