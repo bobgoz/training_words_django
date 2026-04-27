@@ -7,7 +7,7 @@ def detect_language(word):
     return 'en'
 
 # Обновить все слова без языка
-words = Word.objects.filter(language__isnull=False)
+words = Word.objects.filter(language__isnull=True)
 count = words.count()
 print(f"Найдено слов для обновления: {count}")
 

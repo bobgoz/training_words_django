@@ -43,18 +43,35 @@ class WordCreateView(LoginRequiredMixin, CreateView):
 
 
 class TrainingView(BaseTrainingViewMixin):
-    """Вью для тренировки (отображения слов)"""
+    """Вью для тренировки (отображения активных слов)"""
 
     def get_queryset(self):
         """Возвращает список активных слов"""
         user = self.request.user
-        lang = self.request.GET.get('lang', 'all')
-        if lang == 'ru':
-            return Word.words.language_ru(user)
-        elif lang == 'en':
-            return Word.words.language_en(user)
-        else:
-            return Word.words.is_active(user)
+
+        if self._has_english_words:
+            lang = self.request.GET.get('lang', 'all')
+            if lang == 'ru':
+                return Word.words.language_ru(user)
+            elif lang == 'en':
+                return Word.words.language_en(user)
+
+        return Word.words.is_active(user)
+
+    def get_context_data(self, **kwargs):
+        """Передача флага has_en_words в контекст."""
+        context = super().get_context_data(**kwargs)
+        context['has_en_words'] = self._has_english_words
+        return context
+
+    @property
+    def _has_english_words(self) -> bool:
+        """
+        Возвращает True, если в списке
+        слов пользователя есть слова других
+        языков.
+        """
+        return Word.words.language_en(self.request.user).exists()
 
 
 class TrainingLearnedView(BaseTrainingViewMixin):
