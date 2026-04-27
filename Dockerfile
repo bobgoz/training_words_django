@@ -4,7 +4,9 @@ WORKDIR /app
 
 COPY requirements.prod.txt .
 
-RUN pip install -r requirements.prod.txt --no-cache-dir
+RUN apt update && \
+    apt install -y nano && \
+    pip install -r requirements.prod.txt --no-cache-dir
 
 COPY . .
 
