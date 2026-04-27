@@ -1,5 +1,7 @@
+# Файлы и папки проекта
 gunicorn.ctl
 backups/
+prod/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
