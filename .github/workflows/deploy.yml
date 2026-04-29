@@ -6,6 +6,9 @@ on:
         - main
 
 jobs:
+  Login_Build_and_Push:
+    name: Build and push to DockerHub
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v6.0.2
@@ -18,7 +21,7 @@ jobs:
       uses: docker/build-push-action@v7.1.0
       with:
         push: True
-        tags: ${{ variables.DOCKER_TAG }}
+        tags: ${{ vars.DOCKER_TAG }}
         
         
       
