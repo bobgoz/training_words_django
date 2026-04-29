@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
-    'training',
-    'index',
+    'users.apps.UsersConfig',
+    'training.apps.TrainingConfig',
+    'index.apps.IndexConfig',
     'debug_toolbar',
     'bootstrap5',
 ]
