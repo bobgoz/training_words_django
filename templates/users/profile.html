@@ -1,0 +1,25 @@
+<!-- users/profile.html -->
+{% extends "base.html" %}
+
+{% block title %}Профиль {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+              <h3>{{ user.username }}</h3>
+            </div>
+            <div class="card-body text-center">
+                {% if profile.avatar %}
+                    <img src="{{ profile.avatar.url }}" class="rounded-circle mb-3" width="150">
+                {% endif %}
+                <p><strong>Имя:</strong> {{ user.first_name|default:"Не указано" }}</p>
+                <p><strong>Email:</strong> {{ user.email|default:"Не указан" }}</p>
+                <p><strong>О себе:</strong> {{ profile.bio|default:"-" }}</p>
+                <a href="{% url 'profile_edit' %}" class="btn btn-primary">Редактировать</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
