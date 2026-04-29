@@ -1,4 +1,4 @@
-name: Main Foodgram workflow
+name: Deploy Training Project
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     name: Build and push to DockerHub
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    - name: Checkout repo
       uses: actions/checkout@v6.0.2
     - name: Docker Login
       uses: docker/login-action@v4.1.0
@@ -20,8 +20,34 @@ jobs:
     - name: Build and push Docker images
       uses: docker/build-push-action@v7.1.0
       with:
-        push: True
+        push: true
         tags: ${{ vars.DOCKER_TAG }}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: 
+        - Login_Build_and_Push
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v6.0.2
+    - name: copy docker-compose.production vai ssh
+      uses: appleboy/scp-action@master
+      with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "docker-compose.prod.yml"
+          target: "opt/training"
+    - name: executing_ssh_command_for_deploy
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: whoami
+
+
+
+    
         
         
       
