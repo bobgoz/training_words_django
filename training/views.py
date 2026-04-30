@@ -1,8 +1,5 @@
-from random import shuffle
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import IntegrityError
-from django.http import Http404
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -13,16 +10,15 @@ from django.views.generic import (
     UpdateView,
 )
 
+from .constants import COUNT_RANDOM_WORDS, COUNT_WORDS_FOR_ACTIVATE
 from .forms import CreateWordForm, EditWordForm
 from .mixins import (
     BaseTrainingViewMixin,
-    WordAcessMixin,
-    NextUrlMixin,
     GetSuccessUrlMixin,
+    NextUrlMixin,
+    WordAcessMixin,
 )
 from .models import Word
-
-from .constants import COUNT_RANDOM_WORDS, COUNT_WORDS_FOR_ACTIVATE
 
 
 class WordCreateView(LoginRequiredMixin, CreateView):
@@ -87,7 +83,9 @@ class TrainingNoActiveView(BaseTrainingViewMixin):
 
     def get_queryset(self):
         """Возвращает список неактивных слов"""
-        return Word.words.is_not_active(self.request.user).order_by('-created_at')
+        return Word.words.is_not_active(self.request.user).order_by(
+            '-created_at',
+        )
 
 
 class TrainingHardView(BaseTrainingViewMixin):
@@ -198,8 +196,6 @@ class SearchView(BaseTrainingViewMixin):
 
     def get_queryset(self):
         query = self.request.GET.get('q', '').strip()
-        print(query)
-
         if query:
             return Word.objects.filter(
                 word__icontains=query,

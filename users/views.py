@@ -28,7 +28,10 @@ class ProfileView(LoginRequiredMixin, DetailView):
 class ProfileEditView(LoginRequiredMixin, UpdateView):
     model = Profile
     template_name = 'users/profile_edit.html'
-    fields = ('avatar', 'bio',)
+    fields = (
+        'avatar',
+        'bio',
+    )
 
     def get_object(self):
         return self.request.user.profile
