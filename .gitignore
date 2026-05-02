@@ -214,3 +214,4 @@ prod/
 deploy.sh
 ex.py
 *.sh
+.vscode/
