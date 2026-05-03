@@ -9,5 +9,4 @@ from .models import Profile
 def create_user_profile(sender, instance, created, **kwargs):
     """Создание профиля при создании (регистрации) пользователя"""
     if created:
-        print('Создано!')
         Profile.objects.create(user=instance)

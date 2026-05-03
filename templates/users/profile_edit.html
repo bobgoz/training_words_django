@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+
+{% block title %}Редактирование профиля{% endblock title %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0">✏️ Редактирование профиля</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <!-- Поле аватара -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">🖼️ Аватар</label>
+                        <div class="d-flex align-items-center gap-3">
+                            {% if profile.avatar %}
+                                <img src="{{ profile.avatar.url }}" 
+                                     alt="avatar" 
+                                     class="rounded-circle" 
+                                     style="width: 80px; height: 80px; object-fit: cover;">
+                            {% else %}
+                                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" 
+                                     style="width: 80px; height: 80px;">
+                                    <span class="text-white fs-3">👤</span>
+                                </div>
+                            {% endif %}
+                            <div class="flex-grow-1">
+                                {% bootstrap_field form.avatar show_label=False %}
+                                <small class="text-muted">Рекомендуемый размер: 500x500px. JPG, PNG, GIF.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Поле О себе -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">📝 О себе</label>
+                        {% bootstrap_field form.bio show_label=False %}
+                        <small class="text-muted">Расскажите немного о себе</small>
+                    </div>
+                    <!-- Кнопки -->
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a href="{% url 'profile' %}" class="btn btn-outline-secondary">
+                            Отмена
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            Сохранить изменения
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Информация о пользователе -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <h6 class="card-title">ℹ️ Информация об аккаунте</h6>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <small class="text-muted">Имя пользователя:</small>
+                        <p class="mb-0">{{ user.username }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <small class="text-muted">Email:</small>
+                        <p class="mb-0">{{ user.email|default:"Не указан" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,6 +1,7 @@
 import pytest
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from pytest_lazy_fixtures import lazy_fixture as lf
 
 from .models import Profile
 
@@ -52,7 +53,7 @@ class TestUrls:
         [
             ('register', 200),
             ('profile', 302),  # 302 — редирект на логин для неавторизованных
-            ('edit_profile', 302),
+            ('profile_edit', 302),
         ],
     )
     def test_urls_unauthorized(self, client, url_name, expected_status):
@@ -66,7 +67,7 @@ class TestUrls:
         [
             ('register', 200),
             ('profile', 200),
-            ('edit_profile', 200),
+            ('profile_edit', 200),
         ],
     )
     def test_urls_authorized(self, client, url_name, expected_status):

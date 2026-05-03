@@ -1,11 +1,10 @@
-from django.views.generic import DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Profile
 from django.shortcuts import render
-from django.views.generic import CreateView
 from django.urls import reverse_lazy
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from .forms import RegisterForm
+from .models import Profile
 
 
 class RegistrationView(CreateView):
@@ -18,7 +17,7 @@ class RegistrationView(CreateView):
 
 class ProfileView(LoginRequiredMixin, DetailView):
     model = Profile
-    template_name = 'users/profile.html'
+    template_name = 'users/profile_base.html'
     context_object_name = 'profile'
 
     def get_object(self):
@@ -38,3 +37,13 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('profile')
+
+
+class ProfileInfoView(LoginRequiredMixin, DetailView):
+    """Информация о профиле"""
+
+    model = Profile
+    template_name = 'users/profile_info.html'
+
+    def get_object(self):
+        return self.request.user.profile

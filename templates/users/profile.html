@@ -1,23 +1,40 @@
-<!-- users/profile.html -->
+<!-- users/profile_base.html -->
 {% extends "base.html" %}
 
-{% block title %}Профиль {{ user.username }}{% endblock %}
+{% block title %}Профиль{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-              <h3>{{ user.username }}</h3>
+<div class="container mt-4">
+    <div class="row">
+        <!-- Левое меню (sidebar) -->
+        <div class="col-md-3 mb-4">
+            <div class="list-group">
+                <a href="{% url 'profile' %}" 
+                   class="list-group-item list-group-item-action {% if request.resolver_match.url_name == 'profile_info' %}active{% endif %}">
+                    👤 Информация
+                </a>
+                <a href="" 
+                   class="list-group-item list-group-item-action {% if request.resolver_match.url_name == 'profile_stats' %}active{% endif %}">
+                    📊 Статистика
+                </a>
+                <a href="" 
+                   class="list-group-item list-group-item-action {% if request.resolver_match.url_name == 'profile_plan' %}active{% endif %}">
+                    📅 План
+                </a>
+                <a href="{% url 'profile_edit' %}" 
+                   class="list-group-item list-group-item-action {% if request.resolver_match.url_name == 'profile_edit' %}active{% endif %}">
+                    ✏️ Редактировать
+                </a>
             </div>
-            <div class="card-body text-center">
-                {% if profile.avatar %}
-                    <img src="{{ profile.avatar.url }}" class="rounded-circle mb-3" width="150">
-                {% endif %}
-                <p><strong>Имя:</strong> {{ user.first_name|default:"Не указано" }}</p>
-                <p><strong>Email:</strong> {{ user.email|default:"Не указан" }}</p>
-                <p><strong>О себе:</strong> {{ profile.bio|default:"-" }}</p>
-                <a href="{% url 'profile_edit' %}" class="btn btn-primary">Редактировать</a>
+        </div>
+
+        <!-- Правый контент -->
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-body">
+                    {% block profile_content %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </div>
