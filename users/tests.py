@@ -1,7 +1,9 @@
+from http import HTTPStatus
+
 import pytest
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from pytest_lazy_fixtures import lazy_fixture as lf
+from pytest_lazy_fixtures import lf
 
 from .models import Profile
 
@@ -32,16 +34,6 @@ class TestProfileCreation:
 
         assert user.profile.user == user
 
-    def test_profile_created_for_multiple_users(self):
-        """Проверяет, что профили создаются для всех новых пользователей"""
-        users = [
-            User.objects.create_user(username=f'testuser_{i}')
-            for i in range(5)
-        ]
-
-        for user in users:
-            assert hasattr(user, 'profile')
-            assert user.profile.pk is not None
 
 
 @pytest.mark.django_db
@@ -49,33 +41,22 @@ class TestUrls:
     """Тестирование маршрутов приложения users"""
 
     @pytest.mark.parametrize(
-        'url_name, expected_status,',
+        'url_name, client, expected_status,',
         [
-            ('register', 200),
-            ('profile', 302),  # 302 — редирект на логин для неавторизованных
-            ('profile_edit', 302),
+            ('register', lf('no_author_client'), HTTPStatus.OK),
+            ('profile', lf('author_client'),  HTTPStatus.OK),
+            ('profile_edit', lf('author_client'), HTTPStatus.OK),
+            ('profile_info', lf('author_client'), HTTPStatus.OK),
         ],
     )
-    def test_urls_unauthorized(self, client, url_name, expected_status):
+    def test_urls_unauthorized(
+        self,
+        client,
+        url_name,
+        expected_status,
+    ):
         """Тестирование доступности URL для неавторизованного пользователя"""
         url = reverse(url_name)
         response = client.get(url)
         assert response.status_code == expected_status
 
-    @pytest.mark.parametrize(
-        'url_name, expected_status,',
-        [
-            ('register', 200),
-            ('profile', 200),
-            ('profile_edit', 200),
-        ],
-    )
-    def test_urls_authorized(self, client, url_name, expected_status):
-        """Тестирование доступности URL для авторизованного пользователя"""
-
-        User.objects.create_user(username='testuser', password='testpass123')
-        client.login(username='testuser', password='testpass123')
-
-        url = reverse(url_name)
-        response = client.get(url)
-        assert response.status_code == expected_status

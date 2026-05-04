@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'index.apps.IndexConfig',
     'debug_toolbar',
     'bootstrap5',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
