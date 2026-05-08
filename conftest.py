@@ -13,7 +13,7 @@ def author(django_user_model):
 
 
 @fixture
-def author_client(author):
+def auth_client(author):
     """Авторизованный клиент"""
     client = Client()
     client.force_login(author)
@@ -21,10 +21,16 @@ def author_client(author):
 
 
 @fixture
-def no_author_client():
+def no_auth_client():
     """Неавторизованный клиент"""
     return Client()
 
+@fixture
+def word_mass_create(author):
+    """ Массовое (10) создание слов """
+    for i in range (9):
+        
+    
 
 @fixture
 def word_ru(author):
@@ -137,3 +143,8 @@ def delete_word_url(pk_for_args):
 @fixture
 def search_url():
     return reverse('search')
+
+
+@fixture
+def random_url():
+    return reverse('training_random')

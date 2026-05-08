@@ -35,7 +35,6 @@ class TestProfileCreation:
         assert user.profile.user == user
 
 
-
 @pytest.mark.django_db
 class TestUrls:
     """Тестирование маршрутов приложения users"""
@@ -43,10 +42,10 @@ class TestUrls:
     @pytest.mark.parametrize(
         'url_name, client, expected_status,',
         [
-            ('register', lf('no_author_client'), HTTPStatus.OK),
-            ('profile', lf('author_client'),  HTTPStatus.OK),
-            ('profile_edit', lf('author_client'), HTTPStatus.OK),
-            ('profile_info', lf('author_client'), HTTPStatus.OK),
+            ('register', lf('no_auth_client'), HTTPStatus.OK),
+            ('profile', lf('auth_client'), HTTPStatus.OK),
+            ('profile_edit', lf('auth_client'), HTTPStatus.OK),
+            ('profile_info', lf('auth_client'), HTTPStatus.OK),
         ],
     )
     def test_urls_unauthorized(
@@ -59,4 +58,3 @@ class TestUrls:
         url = reverse(url_name)
         response = client.get(url)
         assert response.status_code == expected_status
-
