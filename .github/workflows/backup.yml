@@ -16,10 +16,10 @@ jobs:
           sudo apt-get install -y mailutils
 
       - name: Set backup date
-        run: echo "BACKUP_DATE=$(date +%Y%m%d_%H%M%S)" > $GITHUB_ENV
+        run: echo "BACKUP_DATE=$(date +%Y%m%d_%H%M%S)" >> $GITHUB_ENV
 
       - name: Set backup path for VPM
-        run: echo "BACKUP_PATH=/root/opt/training/backups/" > $GITHUB_ENV
+        run: echo "BACKUP_PATH=/root/opt/training/backups/" >> $GITHUB_ENV
 
       - name: Execute remote SSH commands using password
         uses: appleboy/ssh-action@v1
