@@ -49,9 +49,9 @@ jobs:
       - name: Download backups
         run: |
           mkdir -p ./backups
-          scp -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ env.BACKUP_PATH }}*.tar.gz ./backups/
-          scp -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ env.BACKUP_PATH }}*.sql.gz ./backups/
-
+          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
+          "cd ${{ env.BACKUP_PATH }} && tar czf - *.tar.gz *.sql.gz" | tar xzf - -C ./backups/
+      
       - name: Upload to GitHub Artifacts
         uses: actions/upload-artifact@v7
         with:
