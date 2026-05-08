@@ -16,7 +16,10 @@ jobs:
           sudo apt-get install -y mailutils
 
       - name: Set backup date
-        run: echo "BACKUP_DATE=$(date +%Y%m%d_%H%M%S)" >> $GITHUB_ENV
+        run: echo "BACKUP_DATE=$(date +%Y%m%d_%H%M%S)" > $GITHUB_ENV
+
+      - name: Set backup path for VPM
+        run: echo "BACKUP_PATH=/root/opt/training/backups/" > $GITHUB_ENV
 
       - name: Execute remote SSH commands using password
         uses: appleboy/ssh-action@v1
@@ -27,7 +30,7 @@ jobs:
           script: |
 
             DATE=${{ env.BACKUP_DATE }}
-            BACKUP_DIR="opt/training/backups"
+            BACKUP_DIR=${{ env.BACKUP_PATH }}
             mkdir -p $BACKUP_DIR
             
             # Бэкап PostgreSQL
@@ -46,8 +49,8 @@ jobs:
       - name: Download backups
         run: |
           mkdir -p ./backups
-          scp -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/opt/training/backups/*.tar.gz ./backups/
-          scp -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/opt/training/backups/*.sql.gz ./backups/
+          scp -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ env.BACKUP_PATH }}*.tar.gz ./backups/
+          scp -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ env.BACKUP_PATH }}*.sql.gz ./backups/
 
       - name: Upload to GitHub Artifacts
         uses: actions/upload-artifact@v7
