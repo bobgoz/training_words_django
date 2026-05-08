@@ -25,12 +25,41 @@ def no_auth_client():
     """Неавторизованный клиент"""
     return Client()
 
+
 @fixture
 def word_mass_create(author):
-    """ Массовое (10) создание слов """
-    for i in range (9):
-        
-    
+    """
+    Массовое  создание (10)
+    активных слов.
+    """
+    words = [
+        Word(
+            word=f'word_{i}',
+            user=author,
+            is_active=True,
+        )
+        for i in range(10)
+    ]
+    return Word.objects.bulk_create(words)
+
+
+@fixture
+def word_mass_create_hard(author):
+    """
+    Массовое  создание (10)
+    сложных слов.
+    """
+    words = [
+        Word(
+            word=f'word_{i}',
+            user=author,
+            is_active=True,
+            is_hard=True,
+        )
+        for i in range(10)
+    ]
+    return Word.objects.bulk_create(words)
+
 
 @fixture
 def word_ru(author):
@@ -63,7 +92,7 @@ def new_word(author):
 def form_data(author, new_word):
     """Данные формы"""
     return {
-        'word': new_word,
+        'word': 'слово',
         'user': author,
     }
 
@@ -74,7 +103,7 @@ def pk_for_args(word_ru):
     return word_ru.id
 
 
-# Маршруты
+# Юрлы
 @fixture
 def login_url():
     return reverse('login')
@@ -116,6 +145,11 @@ def training_url():
 
 
 @fixture
+def training_hard_url():
+    return reverse('training_hard')
+
+
+@fixture
 def training_no_active_url():
     return reverse('training_no_active')
 
@@ -148,3 +182,9 @@ def search_url():
 @fixture
 def random_url():
     return reverse('training_random')
+
+
+@fixture
+def create_url():
+    """Юрл создания слова"""
+    return reverse('add_word')

@@ -19,14 +19,39 @@ class TestWordLogic:
         """Проверка, что слово относится к категории английских"""
         assert word_en.language == 'en', 'Слово не имеет категории "en".'
 
-    def test_random_url(self, word_ru, author, random_url, auth_client):
+    def test_random_url(
+        self, word_mass_create, author, random_url, auth_client
+    ):
         """Тестирование логики страницы random"""
         response = auth_client.get(random_url)
         assert response.status_code == HTTPStatus.OK
-        assert Word.objects.filter(
-            user_id=author.id,
-            is_active=False,
-        ).exists()
+        words = response.context.get('words')
+        assert words is not None, "В контексте нет переменной 'words'."
+        assert len(words) == 10, f"Ожидалось 10 слов, получено {len(words)}"
+
+    def test_create_word(self, author, auth_client, form_data, create_url):
+        """Тестирование логики добавления слова."""
+        response = auth_client.post(create_url, form_data)
+        assert response.status_code == HTTPStatus.FOUND
+        word = Word.objects.get(
+            user=author.id,
+            word='Слово',
+        )
+        assert word.word == form_data['word'].title()
+        assert word.user == form_data['user']
+
+    def test_training_hard_url(
+        self,
+        word_mass_create_hard,
+        training_hard_url,
+        auth_client,
+    ):
+        """Тестирование страницы со сложными словами"""
+        response = auth_client.get(training_hard_url)
+        assert response.status_code == HTTPStatus.OK
+        words = response.context.get('words')
+        assert words is not None, 'В контексте нет переменной "words"'
+        assert len(words) == 10, f"Ожидалось 10 слов, получено {len(words)}"
 
 
 @pytest.mark.django_db
