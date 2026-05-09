@@ -49,7 +49,7 @@ jobs:
             echo "Creating static volume backup..."
             docker run --rm \
               -v training_static:/source:ro \
-              -v $BACKUP_DIR:/backup \
+              -v $BACKUP_DIR/$DATE:/backup \
               alpine tar czf /backup/static.tar.gz -C /source .
             
             echo "Бэкап создан: $BACKUP_DIR"
