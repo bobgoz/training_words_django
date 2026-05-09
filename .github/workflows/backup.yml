@@ -18,8 +18,6 @@ jobs:
       - name: Set backup date
         run: echo "BACKUP_DATE=$(date +%m-%d-%Y_%H-%M-%S)" >> $GITHUB_ENV
 
-      - name: Set backup path
-        run: echo "BACKUP_PATH=/root/opt/training/backups/" >> $GITHUB_ENV
 
       - name: Execute remote SSH commands
         uses: appleboy/ssh-action@v1
@@ -30,19 +28,29 @@ jobs:
           script: |
 
             DATE=${{ env.BACKUP_DATE }}
-            BACKUP_DIR=${{ env.BACKUP_PATH }}
-            mkdir -p $BACKUP_DIR
+            BACKUP_DIR="/root/opt/training/backups"
+            
+            mkdir -p $BACKUP_DIR/$DATE
+
+            echo "Starting backup at $DATE to $BACKUP_DIR/$DATE"
             
             # Бэкап PostgreSQL
+            echo "Creating PostgreSQL backup..."
             docker exec training_db pg_dump -U bobrov -d training | gzip > $BACKUP_DIR/$DATE/pg_data.sql.gz
             
             # Бэкап media volume
-            docker run --rm -v training_media:/source:ro -v $BACKUP_DIR:/backup alpine \
-              tar czf /backup/$DATE/media.tar.gz -C /source .
+            echo "Creating media volume backup..."
+            docker run --rm \
+              -v training_media:/source:ro \
+              -v $BACKUP_DIR/$DATE:/backup \
+              alpine tar czf /backup/media.tar.gz -C /source .
             
             # Бэкап static volume
-            docker run --rm -v training_static:/source:ro -v $BACKUP_DIR:/backup alpine \
-              tar czf /backup/$DATE/static.tar.gz -C /source .
+            echo "Creating static volume backup..."
+            docker run --rm \
+              -v training_static:/source:ro \
+              -v $BACKUP_DIR:/backup \
+              alpine tar czf /backup/static.tar.gz -C /source .
             
             echo "Бэкап создан: $BACKUP_DIR"
 
