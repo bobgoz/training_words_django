@@ -64,7 +64,7 @@ jobs:
           # Создаём архив на сервере и сразу передаём
           ssh -i /tmp/key -o StrictHostKeyChecking=no \
             ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
-            "cd /root/opt/training && tar czf - backups/" > ./backups/backups.tar.gz
+            "cd /root/opt/training/backups && tar czf - ." > ./backups/backups.tar.gz
           
           # Распаковываем
           cd ./backups
@@ -83,35 +83,40 @@ jobs:
           path: ./backups/*
           retention-days: 30
 
-      - name: Send email with backup
-        uses: dawidd6/action-send-mail@master
+      - name: Create backup archive for email
+        run: |
+          cd ./backups
+          tar czf ../backup_${{ env.BACKUP_DATE }}.tar.gz .
+          cd ..
+          echo "Archive created:"
+          ls -lh backup_${{ env.BACKUP_DATE }}.tar.gz
+
+      - name: Send email with backup attachment
+        uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.yandex.ru
           server_port: 465
           secure: true
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: ✅ Бэкап томов от ${{ env.BACKUP_DATE }}
+          subject: ✅ Бэкап от ${{ env.BACKUP_DATE }}
           to: ${{ secrets.MAIL_TO }}
           from: ${{ secrets.MAIL_USERNAME }}
           body: |
-            Привет!
-            
-            Бэкап Docker volumes успешно создан.
-            
-            Дата: ${{ env.BACKUP_DATE }}
-            Размеры файлов:
-            $(du -sh ./backups/*.tar.gz ./backups/*.sql.gz)
-            
-            Файлы прикреплены к письму.
-            
-            ---
-            GitHub Actions
-          attachments: ./backups/*.tar.gz, ./backups/*.sql.gz
+            Бекап Docker volumes успешно создан!
+          
+          📅 Дата: ${{ env.BACKUP_DATE }}
+          📦 Размер: $(ls -lh backup_${{ env.BACKUP_DATE }}.tar.gz | awk '{print $5}')
+          
+            Архив прикреплен к письму.
+          attachments: backup_${{ env.BACKUP_DATE }}.tar.gz
 
       - name: Clean old backups on server
-        run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
-            "find /opt/training/backups -name '*.tar.gz' -mtime +30 -delete && \
-             find /opt/training/backups -name '*.sql.gz' -mtime +30 -delete"
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            rm -r /root/opt/training/backups/*
 
