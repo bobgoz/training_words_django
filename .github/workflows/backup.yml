@@ -62,9 +62,10 @@ jobs:
           chmod 600 /tmp/key
           
           # Создаём архив на сервере и сразу передаём
-          ssh -i /tmp/key -o StrictHostKeyChecking=no \
+          ssh -i /tmp/key \
+            -o StrictHostKeyChecking=no \
             ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
-            "cd /root/opt/training/backups && tar czf - ." > ./backups/backups.tar.gz
+            'cd /root/opt/training/backups && tar czf - .' > ./backups/backups.tar.gz
           
           # Распаковываем
           cd ./backups
