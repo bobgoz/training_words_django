@@ -54,15 +54,27 @@ jobs:
             
             echo "Бэкап создан: $BACKUP_DIR"
 
-      - name: Download backups with SCP
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          source: "/root/opt/training/backups/"
-          target: "./backups/"
-          strip_components: 4  # убирает /root/opt/training/backups/ из пути
+      - name: Download backups via tar pipe
+        run: |
+          mkdir -p ./backups
+          
+          echo "${{ secrets.SSH_KEY }}" > /tmp/key
+          chmod 600 /tmp/key
+          
+          # Создаём архив на сервере и сразу передаём
+          ssh -i /tmp/key -o StrictHostKeyChecking=no \
+            ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
+            "cd /root/opt/training && tar czf - backups/" > ./backups/backups.tar.gz
+          
+          # Распаковываем
+          cd ./backups
+          tar xzf backups.tar.gz
+          rm backups.tar.gz
+          
+          echo "✅ Downloaded:"
+          find . -type f -ls
+          
+          rm -f /tmp/key
           
       - name: Upload to GitHub Artifacts
         uses: actions/upload-artifact@v7
