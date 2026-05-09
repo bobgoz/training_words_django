@@ -54,7 +54,7 @@ jobs:
           chmod 600 /tmp/id_rsa
 
           rsync -avz -e "ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no" \
-          ${{ secrets.USERNAME }}@${{ secrets.HOST }}:"${{ env.BACKUP_PATH }}" ./backups/
+          ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ env.BACKUP_PATH }} ./backups/
     
           # Очистка
           rm -f /tmp/id_rsa
