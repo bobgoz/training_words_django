@@ -54,28 +54,36 @@ jobs:
             
             echo "Бэкап создан: $BACKUP_DIR"
 
-      - name: Download backups via tar pipe
+      - name: Download backups - FIX with variables
         run: |
-          mkdir -p ./backups
-          
-          echo "${{ secrets.SSH_KEY }}" > /tmp/key
-          chmod 600 /tmp/key
-          
-          # Создаём архив на сервере и сразу передаём
-          ssh -i /tmp/key \
-            -o StrictHostKeyChecking=no \
-            ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
-            'cd /root/opt/training/backups && tar czf - .' > ./backups/backups.tar.gz
-          
-          # Распаковываем
-          cd ./backups
-          tar xzf backups.tar.gz
-          rm backups.tar.gz
-          
-          echo "✅ Downloaded:"
-          find . -type f -ls
-          
-          rm -f /tmp/key
+            mkdir -p ./backups
+            
+            echo "${{ secrets.SSH_KEY }}" > /tmp/ssh_key
+            chmod 600 /tmp/ssh_key
+            
+            # Задаем переменные
+            SSH_USER="${{ secrets.USERNAME }}"
+            SSH_HOST="${{ secrets.HOST }}"
+            REMOTE_PATH="/root/opt/training/backups"
+            
+            echo "Downloading from ${SSH_USER}@${SSH_HOST}:${REMOTE_PATH}"
+            
+            # Выполняем через переменные
+            ssh -i /tmp/ssh_key \
+                -o StrictHostKeyChecking=no \
+                "${SSH_USER}@${SSH_HOST}" \
+                "cd ${REMOTE_PATH} && tar czf - ." > ./backups/backups.tar.gz
+            
+            ls -lh ./backups/backups.tar.gz
+            
+            cd ./backups
+            tar xzf backups.tar.gz
+            rm backups.tar.gz
+            
+            echo "✅ Downloaded:"
+            find . -type f -exec ls -lh {} \;
+            
+            rm -f /tmp/ssh_key
           
       - name: Upload to GitHub Artifacts
         uses: actions/upload-artifact@v7
