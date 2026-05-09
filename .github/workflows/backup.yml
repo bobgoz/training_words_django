@@ -16,10 +16,10 @@ jobs:
           sudo apt-get install -y mailutils
 
       - name: Set backup date
-        run: echo "BACKUP_DATE=$(date +%Y%m%d_%H%M%S)" >> $GITHUB_ENV
+        run: echo "BACKUP_DATE=$(date +%m-%d-%Y_%H-%M-%S)" >> $GITHUB_ENV
 
       - name: Set backup path
-        run: echo "BACKUP_PATH=opt/training/backups/" >> $GITHUB_ENV
+        run: echo "BACKUP_PATH=/root/opt/training/backups/" >> $GITHUB_ENV
 
       - name: Execute remote SSH commands
         uses: appleboy/ssh-action@v1
@@ -46,15 +46,15 @@ jobs:
             
             echo "Бэкап создан: $BACKUP_DIR"
 
-      - name: Download backups
+      - name: Download backups with rsync
         run: |
           mkdir -p ./backups
 
           echo "${{ secrets.SSH_KEY }}" > /tmp/id_rsa
           chmod 600 /tmp/id_rsa
 
-          ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
-          "cd ${{ env.BACKUP_PATH }} && tar czf - *.tar.gz *.sql.gz 2>/dev/null" | tar xzf - -C ./backups/
+          rsync -avz -e "ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no" \
+          ${{ secrets.USERNAME }}@${{ secrets.HOST }}:"${{ env.BACKUP_PATH }}" ./backups/
     
           # Очистка
           rm -f /tmp/id_rsa
