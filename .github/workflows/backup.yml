@@ -37,11 +37,11 @@ jobs:
             docker exec training_db pg_dump -U bobrov -d training | gzip > $BACKUP_DIR/db_$DATE.sql.gz
             
             # Бэкап media volume
-            docker run --rm -v training_words_django_media:/source:ro -v $BACKUP_DIR:/backup alpine \
+            docker run --rm -v training_media:/source:ro -v $BACKUP_DIR:/backup alpine \
               tar czf /backup/media_$DATE.tar.gz -C /source .
             
             # Бэкап static volume
-            docker run --rm -v training_words_django_static:/source:ro -v $BACKUP_DIR:/backup alpine \
+            docker run --rm -v training_static:/source:ro -v $BACKUP_DIR:/backup alpine \
               tar czf /backup/static_$DATE.tar.gz -C /source .
             
             echo "Бэкап создан: $BACKUP_DIR"
