@@ -18,8 +18,8 @@ jobs:
       - name: Set backup date
         run: echo "BACKUP_DATE=$(date +%Y%m%d_%H%M%S)" >> $GITHUB_ENV
 
-      - name: Set backup path for VPM
-        run: echo "BACKUP_PATH=/root/opt/training/backups/" >> $GITHUB_ENV
+      - name: Set backup path
+        run: echo "BACKUP_PATH=opt/training/backups/" >> $GITHUB_ENV
 
       - name: Execute remote SSH commands
         uses: appleboy/ssh-action@v1
@@ -34,15 +34,15 @@ jobs:
             mkdir -p $BACKUP_DIR
             
             # Бэкап PostgreSQL
-            docker exec training_db pg_dump -U bobrov -d training | gzip > $BACKUP_DIR/db_$DATE.sql.gz
+            docker exec training_db pg_dump -U bobrov -d training | gzip > $BACKUP_DIR/$DATE/pg_data.sql.gz
             
             # Бэкап media volume
             docker run --rm -v training_media:/source:ro -v $BACKUP_DIR:/backup alpine \
-              tar czf /backup/media_$DATE.tar.gz -C /source .
+              tar czf /backup/$DATE/media.tar.gz -C /source .
             
             # Бэкап static volume
             docker run --rm -v training_static:/source:ro -v $BACKUP_DIR:/backup alpine \
-              tar czf /backup/static_$DATE.tar.gz -C /source .
+              tar czf /backup/$DATE/static.tar.gz -C /source .
             
             echo "Бэкап создан: $BACKUP_DIR"
 
