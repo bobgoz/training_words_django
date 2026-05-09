@@ -46,15 +46,18 @@ jobs:
             
             echo "Бэкап создан: $BACKUP_DIR"
 
-      - name: Download backups via scp-action
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          source: "${{ env.BACKUP_PATH }}*.tar.gz,${{ env.BACKUP_PATH }}*.sql.gz"
-          target: "./backups/"
-          strip_components: 1
+      - name: Download backups
+        run: |
+          mkdir -p ./backups
+
+          echo "${{ secrets.SSH_KEY }}" > /tmp/id_rsa
+          chmod 600 /tmp/id_rsa
+
+          ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
+          "cd ${{ env.BACKUP_PATH }} && tar czf - *.tar.gz *.sql.gz 2>/dev/null" | tar xzf - -C ./backups/
+    
+          # Очистка
+          rm -f /tmp/id_rsa
       
       - name: Upload to GitHub Artifacts
         uses: actions/upload-artifact@v7
