@@ -53,10 +53,11 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > /tmp/id_rsa
           chmod 600 /tmp/id_rsa
 
-          BACKUP_PATH="${{ env.BACKUP_PATH }}"
+          BACKUP_PATH="/root/opt/training/backups/"
+
 
           rsync -avz -e "ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no" \
-          ${{ secrets.USERNAME }}@${{ secrets.HOST }}:"$BACKUP_PATH" ./backups/
+          "${{ secrets.USERNAME }}@${{ secrets.HOST }}:${BACKUP_PATH}" ./backups/
     
           # Очистка
           rm -f /tmp/id_rsa
