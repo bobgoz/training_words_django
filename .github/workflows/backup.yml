@@ -60,7 +60,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          source: "/root/opt/training/backups/${{ env.BACKUP_DATE }}/"
+          source: "/root/opt/training/backups/"
           target: "./backups/"
           strip_components: 4  # убирает /root/opt/training/backups/ из пути
           
