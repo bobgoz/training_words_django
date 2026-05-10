@@ -62,16 +62,16 @@ jobs:
             chmod 600 /tmp/ssh_key
             
             # Задаем переменные
-            SSH_USER="${{ secrets.USERNAME }}"
-            SSH_HOST="${{ secrets.HOST }}"
-            REMOTE_PATH="/root/opt/training/backups"
+            SSH_USER=${{ secrets.USERNAME }}
+            SSH_HOST=${{ secrets.HOST }}
+            REMOTE_PATH=/root/opt/training/backups
             
             echo "Downloading from ${SSH_USER}@${SSH_HOST}:${REMOTE_PATH}"
             
             # Выполняем через переменные
             ssh -i /tmp/ssh_key \
                 -o StrictHostKeyChecking=no \
-                "${SSH_USER}@${SSH_HOST}" \
+                ${SSH_USER}@${SSH_HOST} \
                 "cd ${REMOTE_PATH} && tar czf - ." > ./backups/backups.tar.gz
             
             ls -lh ./backups/backups.tar.gz
