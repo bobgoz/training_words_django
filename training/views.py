@@ -132,7 +132,7 @@ class DeleteWordView(
     pk_url_kwarg = 'pk_word'
     context_object_name = 'word'
     # Нет шаблона подтверждения удаления,
-    # подтверждение осуществляется через 
+    # подтверждение осуществляется через
     # всплывающее окно в браузере.
     template_name = None
 

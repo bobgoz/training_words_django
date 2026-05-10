@@ -62,6 +62,40 @@ def word_mass_create_hard(author):
 
 
 @fixture
+def word_mass_create_noactive(author):
+    """
+    Массовое  создание (10)
+    неактивных слов.
+    """
+    words = [
+        Word(
+            word=f'word_{i}',
+            user=author,
+            is_active=False,
+        )
+        for i in range(10)
+    ]
+    return Word.objects.bulk_create(words)
+
+
+@fixture
+def word_mass_create_islearned(author):
+    """
+    Массовое  создание (10)
+    изученных слов.
+    """
+    words = [
+        Word(
+            word=f'word_{i}',
+            user=author,
+            is_learned=True,
+        )
+        for i in range(10)
+    ]
+    return Word.objects.bulk_create(words)
+
+
+@fixture
 def word_ru(author):
     """Русское слово"""
     return Word.objects.create(
@@ -188,3 +222,8 @@ def random_url():
 def create_url():
     """Юрл создания слова"""
     return reverse('add_word')
+
+@fixture
+def noactive_url():
+    """ Юрл неактивных слов """
+    return reverse('training_no_active')

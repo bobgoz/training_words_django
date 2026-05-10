@@ -53,6 +53,40 @@ class TestWordLogic:
         assert words is not None, 'В контексте нет переменной "words"'
         assert len(words) == 10, f"Ожидалось 10 слов, получено {len(words)}"
 
+    def test_not_active_url(
+        self,
+        auth_client,
+        word_mass_create_noactive,
+        noactive_url,
+    ):
+        """Тестирование логики страницы с неактивными словами."""
+        response = auth_client.get(noactive_url)
+        assert response.status_code == HTTPStatus.OK
+        assert Word.objects.filter(
+            is_active=False,
+        ).exists()
+        words = response.context.get('words')
+        assert words is not None
+        assert len(words) == 10
+        # Получение одного объекта слова и изменение поля is_learn на True
+        word = Word.objects.get(pk=1)
+        word.is_learned = True
+        word.save()
+
+        # Проверка, что данного объекта нет в контексте страницы noactive
+        response2 = auth_client.get(noactive_url)
+        words2 = response2.context.get('words')
+        
+        learned_in_context = [w for w in words2 if w.is_learned]
+        assert len(learned_in_context) == 0
+
+
+        response = auth_client.get(noactive_url)
+        words = response2.context.get('words')
+
+        # И общее количество слов уменьшилось на 1
+        assert len(words) == 9
+
 
 @pytest.mark.django_db
 class TestWordUrls:
