@@ -11,9 +11,12 @@ jobs:
 
     steps:
       - name: Set backup date
-        run: echo "BACKUP_DATE=$(date +%m-%d-%Y_%H-%M-%S)" >> $GITHUB_ENV
+        run: |
+          # Используем echo -n чтобы избежать лишних символов новой строки
+          echo "BACKUP_DATE=$(date +%m-%d-%Y_%H-%M-%S)" >> $GITHUB_ENV
+          echo "Backup date set to: $(date +%m-%d-%Y_%H-%M-%S)"
 
-      - name: Execute remote SSH commands (Create Backup)
+      - name: Execute remote SSH commands (Create & Archive Backup)
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.HOST }}
@@ -21,68 +24,89 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             DATE=${{ env.BACKUP_DATE }}
-            BACKUP_DIR="/root/opt/training/backups"
+            BACKUP_ROOT="/root/opt/training/backups"
+            BACKUP_DIR="$BACKUP_ROOT/$DATE"
             
-            mkdir -p $BACKUP_DIR/$DATE
+            mkdir -p $BACKUP_DIR
 
-            echo "Starting backup at $DATE to $BACKUP_DIR/$DATE"
+            echo "Starting backup at $DATE"
             
-            # Бэкап PostgreSQL
+            # 1. Бэкап PostgreSQL
             echo "Creating PostgreSQL backup..."
-            # Важно: убедитесь, что пользователь bobrov имеет права, или используйте postgres
-            docker exec training_db pg_dump -U bobrov -d training | gzip > $BACKUP_DIR/$DATE/pg_data.sql.gz
+            docker exec training_db pg_dump -U bobrov -d training | gzip > $BACKUP_DIR/pg_data.sql.gz
             
-            # Бэкап media volume
+            # 2. Бэкап media volume
             echo "Creating media volume backup..."
             docker run --rm \
               -v training_media:/source:ro \
-              -v $BACKUP_DIR/$DATE:/backup \
+              -v $BACKUP_DIR:/backup \
               alpine tar czf /backup/media.tar.gz -C /source .
             
-            # Бэкап static volume
+            # 3. Бэкап static volume
             echo "Creating static volume backup..."
             docker run --rm \
               -v training_static:/source:ro \
-              -v $BACKUP_DIR/$DATE:/backup \
+              -v $BACKUP_DIR:/backup \
               alpine tar czf /backup/static.tar.gz -C /source .
             
-            echo "Backup created successfully in $BACKUP_DIR/$DATE"
+            # 4. Создаем единый архив для удобной передачи
+            echo "Archiving backup folder..."
+            cd $BACKUP_ROOT
+            tar czf ${DATE}.tar.gz $DATE
+            
+            echo "Backup archived to $BACKUP_ROOT/${DATE}.tar.gz"
+            
+            # Проверка размера
+            ls -lh $BACKUP_ROOT/${DATE}.tar.gz
 
-      - name: Download backups from server
+      - name: Download backup archive
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          source: "/root/opt/training/backups/${{ env.BACKUP_DATE }}"
+          # Скачиваем конкретный файл архива
+          source: "/root/opt/training/backups/${{ env.BACKUP_DATE }}.tar.gz"
           target: "./backups"
-          strip_components: 3 # Убирает лишние уровни вложенности, чтобы папка легла корректно
           overwrite: true
 
-      - name: Verify downloaded files
+      - name: Verify and Extract downloaded archive
         run: |
-          echo "Files downloaded:"
-          ls -R ./backups
+          echo "Checking downloaded file..."
+          ls -lh ./backups/
           
-          # Проверка, что файлы не пустые
-          if [ ! -s "./backups/${{ env.BACKUP_DATE }}/pg_data.sql.gz" ]; then
-            echo "Error: DB backup is empty!"
+          ARCHIVE_PATH="./backups/${{ env.BACKUP_DATE }}.tar.gz"
+          
+          if [ ! -f "$ARCHIVE_PATH" ]; then
+            echo "ERROR: Archive not found!"
             exit 1
           fi
+          
+          if [ ! -s "$ARCHIVE_PATH" ]; then
+            echo "ERROR: Archive is empty!"
+            exit 1
+          fi
+          
+          echo "Extracting archive..."
+          mkdir -p ./final_backup
+          tar xzf $ARCHIVE_PATH -C ./final_backup
+          
+          echo "Contents of final backup:"
+          ls -R ./final_backup
 
       - name: Upload to GitHub Artifacts
-        uses: actions/upload-artifact@v4 # Обновил до v4, так как v7 может быть нестабилен или еще не релизнут стабильно для всех
+        uses: actions/upload-artifact@v4
         with:
           name: backup-${{ env.BACKUP_DATE }}
-          path: ./backups/${{ env.BACKUP_DATE }}
+          path: ./final_backup/${{ env.BACKUP_DATE }}
           retention-days: 30
 
       - name: Create backup archive for email
         run: |
-          cd ./backups/${{ env.BACKUP_DATE }}
+          cd ./final_backup/${{ env.BACKUP_DATE }}
           tar czf ../../backup_${{ env.BACKUP_DATE }}.tar.gz .
           cd ../..
-          echo "Archive created:"
+          echo "Email archive created:"
           ls -lh backup_${{ env.BACKUP_DATE }}.tar.gz
 
       - name: Send email with backup attachment
@@ -105,7 +129,7 @@ jobs:
             Архив прикреплен к письму.
           attachments: backup_${{ env.BACKUP_DATE }}.tar.gz
 
-      - name: Clean OLD backups on server (Keep last 7 days)
+      - name: Clean OLD backups on server
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.HOST }}
@@ -113,7 +137,153 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             BACKUP_DIR="/root/opt/training/backups"
-            echo "Cleaning old backups in $BACKUP_DIR, keeping only last 7 days..."
-            # Удаляем директории старше 7 дней
+            echo "Cleaning old backups (older than 7 days)..."
+            # Удаляем только старые архивы .tar.gz
+            find $BACKUP_DIR -maxdepth 1 -name "*.tar.gz" -mtime +7 -delete
+            # Удаляем старые папки с бэкапами
+            find $BACKUP_DIR -maxdepth 1 -type d -mtime +7 -exec rm -rf {} \;
+            echo "Cleanup finished."name: Backup
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  
+  workflow_dispatch:        
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Set backup date
+        run: |
+          # Используем echo -n чтобы избежать лишних символов новой строки
+          echo "BACKUP_DATE=$(date +%m-%d-%Y_%H-%M-%S)" >> $GITHUB_ENV
+          echo "Backup date set to: $(date +%m-%d-%Y_%H-%M-%S)"
+
+      - name: Execute remote SSH commands (Create & Archive Backup)
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            DATE=${{ env.BACKUP_DATE }}
+            BACKUP_ROOT="/root/opt/training/backups"
+            BACKUP_DIR="$BACKUP_ROOT/$DATE"
+            
+            mkdir -p $BACKUP_DIR
+
+            echo "Starting backup at $DATE"
+            
+            # 1. Бэкап PostgreSQL
+            echo "Creating PostgreSQL backup..."
+            docker exec training_db pg_dump -U bobrov -d training | gzip > $BACKUP_DIR/pg_data.sql.gz
+            
+            # 2. Бэкап media volume
+            echo "Creating media volume backup..."
+            docker run --rm \
+              -v training_media:/source:ro \
+              -v $BACKUP_DIR:/backup \
+              alpine tar czf /backup/media.tar.gz -C /source .
+            
+            # 3. Бэкап static volume
+            echo "Creating static volume backup..."
+            docker run --rm \
+              -v training_static:/source:ro \
+              -v $BACKUP_DIR:/backup \
+              alpine tar czf /backup/static.tar.gz -C /source .
+            
+            # 4. Создаем единый архив для удобной передачи
+            echo "Archiving backup folder..."
+            cd $BACKUP_ROOT
+            tar czf ${DATE}.tar.gz $DATE
+            
+            echo "Backup archived to $BACKUP_ROOT/${DATE}.tar.gz"
+            
+            # Проверка размера
+            ls -lh $BACKUP_ROOT/${DATE}.tar.gz
+
+      - name: Download backup archive
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          # Скачиваем конкретный файл архива
+          source: "/root/opt/training/backups/${{ env.BACKUP_DATE }}.tar.gz"
+          target: "./backups"
+          overwrite: true
+
+      - name: Verify and Extract downloaded archive
+        run: |
+          echo "Checking downloaded file..."
+          ls -lh ./backups/
+          
+          ARCHIVE_PATH="./backups/${{ env.BACKUP_DATE }}.tar.gz"
+          
+          if [ ! -f "$ARCHIVE_PATH" ]; then
+            echo "ERROR: Archive not found!"
+            exit 1
+          fi
+          
+          if [ ! -s "$ARCHIVE_PATH" ]; then
+            echo "ERROR: Archive is empty!"
+            exit 1
+          fi
+          
+          echo "Extracting archive..."
+          mkdir -p ./final_backup
+          tar xzf $ARCHIVE_PATH -C ./final_backup
+          
+          echo "Contents of final backup:"
+          ls -R ./final_backup
+
+      - name: Upload to GitHub Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-${{ env.BACKUP_DATE }}
+          path: ./final_backup/${{ env.BACKUP_DATE }}
+          retention-days: 30
+
+      - name: Create backup archive for email
+        run: |
+          cd ./final_backup/${{ env.BACKUP_DATE }}
+          tar czf ../../backup_${{ env.BACKUP_DATE }}.tar.gz .
+          cd ../..
+          echo "Email archive created:"
+          ls -lh backup_${{ env.BACKUP_DATE }}.tar.gz
+
+      - name: Send email with backup attachment
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.yandex.ru
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: ✅ Бэкап от ${{ env.BACKUP_DATE }}
+          to: ${{ secrets.MAIL_TO }}
+          from: ${{ secrets.MAIL_USERNAME }}
+          body: |
+            Бекап Docker volumes успешно создан!
+          
+            📅 Дата: ${{ env.BACKUP_DATE }}
+            📦 Размер: $(ls -lh backup_${{ env.BACKUP_DATE }}.tar.gz | awk '{print $5}')
+          
+            Архив прикреплен к письму.
+          attachments: backup_${{ env.BACKUP_DATE }}.tar.gz
+
+      - name: Clean OLD backups on server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            BACKUP_DIR="/root/opt/training/backups"
+            echo "Cleaning old backups (older than 7 days)..."
+            # Удаляем только старые архивы .tar.gz
+            find $BACKUP_DIR -maxdepth 1 -name "*.tar.gz" -mtime +7 -delete
+            # Удаляем старые папки с бэкапами
             find $BACKUP_DIR -maxdepth 1 -type d -mtime +7 -exec rm -rf {} \;
             echo "Cleanup finished."
