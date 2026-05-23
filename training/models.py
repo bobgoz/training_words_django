@@ -1,7 +1,9 @@
 import re
+from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils import timezone
 
 from .constants import DEFINITION_FIELD_MAX_LENGTH, WORD_FIELD_MAX_LENGTH
 from .managers import WordManager
@@ -81,6 +83,18 @@ class Word(models.Model):
         help_text='Загрузить изображение для слова',
     )
 
+    repetition_count = models.IntegerField(
+        'Количество успешных повторений',
+        default=0,
+        help_text='Сколько раз пользователь ответил "Знаю"',
+    )
+    next_review_date = models.DateTimeField(
+        'Дата следующего повторения',
+        null=True,
+        blank=True,
+        help_text='Когда слово снова станет активным',
+    )
+
     words = WordManager()
     objects = models.Manager()
 
@@ -91,6 +105,11 @@ class Word(models.Model):
                 name='unique_words_for_user',
             ),
         ]
+        indexes = [
+            models.Index(fields=['user', 'next_review_date']),
+            models.Index(fields=['user', 'is_active']),
+        ]
+
         verbose_name = 'слово'
         verbose_name_plural = 'слова'
         ordering = ('-updated_at',)
@@ -121,3 +140,76 @@ class Word(models.Model):
     def save(self, *args, **kwargs):
         self.language = self._detect_language()
         return super().save(*args, **kwargs)
+
+    def update_review_schedule(self, was_correct):
+        """Обновляет расписание повторений на основе ответа пользователя"""
+        now = timezone.now()
+
+        if was_correct:
+            # Увеличиваем счётчик повторений
+            self.repetition_count += 1
+
+            # Интервалы в днях: 1, 3, 7, 14, 30, 60, 90, 180, 365
+            intervals = (1, 3, 7, 14, 30, 60, 90, 180, 365)
+            idx = min(self.repetition_count - 1, len(intervals) - 1)
+            interval_days = intervals[idx]
+
+            # Устанавливаем дату следующего повторения
+            self.next_review_date = now + timedelta(days=interval_days)
+            self.is_active = False  # Слово временно неактивно
+            self.is_learned = True  # Отмечаем как изученное
+        else:
+            # Если ответил "Не знаю" — сбрасываем прогресс
+            self.repetition_count = 0
+            self.next_review_date = now + timedelta(
+                hours=1
+            )  # Повтор через час
+            self.is_active = True  # Остаётся активным
+            self.is_learned = False
+
+        self.save()
+
+    def activate_if_due(self):
+        """Активирует слово, если пришло время повторения"""
+        if self.next_review_date and timezone.now() >= self.next_review_date:
+            self.is_active = True
+            self.save()
+            return True
+        return False
+
+
+class TrainingSession(models.Model):
+    """Сессия тренировки"""
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    started_at = models.DateTimeField(auto_now_add=True)
+    ended_at = models.DateTimeField(null=True, blank=True)
+    total_words = models.IntegerField(default=0)
+    correct_words = models.IntegerField(default=0)
+    incorrect_words = models.IntegerField(default=0)
+
+    @property
+    def accuracy(self):
+        return (
+            round(self.correct_words / self.total_words * 100, 1)
+            if self.total_words > 0
+            else 0
+        )
+
+    def __str__(self):
+        return f"{self.user.username} - {self.started_at.strftime('%d.%m.%Y %H:%M')}"
+
+
+class WordAttempt(models.Model):
+    """Хранение ответов пользователя."""
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    word = models.ForeignKey(Word, on_delete=models.CASCADE)
+    session = models.ForeignKey(
+        TrainingSession, on_delete=models.CASCADE, null=True, blank=True
+    )
+    is_correct = models.BooleanField(default=False)
+    attempted_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-attempted_at',)

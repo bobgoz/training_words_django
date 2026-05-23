@@ -1,0 +1,55 @@
+<!-- training/train_result.html -->
+{% extends "base.html" %}
+
+{% block title %}Результаты тренировки{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-success text-white text-center">
+                <h4 class="mb-0">🎉 Тренировка завершена!</h4>
+            </div>
+            <div class="card-body text-center p-5">
+                <div class="mb-4">
+                    <h1 class="display-1">{{ accuracy }}%</h1>
+                    <p class="text-muted">правильных ответов</p>
+                </div>
+                
+                <div class="row g-3 mb-4">
+                    <div class="col-6">
+                        <div class="border rounded p-3">
+                            <div class="display-6 text-success">{{ session.correct_words }}</div>
+                            <div>✅ Правильно</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border rounded p-3">
+                            <div class="display-6 text-danger">{{ session.incorrect_words }}</div>
+                            <div>❌ Неправильно</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <p><strong>Всего слов:</strong> {{ session.total_words }}</p>
+                    <p><strong>Время тренировки:</strong> 
+                        {% if session.ended_at %}
+                            {{ session.started_at|timesince:session.ended_at }}
+                        {% endif %}
+                    </p>
+                </div>
+                
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="{% url 'train_start' %}" class="btn btn-primary btn-lg">
+                        🔄 Новая тренировка
+                    </a>
+                    <a href="{% url 'training' %}" class="btn btn-outline-secondary btn-lg">
+                        📋 К списку слов
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

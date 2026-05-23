@@ -1,0 +1,54 @@
+<!-- training/train_setup.html -->
+{% extends "base.html" %}
+{% load bootstrap5 %}
+
+{% block title %}Настройка тренировки{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">⚙️ Настройка тренировки</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">📚 Тип слов</label>
+                        {{ form.word_type }}
+                        {% if form.word_type.help_text %}
+                            <small class="text-muted">{{ form.word_type.help_text }}</small>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">🔢 Количество слов</label>
+                        {{ form.count }}
+                        <small class="text-muted">{{ form.count.help_text }}</small>
+                    </div>
+                    
+                    <div class="mb-4 form-check">
+                        {{ form.include_learned }}
+                        <label class="form-check-label fw-bold">
+                            {{ form.include_learned.label }}
+                        </label>
+                        <br>
+                        <small class="text-muted">{{ form.include_learned.help_text }}</small>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            🚀 Начать тренировку
+                        </button>
+                        <a href="{% url 'training' %}" class="btn btn-outline-secondary">
+                            ← Вернуться к списку слов
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

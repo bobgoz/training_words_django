@@ -1,0 +1,71 @@
+<!-- training/train_complete.html -->
+{% extends "base.html" %}
+
+{% block title %}Результаты тренировки{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-success text-white text-center">
+                <h4 class="mb-0">🎉 Тренировка завершена!</h4>
+            </div>
+            <div class="card-body text-center p-5">
+                <!-- Процент правильных ответов -->
+                <div class="mb-4">
+                    <div class="display-1 fw-bold {% if accuracy >= 80 %}text-success{% elif accuracy >= 50 %}text-warning{% else %}text-danger{% endif %}">
+                        {{ accuracy }}%
+                    </div>
+                    <p class="text-muted">правильных ответов</p>
+                </div>
+                
+                <!-- Статистика -->
+                <div class="row g-3 mb-4">
+                    <div class="col-4">
+                        <div class="border rounded p-3">
+                            <div class="display-6">{{ total_words }}</div>
+                            <div class="small text-muted">всего слов</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="border border-success rounded p-3">
+                            <div class="display-6 text-success">{{ correct_count }}</div>
+                            <div class="small text-muted">✅ правильно</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="border border-danger rounded p-3">
+                            <div class="display-6 text-danger">{{ incorrect_count }}</div>
+                            <div class="small text-muted">❌ неправильно</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Тип тренировки -->
+                <div class="mb-4">
+                    <p><strong>Тип слов:</strong> 
+                        {% if word_type == 'hard' %}Сложные
+                        {% elif word_type == 'learned' %}Изученные
+                        {% elif word_type == 'not_learned' %}Не изученные
+                        {% else %}Все активные
+                        {% endif %}
+                    </p>
+                    {% if session %}
+                        <p><strong>Время:</strong> {{ session.started_at|date:"d.m.Y H:i" }}</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Кнопки действий -->
+                <div class="d-grid gap-2">
+                    <a href="{% url 'training_setup' %}" class="btn btn-primary btn-lg">
+                        🔄 Новая тренировка
+                    </a>
+                    <a href="{% url 'training' %}" class="btn btn-outline-secondary">
+                        📋 К списку слов
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

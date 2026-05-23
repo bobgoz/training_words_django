@@ -1,29 +1,39 @@
 from django.db import models
+from django.utils import timezone
+
+from .constants import MIN_ACTIVE_WORDS
 
 
 class WordManager(models.Manager):
-    """Кастомный  менеджер для модели Word"""
+    """Кастомный менеджер для модели Word"""
 
     def all_self(self, user):
+        """Все слова пользователя (без активации просроченных)"""
         return super().get_queryset().filter(user=user)
+
+    def _base_active(self, user):
+        """Базовый queryset для активных слов (с активацией просроченных)"""
+        # Активируем просроченные слова
+        self.all_self(user).filter(
+            next_review_date__lte=timezone.now(), is_active=False
+        ).update(is_active=True)
+
+        return self.all_self(user).filter(is_active=True)
 
     def is_active(self, user):
         """Только активные слова"""
-        return self.all_self(user).filter(is_active=True, is_learned=False)
+        return self._base_active(user).filter(is_learned=False)
 
     def is_not_active(self, user):
         """Только неактивные слова"""
-        return self.all_self(user).filter(
-            is_active=False,
-            is_learned=False,
-        )
+        return self.all_self(user).filter(is_active=False, is_learned=False)
 
     def is_hard(self, user):
         """Только сложные слова"""
         return self.is_active(user).filter(is_hard=True)
 
     def is_learned(self, user):
-        """Только изученные словаз"""
+        """Только изученные слова"""
         return self.all_self(user).filter(is_learned=True)
 
     def count_active(self, user):
@@ -62,3 +72,41 @@ class WordManager(models.Manager):
     def hard_language_en(self, user):
         """Сложные английские слова"""
         return self.is_hard(user).filter(language='en')
+
+    # ----------Логика интервальных повторений ----------
+    def needs_review(self, user):
+        """Слова, которые пора повторять"""
+        # Используем all_self, а не self.all_self (без рекурсии)
+        return self.all_self(user).filter(
+            next_review_date__lte=timezone.now(), is_active=False
+        )
+
+    def due_for_review_count(self, user):
+        """Количество слов для повторения сегодня"""
+        return self.needs_review(user).count()
+
+    def activate_due_words(self, user):
+        """Активирует все слова, время которых пришло"""
+        return self.needs_review(user).update(is_active=True)
+
+    def ensure_min_active_words(self, user):
+        """Обеспечивает минимальное количество активных слов"""
+        active_count = self.is_active(user).count()
+
+        if active_count < MIN_ACTIVE_WORDS:
+            # Сколько нужно добавить
+            needed = MIN_ACTIVE_WORDS - active_count
+
+            # Берём неактивные, не изученные слова (приоритет по дате обновления)
+            ids_to_activate = list(
+                self.is_not_active(user)
+                .values_list('id', flat=True)[:needed]
+            )
+
+            if ids_to_activate:
+                count = self.filter(id__in=ids_to_activate).update(
+                    is_active=True,
+                )
+                return count
+
+        return 0

@@ -1,5 +1,6 @@
 from django import forms
 
+from .constants import COUNT_RANDOM_WORDS, COUNT_WORDS_FOR_ACTIVATE
 from .models import Word
 
 
@@ -41,3 +42,29 @@ class EditWordForm(forms.ModelForm):
             'is_hard',
             'image',
         )
+
+
+class TrainingSettingsForm(forms.Form):
+    """Форма настройки тренировки"""
+
+    WORD_TYPE_CHOICES = [
+        ('all', 'Активные слова'),
+        ('hard', 'Только сложные'),
+        ('learned', 'Только изученные'),
+        ('random', 'Случайные'),
+    ]
+
+    word_type = forms.ChoiceField(
+        choices=WORD_TYPE_CHOICES,
+        widget=forms.RadioSelect,
+        initial=WORD_TYPE_CHOICES[0],
+        label='Тип слов',
+    )
+
+    count = forms.IntegerField(
+        min_value=5,
+        max_value=100,
+        initial=10,
+        label='Количество слов',
+        help_text='Сколько слов хотите повторить? (5-50)',
+    )

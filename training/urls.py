@@ -20,7 +20,11 @@ urlpatterns = [
         name='mark_as_learned',
     ),
     path('training/', views.TrainingView.as_view(), name='training'),
-    path('training_hard/', views.TrainingHardView.as_view(), name='training_hard'),
+    path(
+        'training_hard/',
+        views.TrainingHardView.as_view(),
+        name='training_hard',
+    ),
     path(
         'training_no_active/',
         views.TrainingNoActiveView.as_view(),
@@ -50,5 +54,19 @@ urlpatterns = [
         'search',
         views.SearchView.as_view(),
         name='search',
+    ),
+    path(
+        'train/setup/',
+        views.TrainingSetupView.as_view(),
+        name='training_setup',
+    ),
+    path('train/card/', views.TrainCardView.as_view(), name='train_card'),
+    path(
+        'train/answer/', views.TrainAnswerView.as_view(), name='train_answer'
+    ),
+    path(
+        'train/complete/',
+        views.TrainCompleteView.as_view(),
+        name='train_complete',
     ),
 ]
