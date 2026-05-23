@@ -14,7 +14,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .constants import COUNT_RANDOM_WORDS, COUNT_WORDS_FOR_ACTIVATE
+from .constants import COUNT_WORDS_FOR_ACTIVATE
 from .forms import CreateWordForm, EditWordForm, TrainingSettingsForm
 from .mixins import (
     BaseTrainingViewMixin,
@@ -87,9 +87,7 @@ class TrainingNoActiveView(BaseTrainingViewMixin):
 
     def get_queryset(self):
         """Возвращает список неактивных слов"""
-        return Word.words.is_not_active(self.request.user).order_by(
-            '-created_at',
-        )
+        return Word.words.is_not_active(self.request.user)
 
 
 class TrainingHardView(BaseTrainingViewMixin):
@@ -98,17 +96,6 @@ class TrainingHardView(BaseTrainingViewMixin):
     def get_queryset(self):
         """Возвращает список сложных слов"""
         return Word.words.is_hard(self.request.user)
-
-
-class TrainingRandomView(BaseTrainingViewMixin):
-    """Вью для отображения случайных слов"""
-
-    # Отключение пагинации
-    paginate_by = None
-
-    def get_queryset(self):
-        """Возвращает срез рандомных слов"""
-        return Word.words.random_words(self.request.user)[:COUNT_RANDOM_WORDS]
 
 
 class DetailWordView(

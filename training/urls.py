@@ -31,11 +31,6 @@ urlpatterns = [
         name='training_no_active',
     ),
     path(
-        'training_random/',
-        views.TrainingRandomView.as_view(),
-        name='training_random',
-    ),
-    path(
         '<int:pk_word>/detail/',
         views.DetailWordView.as_view(),
         name='detail',

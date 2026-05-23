@@ -655,6 +655,14 @@ a {
     border-top: 1px solid var(--border-color);
 }
 
+.text-white-50 {
+    color: rgba(255, 255, 255, 0.7);
+}
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+
 @media (max-width: 991.98px) {
     .page-header {
         flex-direction: column;

@@ -26,7 +26,7 @@ class WordManager(models.Manager):
 
     def is_not_active(self, user):
         """Только неактивные слова"""
-        return self.all_self(user).filter(is_active=False, is_learned=False)
+        return self.all_self(user).filter(is_active=False)
 
     def is_hard(self, user):
         """Только сложные слова"""
