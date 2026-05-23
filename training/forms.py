@@ -1,6 +1,10 @@
 from django import forms
 
-from .constants import COUNT_RANDOM_WORDS, COUNT_WORDS_FOR_ACTIVATE
+from .constants import (
+    COUNT_INITIAL_VALUE,
+    COUNT_MAX_VALUE,
+    COUNT_MIN_VALUE,
+)
 from .models import Word
 
 
@@ -62,9 +66,12 @@ class TrainingSettingsForm(forms.Form):
     )
 
     count = forms.IntegerField(
-        min_value=5,
-        max_value=100,
-        initial=10,
+        min_value=COUNT_MIN_VALUE,
+        max_value=COUNT_MAX_VALUE,
+        initial=COUNT_INITIAL_VALUE,
         label='Количество слов',
-        help_text='Сколько слов хотите повторить? (5-50)',
+        help_text=(
+            'Сколько слов включить в тренировку? '
+            f'({COUNT_MIN_VALUE}-{COUNT_MAX_VALUE})',
+        ),
     )

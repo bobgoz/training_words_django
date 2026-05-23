@@ -197,7 +197,7 @@ class TrainingSession(models.Model):
         )
 
     def __str__(self):
-        return f"{self.user.username} - {self.started_at.strftime('%d.%m.%Y %H:%M')}"
+        return f'{self.user} - {self.started_at.strftime('%d.%m.%Y %H:%M')}'
 
 
 class WordAttempt(models.Model):

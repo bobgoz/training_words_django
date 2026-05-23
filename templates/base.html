@@ -26,16 +26,16 @@
             {% if user.is_authenticated %}
               {% with action=request.resolver_match.url_name %}
                 <li class="nav-item">
-                  <a class="nav-link {% if action == 'train_start' %}active{% endif %}" href="{% url 'training_setup' %}">Сессионная тренировка</a>
+                  <a class="nav-link {% if action == 'train_start' %}active{% endif %}" href="{% url 'training_setup' %}">Тренировка</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link {% if action == 'training' %}active{% endif %}" href="{% url 'training' %}">Тренировка</a>
+                  <a class="nav-link {% if action == 'training' %}active{% endif %}" href="{% url 'training' %}">Просмотр активных слов</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link {% if action == 'training_hard' %}active{% endif %}" href="{% url 'training_hard' %}">Сложные слова</a>
+                  <a class="nav-link {% if action == 'training_hard' %}active{% endif %}" href="{% url 'training_hard' %}">Просмотр сложных слов</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link {% if action == 'training_no_active' %}active{% endif %}" href="{% url 'training_no_active' %}">Неактивные</a>
+                  <a class="nav-link {% if action == 'training_no_active' %}active{% endif %}" href="{% url 'training_no_active' %}">Просмотр неактивных слов</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link {% if action == 'add_word' %}active{% endif %}" href="{% url 'add_word' %}">Добавить слово</a>

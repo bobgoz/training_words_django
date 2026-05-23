@@ -11,11 +11,9 @@
         <h1 class="page-title-sm">
           {% with action=request.resolver_match.url_name %}
             {% if action == 'training' %}
-              Тренировка слов
+              Активные слова
             {% elif action == 'training_hard' %}
-              Повторение сложных слов
-            {% elif action == 'training_random' %}
-              Случайная подборка слов
+              Сложные слова
             {% elif action == 'training_no_active' %}
               Неактивные слова
             {% endif %}
@@ -24,16 +22,6 @@
         <p class="page-subtitle">Открывай карточки, повторяй слова и отмечай уже изученные.</p>
       </div>
 
-      <div class="justify-content-end">
-        <form action="{% url 'mark_as_active' %}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-outline-success">Активировать 10 слов</button>
-        </form>
-        <form action="{% url 'mark_as_inactive' %}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-outline-success">Деактивировать 10 слов</button>
-        </form>
-      </div>
     </div>
     {% if has_en_words %}
       {% with action=request.resolver_match.url_name %}
@@ -54,7 +42,6 @@
         {% endif %}
       {% endwith %}
     {% endif %}
-
 
     {% if words %}
       <div class="list-stack mb-4">
