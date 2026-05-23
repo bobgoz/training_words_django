@@ -217,7 +217,7 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
     def get(self, request):
         """Показать форму настроек"""
-        
+
         Word.words.ensure_min_active_words(request.user)
 
         form = TrainingSettingsForm()
@@ -375,24 +375,32 @@ class TrainCompleteView(LoginRequiredMixin, View):
 
     def get(self, request):
         """
-        Обрабатывает GET-запрос для отображения результатов завершённой тренировки.
+        Обрабатывает GET-запрос для отображения
+        результатов завершённой тренировки.
 
         Выполняет следующие действия:
-            1. Восполняет активные слова до минимального количества (ensure_min_active_words).
-            2. Проверяет, что тренировка действительно завершена (все слова отвечены).
-            3. Извлекает статистику из сессии (количество правильных/неправильных ответов).
-            4. Сохраняет сессию тренировки в базу данных (модель TrainingSession).
+            1. Восполняет активные слова до минимального
+            количества (ensure_min_active_words).
+            2. Проверяет, что тренировка действительно
+            завершена (все слова отвечены).
+            3. Извлекает статистику из сессии
+            (количество правильных/неправильных ответов).
+            4. Сохраняет сессию тренировки в базу данных
+            (модель TrainingSession).
             5. Очищает временные данные тренировки из сессии.
             6. Рассчитывает процент правильных ответов.
             7. Рендерит страницу с итоговой статистикой.
 
         Args:
-            request (HttpRequest): Объект HTTP-запроса, содержащий данные сессии.
+            request (HttpRequest): Объект HTTP-запроса,
+            содержащий данные сессии.
 
         Returns:
             HttpResponse:
-                - Редирект на страницу тренировки (train_card), если тренировка не завершена.
-                - Рендер шаблона 'training/train_complete.html' с контекстом статистики.
+                - Редирект на страницу тренировки (train_card),
+                если тренировка не завершена.
+                - Рендер шаблона 'training/train_complete.html'
+                с контекстом статистики.
 
         Context для шаблона:
             total_words (int): Общее количество отвеченных слов.
@@ -400,13 +408,16 @@ class TrainCompleteView(LoginRequiredMixin, View):
             incorrect_count (int): Количество неправильных ответов.
             accuracy (float): Процент правильных ответов (округлён до 1 знака).
             word_type (str): Тип слов из настроек тренировки.
-            session (TrainingSession | None): Объект сессии тренировки из БД (или None).
+            session (TrainingSession | None): Объект сессии тренировки
+            из БД (или None).
 
         Notes:
-            - Перед рендером происходит восполнение активных слов до MIN_ACTIVE_WORDS.
+            - Перед рендером происходит восполнение
+            активных слов до MIN_ACTIVE_WORDS.
             - Если сессия не была сохранена в БД (например, при прерывании),
             training_session будет None.
-            - Данные тренировки извлекаются из сессии браузера и после сохранения
+            - Данные тренировки извлекаются из сессии
+            браузера и после сохранения
             полностью очищаются.
         """
 
@@ -437,7 +448,8 @@ class TrainCompleteView(LoginRequiredMixin, View):
             training_session.incorrect_words = incorrect_count
             training_session.save()
         else:
-            # Если сессия не была создана (например, пользователь прервал тренировку)
+            # Если сессия не была создана
+            # (например, пользователь прервал тренировку)
             training_session = None
 
         # Очищаем сессию
@@ -459,7 +471,7 @@ class TrainCompleteView(LoginRequiredMixin, View):
             'correct_count': correct_count,
             'incorrect_count': incorrect_count,
             'accuracy': accuracy,
-            'word_type': settings.get('word_type', 'all'),
+            'word_type': settings['word_type'],
             'session': training_session,
         }
 

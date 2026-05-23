@@ -97,10 +97,10 @@ class WordManager(models.Manager):
             # Сколько нужно добавить
             needed = MIN_ACTIVE_WORDS - active_count
 
-            # Берём неактивные, не изученные слова (приоритет по дате обновления)
+            # Берём неактивные, не изученные слова
+            # (приоритет по дате обновления)
             ids_to_activate = list(
-                self.is_not_active(user)
-                .values_list('id', flat=True)[:needed]
+                self.is_not_active(user).values_list('id', flat=True)[:needed]
             )
 
             if ids_to_activate:
