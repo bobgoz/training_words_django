@@ -5,7 +5,13 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 
-from .constants import DEFINITION_FIELD_MAX_LENGTH, WORD_FIELD_MAX_LENGTH
+
+from .constants import (
+    DEFINITION_FIELD_MAX_LENGTH,
+    WORD_FIELD_MAX_LENGTH,
+    INTERVALS,
+    LEARNED_THRESHOLD,
+)
 from .managers import WordManager
 
 User = get_user_model()
@@ -150,14 +156,18 @@ class Word(models.Model):
             self.repetition_count += 1
 
             # Интервалы в днях: 1, 3, 7, 14, 30, 60, 90, 180, 365
-            intervals = (1, 3, 7, 14, 30, 60, 90, 180, 365)
+            intervals = INTERVALS
             idx = min(self.repetition_count - 1, len(intervals) - 1)
             interval_days = intervals[idx]
 
             # Устанавливаем дату следующего повторения
             self.next_review_date = now + timedelta(days=interval_days)
             self.is_active = False  # Слово временно неактивно
-            self.is_learned = True  # Отмечаем как изученное
+
+            # Отмечаем как изученное только после достижения
+            # определенного количества безошибочных повторений.
+            if self.repetition_count >= LEARNED_THRESHOLD:
+                self.is_learned = True
         else:
             # Если ответил "Не знаю" — сбрасываем прогресс
             self.repetition_count = 0

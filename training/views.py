@@ -1,11 +1,12 @@
 from random import shuffle
+from django.utils import timezone
+
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import IntegrityError
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.views import View
 from django.views.generic import (
     CreateView,
@@ -211,17 +212,18 @@ class TrainingSetupView(LoginRequiredMixin, View):
         return render(request, 'training/train_setup.html', {'form': form})
 
     def post(self, request):
-        """Обработать настройки и начать тренировку"""
+        """Обрабатывает настройки тренировки."""
         form = TrainingSettingsForm(request.POST)
 
         if not form.is_valid():
             return render(request, 'training/train_setup.html', {'form': form})
 
         # Сохраняем настройки в сессию
-        request.session['training_settings'] = {
+        settings: dict = {
             'word_type': form.cleaned_data['word_type'],
             'count': form.cleaned_data['count'],
         }
+        request.session.setdefault('training_settings', settings)
 
         # Формируем список слов
         word_ids = self._get_word_ids(request.user, form.cleaned_data)
@@ -234,27 +236,25 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
         # Сохраняем ID слов в сессию (перемешанные)
         shuffle(word_ids)
-        request.session['training_words'] = word_ids
-        request.session['training_current_index'] = 0
-        request.session['training_session_id'] = (
-            None  # будет создан при первом ответе
-        )
+        request.session.setdefault('training_words', word_ids)
+        request.session.setdefault('training_current_index', 0)
+        request.session.setdefault('training_session_id', None)
 
         # Переходим к первому слову
         return redirect('train_card')
 
-    def _get_word_ids(self, user, cleaned_data):
+    def _get_word_ids(self, user, cleaned_data) -> list[int]:
         """Формирует список ID слов по настройкам"""
 
         queryset = Word.words
 
         # Фильтр по типу слов
         if cleaned_data['word_type'] == 'all':
-            queryset = queryset.is_active(user)
+            queryset = queryset.is_active(user).order_by('updated_at')
         elif cleaned_data['word_type'] == 'hard':
-            queryset = queryset.is_hard(user)
+            queryset = queryset.is_hard(user).order_by('updated_at')
         elif cleaned_data['word_type'] == 'learned':
-            queryset = queryset.is_learned(user)
+            queryset = queryset.is_learned(user).order_by('updated_at')
         elif cleaned_data['word_type'] == 'random':
             queryset = queryset.random_words(user)
 
@@ -275,53 +275,53 @@ class TrainCardView(LoginRequiredMixin, View):
         training_words = request.session['training_words']
         current_index = request.session['training_current_index']
 
-        if not training_words or current_index >= len(training_words):
-            # Тренировка закончена
-            return redirect('train_complete')
-
         word_id = training_words[current_index]
         word = Word.objects.get(id=word_id, user=request.user)
 
         # Прогресс
-        progress = {
+        progress: dict = {
             'current': current_index + 1,
             'total': len(training_words),
             'percent': (current_index + 1) / len(training_words) * 100,
         }
 
-        return render(
-            request,
-            'training/train_card.html',
-            {
-                'word': word,
-                'progress': progress,
-                'word_type': request.session['training_settings']['word_type'],
-            },
-        )
+        context: dict = {
+            'word': word,
+            'progress': progress,
+            'word_type': request.session['training_settings']['word_type'],
+        }
+
+        return render(request, 'training/train_card.html', context)
 
 
 class TrainAnswerView(LoginRequiredMixin, View):
     """Обработка ответа пользователя"""
 
     def post(self, request):
-        word_id = request.POST['word_id']
-        is_known = request.POST['is_known'] == 'true'
+        word_id = request.POST.get('word_id')
+        is_known: bool = request.POST.get('is_known') == 'true'
+        is_abort: bool = request.POST.get('is_abort') == 'true'
+
+        if is_abort:
+            return redirect('train_complete')
 
         word = Word.objects.get(id=word_id, user=request.user)
+
+        # Меняем поле is_active на False уже тут
         word.update_review_schedule(is_known)
 
         # Создаём сессию тренировки, если ещё нет
         if not request.session['training_session_id']:
             session = TrainingSession.objects.create(user=request.user)
             request.session['training_session_id'] = session.id
-            request.session['training_correct_count'] = 0
-            request.session['training_incorrect_count'] = 0
-            request.session['training_total_words'] = 0
+            request.session.setdefault('training_correct_count', 0)
+            request.session.setdefault('training_incorrect_count', 0)
+            request.session.setdefault('training_total_words', 0)
 
         session_id = request.session.get('training_session_id')
         session = TrainingSession.objects.get(id=session_id, user=request.user)
 
-        # Сохраняем попытку
+        # Сохраняем ответ пользователя.
         WordAttempt.objects.create(
             user=request.user, word=word, session=session, is_correct=is_known
         )
@@ -329,21 +329,16 @@ class TrainAnswerView(LoginRequiredMixin, View):
         # Обновляем статистику в сессии
         if is_known:
             request.session['training_correct_count'] = (
-                request.session.get('training_correct_count', 0) + 1
+                request.session['training_correct_count'] + 1
             )
         else:
             request.session['training_incorrect_count'] = (
-                request.session.get('training_incorrect_count', 0) + 1
+                request.session['training_incorrect_count'] + 1
             )
 
         request.session['training_total_words'] = (
-            request.session.get('training_total_words', 0) + 1
+            request.session['training_total_words'] + 1
         )
-
-        # Обновляем статус слова
-        if is_known:
-            word.is_learned = True
-            word.save()
 
         # Переходим к следующему слову
         current_index = request.session.get('training_current_index', 0)
@@ -409,14 +404,8 @@ class TrainCompleteView(LoginRequiredMixin, View):
         """
 
         Word.words.ensure_min_active_words(request.user)
-        training_words = request.session.get('training_words', [])
-        current_index = request.session.get('training_current_index', 0)
-        settings = request.session.get('training_settings', {})
 
-        # Проверяем, что тренировка действительно завершена
-        if training_words and current_index < len(training_words):
-            # Если есть неотвеченные слова — перенаправляем обратно
-            return redirect('train_card')
+        settings = request.session['training_settings']
 
         # Получаем статистику из сессии
         total_words = request.session.get('training_total_words', 0)
@@ -424,7 +413,7 @@ class TrainCompleteView(LoginRequiredMixin, View):
         incorrect_count = request.session.get('training_incorrect_count', 0)
 
         # Создаём сессию в БД (если ещё не создана)
-        session_id = request.session.get('training_session_id')
+        session_id = request.session['training_session_id']
         if session_id:
             training_session = TrainingSession.objects.get(
                 id=session_id, user=request.user

@@ -136,21 +136,21 @@
                         <!-- Сообщение, если нет подсказок -->
                         {% if not word.definition and not word.example and not word.image %}
                         <div class="text-muted small text-center py-2">
-                            Нет дополнительных подсказок для этого слова
+                            Нет подсказок для этого слова
                         </div>
                         {% endif %}
                     </div>
-                    
                 </div>
             </div>
             
             <!-- Прервать тренировку -->
-            <div class="text-center mt-4">
-                <a href="{% url 'training_setup' %}" class="small text-muted text-decoration-none">
-                    ⏹️ прервать тренировку
-                </a>
+            <div class="text-center mt-5">
+              <form action="{% url 'train_answer' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="is_abort" value="true">
+                <button type="submit">Прервать тренировку</button>
+              </form>
             </div>
-            
         </div>
     </div>
 </div>

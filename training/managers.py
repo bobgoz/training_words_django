@@ -11,22 +11,13 @@ class WordManager(models.Manager):
         """Все слова пользователя (без активации просроченных)"""
         return super().get_queryset().filter(user=user)
 
-    def _base_active(self, user):
-        """Базовый queryset для активных слов (с активацией просроченных)"""
-        # Активируем просроченные слова
-        self.all_self(user).filter(
-            next_review_date__lte=timezone.now(), is_active=False
-        ).update(is_active=True)
-
-        return self.all_self(user).filter(is_active=True)
-
     def is_active(self, user):
         """Только активные слова"""
-        return self._base_active(user).filter(is_learned=False)
+        return self.all_self(user).filter(is_active=True, is_learned=False)
 
     def is_not_active(self, user):
         """Только неактивные слова"""
-        return self.all_self(user).filter(is_active=False)
+        return self.all_self(user).filter(is_active=False, is_learned=False)
 
     def is_hard(self, user):
         """Только сложные слова"""
@@ -76,7 +67,6 @@ class WordManager(models.Manager):
     # ----------Логика интервальных повторений ----------
     def needs_review(self, user):
         """Слова, которые пора повторять"""
-        # Используем all_self, а не self.all_self (без рекурсии)
         return self.all_self(user).filter(
             next_review_date__lte=timezone.now(), is_active=False
         )
@@ -90,7 +80,11 @@ class WordManager(models.Manager):
         return self.needs_review(user).update(is_active=True)
 
     def ensure_min_active_words(self, user):
-        """Обеспечивает минимальное количество активных слов"""
+        """
+        Обеспечивает минимальное количество активных слов
+        и автоматически меняет поле is_learned на False, если количество
+        повторений слова меньше определенного.
+        """
         active_count = self.is_active(user).count()
 
         if active_count < MIN_ACTIVE_WORDS:
@@ -98,9 +92,15 @@ class WordManager(models.Manager):
             needed = MIN_ACTIVE_WORDS - active_count
 
             # Берём неактивные, не изученные слова
-            # (приоритет по дате обновления)
+            # (приоритет слова, обновленные давно)
             ids_to_activate = list(
-                self.is_not_active(user).values_list('id', flat=True)[:needed]
+                self.is_not_active(
+                    user,
+                )
+                .order_by(
+                    'updated_at',
+                )
+                .values_list('id', flat=True)[:needed]
             )
 
             if ids_to_activate:
