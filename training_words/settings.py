@@ -160,3 +160,5 @@ CACHES = {
         "LOCATION": os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
     }
 }
+
+AUTH_USER_MODEL = 'users.User'

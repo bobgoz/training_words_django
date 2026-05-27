@@ -12,45 +12,13 @@
             </div>
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    
-                    <!-- Поле аватара -->
-                    <div class="mb-4">
-                        <label class="form-label fw-semibold">🖼️ Аватар</label>
-                        <div class="d-flex align-items-center gap-3">
-                            {% if profile.avatar %}
-                                <img src="{{ profile.avatar.url }}" 
-                                     alt="avatar" 
-                                     class="rounded-circle" 
-                                     style="width: 80px; height: 80px; object-fit: cover;">
-                            {% else %}
-                                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" 
-                                     style="width: 80px; height: 80px;">
-                                    <span class="text-white fs-3">👤</span>
-                                </div>
-                            {% endif %}
-                            <div class="flex-grow-1">
-                                {% bootstrap_field form.avatar show_label=False %}
-                                <small class="text-muted">Рекомендуемый размер: 500x500px. JPG, PNG, GIF.</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Поле О себе -->
-                    <div class="mb-4">
-                        <label class="form-label fw-semibold">📝 О себе</label>
-                        {% bootstrap_field form.bio show_label=False %}
-                        <small class="text-muted">Расскажите немного о себе</small>
-                    </div>
-                    <!-- Кнопки -->
-                    <div class="d-flex gap-2 justify-content-end">
-                        <a href="{% url 'profile' %}" class="btn btn-outline-secondary">
-                            Отмена
-                        </a>
-                        <button type="submit" class="btn btn-primary">
-                            Сохранить изменения
-                        </button>
-                    </div>
+                  {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">
+                      Сохранить изменения
+                    </button>
+                  </div>
+                  <a href="{% url 'simple_password_change' %}">Сменить пароль</a>
                 </form>
             </div>
         </div>
