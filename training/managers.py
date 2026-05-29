@@ -97,6 +97,7 @@ class WordManager(models.Manager):
                 self.is_not_active(
                     user,
                 )
+                .filter(next_review_date__lte=timezone.now())
                 .order_by(
                     'updated_at',
                 )

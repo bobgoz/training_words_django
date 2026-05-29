@@ -75,14 +75,6 @@ class TrainingView(BaseTrainingViewMixin):
         return Word.words.language_en(self.request.user).exists()
 
 
-class TrainingLearnedView(BaseTrainingViewMixin):
-    """Вью для отображения только изученных слов"""
-
-    def get_queryset(self):
-        """Возвращает список изученных слов"""
-        return Word.words.is_learned(self.request.users)
-
-
 class TrainingNoActiveView(BaseTrainingViewMixin):
     """Вью для отображения неактивных слов"""
 
@@ -97,6 +89,14 @@ class TrainingHardView(BaseTrainingViewMixin):
     def get_queryset(self):
         """Возвращает список сложных слов"""
         return Word.words.is_hard(self.request.user)
+
+
+class ShowLearnedView(BaseTrainingViewMixin):
+    """Вью для просмотра выученных слов."""
+
+    def get_queryset(self):
+        """Возвращает список выученных слов"""
+        return Word.words.is_learned(self.request.user)
 
 
 class DetailWordView(
@@ -452,3 +452,21 @@ class TrainCompleteView(LoginRequiredMixin, View):
         }
 
         return render(request, 'training/train_complete.html', context)
+
+
+class ResetLearnedWordsView(LoginRequiredMixin, View):
+    """
+    Вью для сброса выученных
+    слов (переводит флаг is learned
+    на False для всех слов пользователя).
+    """
+
+    def post(self, request):
+        """
+        Перевод флага is_learned
+        на False для сброса слов.
+        """
+        Word.words.is_learned(request.user).update(
+            is_learned=False,
+        )
+        return redirect('profile')

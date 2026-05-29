@@ -169,11 +169,6 @@ def mark_as_inactive_url():
 
 
 @fixture
-def mark_as_learned_url():
-    return reverse('mark_as_learned')
-
-
-@fixture
 def training_url():
     return reverse('training')
 
@@ -223,7 +218,8 @@ def create_url():
     """Юрл создания слова"""
     return reverse('add_word')
 
+
 @fixture
 def noactive_url():
-    """ Юрл неактивных слов """
+    """Юрл неактивных слов"""
     return reverse('training_no_active')

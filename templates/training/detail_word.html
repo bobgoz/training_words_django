@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-3">
                             <div class="fw-bold text-success">
-                                {% if word.next_review_date and word.is_learned %}
+                                {% if word.next_review_date %}
                                     через {{ word.next_review_date|timeuntil }}
                                 {% else %}
                                     сегодня

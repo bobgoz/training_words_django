@@ -1,147 +1,195 @@
 {% extends "base.html" %}
-{% load bootstrap5 %}
+{% load bootstrap5 %} 
 
 {% block title %}Тренировка{% endblock %}
 
-{% block content %}
+ {% block content %}
 <div class="row">
   <div class="col-12">
     <div class="page-header">
       <div>
         <h1 class="page-title-sm">
           {% with action=request.resolver_match.url_name %}
-            {% if action == 'training' %}
-              Активные слова
+            {% if action == 'training' %} 
+              Активные слова 
             {% elif action == 'training_hard' %}
-              Сложные слова
+              Сложные слова 
             {% elif action == 'training_no_active' %}
-              Неактивные слова
-            {% endif %}
+              Неактивные слова 
+            {% endif %} 
           {% endwith %}
         </h1>
-        <p class="page-subtitle">Открывай карточки, повторяй слова и отмечай уже изученные.</p>
+        <p class="page-subtitle">
+          Открывай карточки, повторяй слова и отмечай уже изученные.
+        </p>
       </div>
-
     </div>
     {% if has_en_words %}
-      {% with action=request.resolver_match.url_name %}
-        {% if words and action != 'training_random' and action != 'training_no_active'%}
-          <div class="d-flex flex-wrap gap-2 mb-3">
-            {% with action=request.GET.lang %}
-              <a href="?lang=all" class="btn btn-outline-primary {% if action == 'all' or not action %}active{% endif %}">
-                Все слова
-              </a>
-              <a href="?lang=ru" class="btn btn-outline-primary {% if action == 'ru' %}active{% endif %}">
-                🇷🇺 Русские
-              </a>
-              <a href="?lang=en" class="btn btn-outline-primary {% if action == 'en' %}active{% endif %}">
-                EN Английские
-              </a>
-            {% endwith %}
-          </div>
-        {% endif %}
-      {% endwith %}
-    {% endif %}
-
-    {% if words %}
-      <div class="list-stack mb-4">
-        {% for word in words %}
-          <article class="surface-card hover-lift">
-            <div class="surface-card__body word-card__body">
-              <div class="word-card__main">
-                <span class="word-card__counter">{{ forloop.counter }}</span>
-
-                <div class="flex-grow-1 min-w-0">
-                  <div class="word-card__title-row">
-                    <h2 class="word-card__title">{{ word.word }}</h2>
-                    {% if word.definition or word.image %}
-                      <button
-                        type="button"
-                        class="word-card__toggle"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#definition-{{ word.pk }}"
-                        aria-expanded="false"
-                        aria-controls="definition-{{ word.pk }}"
-                      >
-                        Показать детали
-                      </button>
-                    {% endif %}
-                  </div>
-
-                  {% if word.definition or word.image %}
-                    <div class="collapse word-card__details" id="definition-{{ word.pk }}">
-                      {% if word.definition %}
-                        <p class="mb-3">{{ word.definition }}</p>
-                      {% endif %}
-
-                      {% if word.image %}
-                        <img src="{{ word.image.url }}" alt="{{ word.word }}" class="word-card__image">
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                </div>
-              </div>
-
-              <div class="word-card__actions">
-                <a href="{% url 'detail' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}" class="btn btn-sm btn-outline-info">Подробно</a>
-                <a href="{% url 'edit_word' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}" class="btn btn-sm btn-outline-warning">Редактировать</a>
-                <form method="post" action="{% url 'mark_as_learned' %}">
-                  {% csrf_token %}
-                  <input type="hidden" name="word_id" value="{{ word.pk }}">
-                  <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                  <button type="submit" class="btn btn-sm {% if word.is_learned %}btn-success{% else %}btn-outline-success{% endif %}">Изучено</button>
-                </form>
-              </div>
-            </div>
-          </article>
-        {% endfor %}
-      </div>
-
-      {% if page_obj and page_obj.paginator.num_pages > 1 %}
-        <div class="d-flex justify-content-center mt-4">
-          <nav aria-label="Пагинация">
-            <ul class="pagination">
-              {% if page_obj.has_previous %}
-                <li class="page-item">
-                  <a class="page-link" href="?page=1">Первая</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Назад</a>
-                </li>
-              {% else %}
-                <li class="page-item disabled"><span class="page-link">Первая</span></li>
-                <li class="page-item disabled"><span class="page-link">Назад</span></li>
-              {% endif %}
-
-              <li class="page-item active">
-                <span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
-              </li>
-
-              {% if page_obj.has_next %}
-                <li class="page-item">
-                  <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперед</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
-                </li>
-              {% else %}
-                <li class="page-item disabled"><span class="page-link">Вперед</span></li>
-                <li class="page-item disabled"><span class="page-link">Последняя</span></li>
-              {% endif %}
-            </ul>
-          </nav>
+    {% with action=request.resolver_match.url_name %} 
+      {% if words and action != 'training_random' and action != 'training_no_active'%}
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          {% with action=request.GET.lang %}
+            <a
+              href="?lang=all"
+              class="btn btn-outline-primary {% if action == 'all' or not action %}active{% endif %}"
+            >
+              Все слова
+            </a>
+            <a
+              href="?lang=ru"
+              class="btn btn-outline-primary {% if action == 'ru' %}active{% endif %}"
+            >
+              🇷🇺 Русские
+            </a>
+            <a
+              href="?lang=en"
+              class="btn btn-outline-primary {% if action == 'en' %}active{% endif %}"
+            >
+              EN Английские
+            </a>
+          {% endwith %}
         </div>
       {% endif %}
-    {% else %}
-      <div class="surface-card empty-state">
-        <div class="empty-state__icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-linecap="round"/>
-          </svg>
+    {% endwith %}
+     {% endif %}
+    {% if words %}
+    <div class="list-stack mb-4">
+      {% for word in words %}
+      <article class="surface-card hover-lift">
+        <div class="surface-card__body word-card__body">
+          <div class="word-card__main">
+            <span class="word-card__counter">{{ forloop.counter }}</span>
+
+            <div class="flex-grow-1 min-w-0">
+              <div class="word-card__title-row">
+                <h2 class="word-card__title">{{ word.word }}</h2>
+                {% if word.definition or word.image %}
+                <button
+                  type="button"
+                  class="word-card__toggle"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#definition-{{ word.pk }}"
+                  aria-expanded="false"
+                  aria-controls="definition-{{ word.pk }}"
+                >
+                  Показать детали
+                </button>
+                {% endif %}
+              </div>
+
+              {% if word.definition or word.image %}
+              <div
+                class="collapse word-card__details"
+                id="definition-{{ word.pk }}"
+              >
+                {% if word.definition %}
+                <p class="mb-3">{{ word.definition }}</p>
+                {% endif %} {% if word.image %}
+                <img
+                  src="{{ word.image.url }}"
+                  alt="{{ word.word }}"
+                  class="word-card__image"
+                />
+                {% endif %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="word-card__actions">
+            <a
+              href="{% url 'detail' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}"
+              class="btn btn-sm btn-outline-info"
+              >Подробно</a
+            >
+            <a
+              href="{% url 'edit_word' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}"
+              class="btn btn-sm btn-outline-warning"
+              >Редактировать</a
+            >
+          </div>
         </div>
-        <h2 class="empty-state__title">Список пока пуст</h2>
-        <p class="empty-state__text">Добавь первые слова или активируй уже сохраненные, чтобы начать тренировку.</p>
+      </article>
+      {% endfor %}
+    </div>
+
+    {% if page_obj and page_obj.paginator.num_pages > 1 %}
+    <div class="d-flex justify-content-center mt-4">
+      <nav aria-label="Пагинация">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page=1">Первая</a>
+          </li>
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ page_obj.previous_page_number }}"
+              >Назад</a
+            >
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <span class="page-link">Первая</span>
+          </li>
+          <li class="page-item disabled">
+            <span class="page-link">Назад</span>
+          </li>
+          {% endif %}
+
+          <li class="page-item active">
+            <span class="page-link"
+              >{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span
+            >
+          </li>
+
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+              >Вперед</a
+            >
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"
+              >Последняя</a
+            >
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <span class="page-link">Вперед</span>
+          </li>
+          <li class="page-item disabled">
+            <span class="page-link">Последняя</span>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+    {% endif %} {% else %}
+    <div class="surface-card empty-state">
+      <div class="empty-state__icon">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 5v14M5 12h14"
+            stroke="currentColor"
+            stroke-linecap="round"
+          />
+        </svg>
       </div>
+      <h2 class="empty-state__title">Список пока пуст</h2>
+      <p class="empty-state__text">
+        Добавь первые слова или активируй уже сохраненные, чтобы начать
+        тренировку.
+      </p>
+    </div>
     {% endif %}
   </div>
 </div>

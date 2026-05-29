@@ -57,6 +57,8 @@ class ProfileInfoView(LoginRequiredMixin, DetailView):
 
 
 class SimplePasswordChangeView(LoginRequiredMixin, FormView):
+    """Вью  для переназначения пароля в профиле."""
+
     template_name = 'registration/simple_password_change.html'
     form_class = SimplePasswordForm
     success_url = reverse_lazy('profile')

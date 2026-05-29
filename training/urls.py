@@ -5,19 +5,9 @@ from . import views
 urlpatterns = [
     path('add_word/', views.WordCreateView.as_view(), name='add_word'),
     path(
-        'mark_as_active/',
-        views.MarkAsActiveView.as_view(),
-        name='mark_as_active',
-    ),
-    path(
-        'mark_as_inactive/',
-        views.DeactivateWordView.as_view(),
-        name='mark_as_inactive',
-    ),
-    path(
-        'mark_as_learned/',
-        views.MakeAsLearnedView.as_view(),
-        name='mark_as_learned',
+        'reset-learned/',
+        views.ResetLearnedWordsView.as_view(),
+        name='reset_learned_words',
     ),
     path('training/', views.TrainingView.as_view(), name='training'),
     path(
@@ -29,6 +19,11 @@ urlpatterns = [
         'training_no_active/',
         views.TrainingNoActiveView.as_view(),
         name='training_no_active',
+    ),
+    path(
+        'show_learned_words/',
+        views.ShowLearnedView.as_view(),
+        name='show_learned_words',
     ),
     path(
         '<int:pk_word>/detail/',
