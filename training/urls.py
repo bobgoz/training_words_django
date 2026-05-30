@@ -9,21 +9,25 @@ urlpatterns = [
         views.ResetLearnedWordsView.as_view(),
         name='reset_learned_words',
     ),
-    path('training/', views.TrainingView.as_view(), name='training'),
     path(
-        'training_hard/',
-        views.TrainingHardView.as_view(),
-        name='training_hard',
+        'words/active/',
+        views.ShowActiveWordsView.as_view(),
+        name='active_words',
     ),
     path(
-        'training_no_active/',
-        views.TrainingNoActiveView.as_view(),
-        name='training_no_active',
+        'words/hard/',
+        views.ShowHardWordsView.as_view(),
+        name='hard_words',
     ),
     path(
-        'show_learned_words/',
+        'words/inactive/',
+        views.ShowInactiveWordsView.as_view(),
+        name='inactive_words',
+    ),
+    path(
+        'words/learned/',
         views.ShowLearnedView.as_view(),
-        name='show_learned_words',
+        name='learned_words',
     ),
     path(
         '<int:pk_word>/detail/',
@@ -40,11 +44,7 @@ urlpatterns = [
         views.DeleteWordView.as_view(),
         name='delete_word',
     ),
-    path(
-        'search',
-        views.SearchView.as_view(),
-        name='search',
-    ),
+    path('search', views.SearchView.as_view(), name='search'),
     path(
         'train/setup/',
         views.TrainingSetupView.as_view(),
@@ -58,5 +58,10 @@ urlpatterns = [
         'train/complete/',
         views.TrainCompleteView.as_view(),
         name='train_complete',
+    ),
+    path(
+        'profile/manager/',
+        views.WordManagerView.as_view(),
+        name='word_manager',
     ),
 ]

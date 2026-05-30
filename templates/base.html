@@ -3,107 +3,31 @@
 
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% bootstrap_css %}
-  {% bootstrap_javascript %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <title>{% block title %}Тренажёр слов{% endblock %}</title>
-</head>
-<body>
-  <div class="app-shell">
-    <nav class="navbar navbar-expand-lg navbar-dark app-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">Тренажер слов</a>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <title>{% block title %}Тренажёр слов{% endblock %}</title>
+    </head>
+    <body>
+        <div class="app-shell">
+            <nav class="navbar navbar-expand-lg navbar-dark app-navbar">
+                {% include 'includes/navbar.html' %}
+            </nav>
+            <main class="app-main">
+                <div class="container page-section">
+                    {% bootstrap_messages %}
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-3 mb-lg-0">
-            {% if user.is_authenticated %}
-              {% with action=request.resolver_match.url_name %}
-                <li class="nav-item">
-                  <a class="nav-link {% if action == 'train_start' %}active{% endif %}" href="{% url 'training_setup' %}">Тренировка</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link {% if action == 'training' %}active{% endif %}" href="{% url 'training' %}">Просмотр активных слов</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link {% if action == 'training_hard' %}active{% endif %}" href="{% url 'training_hard' %}">Просмотр сложных слов</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link {% if action == 'training_no_active' %}active{% endif %}" href="{% url 'training_no_active' %}">Просмотр неактивных слов</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link {% if action == 'add_word' %}active{% endif %}" href="{% url 'add_word' %}">Добавить слово</a>
-                </li>
-                <form class="d-flex ms-auto" role="search" method="get" action="{% url 'search' %}">
-                  <div class="input-group input-group-sm">
-                    <input class="form-control" 
-                      type="search" 
-                      name="q" 
-                      placeholder="Поиск..." 
-                      aria-label="Search"
-                      value="{{ request.GET.q|default:'' }}"
-                      autocomplete="off">
-                      <button class="btn btn-outline-primary" type="submit">
-                          🔍
-                      </button>
-                  </div>
-                </form>
-              {% endwith %}
-            {% endif %}
-          </ul>
-
-          <ul class="navbar-nav align-items-lg-center gap-lg-2">
-            {% if user.is_authenticated %}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ user.username }}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                  <li>
-                    <a class="dropdown-item" href="{% url 'profile' %}">Профиль {{ user.username }}</a>
-                  </li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li>
-                    <form method="post" action="{% url 'logout' %}" class="px-2">
-                      {% csrf_token %}
-                      <button type="submit" class="dropdown-item text-danger">Выйти</button>
-                    </form>
-                  </li>
-                </ul>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Войти</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
-              </li>
-            {% endif %}
-          </ul>
+            <footer class="app-footer">
+                {% include 'includes/footer.html' %}
+            </footer>
         </div>
-      </div>
-    </nav>
 
-    <main class="app-main">
-      <div class="container page-section">
-        {% bootstrap_messages %}
-        {% block content %}{% endblock %}
-      </div>
-    </main>
-
-    <footer class="app-footer">
-      <div class="container">
-        <p class="mb-0">Тренажер слов для ежедневной практики и повторения.</p>
-      </div>
-    </footer>
-  </div>
-
-  {% block extra_js %}{% endblock %}
-</body>
+        {% block extra_js %}{% endblock %}
+    </body>
 </html>

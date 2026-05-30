@@ -1,0 +1,47 @@
+{% extends "users/profile_base.html" %}
+
+{% block profile_content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3 mb-0">{{ page_title }}</h2>
+        <div>
+            <span class="badge bg-primary">{{ words|length }} слов</span>
+        </div>
+    </div>
+
+    {% if words %}
+        <div class="list-group">
+            {% for word in words %}
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ word.word }}</strong>
+                        {% if word.definition %}
+                            <br><small class="text-muted">{{ word.definition|truncatechars:60 }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="btn-group">
+                        <a
+                            href="{% url 'detail' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}"
+                            class="btn btn-sm btn-outline-primary"
+                        >
+                            Подробно
+                        </a>
+                        <a
+                            href="{% url 'edit_word' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}"
+                            class="btn btn-sm btn-outline-warning"
+                        >
+                            ✏️
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Пагинация -->
+        {% include "includes/pagination.html" %}
+    {% else %}
+        <div class="text-center py-5">
+            <div class="mb-3 fs-1">📭</div>
+            <p class="text-muted">{{ empty_message }}</p>
+        </div>
+    {% endif %}
+{% endblock %}

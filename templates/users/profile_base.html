@@ -1,4 +1,4 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
 {% block title %}Профиль{% endblock %}
 
@@ -37,44 +37,12 @@
           <span>Редактировать</span>
         </a>
 
-        <!-- Менеджер слов (раскрывающийся) -->
-        <div class="mt-2">
-          <div
-            class="list-group-item list-group-item-action d-flex align-items-center gap-3"
-            data-bs-toggle="collapse"
-            data-bs-target="#wordManagerMenu"
-            aria-expanded="false"
-            style="cursor: pointer"
-          >
-            <span class="fs-5">📚</span>
-            <span>Менеджер слов</span>
-            <span class="ms-auto">▼</span>
-          </div>
-          <div class="collapse" id="wordManagerMenu">
-            <div class="ps-4 pt-2 pb-2">
-              <a
-                href="{% url 'training_no_active' %}"
-                class="d-block text-decoration-none py-1 {% if request.resolver_match.url_name == 'training_no_active' %}text-primary fw-bold{% else %}text-secondary{% endif %}"
-              >
-                Просмотр неактивных слов
-              </a>
-              <a
-                href="{% url 'show_learned_words' %}"
-                class="d-block text-decoration-none py-1 {% if request.resolver_match.url_name == 'training_no_active' %}text-primary fw-bold{% else %}text-secondary{% endif %}"
-              >
-                Просмотр выученных слов
-              </a>
-              <a
-                href="#"
-                class="d-block text-decoration-none py-1 text-danger"
-                data-bs-toggle="modal"
-                data-bs-target="#resetLearnedModal"
-              >
-                🔄 Сброс выученных слов
-              </a>
-            </div>
-          </div>
-        </div>
+        <!-- Менеджер слов (отдельная страница, не раскрывающийся) -->
+        <a href="{% url 'word_manager' %}"
+           class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if request.resolver_match.url_name == 'word_manager' %}active{% endif %}">
+          <span class="fs-5">📚</span>
+          <span>Менеджер слов</span>
+        </a>
       </div>
     </div>
 
@@ -82,7 +50,7 @@
     <div class="col-md-9">
       <div class="card shadow-sm border-0">
         <div class="card-body p-4">
-          {% block profile_content %} {% endblock %}
+          {% block profile_content %}{% endblock %}
         </div>
       </div>
     </div>
@@ -95,23 +63,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Сброс выученных слов</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <p>Вы уверены, что хотите сбросить все выученные слова?</p>
         <p class="text-danger small">
-          Это действие сделает все слова невыученными. Прогресс изучения будет
-          потерян.
+          Это действие сделает все слова невыученными. Прогресс изучения будет потерян.
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Отмена
-        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
         <form method="post" action="{% url 'reset_learned_words' %}">
           {% csrf_token %}
           <button type="submit" class="btn btn-danger">Да, сбросить</button>

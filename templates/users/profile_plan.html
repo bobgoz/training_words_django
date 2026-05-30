@@ -1,55 +1,55 @@
 {% extends "users/profile_base.html" %}
 
 {% block profile_content %}
-<h3 class="mb-4 border-bottom pb-2">📅 План повторений</h3>
+    <h3 class="mb-4 border-bottom pb-2">📅 План повторений</h3>
 
-<!-- Сегодня -->
-<div class="card mb-4">
-    <div class="card-header bg-primary text-white">
-        <h5 class="mb-0">🎯 Сегодня</h5>
+    <!-- Сегодня -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">🎯 Сегодня</h5>
+        </div>
+        <div class="card-body">
+            {% if words_today %}
+                <ul class="list-group list-group-flush">
+                    {% for word in words_today %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ word.word }}</strong>
+                                {% if word.definition %}
+                                    <small class="text-muted d-block">{{ word.definition|truncatechars:50 }}</small>
+                                {% endif %}
+                            </div>
+                            <span class="badge bg-primary rounded-pill">повторить</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-center text-muted my-4">🎉 На сегодня нет слов для повторения!</p>
+            {% endif %}
+        </div>
     </div>
-    <div class="card-body">
-        {% if words_today %}
-            <ul class="list-group list-group-flush">
-                {% for word in words_today %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div>
-                        <strong>{{ word.word }}</strong>
-                        {% if word.definition %}
-                            <small class="text-muted d-block">{{ word.definition|truncatechars:50 }}</small>
-                        {% endif %}
-                    </div>
-                    <span class="badge bg-primary rounded-pill">повторить</span>
-                </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="text-center text-muted my-4">🎉 На сегодня нет слов для повторения!</p>
-        {% endif %}
-    </div>
-</div>
 
-<!-- На этой неделе -->
-<div class="card">
-    <div class="card-header bg-secondary text-white">
-        <h5 class="mb-0">📅 На этой неделе</h5>
+    <!-- На этой неделе -->
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">📅 На этой неделе</h5>
+        </div>
+        <div class="card-body">
+            {% if words_week %}
+                <ul class="list-group list-group-flush">
+                    {% for word in words_week %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ word.word }}</strong>
+                                <small class="text-muted d-block">до {{ word.next_review_at|date:"d.m.Y" }}</small>
+                            </div>
+                            <span class="badge bg-secondary rounded-pill">{{ word.next_review_at|date:"l" }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-center text-muted my-4">На этой неделе всё спокойно! 🌟</p>
+            {% endif %}
+        </div>
     </div>
-    <div class="card-body">
-        {% if words_week %}
-            <ul class="list-group list-group-flush">
-                {% for word in words_week %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div>
-                        <strong>{{ word.word }}</strong>
-                        <small class="text-muted d-block">до {{ word.next_review_at|date:"d.m.Y" }}</small>
-                    </div>
-                    <span class="badge bg-secondary rounded-pill">{{ word.next_review_at|date:"l" }}</span>
-                </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="text-center text-muted my-4">На этой неделе всё спокойно! 🌟</p>
-        {% endif %}
-    </div>
-</div>
 {% endblock %}

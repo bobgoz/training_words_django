@@ -1,8 +1,7 @@
 from random import shuffle
-from django.utils import timezone
-
 
 from django.contrib import messages
+from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import IntegrityError
 from django.shortcuts import redirect, render
@@ -13,12 +12,12 @@ from django.views.generic import (
     DeleteView,
     DetailView,
     UpdateView,
+    TemplateView,
 )
 
-from .constants import COUNT_WORDS_FOR_ACTIVATE
 from .forms import CreateWordForm, EditWordForm, TrainingSettingsForm
 from .mixins import (
-    BaseTrainingViewMixin,
+    BaseShowingViewMixin,
     GetSuccessUrlMixin,
     NextUrlMixin,
     WordAcessMixin,
@@ -37,14 +36,22 @@ class WordCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         try:
-            return super().form_valid(form)
+            response = super().form_valid(form)
+            messages.success(self.request, 'Слово добавлено!')
+            return response
         except IntegrityError:
-            form.add_error('word', 'Такое слово уже есть в словаре!')
+            messages.warning(
+                self.request,
+                f'Слово {form.cleaned_data['word']} уже существует!',
+            )
             return self.form_invalid(form)
 
 
-class TrainingView(BaseTrainingViewMixin):
-    """Вью для тренировки (отображения активных слов)"""
+class ShowActiveWordsView(BaseShowingViewMixin):
+    """Вью для отображения активных слов."""
+
+    page_title = 'Активные слова (участвуют в тренировке)'
+    empty_message = 'Нет активных слов'
 
     def get_queryset(self):
         """Возвращает список активных слов"""
@@ -75,24 +82,36 @@ class TrainingView(BaseTrainingViewMixin):
         return Word.words.language_en(self.request.user).exists()
 
 
-class TrainingNoActiveView(BaseTrainingViewMixin):
+class ShowInactiveWordsView(BaseShowingViewMixin):
     """Вью для отображения неактивных слов"""
+
+    page_title = (
+        'Неактивные слова (добавлены недавно или временно '
+        'не участвуют в тренировке)'
+    )
+    empty_message = 'Нет неактивных слов'
 
     def get_queryset(self):
         """Возвращает список неактивных слов"""
         return Word.words.is_not_active(self.request.user)
 
 
-class TrainingHardView(BaseTrainingViewMixin):
+class ShowHardWordsView(BaseShowingViewMixin):
     """Вью для отображения сложных слов"""
+
+    page_title = 'Сложные слова'
+    empty_message = 'Нет сложных слов'
 
     def get_queryset(self):
         """Возвращает список сложных слов"""
         return Word.words.is_hard(self.request.user)
 
 
-class ShowLearnedView(BaseTrainingViewMixin):
+class ShowLearnedView(BaseShowingViewMixin):
     """Вью для просмотра выученных слов."""
+
+    page_title = 'Выученные слова'
+    empty_message = 'Нет выученных слов'
 
     def get_queryset(self):
         """Возвращает список выученных слов"""
@@ -128,36 +147,10 @@ class DeleteWordView(
     # всплывающее окно в браузере.
     template_name = None
 
-
-class MarkAsActiveView(LoginRequiredMixin, View):
-    """Помечает 10 слов как активные"""
-
-    def post(self, request, *args, **kwargs):
-        words_idx = list(
-            Word.words.is_not_active(
-                self.request.user,
-            )
-            .values_list('pk', flat=True)
-            .order_by('-updated_at')[:COUNT_WORDS_FOR_ACTIVATE],
-        )
-        Word.words.filter(id__in=words_idx).update(is_active=True)
-        return redirect('training')
-
-
-class DeactivateWordView(LoginRequiredMixin, View):
-    """Деактивирует 10 первых слов."""
-
-    def post(self, request, *args, **kwargs):
-        words_ids = list(
-            Word.words.is_active(
-                request.user,
-            )
-            .order_by('-updated_at')
-            .values_list('pk', flat=True)[:COUNT_WORDS_FOR_ACTIVATE]
-        )
-        Word.words.filter(pk__in=words_ids).update(is_active=False)
-
-        return redirect('training')
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'Удалено!')
+        return response
 
 
 class EditWordView(
@@ -173,22 +166,21 @@ class EditWordView(
     form_class = EditWordForm
     pk_url_kwarg = 'pk_word'
 
-
-class MakeAsLearnedView(LoginRequiredMixin, View):
-    """Помечает слово как изученное"""
-
-    def post(self, request, *args, **kwargs):
-        word_id = request.POST.get('word_id')
-        next_url = request.POST.get('next', reverse_lazy('training'))
-        word = Word.objects.get(pk=word_id, user=request.user)
-        word.is_learned = True
-        word.save()
-
-        return redirect(next_url)
+    def form_valid(self, form):
+        try:
+            response = super().form_valid(form)
+            messages.success(self.request, 'Успешно!')
+            return response
+        except IntegrityError:
+            messages.warning(self.request, 'Такое слово уже есть!')
+            return self.form_invalid(form)
 
 
-class SearchView(BaseTrainingViewMixin):
+class SearchView(BaseShowingViewMixin):
     """Вью для поиска"""
+
+    page_title = None
+    empty_message = None
 
     def get_queryset(self):
         query = self.request.GET.get('q', '').strip()
@@ -470,3 +462,9 @@ class ResetLearnedWordsView(LoginRequiredMixin, View):
             is_learned=False,
         )
         return redirect('profile')
+
+
+class WordManagerView(LoginRequiredMixin, TemplateView):
+    """Вью для менеджера  слов"""
+
+    template_name = 'users/word_manager.html'

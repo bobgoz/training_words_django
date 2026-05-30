@@ -174,13 +174,13 @@ def training_url():
 
 
 @fixture
-def training_hard_url():
-    return reverse('training_hard')
+def hard_words_url():
+    return reverse('hard_words')
 
 
 @fixture
-def training_no_active_url():
-    return reverse('training_no_active')
+def inactive_words_url():
+    return reverse('inactive_words')
 
 
 @fixture
@@ -222,4 +222,4 @@ def create_url():
 @fixture
 def noactive_url():
     """Юрл неактивных слов"""
-    return reverse('training_no_active')
+    return reverse('inactive_words')

@@ -4,64 +4,66 @@
 {% block title %}Добавить новое слово{% endblock %}
 
 {% block content %}
-<div class="form-panel">
-  <div class="page-header">
-    <div>
-      <h1 class="page-title-sm">Добавить новое слово</h1>
-      <p class="page-subtitle">Можно сразу заполнить определение, пример и изображение, а можно вернуться к этому позже.</p>
+    <div class="form-panel">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title-sm">Добавить новое слово</h1>
+                <p class="page-subtitle">
+                    Можно сразу заполнить определение, пример и изображение, а можно вернуться к этому позже.
+                </p>
+            </div>
+            <a href="{% url 'index' %}" class="back-link">На главный экран</a>
+        </div>
+
+        <div class="surface-card form-card">
+            <div class="surface-card__body">
+                <form method="post" enctype="multipart/form-data" autocomplete="off">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        {% bootstrap_field form.word %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.definition.id_for_label }}" class="form-label">Определение</label>
+                        {% bootstrap_field form.definition show_label=False %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.example.id_for_label }}" class="form-label">Пример использования</label>
+                        {% bootstrap_field form.example show_label=False %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.image.id_for_label }}" class="form-label">Изображение</label>
+                        {{ form.image }}
+                        <small class="form-text d-block mt-2"
+                        >Можно загрузить изображение, которое поможет быстрее запомнить слово.</small>
+                        {% if form.image.errors %}
+                            <div class="text-danger mt-1">{{ form.image.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    {% if form.is_active or form.is_hard %}
+                        <div class="row g-3 mb-4">
+                            {% if form.is_active %}
+                                <div class="col-md-6">
+                                    {% bootstrap_field form.is_active show_label=True %}
+                                </div>
+                            {% endif %}
+                            {% if form.is_hard %}
+                                <div class="col-md-6">
+                                    {% bootstrap_field form.is_hard show_label=True %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary px-4">Сохранить слово</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <a href="{% url 'training' %}" class="back-link">Назад к списку</a>
-  </div>
-
-  <div class="surface-card form-card">
-    <div class="surface-card__body">
-      <form method="post" enctype="multipart/form-data" autocomplete="off">
-        {% csrf_token %}
-
-        <div class="mb-4">
-          {% bootstrap_field form.word %}
-        </div>
-
-        <div class="mb-4">
-          <label for="{{ form.definition.id_for_label }}" class="form-label">Определение</label>
-          {% bootstrap_field form.definition show_label=False %}
-        </div>
-
-        <div class="mb-4">
-          <label for="{{ form.example.id_for_label }}" class="form-label">Пример использования</label>
-          {% bootstrap_field form.example show_label=False %}
-        </div>
-
-        <div class="mb-4">
-          <label for="{{ form.image.id_for_label }}" class="form-label">Изображение</label>
-          {{ form.image }}
-          <small class="form-text d-block mt-2">Можно загрузить изображение, которое поможет быстрее запомнить слово.</small>
-          {% if form.image.errors %}
-            <div class="text-danger mt-1">{{ form.image.errors }}</div>
-          {% endif %}
-        </div>
-
-        {% if form.is_active or form.is_hard %}
-          <div class="row g-3 mb-4">
-            {% if form.is_active %}
-              <div class="col-md-6">
-                {% bootstrap_field form.is_active show_label=True %}
-              </div>
-            {% endif %}
-            {% if form.is_hard %}
-              <div class="col-md-6">
-                {% bootstrap_field form.is_hard show_label=True %}
-              </div>
-            {% endif %}
-          </div>
-        {% endif %}
-
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary px-4">Сохранить слово</button>
-          <a href="{% url 'training' %}" class="btn btn-outline-secondary px-4">Отмена</a>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 {% endblock %}

@@ -40,14 +40,14 @@ class TestWordLogic:
         assert word.word == form_data['word'].title()
         assert word.user == form_data['user']
 
-    def test_training_hard_url(
+    def test_hard_words_url(
         self,
         word_mass_create_hard,
-        training_hard_url,
+        hard_words_url,
         auth_client,
     ):
         """Тестирование страницы со сложными словами"""
-        response = auth_client.get(training_hard_url)
+        response = auth_client.get(hard_words_url)
         assert response.status_code == HTTPStatus.OK
         words = response.context.get('words')
         assert words is not None, 'В контексте нет переменной "words"'
@@ -76,10 +76,9 @@ class TestWordLogic:
         # Проверка, что данного объекта нет в контексте страницы noactive
         response2 = auth_client.get(noactive_url)
         words2 = response2.context.get('words')
-        
+
         learned_in_context = [w for w in words2 if w.is_learned]
         assert len(learned_in_context) == 0
-
 
         response = auth_client.get(noactive_url)
         words = response2.context.get('words')
@@ -94,8 +93,8 @@ class TestWordUrls:
 
     TRAINING_URLS = (
         'training',
-        'training_hard',
-        'training_no_active',
+        'hard_words',
+        'inactive_words',
         'training_random',
     )
 

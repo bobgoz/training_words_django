@@ -8,7 +8,7 @@ class WordManager(models.Manager):
     """Кастомный менеджер для модели Word"""
 
     def all_self(self, user):
-        """Все слова пользователя (без активации просроченных)"""
+        """Все слова пользователя."""
         return super().get_queryset().filter(user=user)
 
     def is_active(self, user):
