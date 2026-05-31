@@ -215,3 +215,5 @@ deploy.sh
 ex.py
 *.sh
 .vscode/
+*.json
+*.sql

@@ -179,8 +179,8 @@ class EditWordView(
 class SearchView(BaseShowingViewMixin):
     """Вью для поиска"""
 
-    page_title = None
-    empty_message = None
+    page_title = 'Результат поиска'
+    empty_message = 'Слов с таким ключевым словом не найдено'
 
     def get_queryset(self):
         query = self.request.GET.get('q', '').strip()
