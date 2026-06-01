@@ -16,13 +16,12 @@
                             <div class="d-flex align-items-center mb-3">
                                 <span class="fs-1 me-3">📖</span>
                                 <div>
-                                    <h5 class="card-title mb-0">Активные слова</h5>
-                                    <small class="text-muted">Слова, которые участвуют в тренировках</small>
+                                    <a href="{% url 'active_words' %}" class="btn btn-outline-primary w-100">
+                                        <h5 class="card-title mb-0">Активные слова</h5>
+                                        <small class="text-muted">Слова, которые участвуют в тренировка</small>
+                                    </a>
                                 </div>
                             </div>
-                            <a href="{% url 'active_words' %}" class="btn btn-outline-primary w-100">
-                                Перейти →
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -34,13 +33,13 @@
                             <div class="d-flex align-items-center mb-3">
                                 <span class="fs-1 me-3">💤</span>
                                 <div>
-                                    <h5 class="card-title mb-0">Неактивные слова</h5>
-                                    <small class="text-muted">Слова, которые временно не участвуют в тренировках</small>
+                                    <a href="{% url 'inactive_words' %}" class="btn btn-outline-secondary w-100">
+                                        <h5 class="card-title mb-0">Неактивные слова</h5>
+                                        <small class="text-muted"
+                                        >Слова, которые временно не участвуют в тренировках</small>
+                                    </a>
                                 </div>
                             </div>
-                            <a href="{% url 'inactive_words' %}" class="btn btn-outline-secondary w-100">
-                                Перейти →
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -52,13 +51,12 @@
                             <div class="d-flex align-items-center mb-3">
                                 <span class="fs-1 me-3">🎓</span>
                                 <div>
-                                    <h5 class="card-title mb-0">Выученные слова</h5>
-                                    <small class="text-muted">Слова, которые уже изучены</small>
+                                    <a href="{% url 'learned_words' %}" class="btn btn-outline-success w-100">
+                                        <h5 class="card-title mb-0">Выученные слова</h5>
+                                        <small class="text-muted">Слова, которые уже изучены</small>
+                                    </a>
                                 </div>
                             </div>
-                            <a href="{% url 'learned_words' %}" class="btn btn-outline-success w-100">
-                                Перейти →
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -70,13 +68,12 @@
                             <div class="d-flex align-items-center mb-3">
                                 <span class="fs-1 me-3">⚡</span>
                                 <div>
-                                    <h5 class="card-title mb-0">Сложные слова</h5>
-                                    <small class="text-muted">Слова, которые вызывают трудности</small>
+                                    <a href="{% url 'hard_words' %}" class="btn btn-outline-warning w-100">
+                                        <h5 class="card-title mb-0">Сложные слова</h5>
+                                        <small class="text-muted">Слова, которые вызывают трудности</small>
+                                    </a>
                                 </div>
                             </div>
-                            <a href="{% url 'hard_words' %}" class="btn btn-outline-warning w-100">
-                                Перейти →
-                            </a>
                         </div>
                     </div>
                 </div>

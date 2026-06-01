@@ -13,23 +13,21 @@
             {% for word in words %}
                 <div class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        <strong>{{ word.word }}</strong>
+                        <a href="{% url 'detail' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}">
+                            <strong>
+                                {{ word.word }}
+                            </strong>
+                        </a>
                         {% if word.definition %}
-                            <br><small class="text-muted">{{ word.definition|truncatechars:60 }}</small>
+                            <br>{{ word.definition|truncatechars:60 }}
                         {% endif %}
                     </div>
                     <div class="btn-group">
                         <a
-                            href="{% url 'detail' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}"
-                            class="btn btn-sm btn-outline-primary"
-                        >
-                            Подробно
-                        </a>
-                        <a
                             href="{% url 'edit_word' pk_word=word.pk %}?next={{ request.get_full_path|urlencode }}"
-                            class="btn btn-sm btn-outline-warning"
+                            class="btn btn-sm"
                         >
-                            ✏️
+                            Редактировать
                         </a>
                     </div>
                 </div>

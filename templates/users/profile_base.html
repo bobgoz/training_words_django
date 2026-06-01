@@ -1,50 +1,53 @@
 {% extends "base.html" %}
 
-{% block title %}Профиль{% endblock %}
+{% block title %}Меню пользователя {% endblock %}
 
 {% block content %}
 <div class="container mt-4">
   <div class="row g-4">
     <!-- Левая колонка: меню -->
+    
+  {% with request.resolver_match.url_name as action %}
     <div class="col-md-3">
       <div class="list-group shadow-sm">
         <a
           href="{% url 'profile_info' %}"
-          class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if request.resolver_match.url_name == 'profile_info' %}active{% endif %}"
+          class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'profile_info' %}active{% endif %}"
         >
           <span class="fs-5">👤</span>
           <span>Информация</span>
         </a>
         <a
           {% comment %} href="{% url 'profile_stats' %}" {% endcomment %}
-          class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if request.resolver_match.url_name == 'profile_stats' %}active{% endif %}"
+          class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'profile_stats' %}active{% endif %}"
         >
           <span class="fs-5">📊</span>
           <span>Статистика</span>
         </a>
         <a
           {% comment %} href="{% url 'profile_plan' %}" {% endcomment %}
-          class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if request.resolver_match.url_name == 'profile_plan' %}active{% endif %}"
+          class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'profile_plan' %}active{% endif %}"
         >
           <span class="fs-5">📅</span>
           <span>План</span>
         </a>
         <a
           href="{% url 'profile_edit' %}"
-          class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if request.resolver_match.url_name == 'profile_edit' %}active{% endif %}"
+          class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'profile_edit' %}active{% endif %}"
         >
           <span class="fs-5">✏️</span>
           <span>Редактировать</span>
         </a>
 
-        <!-- Менеджер слов (отдельная страница, не раскрывающийся) -->
+        <!-- Менеджер слов -->
         <a href="{% url 'word_manager' %}"
-           class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if request.resolver_match.url_name == 'word_manager' %}active{% endif %}">
-          <span class="fs-5">📚</span>
-          <span>Менеджер слов</span>
-        </a>
+           class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'word_manager' or action == 'active_words' or action == 'hard_words' or action == 'inactive_words' or action == 'learned_words'%}active{% endif %}"> 
+           <span class="fs-5">📚</span>
+           <span>Менеджер слов</span>
+          </a>
+        </div>
       </div>
-    </div>
+      {% endwith %}
 
     <!-- Правая колонка: контент -->
     <div class="col-md-9">
