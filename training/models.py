@@ -10,7 +10,6 @@ from .constants import (
     DEFINITION_FIELD_MAX_LENGTH,
     WORD_FIELD_MAX_LENGTH,
     INTERVALS,
-    LEARNED_THRESHOLD,
 )
 from .managers import WordManager
 
@@ -162,26 +161,26 @@ class Word(models.Model):
 
             # Устанавливаем дату следующего повторения
             self.next_review_date = now + timedelta(days=interval_days)
-            self.is_active = False  # Слово временно неактивно
-
-            # Отмечаем как изученное только после достижения
-            # определенного количества безошибочных повторений.
-            if self.repetition_count >= LEARNED_THRESHOLD:
-                self.is_learned = True
+            self.is_learned = True  # Слово помечается как изученное
+            self.is_active = False
         else:
             # Если ответил "Не знаю" — сбрасываем прогресс
             self.repetition_count = 0
             self.next_review_date = now + timedelta(
                 hours=1
             )  # Повтор через час
-            self.is_active = True  # Остаётся активным
             self.is_learned = False
 
         self.save()
 
     def activate_if_due(self):
-        """Активирует слово, если пришло время повторения"""
+        """
+        Если пришло время повторения,
+        переводит флаг is_learned на False.
+        и флаг is_active на True
+        """
         if self.next_review_date and timezone.now() >= self.next_review_date:
+            self.is_learned = False
             self.is_active = True
             self.save()
             return True
