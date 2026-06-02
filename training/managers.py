@@ -7,7 +7,6 @@ class WordManager(models.Manager):
 
     def all_self(self, user):
         """Все слова пользователя."""
-
         return super().get_queryset().filter(user=user)
 
     def activate_due_words(self, user):
