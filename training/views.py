@@ -170,8 +170,8 @@ class EditWordView(
             response = super().form_valid(form)
             messages.success(self.request, 'Успешно!')
             return response
-        except IntegrityError:
-            messages.warning(self.request, 'Такое слово уже есть!')
+        except IntegrityError as e:
+            messages.warning(self.request, f'Ошибка: {e}')
             return self.form_invalid(form)
 
 
@@ -197,7 +197,7 @@ class TrainingSetupView(LoginRequiredMixin, View):
     def get(self, request):
         """Показать форму настроек"""
 
-        Word.words.ensure_min_active_words(request.user)
+        Word.ensure_min_active_words(request.user)
 
         form = TrainingSettingsForm()
         return render(request, 'training/train_setup.html', {'form': form})
@@ -394,7 +394,7 @@ class TrainCompleteView(LoginRequiredMixin, View):
             полностью очищаются.
         """
 
-        Word.words.ensure_min_active_words(request.user)
+        Word.ensure_min_active_words(request.user)
 
         settings = request.session['training_settings']
 

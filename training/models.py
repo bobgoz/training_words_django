@@ -10,6 +10,7 @@ from .constants import (
     DEFINITION_FIELD_MAX_LENGTH,
     WORD_FIELD_MAX_LENGTH,
     INTERVALS,
+    MIN_ACTIVE_WORDS,
 )
 from .managers import WordManager
 
@@ -95,8 +96,7 @@ class Word(models.Model):
     )
     next_review_date = models.DateTimeField(
         'Дата следующего повторения',
-        null=True,
-        blank=True,
+        default=timezone.now,
         help_text='Когда слово снова станет активным',
     )
 
@@ -170,21 +170,47 @@ class Word(models.Model):
                 hours=1
             )  # Повтор через час
             self.is_learned = False
+            self.is_active = True
 
         self.save()
 
-    def activate_if_due(self):
+    @classmethod
+    def ensure_min_active_words(cls, user):
         """
-        Если пришло время повторения,
-        переводит флаг is_learned на False.
-        и флаг is_active на True
+        Обеспечивает минимальное количество активных слов
+        и автоматически меняет поле is_learned на False, если количество
+        повторений слова меньше определенного.
         """
-        if self.next_review_date and timezone.now() >= self.next_review_date:
-            self.is_learned = False
-            self.is_active = True
-            self.save()
-            return True
-        return False
+
+        active_count = cls.words.is_active(user).count()
+
+        if active_count < MIN_ACTIVE_WORDS:
+            # Сколько нужно добавить
+            needed = MIN_ACTIVE_WORDS - active_count
+
+            # Приоритет слова, обновленные давно
+            ids_to_activate = list(
+                cls.words.is_not_active(
+                    user,
+                )
+                .filter(
+                    next_review_date__lte=timezone.now(),
+                )
+                .order_by(
+                    'updated_at',
+                )
+                .values_list('id', flat=True)[:needed]
+            )
+            print(f'Неактивные слова: {ids_to_activate}')
+
+            if ids_to_activate:
+                count = cls.objects.filter(id__in=ids_to_activate).update(
+                    is_active=True,
+                    is_learned=False,
+                )
+                return count
+
+        return 0
 
 
 class TrainingSession(models.Model):

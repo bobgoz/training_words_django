@@ -110,19 +110,7 @@ class EditWordForm(forms.ModelForm):
                 'class': 'form-control',
             },
         ),
-        initial=timezone.now(),
-        required=False,
-    )
-
-    next_review_date = forms.DateTimeField(
-        label='Следующее повторение',
-        widget=forms.DateTimeInput(
-            attrs={
-                'type': 'datetime-local',
-                'class': 'form-control',
-            },
-        ),
-        initial=timezone.now(),
+        initial=timezone.now,
         required=False,
     )
 
@@ -137,7 +125,7 @@ class EditWordForm(forms.ModelForm):
             'is_learned',
             'image',
             'repetition_count',
-            'next_review_date',
+            # 'next_review_date',
         )
 
 
