@@ -7,10 +7,22 @@ class WordManager(models.Manager):
 
     def all_self(self, user):
         """Все слова пользователя."""
+
         return super().get_queryset().filter(user=user)
 
+    def activate_due_words(self, user):
+        """Активация истекших слов"""
+        self.is_learned(user).filter(
+            next_review_date__lte=timezone.now(),
+        ).update(
+            is_active=True,
+            is_learned=False,
+        )
+
     def is_active(self, user):
-        """Только активные слова"""
+        """Только активные слова с активацией просроченных"""
+        self.activate_due_words(user)
+
         return self.all_self(user).filter(
             is_active=True,
             is_learned=False,

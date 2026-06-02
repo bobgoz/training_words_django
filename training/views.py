@@ -85,9 +85,7 @@ class ShowActiveWordsView(BaseShowingViewMixin):
 class ShowInactiveWordsView(BaseShowingViewMixin):
     """Вью для отображения неактивных слов"""
 
-    page_title = (
-        'Неактивные слова, в ожидании изучения'
-    )
+    page_title = 'Неактивные слова, в ожидании изучения'
     empty_message = 'Нет новых слов'
 
     def get_queryset(self):
@@ -459,8 +457,9 @@ class ResetLearnedWordsView(LoginRequiredMixin, View):
         """
         Word.words.is_learned(request.user).update(
             is_learned=False,
+            next_review_date=timezone.now(),
         )
-        return redirect('profile')
+        return redirect('word_manager')
 
 
 class WordManagerView(LoginRequiredMixin, TemplateView):

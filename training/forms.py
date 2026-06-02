@@ -1,5 +1,6 @@
 from django import forms
 from django.utils import timezone
+from datetime import timedelta
 
 from .constants import (
     COUNT_INITIAL_VALUE,
@@ -91,28 +92,27 @@ class EditWordForm(forms.ModelForm):
         widget=forms.FileInput(attrs={'class': 'form-control'}),
     )
 
-    repetition_count = forms.IntegerField(
-        label='Количество повторений',
+    next_review_date = forms.DateTimeField(
+        widget=forms.HiddenInput(),
         required=False,
-        widget=forms.NumberInput(
-            attrs={
-                'class': 'form-control',
-                'readonly': True,
-            }
-        ),
     )
 
-    next_review_date = forms.DateTimeField(
-        label='Следующее повторение',
-        widget=forms.DateTimeInput(
-            attrs={
-                'type': 'datetime-local',
-                'class': 'form-control',
-            },
-        ),
-        initial=timezone.now,
-        required=False,
-    )
+    def clean(self):
+        is_active = self.cleaned_data.get('is_active')
+        is_learned = self.cleaned_data.get('is_learned')
+
+        if is_active and is_learned:
+            raise forms.ValidationError(
+                'Слово не может быть одновременно активным и изученным.',
+            )
+        if is_active:
+            self.cleaned_data['next_review_date'] = timezone.now()
+        elif is_learned:
+            self.cleaned_data['next_review_date'] = timezone.now() + timedelta(
+                days=1,
+            )
+
+        return super().clean()
 
     class Meta:
         model = Word
@@ -124,8 +124,7 @@ class EditWordForm(forms.ModelForm):
             'is_hard',
             'is_learned',
             'image',
-            'repetition_count',
-            # 'next_review_date',
+            'next_review_date',
         )
 
 
