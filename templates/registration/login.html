@@ -3,43 +3,43 @@
 {% block title %}Вход в систему{% endblock %}
 
 {% block content %}
-    <div class="auth-layout">
-        <div class="surface-card surface-card__body auth-card">
-            <div class="auth-card__header">
-                <div class="auth-card__eyebrow">L</div>
-                <h1 class="auth-card__title">Вход в аккаунт</h1>
-                <p class="auth-card__subtitle">Войди, чтобы продолжить работу со своим словарем и тренировками.</p>
-            </div>
+ <div class="auth-layout">
+  <div class="surface-card surface-card__body auth-card">
+   <div class="auth-card__header">
+    <div class="auth-card__eyebrow">L</div>
+    <h1 class="auth-card__title">Вход в аккаунт</h1>
+    <p class="auth-card__subtitle">Войди, чтобы продолжить работу со своим словарем и тренировками.</p>
+   </div>
 
-            <form method="post" class="auth-form">
-                {% csrf_token %}
-                {% if form.non_field_errors %}
-                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
-                {% endif %}
+   <form method="post" class="auth-form">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+     <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
 
-                <div class="form-group">
-                    <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
-                    {{ form.username }}
-                    {% if form.username.errors %}
-                        <div class="text-danger mt-2 small">{{ form.username.errors }}</div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.password.id_for_label }}">Пароль</label>
-                    {{ form.password }}
-                    {% if form.password.errors %}
-                        <div class="text-danger mt-2 small">{{ form.password.errors }}</div>
-                    {% endif %}
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100 mt-3">Войти</button>
-            </form>
-
-            <div class="auth-links">
-                <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
-                <p><a href="{% url 'index' %}">На главную</a></p>
-            </div>
-        </div>
+    <div class="form-group">
+     <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
+     {{ form.username }}
+     {% if form.username.errors %}
+      <div class="text-danger mt-2 small">{{ form.username.errors }}</div>
+     {% endif %}
     </div>
+
+    <div class="form-group">
+     <label for="{{ form.password.id_for_label }}">Пароль</label>
+     {{ form.password }}
+     {% if form.password.errors %}
+      <div class="text-danger mt-2 small">{{ form.password.errors }}</div>
+     {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 mt-3">Войти</button>
+   </form>
+
+   <div class="auth-links">
+    <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+    <p><a href="{% url 'index' %}">На главную</a></p>
+   </div>
+  </div>
+ </div>
 {% endblock %}

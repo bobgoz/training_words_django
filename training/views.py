@@ -239,7 +239,7 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
         # Фильтр по типу слов
         if cleaned_data['word_type'] == 'all':
-            queryset = queryset.is_active(user).order_by('-updated_at')
+            queryset = queryset.is_active(user).order_by('updated_at')
         elif cleaned_data['word_type'] == 'hard':
             queryset = queryset.is_hard(user).order_by('updated_at')
         elif cleaned_data['word_type'] == 'learned':

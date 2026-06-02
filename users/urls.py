@@ -12,4 +12,5 @@ urlpatterns = [
         views.SimplePasswordChangeView.as_view(),
         name='simple_password_change',
     ),
+    path('statistics/', views.StatisticsView.as_view(), name='statistics'),
 ]

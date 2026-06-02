@@ -1,0 +1,152 @@
+{% extends "users/profile_base.html" %}
+{% load static %}
+
+{% block title %}Статистика{% endblock %}
+
+{% block profile_content %}
+ <div class="container">
+  <h2 class="mb-4">📊 Статистика</h2>
+
+  <!-- Основные показатели -->
+  <div class="row g-3 mb-4">
+   <div class="col-md-3">
+    <div class="card text-center border-primary">
+     <div class="card-body">
+      <div class="display-4 fw-bold text-primary">{{ total_count }}</div>
+      <div class="text-muted">всего слов</div>
+     </div>
+    </div>
+   </div>
+   <div class="col-md-3">
+    <div class="card text-center border-success">
+     <div class="card-body">
+      <div class="display-4 fw-bold text-success">{{ active_count }}</div>
+      <div class="text-muted">активных слов</div>
+     </div>
+    </div>
+   </div>
+   <div class="col-md-3">
+    <div class="card text-center border-warning">
+     <div class="card-body">
+      <div class="display-4 fw-bold text-warning">{{ inactive_count }}</div>
+      <div class="text-muted">неактивных слов</div>
+     </div>
+    </div>
+   </div>
+   <div class="col-md-3">
+    <div class="card text-center border-info">
+     <div class="card-body">
+      <div class="display-4 fw-bold text-info">{{ learned_count }}</div>
+      <div class="text-muted">изученных слов</div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <!-- Эффективность и прогресс -->
+  <div class="row g-3 mb-4">
+   <div class="col-md-6">
+    <div class="card">
+     <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">🎯 Эффективность тренировок</h5>
+     </div>
+     <div class="card-body text-center">
+      <div class="display-1 fw-bold">{{ efficiency }}%</div>
+      <p class="text-muted">
+       активных слов от общего количества
+      </p>
+      <div class="progress" style="height: 10px">
+       <div class="progress-bar bg-primary" style="width: {{ efficiency }}%;"></div>
+      </div>
+      <small class="text-muted mt-2 d-block">
+       Чем больше активных слов, тем чаще вы тренируетесь
+      </small>
+     </div>
+    </div>
+   </div>
+   <div class="col-md-6">
+    <div class="card">
+     <div class="card-header bg-success text-white">
+      <h5 class="mb-0">📚 Прогресс изучения</h5>
+     </div>
+     <div class="card-body text-center">
+      <div class="display-1 fw-bold">{{ learning_progress }}%</div>
+      <p class="text-muted">
+       изученных слов от общего количества
+      </p>
+      <div class="progress" style="height: 10px">
+       <div class="progress-bar bg-success" style="width: {{ learning_progress }}%;"></div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <!-- Активность за месяц -->
+  <div class="row g-3 mb-4">
+   <div class="col-md-4">
+    <div class="card">
+     <div class="card-header bg-info text-white">
+      <h5 class="mb-0">📅 За последний месяц</h5>
+     </div>
+     <div class="card-body text-center">
+      <div class="h2 fw-bold">{{ sessions_count }}</div>
+      <div class="text-muted">тренировок</div>
+      <hr>
+      <div class="h2 fw-bold">{{ words_added_month }}</div>
+      <div class="text-muted">добавлено слов</div>
+      <hr>
+      <div class="h2 fw-bold">{{ words_learned_month }}</div>
+      <div class="text-muted">изучено слов</div>
+     </div>
+    </div>
+   </div>
+   <div class="col-md-4">
+    <div class="card">
+     <div class="card-header bg-warning text-dark">
+      <h5 class="mb-0">📈 Всего тренировок</h5>
+     </div>
+     <div class="card-body text-center">
+      <div class="display-1 fw-bold">{{ total_trainings }}</div>
+      <div class="text-muted">всего слов пройдено</div>
+      <hr>
+      <div class="h2 fw-bold text-success">{{ correct_trainings }}</div>
+      <div class="text-muted">правильных ответов</div>
+     </div>
+    </div>
+   </div>
+   <div class="col-md-4">
+    <div class="card">
+     <div class="card-header bg-danger text-white">
+      <h5 class="mb-0">🎓 Точность</h5>
+     </div>
+     <div class="card-body text-center">
+      <div class="display-1 fw-bold">{{ avg_accuracy }}%</div>
+      <p class="text-muted">
+       средняя точность ответов
+      </p>
+      <div class="progress" style="height: 10px">
+       <div class="progress-bar bg-danger" style="width: {{ avg_accuracy }}%;"></div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <!-- Дополнительная информация -->
+  <div class="card">
+   <div class="card-header bg-secondary text-white">
+    <h5 class="mb-0">ℹ️ Пояснения</h5>
+   </div>
+   <div class="card-body">
+    <ul class="mb-0">
+     <li><strong>Активные слова</strong> — слова, которые участвуют в текущих тренировках</li>
+     <li><strong>Неактивные слова</strong> — новые слова, ожидающие изучения</li>
+     <li><strong>Изученные слова</strong> — слова, которые проходят интервальные повторения</li>
+     <li><strong>Эффективность</strong> = (активные слова / все слова) × 100%</li>
+     <li><strong>Прогресс изучения</strong> = (изученные слова / все слова) × 100%</li>
+    </ul>
+   </div>
+  </div>
+ </div>
+{% endblock %}

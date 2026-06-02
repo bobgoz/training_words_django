@@ -3,173 +3,173 @@
 {% block title %}Тренировка{% endblock %}
 
 {% block content %}
-    <div class="container py-4">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8">
-                <!-- Прогресс -->
-                <div class="mb-4">
-                    <div class="d-flex justify-content-between small text-muted mb-1">
-                        <span>Прогресс</span>
-                        <span>{{ progress.current }} / {{ progress.total }}</span>
-                    </div>
-                    <div class="progress" style="height: 6px">
-                        <div class="progress-bar bg-primary" style="width: {{ progress.percent }}%;"></div>
-                    </div>
-                </div>
-
-                <!-- Карточка слова -->
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body p-4 p-lg-5 text-center">
-                        <!-- Слово -->
-                        <h2 class="display-5 fw-bold mb-4">{{ word.word }}</h2>
-
-                        <!-- Статистика слова (компактно) -->
-                        <div class="row g-2 small text-muted mb-4 pb-2 border-bottom">
-                            <div class="col-4">
-                                <div class="fw-bold text-primary">{{ word.repetition_count }}</div>
-                                <div>повторений</div>
-                            </div>
-                            <div class="col-4">
-                                <div class="fw-bold text-success">
-                                    {% if word.next_review_date and word.is_learned %}
-                                        через {{ word.next_review_date|timeuntil }}
-                                    {% else %}
-                                        сегодня
-                                    {% endif %}
-                                </div>
-                                <div>следующий раз</div>
-                            </div>
-                            <div class="col-4">
-                                <div class="fw-bold text-info">
-                                    {% if word.is_learned %}
-                                        🎓 изучено
-                                    {% else %}
-                                        📖 в процессе
-                                    {% endif %}
-                                </div>
-                                <div>статус</div>
-                            </div>
-                        </div>
-
-                        <!-- Кнопки действий -->
-                        <div class="d-flex gap-3 mt-4 mb-4">
-                            <form method="post" action="{% url 'train_answer' %}" class="flex-grow-1">
-                                {% csrf_token %}
-                                <input type="hidden" name="word_id" value="{{ word.id }}">
-                                <input type="hidden" name="is_known" value="true">
-                                <button type="submit" class="btn btn-success w-100 py-2 fw-semibold">
-                                    ✅ Знаю
-                                </button>
-                            </form>
-
-                            <form method="post" action="{% url 'train_answer' %}" class="flex-grow-1">
-                                {% csrf_token %}
-                                <input type="hidden" name="word_id" value="{{ word.id }}">
-                                <input type="hidden" name="is_known" value="false">
-                                <button type="submit" class="btn btn-outline-danger w-100 py-2 fw-semibold">
-                                    ❌ Не знаю
-                                </button>
-                            </form>
-                        </div>
-
-                        <!-- Подсказки (коллапс) -->
-                        <div class="mt-3 pt-2 border-top">
-                            <div class="small text-muted mb-2">📖 Подсказки:</div>
-
-                            <!-- Определение -->
-                            {% if word.definition %}
-                                <div class="mb-2">
-                                    <button
-                                        class="btn btn-sm btn-outline-secondary w-100 text-start"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#definitionHint"
-                                    >
-                                        📝 Определение
-                                    </button>
-                                    <div class="collapse mt-2" id="definitionHint">
-                                        <div class="small bg-light p-3 rounded">
-                                            {{ word.definition }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-
-                            <!-- Пример использования -->
-                            {% if word.example %}
-                                <div class="mb-2">
-                                    <button
-                                        class="btn btn-sm btn-outline-secondary w-100 text-start"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#exampleHint"
-                                    >
-                                        💡 Пример использования
-                                    </button>
-                                    <div class="collapse mt-2" id="exampleHint">
-                                        <div class="small bg-light p-3 rounded fst-italic">
-                                            "{{ word.example }}"
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-
-                            <!-- Изображение -->
-                            {% if word.image %}
-                                <div class="mb-2">
-                                    <button
-                                        class="btn btn-sm btn-outline-secondary w-100 text-start"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#imageHint"
-                                    >
-                                        🖼️ Изображение
-                                    </button>
-                                    <div class="collapse mt-2" id="imageHint">
-                                        <div class="text-center bg-light p-3 rounded">
-                                            <img
-                                                src="{{ word.image.url }}"
-                                                alt="{{ word.word }}"
-                                                class="img-fluid rounded"
-                                                style="max-height: 200px"
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-
-                            <!-- Сообщение, если нет подсказок -->
-                            {% if not word.definition and not word.example and not word.image %}
-                                <div class="text-muted small text-center py-2">
-                                    Нет подсказок для этого слова
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Прервать тренировку -->
-                <div class="text-center mt-5">
-                    <form action="{% url 'train_answer' %}" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="is_abort" value="true">
-                        <button type="submit">Прервать тренировку</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+ <div class="container py-4">
+  <div class="row justify-content-center">
+   <div class="col-lg-6 col-md-8">
+    <!-- Прогресс -->
+    <div class="mb-4">
+     <div class="d-flex justify-content-between small text-muted mb-1">
+      <span>Прогресс</span>
+      <span>{{ progress.current }} / {{ progress.total }}</span>
+     </div>
+     <div class="progress" style="height: 6px">
+      <div class="progress-bar bg-primary" style="width: {{ progress.percent }}%;"></div>
+     </div>
     </div>
 
-    <style>
-        .btn-outline-secondary {
-            transition: all 0.2s ease;
-        }
-        .btn-outline-secondary:hover {
-            transform: translateY(-1px);
-            background-color: #f0f0f0;
-        }
-        .collapse .bg-light {
-            border-left: 3px solid #0d6efd;
-        }
-    </style>
+    <!-- Карточка слова -->
+    <div class="card border-0 shadow-sm">
+     <div class="card-body p-4 p-lg-5 text-center">
+      <!-- Слово -->
+      <h2 class="display-5 fw-bold mb-4">{{ word.word }}</h2>
+
+      <!-- Статистика слова (компактно) -->
+      <div class="row g-2 small text-muted mb-4 pb-2 border-bottom">
+       <div class="col-4">
+        <div class="fw-bold text-primary">{{ word.repetition_count }}</div>
+        <div>повторений</div>
+       </div>
+       <div class="col-4">
+        <div class="fw-bold text-success">
+         {% if word.next_review_date and word.is_learned %}
+          через {{ word.next_review_date|timeuntil }}
+         {% else %}
+          сегодня
+         {% endif %}
+        </div>
+        <div>следующий раз</div>
+       </div>
+       <div class="col-4">
+        <div class="fw-bold text-info">
+         {% if word.is_learned %}
+          🎓 изучено
+         {% else %}
+          📖 в процессе
+         {% endif %}
+        </div>
+        <div>статус</div>
+       </div>
+      </div>
+
+      <!-- Кнопки действий -->
+      <div class="d-flex gap-3 mt-4 mb-4">
+       <form method="post" action="{% url 'train_answer' %}" class="flex-grow-1">
+        {% csrf_token %}
+        <input type="hidden" name="word_id" value="{{ word.id }}">
+        <input type="hidden" name="is_known" value="true">
+        <button type="submit" class="btn btn-success w-100 py-2 fw-semibold">
+         ✅ Знаю
+        </button>
+       </form>
+
+       <form method="post" action="{% url 'train_answer' %}" class="flex-grow-1">
+        {% csrf_token %}
+        <input type="hidden" name="word_id" value="{{ word.id }}">
+        <input type="hidden" name="is_known" value="false">
+        <button type="submit" class="btn btn-outline-danger w-100 py-2 fw-semibold">
+         ❌ Не знаю
+        </button>
+       </form>
+      </div>
+
+      <!-- Подсказки (коллапс) -->
+      <div class="mt-3 pt-2 border-top">
+       <div class="small text-muted mb-2">📖 Подсказки:</div>
+
+       <!-- Определение -->
+       {% if word.definition %}
+        <div class="mb-2">
+         <button
+          class="btn btn-sm btn-outline-secondary w-100 text-start"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#definitionHint"
+         >
+          📝 Определение
+         </button>
+         <div class="collapse mt-2" id="definitionHint">
+          <div class="small bg-light p-3 rounded">
+           {{ word.definition }}
+          </div>
+         </div>
+        </div>
+       {% endif %}
+
+       <!-- Пример использования -->
+       {% if word.example %}
+        <div class="mb-2">
+         <button
+          class="btn btn-sm btn-outline-secondary w-100 text-start"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#exampleHint"
+         >
+          💡 Пример использования
+         </button>
+         <div class="collapse mt-2" id="exampleHint">
+          <div class="small bg-light p-3 rounded fst-italic">
+           "{{ word.example }}"
+          </div>
+         </div>
+        </div>
+       {% endif %}
+
+       <!-- Изображение -->
+       {% if word.image %}
+        <div class="mb-2">
+         <button
+          class="btn btn-sm btn-outline-secondary w-100 text-start"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#imageHint"
+         >
+          🖼️ Изображение
+         </button>
+         <div class="collapse mt-2" id="imageHint">
+          <div class="text-center bg-light p-3 rounded">
+           <img
+            src="{{ word.image.url }}"
+            alt="{{ word.word }}"
+            class="img-fluid rounded"
+            style="max-height: 200px"
+           >
+          </div>
+         </div>
+        </div>
+       {% endif %}
+
+       <!-- Сообщение, если нет подсказок -->
+       {% if not word.definition and not word.example and not word.image %}
+        <div class="text-muted small text-center py-2">
+         Нет подсказок для этого слова
+        </div>
+       {% endif %}
+      </div>
+     </div>
+    </div>
+
+    <!-- Прервать тренировку -->
+    <div class="text-center mt-5">
+     <form action="{% url 'train_answer' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="is_abort" value="true">
+      <button type="submit">Прервать тренировку</button>
+     </form>
+    </div>
+   </div>
+  </div>
+ </div>
+
+ <style>
+  .btn-outline-secondary {
+   transition: all 0.2s ease;
+  }
+  .btn-outline-secondary:hover {
+   transform: translateY(-1px);
+   background-color: #f0f0f0;
+  }
+  .collapse .bg-light {
+   border-left: 3px solid #0d6efd;
+  }
+ </style>
 {% endblock %}
