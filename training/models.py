@@ -5,13 +5,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 
-
-from .constants import (
-    DEFINITION_FIELD_MAX_LENGTH,
-    WORD_FIELD_MAX_LENGTH,
-    INTERVALS,
-    MIN_ACTIVE_WORDS,
-)
+from .constants import (DEFINITION_FIELD_MAX_LENGTH, INTERVALS,
+                        MIN_ACTIVE_WORDS, WORD_FIELD_MAX_LENGTH)
 from .managers import WordManager
 
 User = get_user_model()

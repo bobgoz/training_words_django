@@ -1,12 +1,9 @@
-from django import forms
-from django.utils import timezone
 from datetime import timedelta
 
-from .constants import (
-    COUNT_INITIAL_VALUE,
-    COUNT_MAX_VALUE,
-    COUNT_MIN_VALUE,
-)
+from django import forms
+from django.utils import timezone
+
+from .constants import COUNT_INITIAL_VALUE, COUNT_MAX_VALUE, COUNT_MIN_VALUE
 from .models import Word
 
 

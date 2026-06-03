@@ -1,27 +1,18 @@
 from random import shuffle
 
 from django.contrib import messages
-from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import IntegrityError
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views import View
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    UpdateView,
-    TemplateView,
-)
+from django.views.generic import (CreateView, DeleteView, DetailView,
+                                  TemplateView, UpdateView)
 
 from .forms import CreateWordForm, EditWordForm, TrainingSettingsForm
-from .mixins import (
-    BaseShowingViewMixin,
-    GetSuccessUrlMixin,
-    NextUrlMixin,
-    WordAcessMixin,
-)
+from .mixins import (BaseShowingViewMixin, GetSuccessUrlMixin, NextUrlMixin,
+                     WordAcessMixin)
 from .models import TrainingSession, Word, WordAttempt
 
 

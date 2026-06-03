@@ -1,16 +1,17 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView
-from django.contrib.auth import get_user_model
-from django.views.generic import FormView
+from datetime import timedelta
+
 from django.contrib import messages
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import models
+from django.urls import reverse_lazy
+from django.utils import timezone
+from django.views.generic import (CreateView, DetailView, FormView,
+                                  TemplateView, UpdateView)
+
+from training.models import TrainingSession, Word
 
 from .forms import RegisterForm, SimplePasswordForm
-from django.views.generic import TemplateView
-from django.utils import timezone
-from datetime import timedelta
-from training.models import Word, TrainingSession
-from django.db import models
 
 User = get_user_model()
 
