@@ -30,21 +30,11 @@
         <div>повторений</div>
        </div>
        <div class="col-4">
-        <div class="fw-bold text-success">
-         {% if word.next_review_date and word.is_learned %}
-          через {{ word.next_review_date|timeuntil }}
-         {% else %}
-          сегодня
-         {% endif %}
-        </div>
-        <div>следующий раз</div>
-       </div>
-       <div class="col-4">
         <div class="fw-bold text-info">
          {% if word.is_learned %}
-          🎓 изучено
+          🎓 Изучено
          {% else %}
-          📖 в процессе
+          📖 Активно
          {% endif %}
         </div>
         <div>статус</div>

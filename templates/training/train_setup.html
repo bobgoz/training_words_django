@@ -9,69 +9,24 @@
    <div class="col-lg-6 col-md-8">
     <!-- Карточка настроек -->
     <div class="card border-0 shadow-sm">
-     <div class="card-header bg-primary text-white text-center py-3">
-      <h4 class="mb-0 fw-semibold">⚙️ Настройка тренировки</h4>
-     </div>
+      <h4 class="mb-0 fw-semibold">Настройка тренировки</h4>
 
-     <div class="card-body p-4 p-lg-5">
+    <div class="card-body p-4 p-lg-5">
+
       <form method="post">
-       {% csrf_token %}
+          {% csrf_token %}
+          {{ form.as_p }}
 
-       <!-- Тип слов -->
-       <div class="mb-4">
-        <label class="form-label fw-semibold mb-2">📚 Тип слов</label>
-        <div class="border rounded p-3 bg-light">
-         {{ form.word_type }}
-        </div>
-        {% if form.word_type.help_text %}
-         <small class="text-muted mt-1 d-block">{{ form.word_type.help_text }}</small>
-        {% endif %}
-        {% if form.word_type.errors %}
-         <div class="text-danger small mt-1">{{ form.word_type.errors }}</div>
-        {% endif %}
-       </div>
-
-       <!-- Количество слов -->
-       <div class="mb-4">
-        <label class="form-label fw-semibold mb-2">🔢 Количество слов</label>
-        {{ form.count }}
-        {% if form.count.help_text %}
-         <small class="text-muted mt-1 d-block">{{ form.count.help_text }}</small>
-        {% endif %}
-        {% if form.count.errors %}
-         <div class="text-danger small mt-1">{{ form.count.errors }}</div>
-        {% endif %}
-       </div>
-
-       <!-- Включать изученные -->
-       {% if form.include_learned %}
-        <div class="mb-4 form-check p-3 bg-light rounded">
-         {{ form.include_learned }}
-         <label class="form-check-label fw-semibold">
-          {{ form.include_learned.label }}
-         </label>
-         {% if form.include_learned.help_text %}
-          <br>
-          <small class="text-muted">{{ form.include_learned.help_text }}</small>
-         {% endif %}
-         {% if form.include_learned.errors %}
-          <div class="text-danger small mt-1">{{ form.include_learned.errors }}</div>
-         {% endif %}
-        </div>
-       {% endif %}
-
-       <!-- Кнопки действий -->
-       <div class="d-flex gap-3 mt-4">
-        <button type="submit" class="btn btn-success flex-grow-1 py-2 fw-semibold">
-         🚀 Начать тренировку
-        </button>
-        <a
-         href="{% url 'index' %}"
-         class="btn btn-outline-secondary flex-grow-1 py-2 fw-semibold text-center"
-        >
-         На главную страницу
+        <div class="d-flex gap-3 mt-4">
+          <button type="submit" class="btn btn-success flex-grow-1 py-2 fw-semibold">
+            Начать тренировку
+          </button>
+          <a
+          href="{% url 'index' %}"
+          class="btn btn-outline-secondary flex-grow-1 py-2 fw-semibold text-center"
+          >
+          На главную страницу
         </a>
-       </div>
       </form>
      </div>
     </div>

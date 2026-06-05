@@ -147,8 +147,6 @@ class TrainingSettingsForm(forms.Form):
         max_value=COUNT_MAX_VALUE,
         initial=COUNT_INITIAL_VALUE,
         label='Количество слов',
-        help_text=(
-            'Сколько слов включить в тренировку? '
-            f'({COUNT_MIN_VALUE}-{COUNT_MAX_VALUE})',
-        ),
+        help_text='Сколько слов включить в тренировку? '
+        f'({COUNT_MIN_VALUE}-{COUNT_MAX_VALUE})',
     )

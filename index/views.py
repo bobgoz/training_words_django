@@ -22,7 +22,7 @@ class IndexView(TemplateView):
             context['active_words'] = Word.words.count_active(
                 self.request.user,
             )
-            context['hard_words'] = Word.words.count_hard(
+            context['count_inactive'] = Word.words.count_inactive(
                 self.request.user,
             )
 
