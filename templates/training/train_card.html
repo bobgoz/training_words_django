@@ -47,9 +47,10 @@
        <form method="post" action="{% url 'train_answer' %}" class="flex-grow-1">
         {% csrf_token %}
         <input type="hidden" name="word_id" value="{{ word.id }}">
-        <input type="hidden" name="is_known" value="true">
-        {% bootstrap_button "Знаю" button_class="btn btn-success rounded-pill py-2" button_type="submit" name="is_known" value="true" %}
-        {% bootstrap_button "Не знаю" button_class="btn btn-outline-danger rounded-pill py-2" button_type="submit" name="is_known" value="false" %}
+        <div class="d-flex gap-3">
+         {% bootstrap_button "Знаю" button_class="btn btn-success rounded-pill py-2 flex-grow-1" button_type="submit" name="is_known" value="true" %}
+         {% bootstrap_button "Не знаю" button_class="btn btn-outline-danger rounded-pill py-2 flex-grow-1" button_type="submit" name="is_known" value="false" %}
+        </div>
        </form>
       </div>
 

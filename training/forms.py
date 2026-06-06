@@ -1,7 +1,7 @@
 from datetime import timedelta
 
-from bootstrap5.widgets import RadioSelectButtonGroup
 from django import forms
+from django.core.exceptions import NON_FIELD_ERRORS
 from django.utils import timezone
 
 from .constants import COUNT_INITIAL_VALUE, NUMBER_OF_WORD
@@ -20,17 +20,6 @@ class CreateWordForm(forms.ModelForm):
             'image',
             'is_active',
         )
-        widgets = {
-            'image': forms.FileInput(attrs={'class': 'form-control'}),
-            'word': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'autofocus': True,
-                    'autocomplete': 'off',
-                    'placeholder': 'Введите слово',
-                }
-            ),
-        }
 
 
 class EditWordForm(forms.ModelForm):
