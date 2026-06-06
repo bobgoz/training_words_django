@@ -9,28 +9,18 @@
    <div class="col-lg-6 col-md-8">
     <!-- Карточка настроек -->
     <div class="card border-0 shadow-sm">
-      <h4 class="mb-0 fw-semibold">Настройка тренировки</h4>
+     <h4 class="mb-0 fw-semibold">Настройка тренировки</h4>
 
-    <div class="card-body p-4 p-lg-5">
-
+     <div class="card-body p-4 p-lg-5">
       <form method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
-
-        <div class="d-flex gap-3 mt-4">
-          <button type="submit" class="btn btn-success flex-grow-1 py-2 fw-semibold">
-            Начать тренировку
-          </button>
-          <a
-          href="{% url 'index' %}"
-          class="btn btn-outline-secondary flex-grow-1 py-2 fw-semibold text-center"
-          >
-          На главную страницу
-        </a>
+       {% csrf_token %}
+       {% bootstrap_form form %}
+       {% bootstrap_button "Начать тренировку" button_type="submit" button_class="btn-primary rounded-pill" %}
+       {% url 'index' as index %}
+       {% bootstrap_button "На главную страницу" button_type="link" href=index button_class="btn btn-dark rounded-pill" %}
       </form>
      </div>
     </div>
-
     <!-- Дополнительная информация -->
     <div class="text-center mt-4">
      <small class="text-muted">

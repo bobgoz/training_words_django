@@ -706,3 +706,15 @@ a {
         min-height: auto;
     }
 }
+
+  .btn-outline-secondary {
+   transition: all 0.2s ease;
+  }
+  .btn-outline-secondary:hover {
+   transform: translateY(-1px);
+   background-color: #f0f0f0;
+  }
+  .collapse .bg-light {
+   border-left: 3px solid #0d6efd;
+  }
+

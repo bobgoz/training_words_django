@@ -16,7 +16,7 @@
        <div class="d-flex align-items-center mb-3">
         <span class="fs-1 me-3">📖</span>
         <div>
-         <a href="{% url 'active_words' %}" class="btn btn-outline-primary w-100">
+         <a href="{% url 'active_words' %}" class="btn btn-outline-primary w-100 rounded-pill">
           <h5 class="card-title mb-0">Активные слова</h5>
           <small class="text-muted">Слова, которые участвуют в тренировка</small>
          </a>
@@ -33,7 +33,7 @@
        <div class="d-flex align-items-center mb-3">
         <span class="fs-1 me-3">💤</span>
         <div>
-         <a href="{% url 'inactive_words' %}" class="btn btn-outline-secondary w-100">
+         <a href="{% url 'inactive_words' %}" class="btn btn-outline-secondary w-100 rounded-pill">
           <h5 class="card-title mb-0">Неактивные слова</h5>
           <small class="text-muted">Слова, которые временно не участвуют в тренировках</small>
          </a>
@@ -50,7 +50,7 @@
        <div class="d-flex align-items-center mb-3">
         <span class="fs-1 me-3">🎓</span>
         <div>
-         <a href="{% url 'learned_words' %}" class="btn btn-outline-success w-100">
+         <a href="{% url 'learned_words' %}" class="btn btn-outline-success w-100 rounded-pill">
           <h5 class="card-title mb-0">Выученные слова</h5>
           <small class="text-muted">Слова, которые уже изучены</small>
          </a>
@@ -67,7 +67,7 @@
        <div class="d-flex align-items-center mb-3">
         <span class="fs-1 me-3">⚡</span>
         <div>
-         <a href="{% url 'hard_words' %}" class="btn btn-outline-warning w-100">
+         <a href="{% url 'hard_words' %}" class="btn btn-outline-warning w-100 rounded-pill">
           <h5 class="card-title mb-0">Сложные слова</h5>
           <small class="text-muted">Слова, которые вызывают трудности</small>
          </a>
@@ -90,7 +90,7 @@
         <small class="text-muted">Это действие нельзя отменить</small>
        </div>
        <button
-        class="btn btn-outline-danger"
+        class="btn btn-outline-danger rounded-pill"
         data-bs-toggle="modal"
         data-bs-target="#resetLearnedModal"
        >

@@ -7,12 +7,21 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import View
-from django.views.generic import (CreateView, DeleteView, DetailView,
-                                  TemplateView, UpdateView)
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    TemplateView,
+    UpdateView,
+)
 
 from .forms import CreateWordForm, EditWordForm, TrainingSettingsForm
-from .mixins import (BaseShowingViewMixin, GetSuccessUrlMixin, NextUrlMixin,
-                     WordAcessMixin)
+from .mixins import (
+    BaseShowingViewMixin,
+    GetSuccessUrlMixin,
+    NextUrlMixin,
+    WordAcessMixin,
+)
 from .models import TrainingSession, Word, WordAttempt
 
 
@@ -252,8 +261,8 @@ class TrainCardView(LoginRequiredMixin, View):
     def get(self, request):
         """Показать карточку текущего слова"""
 
-        training_words = request.session['training_words']
-        current_index = request.session['training_current_index']
+        training_words = request.session.get('training_words')
+        current_index = request.session.get('training_current_index')
 
         word_id = training_words[current_index]
         word = Word.objects.get(id=word_id, user=request.user)
@@ -281,9 +290,13 @@ class TrainAnswerView(LoginRequiredMixin, View):
         word_id = request.POST.get('word_id')
         is_known: bool = request.POST.get('is_known') == 'true'
         is_abort: bool = request.POST.get('is_abort') == 'true'
+        user_input: str = request.POST.get('user_input', '').strip().lower()
 
         if is_abort:
             return redirect('train_complete')
+
+        if is_known and user_input:
+            print(user_input)
 
         word = Word.objects.get(id=word_id, user=request.user)
 
@@ -385,7 +398,7 @@ class TrainCompleteView(LoginRequiredMixin, View):
 
         Word.ensure_min_active_words(request.user)
 
-        settings = request.session['training_settings']
+        settings = request.session.get('training_settings')
 
         # Получаем статистику из сессии
         total_words = request.session.get('training_total_words', 0)
@@ -393,7 +406,7 @@ class TrainCompleteView(LoginRequiredMixin, View):
         incorrect_count = request.session.get('training_incorrect_count', 0)
 
         # Создаём сессию в БД (если ещё не создана)
-        session_id = request.session['training_session_id']
+        session_id = request.session.get('training_session_id')
         if session_id:
             training_session = TrainingSession.objects.get(
                 id=session_id, user=request.user
@@ -407,6 +420,7 @@ class TrainCompleteView(LoginRequiredMixin, View):
             # Если сессия не была создана
             # (например, пользователь прервал тренировку)
             training_session = None
+            return redirect('training_setup')
 
         # Очищаем сессию
         request.session.pop('training_words', None)

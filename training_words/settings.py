@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'bootstrap5',
     'django_extensions',
+    'django_bootstrap_icons',
 ]
 
 MIDDLEWARE = [
@@ -162,3 +163,7 @@ CACHES = {
 }
 
 AUTH_USER_MODEL = 'users.User'
+
+BS_ICONS_CACHE = os.path.join(STATIC_ROOT, 'icon_cache')
+
+BS_ICONS_NOT_FOUND = f"Icon does not exist"

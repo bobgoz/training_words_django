@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load bootstrap_icons %}
+{% load bootstrap5 %}
 
 {% block title %}Тренировка{% endblock %}
 
@@ -32,33 +34,24 @@
        <div class="col-4">
         <div class="fw-bold text-info">
          {% if word.is_learned %}
-          🎓 Изучено
+          {% bs_icon 'check2-square' size="30px" color="green" %}<br>Изучено
          {% else %}
-          📖 Активно
+          {% bs_icon 'rocket-takeoff' size="30px" color="green" %}<br> <small class="text-primary">Активно</small>
          {% endif %}
         </div>
-        <div>статус</div>
        </div>
       </div>
 
       <!-- Кнопки действий -->
-      <div class="d-flex gap-3 mt-4 mb-4">
+      <div class="d-flex gap-1 mt-4 mb-4">
        <form method="post" action="{% url 'train_answer' %}" class="flex-grow-1">
         {% csrf_token %}
         <input type="hidden" name="word_id" value="{{ word.id }}">
         <input type="hidden" name="is_known" value="true">
-        <button type="submit" class="btn btn-success w-100 py-2 fw-semibold">
-         ✅ Знаю
-        </button>
-       </form>
-
-       <form method="post" action="{% url 'train_answer' %}" class="flex-grow-1">
-        {% csrf_token %}
-        <input type="hidden" name="word_id" value="{{ word.id }}">
-        <input type="hidden" name="is_known" value="false">
-        <button type="submit" class="btn btn-outline-danger w-100 py-2 fw-semibold">
-         ❌ Не знаю
-        </button>
+        {% buttons %}
+        {% bootstrap_button "Знаю" button_class="btn btn-success rounded-pill w-50 py-2" button_type="submit" name="is_known" value="true" %}
+        {% bootstrap_button "Не знаю" button_class="btn btn-outline-danger rounded-pill w-50 py-2" button_type="submit" name="is_known" value="false" %}
+        {% endbuttons %}
        </form>
       </div>
 
@@ -137,29 +130,14 @@
       </div>
      </div>
     </div>
-
     <!-- Прервать тренировку -->
-    <div class="text-center mt-5">
+    <div class="text-center">
      <form action="{% url 'train_answer' %}" method="post">
       {% csrf_token %}
-      <input type="hidden" name="is_abort" value="true">
-      <button type="submit">Прервать тренировку</button>
+      {% bootstrap_button "Прервать тренировку" button_class="btn btn-outline-danger rounded-pill w-50 py-2" button_type="submit" name="is_abort" value="true" %}
      </form>
     </div>
    </div>
   </div>
  </div>
-
- <style>
-  .btn-outline-secondary {
-   transition: all 0.2s ease;
-  }
-  .btn-outline-secondary:hover {
-   transform: translateY(-1px);
-   background-color: #f0f0f0;
-  }
-  .collapse .bg-light {
-   border-left: 3px solid #0d6efd;
-  }
- </style>
 {% endblock %}

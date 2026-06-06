@@ -1,9 +1,10 @@
 from datetime import timedelta
 
+from bootstrap5.widgets import RadioSelectButtonGroup
 from django import forms
 from django.utils import timezone
 
-from .constants import COUNT_INITIAL_VALUE, COUNT_MAX_VALUE, COUNT_MIN_VALUE
+from .constants import NUMBER_OF_WORD
 from .models import Word
 
 
@@ -128,6 +129,8 @@ class EditWordForm(forms.ModelForm):
 class TrainingSettingsForm(forms.Form):
     """Форма настройки тренировки"""
 
+    COUNT_CHOICES = [(i, str(i)) for i in NUMBER_OF_WORD]
+
     WORD_TYPE_CHOICES = [
         ('all', 'Активные слова'),
         ('hard', 'Только сложные'),
@@ -142,11 +145,10 @@ class TrainingSettingsForm(forms.Form):
         label='Тип слов',
     )
 
-    count = forms.IntegerField(
-        min_value=COUNT_MIN_VALUE,
-        max_value=COUNT_MAX_VALUE,
-        initial=COUNT_INITIAL_VALUE,
+    count = forms.TypedChoiceField(
+        choices=COUNT_CHOICES,
+        coerce=int,
+        widget=RadioSelectButtonGroup,
         label='Количество слов',
-        help_text='Сколько слов включить в тренировку? '
-        f'({COUNT_MIN_VALUE}-{COUNT_MAX_VALUE})',
+        help_text='Сколько слов включить в тренировку? ',
     )
