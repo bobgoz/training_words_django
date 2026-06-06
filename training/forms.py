@@ -4,7 +4,7 @@ from bootstrap5.widgets import RadioSelectButtonGroup
 from django import forms
 from django.utils import timezone
 
-from .constants import NUMBER_OF_WORD
+from .constants import COUNT_INITIAL_VALUE, NUMBER_OF_WORD
 from .models import Word
 
 
@@ -147,8 +147,8 @@ class TrainingSettingsForm(forms.Form):
 
     count = forms.TypedChoiceField(
         choices=COUNT_CHOICES,
+        initial=COUNT_INITIAL_VALUE,
         coerce=int,
-        widget=RadioSelectButtonGroup,
         label='Количество слов',
         help_text='Сколько слов включить в тренировку? ',
     )

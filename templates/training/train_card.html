@@ -27,11 +27,11 @@
 
       <!-- Статистика слова (компактно) -->
       <div class="row g-2 small text-muted mb-4 pb-2 border-bottom">
-       <div class="col-4">
+       <div class="col-6">
         <div class="fw-bold text-primary">{{ word.repetition_count }}</div>
         <div>повторений</div>
        </div>
-       <div class="col-4">
+       <div class="col-6">
         <div class="fw-bold text-info">
          {% if word.is_learned %}
           {% bs_icon 'check2-square' size="30px" color="green" %}<br>Изучено
@@ -43,15 +43,13 @@
       </div>
 
       <!-- Кнопки действий -->
-      <div class="d-flex gap-1 mt-4 mb-4">
+      <div class="d-flex mt-4 mb-4">
        <form method="post" action="{% url 'train_answer' %}" class="flex-grow-1">
         {% csrf_token %}
         <input type="hidden" name="word_id" value="{{ word.id }}">
         <input type="hidden" name="is_known" value="true">
-        {% buttons %}
-        {% bootstrap_button "Знаю" button_class="btn btn-success rounded-pill w-50 py-2" button_type="submit" name="is_known" value="true" %}
-        {% bootstrap_button "Не знаю" button_class="btn btn-outline-danger rounded-pill w-50 py-2" button_type="submit" name="is_known" value="false" %}
-        {% endbuttons %}
+        {% bootstrap_button "Знаю" button_class="btn btn-success rounded-pill py-2" button_type="submit" name="is_known" value="true" %}
+        {% bootstrap_button "Не знаю" button_class="btn btn-outline-danger rounded-pill py-2" button_type="submit" name="is_known" value="false" %}
        </form>
       </div>
 
@@ -134,7 +132,7 @@
     <div class="text-center">
      <form action="{% url 'train_answer' %}" method="post">
       {% csrf_token %}
-      {% bootstrap_button "Прервать тренировку" button_class="btn btn-outline-danger rounded-pill w-50 py-2" button_type="submit" name="is_abort" value="true" %}
+      {% bootstrap_button "Прервать тренировку" button_class="btn btn-outline-warning rounded-pill py-2" button_type="submit" name="is_abort" value="true" %}
      </form>
     </div>
    </div>
