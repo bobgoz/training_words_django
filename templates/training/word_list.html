@@ -35,7 +35,9 @@
    {% endfor %}
   </div>
   <!-- Пагинация -->
-  {% bootstrap_pagination page_obj pages_to_show=3 extra=request.GET.urlencode %}
+  <div class="mt-4 justify-content-center">
+    {% bootstrap_pagination page_obj pages_to_show=3 extra=request.GET.urlencode %}
+  </div>
  {% else %}
   <div class="text-center py-5">
    <div class="mb-3 fs-1">📭</div>
