@@ -4,6 +4,7 @@ from datetime import timedelta
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
+from .service import translator
 
 from .constants import (DEFINITION_FIELD_MAX_LENGTH, INTERVALS,
                         MIN_ACTIVE_WORDS, WORD_FIELD_MAX_LENGTH)
@@ -124,7 +125,9 @@ class Word(models.Model):
         if self.definition:
             self.definition = self.definition.capitalize().strip()
         if self.example:
-            self.example = self.example.strip()
+            self.example = self.example.capitalize().strip()
+        if not self.definition and self._detect_language() == 'en':
+            self.definition = translator(self.word)
 
         return super().clean()
 

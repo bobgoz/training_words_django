@@ -1,7 +1,6 @@
 from datetime import timedelta
 
 from django import forms
-from django.core.exceptions import NON_FIELD_ERRORS
 from django.utils import timezone
 
 from .constants import COUNT_INITIAL_VALUE, NUMBER_OF_WORD
@@ -20,6 +19,8 @@ class CreateWordForm(forms.ModelForm):
             'image',
             'is_active',
         )
+        
+    
 
 
 class EditWordForm(forms.ModelForm):
