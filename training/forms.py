@@ -19,8 +19,6 @@ class CreateWordForm(forms.ModelForm):
             'image',
             'is_active',
         )
-        
-    
 
 
 class EditWordForm(forms.ModelForm):

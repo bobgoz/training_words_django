@@ -4,11 +4,15 @@ from datetime import timedelta
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
-from .service import translator
 
-from .constants import (DEFINITION_FIELD_MAX_LENGTH, INTERVALS,
-                        MIN_ACTIVE_WORDS, WORD_FIELD_MAX_LENGTH)
+from .constants import (
+    DEFINITION_FIELD_MAX_LENGTH,
+    INTERVALS,
+    MIN_ACTIVE_WORDS,
+    WORD_FIELD_MAX_LENGTH,
+)
 from .managers import WordManager
+from .service import translator
 
 User = get_user_model()
 
@@ -120,6 +124,8 @@ class Word(models.Model):
         Автоматическая заглавная
         буква в начале слова и очистка
         от лишних пробелов.
+
+        Добавление перевода для английского слова.
         """
         self.word = self.word.capitalize().strip()
         if self.definition:
@@ -175,9 +181,7 @@ class Word(models.Model):
     @classmethod
     def ensure_min_active_words(cls, user):
         """
-        Обеспечивает минимальное количество активных слов
-        и автоматически меняет поле is_learned на False, если количество
-        повторений слова меньше определенного.
+        Обеспечивает минимальное количество активных слов.
         """
 
         active_count = cls.words.is_active(user).count()
@@ -199,7 +203,6 @@ class Word(models.Model):
                 )
                 .values_list('id', flat=True)[:needed]
             )
-            print(f'Неактивные слова: {ids_to_activate}')
 
             if ids_to_activate:
                 count = cls.objects.filter(id__in=ids_to_activate).update(

@@ -23,6 +23,7 @@ from .mixins import (
     WordAcessMixin,
 )
 from .models import TrainingSession, Word, WordAttempt
+from .services import clean_session
 
 
 class WordCreateView(LoginRequiredMixin, CreateView):
@@ -194,6 +195,7 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
     def get(self, request):
         """Показать форму настроек"""
+        clean_session(request)
 
         Word.ensure_min_active_words(request.user)
 
@@ -417,20 +419,9 @@ class TrainCompleteView(LoginRequiredMixin, View):
             training_session.incorrect_words = incorrect_count
             training_session.save()
         else:
-            # Если сессия не была создана
-            # (например, пользователь прервал тренировку)
-            training_session = None
             return redirect('training_setup')
 
-        # Очищаем сессию
-        request.session.pop('training_words', None)
-        request.session.pop('training_current_index', None)
-        request.session.pop('training_settings', None)
-        request.session.pop('training_session_id', None)
-        request.session.pop('training_correct_count', None)
-        request.session.pop('training_incorrect_count', None)
-        request.session.pop('training_total_words', None)
-
+        clean_session(request)
         # Рассчитываем процент правильных ответов
         accuracy = 0
         if total_words > 0:

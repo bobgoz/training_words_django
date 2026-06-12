@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load bootstrap5 %}
+{% load bootstrap_icons %}
 
 {% block title %}{{ word.word }} — детали слова{% endblock %}
 
@@ -28,27 +29,18 @@
         <div class="fw-bold text-primary">{{ word.repetition_count }}</div>
         <div>повторений</div>
        </div>
-       <div class="col-3">
-        <div class="fw-bold text-success">
-         {% if word.next_review_date %}
-          через {{ word.next_review_date|timeuntil }}
-         {% else %}
-          сегодня
-         {% endif %}
+      {% if word.next_review_date %}
+        <div class="col-3">
+          <div class="fw-bold text-success">
+            через {{ word.next_review_date|timeuntil }}
+          </div>
+          <div>следующий раз</div>
         </div>
-        <div>следующий раз</div>
-       </div>
+      {% endif %}
        <div class="col-3">
         <div class="fw-bold text-info">
-         {% if word.is_learned %}🎓 изучено{% else %}📖 в процессе{% endif %}
+         {% if word.is_learned %}🎓<br> Изучено{% else %}{% bs_icon 'rocket' %}<br>Активно{% endif %}
         </div>
-        <div>статус</div>
-       </div>
-       <div class="col-3">
-        <div class="fw-bold {% if word.is_active %}text-success{% else %}text-secondary{% endif %}">
-         {% if word.is_active %}активно{% else %}неактивно{% endif %}
-        </div>
-        <div>активность</div>
        </div>
       </div>
 
