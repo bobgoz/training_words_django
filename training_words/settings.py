@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'training.apps.TrainingConfig',
     'index.apps.IndexConfig',
+    'download.apps.DownloadConfig',
     'debug_toolbar',
     'bootstrap5',
     'django_extensions',

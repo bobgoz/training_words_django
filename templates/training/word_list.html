@@ -10,6 +10,12 @@
  </div>
 
  {% if words %}
+  <div>
+    <form action="{% url 'download:download' %}" method="post">
+      {% csrf_token %}
+      {% bootstrap_button 'Скачать 10 активных слов' submit size='xs' extra_classes='rounded-pill' %}
+    </form>
+  </div>
   <div class="list-group">
    {% for word in words %}
     <div class="list-group-item d-flex justify-content-between align-items-center">
