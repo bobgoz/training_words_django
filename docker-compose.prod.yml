@@ -58,8 +58,6 @@ services:
         - /var/opt/pgbackups:/backups
     links:
         - postgres
-    depends_on:
-        - postgres
     environment:
         - POSTGRES_HOST=training_db
         - POSTGRES_DB=${DB_NAME}
