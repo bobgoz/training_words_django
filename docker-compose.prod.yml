@@ -40,13 +40,40 @@ services:
 
   redis:
     image: redis:latest
-    container_name: redis
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
     restart: unless-stopped
+    container_name: redis
 
+  pgbackups:
+    image: prodrigestivill/postgres-backup-local
+    container_name: backup_data
+    depends_on:
+      - training_db
+    restart: always
+    user: postgres:postgres # Optional: see below
+    volumes:
+        - /var/opt/pgbackups:/backups
+    links:
+        - postgres
+    depends_on:
+        - postgres
+    environment:
+        - POSTGRES_HOST=training_db
+        - POSTGRES_DB=${DB_NAME}
+        - POSTGRES_USER=${DB_USER}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+        # Параметры бекапа
+        - POSTGRES_EXTRA_OPTS=-Z1 --schema=public --blobs
+        - SCHEDULE=@daily
+        - BACKUP_ON_START=TRUE
+        - BACKUP_KEEP_DAYS=7
+        - HEALTHCHECK_PORT=8080
+        - TZ=Europe/Moscow
+        - BACKUP_KEEP_WEEKS=4
+        - BACKUP_KEEP_MONTHS=6
 
 
 volumes:
