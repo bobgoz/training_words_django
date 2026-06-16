@@ -15,7 +15,8 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        # key: ${{ secrets.SSH_KEY }}
         type: db
         db_type: postgres
         db_user: ${{ secrets.DB_USERNAME }}
