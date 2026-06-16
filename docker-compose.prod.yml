@@ -8,8 +8,6 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    # ports:
-    #   - "5432:5432"
     restart: unless-stopped
     networks:
     - training_network
@@ -31,7 +29,6 @@ services:
     networks:
     - training_network
 
-
   gateway:
     image: bobgoze/gateway
     container_name: gateway
@@ -48,8 +45,6 @@ services:
 
   redis:
     image: redis:latest
-    # ports:
-    #   - "6379:6379"
     volumes:
       - redis_data:/data
     restart: unless-stopped
