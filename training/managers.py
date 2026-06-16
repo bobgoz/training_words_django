@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count
 from django.utils import timezone
 
 
@@ -41,13 +42,17 @@ class WordManager(models.Manager):
     def is_learned(self, user):
         """Только изученные слова"""
         return self.all_self(user).filter(is_learned=True)
-    
+
     def count_inactive(self, user):
         """Количество неактивные слова"""
-        return self.all_self(user).filter(
-            is_active=False,
-            is_learned=False,
-        ).count()
+        return (
+            self.all_self(user)
+            .filter(
+                is_active=False,
+                is_learned=False,
+            )
+            .count()
+        )
 
     def count_active(self, user):
         """Количество активных слов"""

@@ -25,6 +25,7 @@ class BaseShowingViewMixin(LoginRequiredMixin, ListView):
     paginate_by: int | None = 10
     page_title = None
     empty_message = None
+    count_words = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -38,8 +39,14 @@ class BaseShowingViewMixin(LoginRequiredMixin, ListView):
                 f'Класс {self.__class__.__name__} должен определить '
                 'атрибут empty_message при наследовании.'
             )
+        if self.count_words is None:
+            raise NotImplementedError(
+                f'Класс {self.__class__.__name__} должен определить '
+                'атрибут count_words при наследовании.'
+            )
         context['page_title'] = self.page_title
         context['empty_message'] = self.empty_message
+        context['count_words'] = self.count_words
         return context
 
 

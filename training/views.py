@@ -53,6 +53,7 @@ class ShowActiveWordsView(BaseShowingViewMixin):
 
     page_title = 'Активные слова (участвуют в тренировке)'
     empty_message = 'Нет активных слов'
+    count_words = Word.words.count_active
 
     def get_queryset(self):
         """Возвращает список активных слов"""
@@ -88,6 +89,7 @@ class ShowInactiveWordsView(BaseShowingViewMixin):
 
     page_title = 'Неактивные слова, в ожидании изучения'
     empty_message = 'Нет новых слов'
+    count_words = Word.words.count_inactive
 
     def get_queryset(self):
         """Возвращает список неактивных слов"""
@@ -99,6 +101,7 @@ class ShowHardWordsView(BaseShowingViewMixin):
 
     page_title = 'Сложные слова'
     empty_message = 'Нет сложных слов'
+    count_words = Word.words.count_hard
 
     def get_queryset(self):
         """Возвращает список сложных слов"""
@@ -110,6 +113,7 @@ class ShowLearnedView(BaseShowingViewMixin):
 
     page_title = 'Выученные слова'
     empty_message = 'Нет выученных слов'
+    count_words = Word.words.count_all_learned
 
     def get_queryset(self):
         """Возвращает список выученных слов"""
