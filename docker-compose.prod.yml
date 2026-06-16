@@ -51,7 +51,7 @@ services:
     image: prodrigestivill/postgres-backup-local
     container_name: backup_data
     depends_on:
-      - training_db
+      - db
     restart: always
     user: postgres:postgres # Optional: see below
     volumes:
