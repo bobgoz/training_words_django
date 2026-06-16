@@ -51,13 +51,13 @@ services:
     image: prodrigestivill/postgres-backup-local
     container_name: backup_data
     depends_on:
-      - db
+      - training_db
     # restart: unless-stopped
     user: postgres:postgres # Optional: see below
     volumes:
         - /var/opt/pgbackups:/backups
     environment:
-        - POSTGRES_HOST=${DB_HOST}
+        - POSTGRES_HOST=training_db
         - POSTGRES_DB=${DB_NAME}
         - POSTGRES_USER=${DB_USER}
         - POSTGRES_PASSWORD=${DB_PASSWORD}
