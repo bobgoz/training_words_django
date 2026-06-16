@@ -57,7 +57,7 @@ services:
     volumes:
         - /var/opt/pgbackups:/backups
     environment:
-        - POSTGRES_HOST=training_db
+        - POSTGRES_HOST=${DB_HOST}
         - POSTGRES_DB=${DB_NAME}
         - POSTGRES_USER=${DB_USER}
         - POSTGRES_PASSWORD=${DB_PASSWORD}
