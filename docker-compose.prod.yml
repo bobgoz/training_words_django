@@ -56,8 +56,6 @@ services:
     user: postgres:postgres # Optional: see below
     volumes:
         - /var/opt/pgbackups:/backups
-    links:
-        - postgres
     environment:
         - POSTGRES_HOST=training_db
         - POSTGRES_DB=${DB_NAME}
