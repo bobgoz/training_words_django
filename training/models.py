@@ -138,7 +138,7 @@ class Word(models.Model):
         return super().clean()
 
     def __str__(self):
-        return f'{self.word}, -> {self.user}'
+        return f'{self.word} -> {self.user}'
 
     def _detect_language(self) -> str:
         """Определяет язык слова"""
