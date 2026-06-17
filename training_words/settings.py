@@ -146,6 +146,7 @@ MEDIA_ROOT = '/app/media'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/login'
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -165,6 +166,6 @@ CACHES = {
 
 AUTH_USER_MODEL = 'users.User'
 
+# Bootstrap
 BS_ICONS_CACHE = os.path.join(STATIC_ROOT, 'icon_cache')
-
 BS_ICONS_NOT_FOUND = f"Icon does not exist"

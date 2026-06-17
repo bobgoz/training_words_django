@@ -46,9 +46,5 @@ class DownloadView(LoginRequiredMixin, View):
         writer.writerow(['Слово', 'Определение'])
 
         for word in words:
-            writer.writerow(
-                [
-                    f'{word.word}\t{word.definition}'
-                ]
-            )
+            writer.writerow([f'{word.word}\t{word.definition}'])
         return response

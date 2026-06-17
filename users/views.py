@@ -6,8 +6,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import models
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import (CreateView, DetailView, FormView,
-                                  TemplateView, UpdateView)
+from django.views.generic import (
+    CreateView,
+    DetailView,
+    FormView,
+    TemplateView,
+    UpdateView,
+)
 
 from training.models import TrainingSession, Word
 
@@ -21,7 +26,7 @@ class RegistrationView(CreateView):
 
     template_name = 'registration/registration.html'
     form_class = RegisterForm
-    success_url = 'login'
+    success_url = '/login'
 
 
 class ProfileView(LoginRequiredMixin, DetailView):

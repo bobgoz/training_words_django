@@ -3,29 +3,29 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('add_word/', views.WordCreateView.as_view(), name='add_word'),
+    path('new_word/', views.WordCreateView.as_view(), name='add_word'),
     path(
-        'reset-learned/',
+        'reset_learned/',
         views.ResetLearnedWordsView.as_view(),
         name='reset_learned_words',
     ),
     path(
-        'words/active/',
+        'manager/active/',
         views.ShowActiveWordsView.as_view(),
         name='active_words',
     ),
     path(
-        'words/hard/',
+        'manager/hard/',
         views.ShowHardWordsView.as_view(),
         name='hard_words',
     ),
     path(
-        'words/inactive/',
+        'manager/inactive/',
         views.ShowInactiveWordsView.as_view(),
         name='inactive_words',
     ),
     path(
-        'words/learned/',
+        'manager/learned/',
         views.ShowLearnedView.as_view(),
         name='learned_words',
     ),
@@ -60,7 +60,7 @@ urlpatterns = [
         name='train_complete',
     ),
     path(
-        'profile/manager/',
+        'manager/',
         views.WordManagerView.as_view(),
         name='word_manager',
     ),
