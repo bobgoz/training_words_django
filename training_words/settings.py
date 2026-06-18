@@ -137,7 +137,6 @@ USE_I18N = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
-
 STATIC_URL = 'static/'
 STATIC_ROOT = '/app/staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
@@ -146,32 +145,22 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = '/app/media'
 
 # Auth
-
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
+AUTH_USER_MODEL = 'users.User'
 
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
-    }
-}
-
-AUTH_USER_MODEL = 'users.User'
-
 # Bootstrap
-
 BS_ICONS_CACHE = os.path.join(STATIC_ROOT, 'icon_cache')
 BS_ICONS_NOT_FOUND = f"Icon does not exist"
 
-# Dropbox
 
+# Dropbox
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.dropbox.DropboxStorage",
@@ -187,4 +176,26 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
+}
+
+
+# Redis
+REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+
+
+# Celery
+CELERY_BROKER_URL = REDIS_URL
+CELERY_RESULT_BACKEND = REDIS_URL
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/Moscow'
+
+
+# Django Cache
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": REDIS_URL,
+    }
 }
