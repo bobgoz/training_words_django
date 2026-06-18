@@ -12,7 +12,6 @@ services:
     networks:
     - training_network
 
-
   web:
     image: bobgoze/training_word
     container_name: training_web
@@ -44,7 +43,7 @@ services:
     - training_network
 
   redis:
-    image: redis:latest
+    image: redis:alpine
     volumes:
       - redis_data:/data
     restart: unless-stopped
@@ -76,11 +75,13 @@ services:
     - training_network
 
   celery_worker:
-    image: bobgoze/training_word  # Используем тот же образ, что и web
+    image: bobgoze/training_word
     container_name: celery_worker
     command: celery -A training_words.celery_app worker -l info --concurrency=2
-    env_file:
-      - .env
+    environment:
+      - CELERY_BROKER_URL=${REDIS_URL}
+      - CELERY_RESULT_BACKEND=${REDIS_URL}
+
     depends_on:
       - redis
       - db
