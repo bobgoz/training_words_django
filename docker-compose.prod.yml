@@ -75,6 +75,23 @@ services:
     networks:
     - training_network
 
+  celery_worker:
+    image: bobgoze/training_word  # Используем тот же образ, что и web
+    container_name: celery_worker
+    command: celery -A training_words.celery_app worker -l info --concurrency=2
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - db
+    volumes:
+      - media:/app/media
+      - static:/app/staticfiles
+    restart: unless-stopped
+    networks:
+      - training_network
+
+  
 networks:
   training_network:
     driver: bridge
