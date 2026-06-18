@@ -46,9 +46,10 @@ INSTALLED_APPS = [
     'index.apps.IndexConfig',
     'download.apps.DownloadConfig',
     'debug_toolbar',
-    'bootstrap5',
+    'django_bootstrap5',
     'django_extensions',
     'django_bootstrap_icons',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -144,6 +145,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = 'media/'
 MEDIA_ROOT = '/app/media'
 
+# Auth
+
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
@@ -152,10 +155,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-
-BOOTSTRAP5 = {
-    'error_css_class': '',
-}
 
 CACHES = {
     "default": {
@@ -167,5 +166,25 @@ CACHES = {
 AUTH_USER_MODEL = 'users.User'
 
 # Bootstrap
+
 BS_ICONS_CACHE = os.path.join(STATIC_ROOT, 'icon_cache')
 BS_ICONS_NOT_FOUND = f"Icon does not exist"
+
+# Dropbox
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.dropbox.DropboxStorage",
+        "OPTIONS": {
+            "app_key": os.getenv('APP_KEY'),
+            "app_secret": os.getenv('APP_SECRET'),
+            "oauth2_refresh_token": os.getenv('REFRESH_TOKEN'),
+            "root_path": os.getenv('ROOT_PATH'),
+            "write_mode": os.getenv('WRITE_MODE'),  # 'add' или 'overwrite'
+            "timeout": 100,
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}

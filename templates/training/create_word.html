@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load bootstrap5 %}
+{% load django_bootstrap5 %}
 
 {% block title %}Добавить новое слово{% endblock %}
 
@@ -20,14 +20,12 @@
     <form method="post" enctype="multipart/form-data" autocomplete="off">
      {% csrf_token %}
      {% bootstrap_form form %}
-     {% buttons %}
      <button type="submit" class="btn btn-primary rounded-pill flex-grow-1">
       Сохранить
      </button>
      <button type="reset" class="btn btn-outline-secondary rounded-pill flex-grow-1">
       Сбросить форму
      </button>
-     {% endbuttons %}
     </form>
    </div>
   </div>
