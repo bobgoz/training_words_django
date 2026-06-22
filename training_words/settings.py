@@ -14,6 +14,7 @@ import os
 import sys
 from pathlib import Path
 
+from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,16 +25,13 @@ load_dotenv(dotenv_path=BASE_DIR / '.env')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True') == 'true'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -161,7 +159,15 @@ BS_ICONS_NOT_FOUND = f"Icon does not exist"
 
 
 # Dropbox
-if os.getenv('DROPBOX_USE') == 'true':
+DROPBOX_USE = os.getenv('DROPBOX_USE') == 'true'
+
+if not DROPBOX_USE and not DEBUG:
+    raise ImproperlyConfigured(
+        'В продакшене нужно установить переменную DROPBOX_USE=true '
+        'в файле .env!'
+    )
+
+if DROPBOX_USE:
     STORAGES = {
         "default": {
             "BACKEND": "storages.backends.dropbox.DropboxStorage",
