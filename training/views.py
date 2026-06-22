@@ -85,11 +85,10 @@ class ShowActiveWordsView(BaseShowingViewMixin):
 
 
 class ShowInactiveWordsView(BaseShowingViewMixin):
-    """Вью для отображения неактивных слов"""
+    """Вью для отображения новых слов"""
 
-    page_title = 'Неактивные слова, в ожидании изучения'
+    page_title = 'Новые слова, в ожидании изучения'
     empty_message = 'Нет новых слов'
-    count_words = Word.words.count_inactive
 
     def get_queryset(self):
         """Возвращает список неактивных слов"""
@@ -125,7 +124,9 @@ class ShowLearnedView(BaseShowingViewMixin):
 
     def get_queryset(self):
         """Возвращает список выученных слов"""
-        return Word.words.is_learned(self.request.user)
+        return Word.words.is_learned(self.request.user).order_by(
+            'repetition_count',
+        )
 
     def get_context_data(self, **kwargs):
         kwargs['count_words'] = Word.words.count_all_learned(self.request.user)
