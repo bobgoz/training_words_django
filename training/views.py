@@ -120,12 +120,11 @@ class ShowLearnedView(BaseShowingViewMixin):
 
     page_title = 'Выученные слова'
     empty_message = 'Нет выученных слов'
-    count_words = Word.words.count_all_learned
 
     def get_queryset(self):
         """Возвращает список выученных слов"""
         return Word.words.is_learned(self.request.user).order_by(
-            'repetition_count',
+            'next_review_date',
         )
 
     def get_context_data(self, **kwargs):
