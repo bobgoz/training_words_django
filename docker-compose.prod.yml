@@ -77,7 +77,6 @@ services:
   celery_worker:
     image: bobgoze/training_word
     container_name: celery_worker
-    command: celery -A training_words.celery_app worker -l info --concurrency=2
     environment:
       - CELERY_BROKER_URL=${REDIS_URL}
       - CELERY_RESULT_BACKEND=${REDIS_URL}
@@ -88,6 +87,7 @@ services:
     volumes:
       - media:/app/media
       - static:/app/staticfiles
+    command: python manage.py makemigrations $$ python manage.py migrate
     restart: unless-stopped
     networks:
       - training_network

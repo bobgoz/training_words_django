@@ -23,23 +23,28 @@
      </div>
 
      <div class="card-body p-4 p-lg-5">
-      <!-- Статистика слова -->
-      <div class="row g-3 small text-muted mb-4 pb-2 border-bottom">
-       <div class="col-3">
+      <div class="d-flex flex-wrap gap-3 smail-muted mb-4 pb-2 border-bottom">
+       <div class="flex-grow-1 text-center">
         <div class="fw-bold text-primary">{{ word.repetition_count }}</div>
         <div>повторений</div>
        </div>
-      {% if word.next_review_date %}
-        <div class="col-3">
+      {% if word.is_due_for_review %}
+        <div class="flex-grow-1 text-center">
           <div class="fw-bold text-success">
             через {{ word.next_review_date|timeuntil }}
           </div>
-          <div>следующий раз</div>
+          <div>будет доступно</div>
         </div>
       {% endif %}
-       <div class="col-3">
+       <div class="flex-grow-1 text-center">
         <div class="fw-bold text-info">
-         {% if word.is_learned %}🎓<br> Изучено{% else %}{% bs_icon 'rocket' %}<br>Активно{% endif %}
+         {% if word.is_learned %}
+          🎓<br> Изучено
+         {% elif word.is_active %}
+          {% bs_icon 'rocket' %}<br>Активно
+         {% else %}
+          Новое слово
+         {% endif %}
         </div>
        </div>
       </div>

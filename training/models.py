@@ -213,6 +213,11 @@ class Word(models.Model):
 
         return 0
 
+    @property
+    def is_due_for_review(self) -> bool:
+        """Проверяет, что дата повторения в будущем"""
+        return self.next_review_date and self.next_review_date > timezone.now()
+
 
 class TrainingSession(models.Model):
     """Сессия тренировки"""
