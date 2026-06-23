@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Count
 from django.utils import timezone
 
 
@@ -83,21 +82,6 @@ class WordManager(models.Manager):
         """Только английские слова (активные, не изученные)"""
         return self.is_active(user).filter(language='en')
 
-    def hard_language_ru(self, user):
-        """Сложные русские слова"""
-        return self.is_hard(user).filter(language='ru')
-
-    def hard_language_en(self, user):
-        """Сложные английские слова"""
-        return self.is_hard(user).filter(language='en')
-
-    # ----------Логика интервальных повторений ----------
-    def needs_review(self, user):
-        """Слова, у которых истек таймер."""
-        return self.all_self(user).filter(
-            next_review_date__lte=timezone.now(), is_active=False
-        )
-
-    def due_for_review_count(self, user):
-        """Количество слов для повторения сегодня"""
-        return self.needs_review(user).count()
+    def has_en_words(self, user) -> bool:
+        """Возвращает True если есть иностранные слова."""
+        return self.all_self(user).filter(language='en').first()

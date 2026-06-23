@@ -215,20 +215,27 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
         Word.ensure_min_active_words(request.user)
 
-        form = TrainingSettingsForm()
+        form = TrainingSettingsForm(user=request.user)
         return render(request, 'training/train_setup.html', {'form': form})
 
     def post(self, request):
         """Обрабатывает настройки тренировки."""
-        form = TrainingSettingsForm(request.POST)
+        form = TrainingSettingsForm(request.POST, user=request.user)
 
         if not form.is_valid():
             return render(request, 'training/train_setup.html', {'form': form})
 
+        word_type = form.cleaned_data.get('word_type')
+        count = form.cleaned_data.get('count')
+        # only_en_words = form.cleaned_data.get('only_en_words')
+        # only_ru_words = form.cleaned_data.get('only_ru_words')
+
         # Сохраняем настройки в сессию
         settings: dict = {
-            'word_type': form.cleaned_data['word_type'],
-            'count': form.cleaned_data['count'],
+            'word_type': word_type,
+            'count': count,
+            # 'only_en_words': only_en_words,
+            # 'only_ru_words': only_ru_words,
         }
         request.session.setdefault('training_settings', settings)
 
@@ -255,22 +262,28 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
         queryset = Word.words
 
+        only_en_words = cleaned_data.get('only_en_words')
+        only_ru_words = cleaned_data.get('only_ru_words')
+        word_type = cleaned_data.get('word_type')
+
         # Фильтр по типу слов
-        if cleaned_data['word_type'] == 'all':
+        if word_type == 'all':
             queryset = queryset.is_active(user).order_by('updated_at')
-        elif cleaned_data['word_type'] == 'hard':
+        elif word_type == 'hard':
             queryset = queryset.is_hard(user).order_by('updated_at')
-        elif cleaned_data['word_type'] == 'learned':
+        elif word_type == 'learned':
             queryset = queryset.is_learned(user).order_by('updated_at')
-        elif cleaned_data['word_type'] == 'random':
+        elif word_type == 'random':
             queryset = queryset.random_words(user)
+        if only_en_words:
+            queryset = queryset.filter(language='en')
+        elif only_ru_words:
+            queryset = queryset.filter(language='ru')
 
         # Ограничиваем количество
-        word_ids = list(
+        return list(
             queryset.values_list('id', flat=True)[: cleaned_data['count']]
         )
-
-        return word_ids
 
 
 class TrainCardView(LoginRequiredMixin, View):

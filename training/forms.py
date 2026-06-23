@@ -140,3 +140,20 @@ class TrainingSettingsForm(forms.Form):
         label='Количество слов',
         help_text='Сколько слов включить в тренировку? ',
     )
+
+    def __init__(self, *args, **kwargs):
+        """Переопределение метода для динамического добавления полей"""
+        self.user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+
+        if Word.words.has_en_words(self.user):
+            self.fields['only_en_words'] = forms.BooleanField(
+                label='Только английские слова',
+                help_text='Начни тренировку английских слов',
+                required=False,
+            )
+            self.fields['only_ru_words'] = forms.BooleanField(
+                label='Только русские слова',
+                help_text='Начни тренировку русских слов',
+                required=False,
+            )
