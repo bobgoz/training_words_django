@@ -208,15 +208,11 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
         word_type = form.cleaned_data.get('word_type')
         count = form.cleaned_data.get('count')
-        # only_en_words = form.cleaned_data.get('only_en_words')
-        # only_ru_words = form.cleaned_data.get('only_ru_words')
 
         # Сохраняем настройки в сессию
         settings: dict = {
             'word_type': word_type,
             'count': count,
-            # 'only_en_words': only_en_words,
-            # 'only_ru_words': only_ru_words,
         }
         request.session.setdefault('training_settings', settings)
 

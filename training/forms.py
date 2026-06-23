@@ -157,3 +157,12 @@ class TrainingSettingsForm(forms.Form):
                 help_text='Начни тренировку русских слов',
                 required=False,
             )
+
+    def clean(self):
+        only_en_words = self.cleaned_data.get('only_en_words')
+        only_ru_words = self.cleaned_data.get('only_ru_words')
+        if only_en_words and only_ru_words:
+            raise forms.ValidationError(
+                'Выберите либо русские, либо английские слова!'
+            )
+        return super().clean()
