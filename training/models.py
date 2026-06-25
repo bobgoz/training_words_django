@@ -218,6 +218,11 @@ class Word(models.Model):
         """Проверяет, что дата повторения в будущем"""
         return self.next_review_date and self.next_review_date > timezone.now()
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse('detail', kwargs={'pk_word': self.pk})
+
 
 class TrainingSession(models.Model):
     """Сессия тренировки"""
