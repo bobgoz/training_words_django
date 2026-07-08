@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}Добавить новое словосочетание{% endblock %}
+
+{% block content %}
+    <div class="form-panel">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title-sm">Добавить новое словосочетание</h1>
+            </div>
+            <a href="{% url 'index' %}" class="back-link">На главный экран</a>
+        </div>
+
+        <div class="surface-card form-card">
+            <div class="surface-card__body">
+                <form method="post" enctype="multipart/form-data" autocomplete="off">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-primary rounded-pill flex-grow-1">
+                        Сохранить
+                    </button>
+                    <button type="reset" class="btn btn-outline-secondary rounded-pill flex-grow-1">
+                        Сбросить форму
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

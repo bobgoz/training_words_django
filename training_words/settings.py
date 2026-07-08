@@ -20,87 +20,88 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(dotenv_path=BASE_DIR / '.env')
+load_dotenv(dotenv_path=BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = os.getenv('DEBUG', 'True') == 'true'
+DEBUG = os.getenv("DEBUG", "True") == "true"
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost").split(",")
 
 # Application definition
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'users.apps.UsersConfig',
-    'training.apps.TrainingConfig',
-    'index.apps.IndexConfig',
-    'download.apps.DownloadConfig',
-    'debug_toolbar',
-    'django_bootstrap5',
-    'django_extensions',
-    'django_bootstrap_icons',
-    'storages',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "users.apps.UsersConfig",
+    "training.apps.TrainingConfig",
+    "index.apps.IndexConfig",
+    "download.apps.DownloadConfig",
+    "phrase.apps.PhraseConfig",
+    "debug_toolbar",
+    "django_bootstrap5",
+    "django_extensions",
+    "django_bootstrap_icons",
+    "storages",
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'training_words.urls'
+ROOT_URLCONF = "training_words.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'training_words.wsgi.application'
+WSGI_APPLICATION = "training_words.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 
-if os.getenv('POSTGRES_USE') == 'true':
+if os.getenv("POSTGRES_USE") == "true":
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME'),
-            'USER': os.getenv('DB_USER'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': os.getenv('DB_PORT'),
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DB_NAME"),
+            "USER": os.getenv("DB_USER"),
+            "PASSWORD": os.getenv("DB_PASSWORD"),
+            "HOST": os.getenv("DB_HOST"),
+            "PORT": os.getenv("DB_PORT"),
         }
     }
 else:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
 
@@ -110,16 +111,16 @@ else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -128,25 +129,25 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
 # USE_TZ = True
-LANGUAGE_CODE = 'ru-ru'
-TIME_ZONE = 'Europe/Moscow'
+LANGUAGE_CODE = "ru-ru"
+TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
-STATIC_URL = 'static/'
-STATIC_ROOT = '/app/staticfiles'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_URL = "static/"
+STATIC_ROOT = "/app/staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = '/app/media'
+MEDIA_URL = "media/"
+MEDIA_ROOT = "/app/media"
 
 # Auth
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-LOGIN_URL = '/login'
-AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+LOGIN_URL = "/login"
+AUTH_USER_MODEL = "users.User"
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -154,17 +155,16 @@ INTERNAL_IPS = [
 
 
 # Bootstrap
-BS_ICONS_CACHE = os.path.join(STATIC_ROOT, 'icon_cache')
+BS_ICONS_CACHE = os.path.join(STATIC_ROOT, "icon_cache")
 BS_ICONS_NOT_FOUND = f"Icon does not exist"
 
 
 # Dropbox
-DROPBOX_USE = os.getenv('DROPBOX_USE') == 'true'
+DROPBOX_USE = os.getenv("DROPBOX_USE") == "true"
 
 if not DROPBOX_USE and not DEBUG:
     raise ImproperlyConfigured(
-        'В продакшене нужно установить переменную DROPBOX_USE=true '
-        'в файле .env!'
+        "В продакшене нужно установить переменную DROPBOX_USE=true " "в файле .env!"
     )
 
 if DROPBOX_USE:
@@ -172,11 +172,11 @@ if DROPBOX_USE:
         "default": {
             "BACKEND": "storages.backends.dropbox.DropboxStorage",
             "OPTIONS": {
-                "app_key": os.getenv('APP_KEY'),
-                "app_secret": os.getenv('APP_SECRET'),
-                "oauth2_refresh_token": os.getenv('REFRESH_TOKEN'),
-                "root_path": os.getenv('ROOT_PATH'),
-                "write_mode": os.getenv('WRITE_MODE'),  # 'add' или 'overwrite'
+                "app_key": os.getenv("APP_KEY"),
+                "app_secret": os.getenv("APP_SECRET"),
+                "oauth2_refresh_token": os.getenv("REFRESH_TOKEN"),
+                "root_path": os.getenv("ROOT_PATH"),
+                "write_mode": os.getenv("WRITE_MODE"),  # 'add' или 'overwrite'
                 "timeout": 100,
             },
         },
@@ -187,16 +187,16 @@ if DROPBOX_USE:
 
 
 # Redis
-REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
 
 # Celery
 CELERY_BROKER_URL = REDIS_URL
 CELERY_RESULT_BACKEND = REDIS_URL
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Europe/Moscow'
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "Europe/Moscow"
 
 
 # Django Cache

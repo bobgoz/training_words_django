@@ -1,5 +1,4 @@
 import re
-from datetime import timedelta
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -8,18 +7,20 @@ from django.utils import timezone
 
 from .constants import (
     DEFINITION_FIELD_MAX_LENGTH,
-    INTERVALS,
     MIN_ACTIVE_WORDS,
-    PHRASE_MAX_LENGTH,
     WORD_FIELD_MAX_LENGTH,
 )
 from .managers import WordManager
+from .mixins import BaseIntervalLogicMixin, BaseTimestampMixin
 from .service import translator
 
 User = get_user_model()
 
 
-class Word(models.Model):
+class Word(
+    BaseIntervalLogicMixin,
+    BaseTimestampMixin,
+):
     """Класс слова"""
 
     LANGUAGE_CHOICES = [
@@ -39,29 +40,10 @@ class Word(models.Model):
         help_text="Обязательное поле",
     )
 
-    created_at = models.DateTimeField(
-        "Дата и время создания слова",
-        auto_now_add=True,
-    )
-    updated_at = models.DateTimeField(
-        "Дата и время обновления слова",
-        auto_now=True,
-    )
-
-    is_active = models.BooleanField(
-        "Активное слово",
-        default=False,
-        help_text="Отметьте, если слово должно отображаться в тренировке",
-    )
     is_hard = models.BooleanField(
         "Сложное слово",
         default=False,
         help_text="Отметьте, если слово вызывает трудности",
-    )
-    is_learned = models.BooleanField(
-        "Изученное слово",
-        default=False,
-        help_text="Отметьте, если слово хорошо усвоили",
     )
     definition = models.CharField(
         "Определение слова",
@@ -89,17 +71,6 @@ class Word(models.Model):
         blank=True,
         null=True,
         help_text="Загрузить изображение для слова",
-    )
-
-    repetition_count = models.IntegerField(
-        "Количество успешных повторений",
-        default=0,
-        help_text='Сколько раз пользователь ответил "Знаю"',
-    )
-    next_review_date = models.DateTimeField(
-        "Дата следующего повторения",
-        default=timezone.now,
-        help_text="Когда слово снова станет активным",
     )
 
     words = WordManager()
@@ -151,32 +122,6 @@ class Word(models.Model):
     def save(self, *args, **kwargs):
         self.language = self._detect_language()
         return super().save(*args, **kwargs)
-
-    def update_review_schedule(self, was_correct):
-        """Обновляет расписание повторений на основе ответа пользователя"""
-        now = timezone.now()
-
-        if was_correct:
-            # Увеличиваем счётчик повторений
-            self.repetition_count += 1
-
-            # Интервалы в днях: 1, 3, 7, 14, 30, 60, 90, 180, 365
-            intervals = INTERVALS
-            idx = min(self.repetition_count - 1, len(intervals) - 1)
-            interval_days = intervals[idx]
-
-            # Устанавливаем дату следующего повторения
-            self.next_review_date = now + timedelta(days=interval_days)
-            self.is_learned = True  # Слово помечается как изученное
-            self.is_active = False
-        else:
-            # Если ответил "Не знаю" — сбрасываем прогресс
-            self.repetition_count = 0
-            self.next_review_date = now + timedelta(hours=1)  # Повтор через час
-            self.is_learned = False
-            self.is_active = True
-
-        self.save()
 
     @classmethod
     def ensure_min_active_words(cls, user):
@@ -247,27 +192,3 @@ class TrainingSession(models.Model):
 
     def __str__(self):
         return f'{self.user} - {self.started_at.strftime("%d.%m.%Y %H:%M")}'
-
-
-class Phrase(models.Model):
-    """Модель  словосочетания."""
-
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
-    phrase = models.CharField(
-        "Словосочетание",
-        max_length=PHRASE_MAX_LENGTH,
-        help_text="Обязательное поле",
-    )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["phrase", "user"],
-                name="unique_phrase_for_user",
-            ),
-        ]
-        verbose_name = "словосочетание"
-        verbose_name_plural = "словосочетания"

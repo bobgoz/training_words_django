@@ -1,96 +1,107 @@
 {% load bootstrap_icons %}
 <div class="container">
- <a class="navbar-brand" href="{% url 'index' %}">Тренажер слов</a>
+    <a class="navbar-brand" href="{% url 'index' %}">Тренажер слов</a>
 
- <button
-  class="navbar-toggler"
-  type="button"
-  data-bs-toggle="collapse"
-  data-bs-target="#navbarNav"
-  aria-controls="navbarNav"
-  aria-expanded="false"
-  aria-label="Toggle navigation"
- >
-  <span class="navbar-toggler-icon"></span>
- </button>
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
- <div class="collapse navbar-collapse" id="navbarNav">
-  <ul class="navbar-nav me-auto mb-3 mb-lg-0">
-   {% if user.is_authenticated %}
-    {% with action=request.resolver_match.url_name %}
-     <li class="nav-item">
-      <a
-       class="nav-link {% if action == 'training_setup' %}active{% endif %}"
-       href="{% url 'training_setup' %}"
-      >Тренировка</a>
-     </li>
-     <li class="nav-item">
-      <a
-       class="nav-link {% if action == 'add_word' %}active{% endif %}"
-       href="{% url 'add_word' %}"
-      >Добавить слово</a>
-     </li>
-     <li class="nav-item">
-      <a
-       class="nav-link {% if action == 'word_manager' %}active{% endif %}"
-       href="{% url 'word_manager' %}"
-      >Менеджер слов</a>
-     </li>
-     <form class="d-flex ms-auto" role="search" method="get" action="{% url 'search' %}">
-      <div class="input-group input-group-sm">
-       <input
-        class="form-control"
-        type="search"
-        name="q"
-        placeholder="Поиск..."
-        aria-label="Search"
-        value="{{ request.GET.q|default:'' }}"
-        autocomplete="off"
-       >
-       <button class="btn btn-outline-primary" type="submit">
-        🔍
-       </button>
-      </div>
-     </form>
-    {% endwith %}
-   {% endif %}
-  </ul>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+            {% if user.is_authenticated %}
+                {% with action=request.resolver_match.url_name %}
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {% if action == 'training_setup' %}active{% endif %}"
+                            href="{% url 'training_setup' %}"
+                        >Тренировка</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <button
+                            class="nav-link dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            type="button"
+                            id="dropdownMenuButton1"
+                            aria-expanded="false"
+                        >
+                            Добавить
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="{% url 'add_word' %}">Слово</a></li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'add_phrase' %}">Словосочетание</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {% if action == 'word_manager' %}active{% endif %}"
+                            href="{% url 'word_manager' %}"
+                        >Менеджер слов</a>
+                    </li>
+                    <form class="d-flex ms-auto" role="search" method="get" action="{% url 'search' %}">
+                        <div class="input-group input-group-sm">
+                            <input
+                                class="form-control"
+                                type="search"
+                                name="q"
+                                placeholder="Поиск..."
+                                aria-label="Search"
+                                value="{{ request.GET.q|default:'' }}"
+                                autocomplete="off"
+                            >
+                            <button class="btn btn-outline-primary" type="submit">
+                                🔍
+                            </button>
+                        </div>
+                    </form>
+                {% endwith %}
+            {% endif %}
+        </ul>
 
-  <ul class="navbar-nav align-items-lg-center gap-lg-2">
-   {% if user.is_authenticated %}
-    <li class="nav-item dropdown">
-     <a
-      class="nav-link dropdown-toggle"
-      href="#"
-      id="userDropdown"
-      role="button"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-     >
-      {{ user.username }}
-     </a>
-     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-      <li>
-       <a class="dropdown-item" href="{% url 'profile' %}">Профиль
-        {{ user.username }}</a>
-      </li>
-      <li><hr class="dropdown-divider"></li>
-      <li>
-       <form method="post" action="{% url 'logout' %}" class="px-2">
-        {% csrf_token %}
-        <button type="submit" class="dropdown-item text-danger">Выйти</button>
-       </form>
-      </li>
-     </ul>
-    </li>
-   {% else %}
-    <li class="nav-item">
-     <a class="nav-link" href="{% url 'login' %}">Войти</a>
-    </li>
-    <li class="nav-item">
-     <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
-    </li>
-   {% endif %}
-  </ul>
- </div>
+        <ul class="navbar-nav align-items-lg-center gap-lg-2">
+            {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="userDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        {{ user.username }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'profile' %}">Профиль
+                                {{ user.username }}</a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form method="post" action="{% url 'logout' %}" class="px-2">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item text-danger">Выйти</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 </div>

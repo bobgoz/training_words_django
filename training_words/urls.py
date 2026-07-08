@@ -21,11 +21,12 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('training.urls')),
-    path('', include('index.urls')),
-    path('', include('users.urls')),
-    path('', include('download.urls')),
+    path("admin/", admin.site.urls),
+    path("", include("training.urls")),
+    path("", include("phrase.urls")),
+    path("", include("index.urls")),
+    path("", include("users.urls")),
+    path("", include("download.urls")),
 ]
 
 if settings.DEBUG:

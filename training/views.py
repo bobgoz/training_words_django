@@ -15,7 +15,11 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .forms import CreateWordForm, EditWordForm, TrainingSettingsForm
+from .forms import (
+    CreateWordForm,
+    EditWordForm,
+    TrainingSettingsForm,
+)
 from .mixins import (
     BaseShowingViewMixin,
     GetSuccessUrlMixin,
