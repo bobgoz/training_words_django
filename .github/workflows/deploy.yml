@@ -24,7 +24,7 @@ jobs:
         tags: ${{ vars.DOCKER_TAG }}
   deploy:
     runs-on: ubuntu-latest
-    needs: 
+    needs:
         - Login_Build_and_Push
     steps:
     - name: Checkout repo
@@ -53,19 +53,4 @@ jobs:
           docker-compose -f docker-compose.prod.yml down
           docker-compose -f docker-compose.prod.yml pull
           docker-compose -f docker-compose.prod.yml up -d
-
-
-
-
-
-    
-        
-        
-      
-      
-
-  
-  
- 
-        
-
+          docker-compose -f docker-compose.prod.yml exec web python manage.py migrate
