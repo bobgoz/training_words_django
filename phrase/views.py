@@ -1,11 +1,18 @@
 from django.contrib import messages
 from django.db import IntegrityError
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    TemplateView,
+    UpdateView,
+)
 
 from training.mixins import LoginRequiredMixin
 
 from .forms import CreatePhraseForm
+from .mixins import BaseShowingViewMixin
 from .models import Phrase
 
 
@@ -32,7 +39,75 @@ class PhraseCreateView(LoginRequiredMixin, CreateView):
             return self.form_invalid(form)
 
 
+class DetailPhraseView(
+    LoginRequiredMixin,
+    DetailView,
+):
+    """Вью  для детального отображения."""
+
+    model = Phrase
+    template_name = 'phrase/detail.html'
+    pk_url_kwarg = 'pk_phrase'
+
+
+class EditPhraseView(LoginRequiredMixin, UpdateView):
+    """Вью для редактирования объектов."""
+
+    model = Phrase
+    template_name = 'phrase/edit.html'
+    fields = ('phrase', 'is_active')
+    pk_url_kwarg = 'pk_phrase'
+
+
+class DeletePhraseView(LoginRequiredMixin, DeleteView):
+    """Вью для удаления объектов."""
+
+    model = Phrase
+    pk_url_kwarg = 'pk_phrase'
+    context_object_name = 'phrase'
+    template_name = None
+    success_url = reverse_lazy('phrase_manager')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'Удалено!')
+        return response
+
+
 class PhraseManagerView(LoginRequiredMixin, TemplateView):
     """Вью для менеджера словосочетаний."""
 
-    template_name = "users/"
+    template_name = "users/phrase_manager.html"
+
+
+class ShowActivePhrasesView(BaseShowingViewMixin):
+    """Вью для отображения актианых словосочетаний."""
+
+    model = Phrase
+    page_title = 'Активные словосочетания (участвуют в тренировке)'
+    empty_message = "Нет активныз словосочетаний"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True, is_learned=False)
+
+
+class ShowInactivePhrasesView(BaseShowingViewMixin):
+    """Вью для отображения новых (неактивных) словосочетаний"""
+
+    model = Phrase
+    page_title = "Новые словосочетания, в ожидании изучения"
+    empty_message = "Нет новых словосочетаний"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=False, is_learned=False)
+
+
+class ShowLearnedPhrasesView(BaseShowingViewMixin):
+    """Вью для отображения изученных словосочетаний"""
+
+    model = Phrase
+    page_title = "Выученные словосочетания"
+    empty_message = "Нет выученных словосочетаний"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=False, is_learned=True)

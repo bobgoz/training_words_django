@@ -45,8 +45,8 @@
            <span class="fs-5">📚</span>
            <span>Менеджер слов</span>
           </a>
-        <a href="#"
-           class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'word_manager' or action == 'active_words' or action == 'hard_words' or action == 'inactive_words' or action == 'learned_words'%}active{% endif %}">
+        <a href="{% url 'phrase_manager' %}"
+           class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'phrase_manager' or action == 'active_phrases' or action == 'inactive_phrases' or action == 'learned_phrases'%}active{% endif %}">
            <span class="fs-5">📚</span>
            <span>Менеджер словосочетаний</span>
           </a>

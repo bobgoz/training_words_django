@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    {% if words %}
+    {% if phrases %}
         <div class="mb-4">
             <form action="{% url 'download:download' %}" method="post">
                 {% csrf_token %}
@@ -17,21 +17,18 @@
             </form>
         </div>
         <div class="list-group">
-            {% for word in words %}
+            {% for phrase in phrases %}
                 <div class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        <a href="{% url 'detail' pk_word=word.pk %}">
+                        <a href="{% url 'phrase_detail' pk_phrase=phrase.pk %}">
                             <strong>
-                                {{ word.word }}
+                                {{ phrase.phrase }}
                             </strong>
                         </a>
-                        {% if word.definition %}
-                            <br>{{ word.definition|truncatechars:60 }}
-                        {% endif %}
                     </div>
                     <div class="btn-group">
                         <a
-                            href="{% url 'edit_word' pk_word=word.pk %}"
+                            href="{% url 'edit_phrase' pk_phrase=phrase.pk %}"
                             class="btn btn-sm"
                         >
                             Редактировать

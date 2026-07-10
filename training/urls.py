@@ -51,7 +51,9 @@ urlpatterns = [
         name="training_setup",
     ),
     path("train/card/", views.TrainCardView.as_view(), name="train_card"),
-    path("train/answer/", views.TrainAnswerView.as_view(), name="train_answer"),
+    path(
+        "train/answer/", views.TrainAnswerView.as_view(), name="train_answer"
+    ),
     path(
         "train/complete/",
         views.TrainCompleteView.as_view(),

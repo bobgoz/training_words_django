@@ -6,7 +6,7 @@ from training.mixins import LoginRequiredMixin
 class BaseShowingViewMixin(LoginRequiredMixin, ListView):
     """Общий класс для всех вью для показа различных типов словосочетаний."""
 
-    template_name = "training/word_list.html"
+    template_name = "phrase/list.html"
     context_object_name = "phrases"
     paginate_by: int | None = 10
     page_title = None
