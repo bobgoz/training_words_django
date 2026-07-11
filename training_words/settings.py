@@ -164,7 +164,8 @@ DROPBOX_USE = os.getenv("DROPBOX_USE") == "true"
 
 if not DROPBOX_USE and not DEBUG:
     raise ImproperlyConfigured(
-        "В продакшене нужно установить переменную DROPBOX_USE=true " "в файле .env!"
+        "В продакшене нужно установить переменную DROPBOX_USE=true "
+        "в файле .env!"
     )
 
 if DROPBOX_USE:
@@ -206,3 +207,5 @@ CACHES = {
         "LOCATION": REDIS_URL,
     }
 }
+
+TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"
