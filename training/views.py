@@ -306,9 +306,6 @@ class TrainAnswerView(LoginRequiredMixin, View):
         if is_abort:
             return redirect("train_complete")
 
-        if is_known and user_input:
-            print(user_input)
-
         word = Word.objects.get(id=word_id, user=request.user)
 
         # Меняем поле is_active на False уже тут
