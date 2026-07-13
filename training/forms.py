@@ -13,11 +13,11 @@ class CreateWordForm(forms.ModelForm):
     class Meta:
         model = Word
         fields = (
-            'word',
-            'definition',
-            'example',
-            'image',
-            'is_active',
+            "word",
+            "definition",
+            "example",
+            "image",
+            "is_active",
         )
 
 
@@ -25,57 +25,57 @@ class EditWordForm(forms.ModelForm):
     """Форма редактирования слова"""
 
     word = forms.CharField(
-        label='Слово',
+        label="Слово",
         widget=forms.TextInput(
-            attrs={'class': 'form-control', 'placeholder': 'Введите слово'}
+            attrs={"class": "form-control", "placeholder": "Введите слово"}
         ),
     )
 
     definition = forms.CharField(
-        label='Определение',
+        label="Определение",
         required=False,
         widget=forms.Textarea(
             attrs={
-                'class': 'form-control',
-                'rows': 3,
-                'placeholder': 'Определение слова',
+                "class": "form-control",
+                "rows": 3,
+                "placeholder": "Определение слова",
             }
         ),
     )
 
     example = forms.CharField(
-        label='Пример использования',
+        label="Пример использования",
         required=False,
         widget=forms.Textarea(
             attrs={
-                'class': 'form-control',
-                'rows': 2,
-                'placeholder': 'Пример использования слова',
+                "class": "form-control",
+                "rows": 2,
+                "placeholder": "Пример использования слова",
             }
         ),
     )
 
     is_active = forms.BooleanField(
-        label='Активное слово',
+        label="Активное слово",
         required=False,
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
     )
 
     is_hard = forms.BooleanField(
-        label='Сложное слово',
+        label="Сложное слово",
         required=False,
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
     )
     is_learned = forms.BooleanField(
-        label='Изученное слово',
+        label="Изученное слово",
         required=False,
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
     )
 
     image = forms.ImageField(
-        label='Изображение',
+        label="Изображение",
         required=False,
-        widget=forms.FileInput(attrs={'class': 'form-control'}),
+        widget=forms.FileInput(attrs={"class": "form-control"}),
     )
 
     next_review_date = forms.DateTimeField(
@@ -84,17 +84,22 @@ class EditWordForm(forms.ModelForm):
     )
 
     def clean(self):
-        is_active = self.cleaned_data.get('is_active')
-        is_learned = self.cleaned_data.get('is_learned')
+        is_active = self.cleaned_data.get("is_active")
+        is_learned = self.cleaned_data.get("is_learned")
+        delete_image = self.cleaned_data.get("delete_image")
+
+        if delete_image:
+            if self.instance.image:
+                self.instance.image.delete()
 
         if is_active and is_learned:
             raise forms.ValidationError(
-                'Слово не может быть одновременно активным и изученным.',
+                "Слово не может быть одновременно активным и изученным.",
             )
         if is_active:
-            self.cleaned_data['next_review_date'] = timezone.now()
+            self.cleaned_data["next_review_date"] = timezone.now()
         elif is_learned:
-            self.cleaned_data['next_review_date'] = timezone.now() + timedelta(
+            self.cleaned_data["next_review_date"] = timezone.now() + timedelta(
                 days=1,
             )
 
@@ -103,15 +108,24 @@ class EditWordForm(forms.ModelForm):
     class Meta:
         model = Word
         fields = (
-            'word',
-            'definition',
-            'example',
-            'is_active',
-            'is_hard',
-            'is_learned',
-            'image',
-            'next_review_date',
+            "word",
+            "definition",
+            "example",
+            "is_active",
+            "is_hard",
+            "is_learned",
+            "image",
+            "next_review_date",
         )
+
+    def __init__(self, *args, **kwargs):
+        super(EditWordForm, self).__init__(*args, **kwargs)
+        if self.instance.image:
+            self.fields["delete_image"] = forms.BooleanField(
+                label="Удалить картинку",
+                required=False,
+                widget=forms.CheckboxInput(),
+            )
 
 
 class TrainingSettingsForm(forms.Form):
@@ -120,49 +134,47 @@ class TrainingSettingsForm(forms.Form):
     COUNT_CHOICES = [(i, str(i)) for i in NUMBER_OF_WORD]
 
     WORD_TYPE_CHOICES = [
-        ('all', 'Активные слова'),
-        ('hard', 'Только сложные'),
-        ('learned', 'Только изученные'),
-        ('random', 'Случайные'),
+        ("all", "Активные слова"),
+        ("hard", "Только сложные"),
+        ("learned", "Только изученные"),
+        ("random", "Случайные"),
     ]
 
     word_type = forms.ChoiceField(
         choices=WORD_TYPE_CHOICES,
         widget=forms.RadioSelect,
         initial=WORD_TYPE_CHOICES[0],
-        label='Тип слов',
+        label="Тип слов",
     )
 
     count = forms.TypedChoiceField(
         choices=COUNT_CHOICES,
         initial=COUNT_INITIAL_VALUE,
         coerce=int,
-        label='Количество слов',
-        help_text='Сколько слов включить в тренировку? ',
+        label="Количество слов",
+        help_text="Сколько слов включить в тренировку? ",
     )
 
     def __init__(self, *args, **kwargs):
         """Переопределение метода для динамического добавления полей"""
-        self.user = kwargs.pop('user')
+        self.user = kwargs.pop("user")
         super().__init__(*args, **kwargs)
 
         if Word.words.has_en_words(self.user):
-            self.fields['only_en_words'] = forms.BooleanField(
-                label='Только английские слова',
-                help_text='Начни тренировку английских слов',
+            self.fields["only_en_words"] = forms.BooleanField(
+                label="Только английские слова",
+                help_text="Начни тренировку английских слов",
                 required=False,
             )
-            self.fields['only_ru_words'] = forms.BooleanField(
-                label='Только русские слова',
-                help_text='Начни тренировку русских слов',
+            self.fields["only_ru_words"] = forms.BooleanField(
+                label="Только русские слова",
+                help_text="Начни тренировку русских слов",
                 required=False,
             )
 
     def clean(self):
-        only_en_words = self.cleaned_data.get('only_en_words')
-        only_ru_words = self.cleaned_data.get('only_ru_words')
+        only_en_words = self.cleaned_data.get("only_en_words")
+        only_ru_words = self.cleaned_data.get("only_ru_words")
         if only_en_words and only_ru_words:
-            raise forms.ValidationError(
-                'Выберите либо русские, либо английские слова!'
-            )
+            raise forms.ValidationError("Выберите либо русские, либо английские слова!")
         return super().clean()
