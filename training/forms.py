@@ -86,11 +86,11 @@ class EditWordForm(forms.ModelForm):
     def clean(self):
         is_active = self.cleaned_data.get("is_active")
         is_learned = self.cleaned_data.get("is_learned")
-        delete_image = self.cleaned_data.get("delete_image")
+        # delete_image = self.cleaned_data.get("delete_image")
 
-        if delete_image:
-            if self.instance.image:
-                self.instance.image.delete()
+        # if delete_image:
+        #     if self.instance.image:
+        #         self.instance.image.delete()
 
         if is_active and is_learned:
             raise forms.ValidationError(
@@ -104,6 +104,15 @@ class EditWordForm(forms.ModelForm):
             )
 
         return super().clean()
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if self.cleaned_data.get("delete_image"):
+            if instance.image:
+                instance.image.delete()
+        if commit:
+            instance.save()
+        return instance
 
     class Meta:
         model = Word

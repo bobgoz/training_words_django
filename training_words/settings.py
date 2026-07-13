@@ -164,8 +164,7 @@ DROPBOX_USE = os.getenv("DROPBOX_USE") == "true"
 
 if not DROPBOX_USE and not DEBUG:
     raise ImproperlyConfigured(
-        "В продакшене нужно установить переменную DROPBOX_USE=true "
-        "в файле .env!"
+        "В продакшене нужно установить переменную DROPBOX_USE=true " "в файле .env!"
     )
 
 if DROPBOX_USE:
@@ -199,8 +198,10 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = "Europe/Moscow"
 
+if DEBUG:
+    CELERY_TASK_ALWAYS_EAGER = True
+    CELERY_BROKER_URL = "memory://"
 
-# Django Cache
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
