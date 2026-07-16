@@ -6,6 +6,20 @@ repos:
     -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
+    -   id: requirements-txt-fixer
+    -   id: check-ast
+    -   id: check-case-conflict
+    -   id: check-json
+    -   id: check-merge-conflict
+    -   id: check-toml
+    -   id: detect-private-key
+    -   id: pretty-format-json
+        args: [--autofix, --indent 2, --no-ensure-ascii]
+    -   id: debug-statements
+
+
+
+
 
 -   repo: https://github.com/psf/black
     rev: 22.10.0
