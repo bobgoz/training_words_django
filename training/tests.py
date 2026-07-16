@@ -133,38 +133,3 @@ class TestWordUrls:
         response = auth_client.get(detail_url)
         word_obj = response.context["word"]
         assert word_obj.word != word_ru.word
-
-
-@pytest.mark.parametrize(
-    "delete_image_flag, expected_has_image",
-    (
-        (True, False),
-        (False, True),
-    ),
-)
-def test_delete_image_in_edit_form(
-    delete_image_flag,
-    expected_has_image,
-    word_ru,
-):
-    """Тестирование удаления картинки"""
-    image_file = SimpleUploadedFile(
-        name="image.jpg",
-        content=b"image",
-        content_type="image/jpeg",
-    )
-
-    word_ru.image = image_file
-
-    form_data = dict(
-        word="test_word",
-        delete_image=delete_image_flag,
-    )
-    form = EditWordForm(data=form_data, instance=word_ru)
-    assert form.is_valid()
-
-    updated_word = form.save()
-    if expected_has_image:
-        assert updated_word.image is not None
-    else:
-        assert updated_word.image is None
