@@ -103,16 +103,7 @@ def word_en(author):
 
 
 @fixture
-def new_word(author):
-    """Новый объект слова."""
-    return Word.objects.create(
-        word="Вода",
-        user=author,
-    )
-
-
-@fixture
-def form_data(author, new_word):
+def form_data(author):
     """Данные формы."""
     return {
         "word": "слово",
@@ -152,9 +143,9 @@ def inactive_words_url():
 
 
 @fixture
-def word_detail_url(new_word):
+def word_detail_url(word_ru):
     """Юрл с детальным отображением объекта слова."""
-    return new_word.get_absolute_url()
+    return word_ru.get_absolute_url()
 
 
 @fixture

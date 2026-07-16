@@ -33,11 +33,13 @@ services:
     container_name: gateway
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - web
     volumes:
       - media:/media:ro
       - static:/static:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     restart: unless-stopped
     networks:
     - training_network
