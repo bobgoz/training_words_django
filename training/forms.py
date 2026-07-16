@@ -1,3 +1,5 @@
+"""Модуль содержащий  формы Django."""
+
 from django import forms
 from django.utils import timezone
 
@@ -6,7 +8,7 @@ from .models import Word
 
 
 class CreateWordForm(forms.ModelForm):
-    """Форма для создания слова"""
+    """Форма для создания слова."""
 
     class Meta:
         model = Word
@@ -20,7 +22,7 @@ class CreateWordForm(forms.ModelForm):
 
 
 class EditWordForm(forms.ModelForm):
-    """Форма редактирования слова"""
+    """Форма редактирования слова."""
 
     word = forms.CharField(
         label="Слово",
@@ -77,6 +79,14 @@ class EditWordForm(forms.ModelForm):
     )
 
     def clean(self):
+        """Очищает данные формы.
+
+        Нельзя использовать два флага
+        is_active и is_learned одновременно.
+
+        Если Пользователь выбрал слово как активное,
+        сбрасывается дата следующей тренировки.
+        """
         is_active = self.cleaned_data.get("is_active")
         is_learned = self.cleaned_data.get("is_learned")
 
@@ -90,6 +100,7 @@ class EditWordForm(forms.ModelForm):
         return super().clean()
 
     def save(self, commit=True):
+        """Удаление картинки."""
         instance = super().save(commit=False)
         if self.cleaned_data.get("delete_image"):
             if instance.image:
@@ -116,6 +127,7 @@ class EditWordForm(forms.ModelForm):
         )
 
     def __init__(self, *args, **kwargs):
+        """Добавление поля формы, если есть изображение."""
         super(EditWordForm, self).__init__(*args, **kwargs)
         if self.instance.image:
             self.fields["delete_image"] = forms.BooleanField(
@@ -126,13 +138,13 @@ class EditWordForm(forms.ModelForm):
 
 
 class TrainingSettingsForm(forms.Form):
-    """Форма настройки тренировки"""
+    """Форма настройки тренировки."""
 
     COUNT_CHOICES = [(i, str(i)) for i in NUMBER_OF_WORD]
 
     WORD_TYPE_CHOICES = [
-        ("all", "Активные слова"),
-        ("learned", "Только изученные"),
+        ("all", "Активные"),
+        ("learned", "Изученные"),
     ]
 
     word_type = forms.ChoiceField(
@@ -149,13 +161,17 @@ class TrainingSettingsForm(forms.Form):
         label="Количество слов",
         help_text="Сколько слов включить в тренировку? ",
     )
+    is_arbitrary = forms.BooleanField(
+        label="В произвольном порядке",
+        help_text="Если не выбрано, слова будут отображаться в упорядоченном "
+        "порядке.",
+        required=False,
+    )
 
     def __init__(self, *args, **kwargs):
-        """Переопределение метода для динамического добавления полей"""
-        self.user = kwargs.pop("user")
+        """Динамическое добавление полей."""
         super().__init__(*args, **kwargs)
-
-        if Word.words.has_en_words(self.user):
+        if Word.objects.filter(language="en").exists():
             self.fields["only_en_words"] = forms.BooleanField(
                 label="Только английские слова",
                 help_text="Начни тренировку английских слов",
@@ -168,8 +184,11 @@ class TrainingSettingsForm(forms.Form):
             )
 
     def clean(self):
+        """Очистка данных формы."""
         only_en_words = self.cleaned_data.get("only_en_words")
         only_ru_words = self.cleaned_data.get("only_ru_words")
         if only_en_words and only_ru_words:
-            raise forms.ValidationError("Выберите либо русские, либо английские слова!")
+            raise forms.ValidationError(
+                "Выберите либо русские, либо английские слова!",
+            )
         return super().clean()

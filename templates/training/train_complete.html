@@ -45,9 +45,12 @@
           <div class="mb-4">
             <p>
               <strong>Тип слов:</strong>
-              {% elif word_type == 'learned' %}Изученные
-              {% elif word_type == 'not_learned' %}Не изученные
-              {% else %}Все активные
+              {% if word_type == 'learned' %}
+                Изученные
+              {% elif word_type == 'not_learned' %}
+                Не изученные
+              {% else %}
+                Все активные
               {% endif %}
             </p>
             {% if session %}

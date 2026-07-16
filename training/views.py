@@ -1,3 +1,5 @@
+"""Модуль содержащий Views приложения Training."""
+
 from random import shuffle
 
 from django.contrib import messages
@@ -31,7 +33,7 @@ from .services import clean_session
 
 
 class WordCreateView(LoginRequiredMixin, CreateView):
-    """Вью для создания слов"""
+    """Вью для создания слов."""
 
     model = Word
     template_name = "training/create_word.html"
@@ -39,6 +41,7 @@ class WordCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("add_word")
 
     def form_valid(self, form):
+        """Очистка данных формы."""
         form.instance.user = self.request.user
         try:
             response = super().form_valid(form)
@@ -60,7 +63,7 @@ class ShowActiveWordsView(BaseShowingViewMixin):
     empty_message = "Нет активных слов"
 
     def get_queryset(self):
-        """Возвращает список активных слов"""
+        """Возвращает список активных слов."""
         return Word.words.is_active(self.request.user)
 
     def get_context_data(self, **kwargs):
@@ -71,16 +74,17 @@ class ShowActiveWordsView(BaseShowingViewMixin):
 
 
 class ShowInactiveWordsView(BaseShowingViewMixin):
-    """Вью для отображения новых слов"""
+    """Вью для отображения новых слов."""
 
     page_title = "Новые слова, в ожидании изучения"
     empty_message = "Нет новых слов"
 
     def get_queryset(self):
-        """Возвращает список неактивных слов"""
+        """Возвращает список неактивных слов."""
         return Word.words.is_not_active(self.request.user)
 
     def get_context_data(self, **kwargs):
+        """Передача данных в контекст."""
         kwargs["count_words"] = Word.words.count_inactive(self.request.user)
         return super().get_context_data(**kwargs)
 
@@ -92,12 +96,16 @@ class ShowLearnedView(BaseShowingViewMixin):
     empty_message = "Нет выученных слов"
 
     def get_queryset(self):
-        """Возвращает список выученных слов"""
+        """Возвращает список выученных слов."""
         return Word.words.is_learned(self.request.user).order_by(
             "next_review_date",
         )
 
     def get_context_data(self, **kwargs):
+        """Передача данных в контекст.
+
+        count_words - количество слов.
+        """
         kwargs["count_words"] = Word.words.count_all_learned(self.request.user)
         return super().get_context_data(**kwargs)
 
@@ -108,7 +116,7 @@ class DetailWordView(
     NextUrlMixin,
     DetailView,
 ):
-    """Вью для детального отображения"""
+    """Вью для детального отображения."""
 
     model = Word
     template_name = "training/detail_word.html"
@@ -121,7 +129,7 @@ class DeleteWordView(
     GetSuccessUrlMixin,
     DeleteView,
 ):
-    """Вью для удаление слов"""
+    """Вью для удаление слов."""
 
     model = Word
     pk_url_kwarg = "pk_word"
@@ -132,6 +140,7 @@ class DeleteWordView(
     template_name = None
 
     def form_valid(self, form):
+        """Отправка сообщения при успешном действии."""
         response = super().form_valid(form)
         messages.success(self.request, "Удалено!")
         return response
@@ -143,7 +152,7 @@ class EditWordView(
     GetSuccessUrlMixin,
     UpdateView,
 ):
-    """Редактирование слов"""
+    """Редактирование слов."""
 
     model = Word
     template_name = "training/edit_word.html"
@@ -151,6 +160,10 @@ class EditWordView(
     pk_url_kwarg = "pk_word"
 
     def form_valid(self, form):
+        """Очистка данных  формы.
+
+        Выброс исключения если объект существует.
+        """
         try:
             response = super().form_valid(form)
             messages.success(self.request, "Успешно!")
@@ -161,12 +174,13 @@ class EditWordView(
 
 
 class SearchView(BaseShowingViewMixin):
-    """Вью для поиска"""
+    """Вью для поиска."""
 
     page_title = "Результат поиска"
     empty_message = "Слов с таким ключевым словом не найдено"
 
     def get_queryset(self):
+        """Возвращает результат поиска."""
         query = self.request.GET.get("q", "").strip()
         if query:
             return Word.objects.filter(
@@ -177,20 +191,20 @@ class SearchView(BaseShowingViewMixin):
 
 
 class TrainingSetupView(LoginRequiredMixin, View):
-    """Настройка и начало тренировки"""
+    """Настройка и начало тренировки."""
 
     def get(self, request):
-        """Показать форму настроек"""
+        """Показать форму настроек."""
         clean_session(request)
 
         Word.ensure_min_active_words(request.user)
 
-        form = TrainingSettingsForm(user=request.user)
+        form = TrainingSettingsForm()
         return render(request, "training/train_setup.html", {"form": form})
 
     def post(self, request):
         """Обрабатывает настройки тренировки."""
-        form = TrainingSettingsForm(request.POST, user=request.user)
+        form = TrainingSettingsForm(request.POST)
 
         if not form.is_valid():
             return render(request, "training/train_setup.html", {"form": form})
@@ -214,8 +228,6 @@ class TrainingSetupView(LoginRequiredMixin, View):
             )
             return redirect("training_setup")
 
-        # Сохраняем ID слов в сессию (перемешанные)
-        shuffle(word_ids)
         request.session.setdefault("training_words", word_ids)
         request.session.setdefault("training_current_index", 0)
         request.session.setdefault("training_session_id", None)
@@ -224,36 +236,37 @@ class TrainingSetupView(LoginRequiredMixin, View):
         return redirect("train_card")
 
     def _get_word_ids(self, user, cleaned_data) -> list[int]:
-        """Формирует список ID слов по настройкам"""
-
+        """Формирует список ID слов по настройкам."""
         queryset = Word.words
 
         only_en_words = cleaned_data.get("only_en_words")
         only_ru_words = cleaned_data.get("only_ru_words")
         word_type = cleaned_data.get("word_type")
+        is_arbitrary = cleaned_data.get("is_arbitrary")
+        count = cleaned_data.get("count")
 
         # Фильтр по типу слов
         if word_type == "all":
             queryset = queryset.is_active(user).order_by("updated_at")
         elif word_type == "learned":
             queryset = queryset.is_learned(user).order_by("updated_at")
-        elif word_type == "random":
-            queryset = queryset.random_words(user)
         if only_en_words:
             queryset = queryset.filter(language="en")
         elif only_ru_words:
             queryset = queryset.filter(language="ru")
 
         # Ограничиваем количество
-        return list(queryset.values_list("id", flat=True)[: cleaned_data["count"]])
+        words = list(queryset.values_list("id", flat=True)[:count])
+        if is_arbitrary:
+            shuffle(words)
+        return words
 
 
 class TrainCardView(LoginRequiredMixin, View):
-    """Показывает текущее слово тренировки"""
+    """Показывает текущее слово тренировки."""
 
     def get(self, request):
-        """Показать карточку текущего слова"""
-
+        """Показать карточку текущего слова."""
         training_words = request.session.get("training_words")
         current_index = request.session.get("training_current_index")
 
@@ -277,9 +290,10 @@ class TrainCardView(LoginRequiredMixin, View):
 
 
 class TrainAnswerView(LoginRequiredMixin, View):
-    """Обработка ответа пользователя"""
+    """Обработка ответа пользователя."""
 
     def post(self, request):
+        """Обработка действий пользователя."""
         word_id = request.POST.get("word_id")
         is_known: bool = request.POST.get("is_known") == "true"
         is_abort: bool = request.POST.get("is_abort") == "true"
@@ -330,56 +344,53 @@ class TrainAnswerView(LoginRequiredMixin, View):
 
 
 class TrainCompleteView(LoginRequiredMixin, View):
-    """Завершение тренировки — вывод статистики"""
+    """Завершение тренировки — вывод статистики."""
 
     def get(self, request):
-        """
-        Обрабатывает GET-запрос для отображения
-        результатов завершённой тренировки.
+        """Обрабатывает GET-запрос для отображения результатов тренировки.
 
         Выполняет следующие действия:
             1. Восполняет активные слова до минимального
-            количества (ensure_min_active_words).
+               количества (ensure_min_active_words).
             2. Проверяет, что тренировка действительно
-            завершена (все слова отвечены).
+               завершена (все слова отвечены).
             3. Извлекает статистику из сессии
-            (количество правильных/неправильных ответов).
+               (количество правильных/неправильных ответов).
             4. Сохраняет сессию тренировки в базу данных
-            (модель TrainingSession).
+               (модель TrainingSession).
             5. Очищает временные данные тренировки из сессии.
             6. Рассчитывает процент правильных ответов.
             7. Рендерит страницу с итоговой статистикой.
 
         Args:
             request (HttpRequest): Объект HTTP-запроса,
-            содержащий данные сессии.
+                содержащий данные сессии.
 
         Returns:
             HttpResponse:
                 - Редирект на страницу тренировки (train_card),
-                если тренировка не завершена.
+                  если тренировка не завершена.
                 - Рендер шаблона 'training/train_complete.html'
-                с контекстом статистики.
+                  с контекстом статистики.
 
-        Context для шаблона:
+        Контекст для шаблона:
             total_words (int): Общее количество отвеченных слов.
             correct_count (int): Количество правильных ответов.
             incorrect_count (int): Количество неправильных ответов.
             accuracy (float): Процент правильных ответов (округлён до 1 знака).
             word_type (str): Тип слов из настроек тренировки.
             session (TrainingSession | None): Объект сессии тренировки
-            из БД (или None).
+                из БД (или None).
 
         Notes:
             - Перед рендером происходит восполнение
-            активных слов до MIN_ACTIVE_WORDS.
+              активных слов до MIN_ACTIVE_WORDS.
             - Если сессия не была сохранена в БД (например, при прерывании),
-            training_session будет None.
+              training_session будет None.
             - Данные тренировки извлекаются из сессии
-            браузера и после сохранения
-            полностью очищаются.
+              браузера и после сохранения
+              полностью очищаются.
         """
-
         Word.ensure_min_active_words(request.user)
 
         settings = request.session.get("training_settings")
@@ -422,17 +433,14 @@ class TrainCompleteView(LoginRequiredMixin, View):
 
 
 class ResetLearnedWordsView(LoginRequiredMixin, View):
-    """
-    Вью для сброса выученных
-    слов (переводит флаг is learned
-    на False для всех слов пользователя).
+    """Вью для сброса выученных слов.
+
+    Переводит флаг is learned
+    на False для всех слов пользователя.
     """
 
     def post(self, request):
-        """
-        Перевод флага is_learned
-        на False для сброса слов.
-        """
+        """Перевод флага is_learned на False для сброса слов."""
         Word.words.is_learned(request.user).update(
             is_learned=False,
             next_review_date=timezone.now(),
@@ -441,6 +449,6 @@ class ResetLearnedWordsView(LoginRequiredMixin, View):
 
 
 class WordManagerView(LoginRequiredMixin, TemplateView):
-    """Вью для менеджера  слов"""
+    """Вью для менеджера  слов."""
 
     template_name = "users/word_manager.html"

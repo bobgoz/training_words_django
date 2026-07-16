@@ -17,8 +17,11 @@ repos:
         args: [--autofix, --indent 2, --no-ensure-ascii]
     -   id: debug-statements
 
-
-
+- repo: https://github.com/pycqa/pydocstyle
+  rev: 5.0.2
+  hooks:
+  -    id: pydocstyle
+       args: [--add-ignore=D106, --convention=google]
 
 
 -   repo: https://github.com/psf/black
