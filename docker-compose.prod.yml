@@ -80,6 +80,8 @@ services:
     environment:
       - CELERY_BROKER_URL=${REDIS_URL}
       - CELERY_RESULT_BACKEND=${REDIS_URL}
+    env_file:
+      - .env
 
     depends_on:
       - redis
@@ -92,7 +94,7 @@ services:
     networks:
       - training_network
 
-  
+
 networks:
   training_network:
     driver: bridge
