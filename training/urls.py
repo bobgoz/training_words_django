@@ -15,11 +15,6 @@ urlpatterns = [
         name="active_words",
     ),
     path(
-        "manager/hard/",
-        views.ShowHardWordsView.as_view(),
-        name="hard_words",
-    ),
-    path(
         "manager/inactive/",
         views.ShowInactiveWordsView.as_view(),
         name="inactive_words",
@@ -51,9 +46,7 @@ urlpatterns = [
         name="training_setup",
     ),
     path("train/card/", views.TrainCardView.as_view(), name="train_card"),
-    path(
-        "train/answer/", views.TrainAnswerView.as_view(), name="train_answer"
-    ),
+    path("train/answer/", views.TrainAnswerView.as_view(), name="train_answer"),
     path(
         "train/complete/",
         views.TrainCompleteView.as_view(),

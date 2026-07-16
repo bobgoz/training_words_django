@@ -29,19 +29,6 @@ class TestWordLogic:
         assert word.word == form_data["word"].title()
         assert word.user == form_data["user"]
 
-    def test_hard_words_url(
-        self,
-        word_mass_create_hard,
-        hard_words_url,
-        auth_client,
-    ):
-        """Тестирование страницы со сложными словами"""
-        response = auth_client.get(hard_words_url)
-        assert response.status_code == HTTPStatus.OK
-        words = response.context.get("words")
-        assert words is not None, 'В контексте нет переменной "words"'
-        assert len(words) == 10, f"Ожидалось 10 слов, получено {len(words)}"
-
     def test_not_active_url(
         self,
         auth_client,
@@ -83,7 +70,6 @@ class TestWordUrls:
     TRAINING_URLS = (
         "add_word",
         "active_words",
-        "hard_words",
         "inactive_words",
         "learned_words",
         "training_setup",
@@ -117,7 +103,7 @@ class TestWordUrls:
         detail_url,
         form_data,
     ):
-        """Дотошное тестирование редактирования слов"""
+        """Тестирование редактирования слов"""
 
         response = auth_client.get(detail_url)
         word_obj = response.context["word"]
@@ -125,7 +111,6 @@ class TestWordUrls:
         # Редактирование слова
         edit_response = auth_client.post(edit_word_url, data=form_data)
         assert edit_response.status_code == 302
-
         response = auth_client.get(detail_url)
         word_obj = response.context["word"]
         assert word_obj.word != word_ru.word
