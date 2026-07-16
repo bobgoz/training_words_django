@@ -1,5 +1,3 @@
-from datetime import timedelta
-
 from django import forms
 from django.utils import timezone
 
@@ -86,11 +84,6 @@ class EditWordForm(forms.ModelForm):
     def clean(self):
         is_active = self.cleaned_data.get("is_active")
         is_learned = self.cleaned_data.get("is_learned")
-        # delete_image = self.cleaned_data.get("delete_image")
-
-        # if delete_image:
-        #     if self.instance.image:
-        #         self.instance.image.delete()
 
         if is_active and is_learned:
             raise forms.ValidationError(
@@ -98,10 +91,6 @@ class EditWordForm(forms.ModelForm):
             )
         if is_active:
             self.cleaned_data["next_review_date"] = timezone.now()
-        elif is_learned:
-            self.cleaned_data["next_review_date"] = timezone.now() + timedelta(
-                days=1,
-            )
 
         return super().clean()
 
