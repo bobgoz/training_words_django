@@ -61,11 +61,6 @@ class EditWordForm(forms.ModelForm):
         widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
     )
 
-    is_hard = forms.BooleanField(
-        label="Сложное слово",
-        required=False,
-        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
-    )
     is_learned = forms.BooleanField(
         label="Изученное слово",
         required=False,
@@ -121,7 +116,6 @@ class EditWordForm(forms.ModelForm):
             "definition",
             "example",
             "is_active",
-            "is_hard",
             "is_learned",
             "image",
             "next_review_date",
@@ -144,9 +138,7 @@ class TrainingSettingsForm(forms.Form):
 
     WORD_TYPE_CHOICES = [
         ("all", "Активные слова"),
-        ("hard", "Только сложные"),
         ("learned", "Только изученные"),
-        ("random", "Случайные"),
     ]
 
     word_type = forms.ChoiceField(

@@ -85,22 +85,6 @@ class ShowInactiveWordsView(BaseShowingViewMixin):
         return super().get_context_data(**kwargs)
 
 
-class ShowHardWordsView(BaseShowingViewMixin):
-    """Вью для отображения сложных слов"""
-
-    page_title = "Сложные слова"
-    empty_message = "Нет сложных слов"
-    count_words = Word.words.count_hard
-
-    def get_queryset(self):
-        """Возвращает список сложных слов"""
-        return Word.words.is_hard(self.request.user)
-
-    def get_context_data(self, **kwargs):
-        kwargs["count_words"] = Word.words.count_hard(self.request.user)
-        return super().get_context_data(**kwargs)
-
-
 class ShowLearnedView(BaseShowingViewMixin):
     """Вью для просмотра выученных слов."""
 
@@ -251,8 +235,6 @@ class TrainingSetupView(LoginRequiredMixin, View):
         # Фильтр по типу слов
         if word_type == "all":
             queryset = queryset.is_active(user).order_by("updated_at")
-        elif word_type == "hard":
-            queryset = queryset.is_hard(user).order_by("updated_at")
         elif word_type == "learned":
             queryset = queryset.is_learned(user).order_by("updated_at")
         elif word_type == "random":

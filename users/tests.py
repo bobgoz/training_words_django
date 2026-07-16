@@ -25,9 +25,3 @@ class TestUser(TestCase):
             "profile_info",
             "profile_edit",
         ]
-
-    # def test_urls(self):
-    #     for url in self.urlpatterns:
-    #         with self.subTest(url=reverse(url)):
-    #             response = self.auth_client.get(url)
-    #             self.assertEqual(response.status_code, 200)

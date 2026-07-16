@@ -40,11 +40,6 @@ class Word(
         help_text="Обязательное поле",
     )
 
-    is_hard = models.BooleanField(
-        "Сложное слово",
-        default=False,
-        help_text="Отметьте, если слово вызывает трудности",
-    )
     definition = models.CharField(
         "Определение слова",
         max_length=DEFINITION_FIELD_MAX_LENGTH,

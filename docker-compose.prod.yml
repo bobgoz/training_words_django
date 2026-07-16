@@ -27,6 +27,7 @@ services:
     restart: unless-stopped
     networks:
     - training_network
+    command: python manage.py migrate
 
   gateway:
     image: bobgoze/gateway

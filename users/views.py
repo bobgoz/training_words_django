@@ -24,43 +24,43 @@ User = get_user_model()
 class RegistrationView(CreateView):
     """Вью для регистрации"""
 
-    template_name = 'registration/registration.html'
+    template_name = "registration/registration.html"
     form_class = RegisterForm
-    success_url = '/login'
+    success_url = "/login"
 
 
 class ProfileView(LoginRequiredMixin, DetailView):
     model = User
-    template_name = 'users/profile_base.html'
-    context_object_name = 'profile'
+    template_name = "users/profile_base.html"
+    context_object_name = "profile"
 
     def get_object(self):
         return self.request.user
 
 
 class ProfileEditView(LoginRequiredMixin, UpdateView):
-    template_name = 'users/profile_edit.html'
+    template_name = "users/profile_edit.html"
     fields = (
-        'username',
-        'first_name',
-        'last_name',
-        'email',
-        'avatar',
-        'bio',
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "avatar",
+        "bio",
     )
 
     def get_object(self):
         return self.request.user
 
     def get_success_url(self):
-        return reverse_lazy('profile')
+        return reverse_lazy("profile")
 
 
 class ProfileInfoView(LoginRequiredMixin, DetailView):
     """Информация о профиле"""
 
     model = User
-    template_name = 'users/profile_info.html'
+    template_name = "users/profile_info.html"
 
     def get_object(self):
         return self.request.user
@@ -69,24 +69,24 @@ class ProfileInfoView(LoginRequiredMixin, DetailView):
 class SimplePasswordChangeView(LoginRequiredMixin, FormView):
     """Вью  для переназначения пароля в профиле."""
 
-    template_name = 'registration/simple_password_change.html'
+    template_name = "registration/simple_password_change.html"
     form_class = SimplePasswordForm
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy("profile")
 
     def form_valid(self, form):
         user = self.request.user
-        new_password = form.cleaned_data['new_password1']
+        new_password = form.cleaned_data["new_password1"]
         user.set_password(new_password)
         user.save()
 
-        messages.success(self.request, 'Пароль успешно изменён!')
+        messages.success(self.request, "Пароль успешно изменён!")
         return super().form_valid(form)
 
 
 class StatisticsView(LoginRequiredMixin, TemplateView):
     """Вью для отображения статистики пользователя"""
 
-    template_name = 'stats/statistics.html'
+    template_name = "stats/statistics.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -99,13 +99,11 @@ class StatisticsView(LoginRequiredMixin, TemplateView):
         active_words = Word.words.is_active(user)
         inactive_words = Word.words.is_not_active(user)
         learned_words = Word.words.is_learned(user)
-        hard_words = Word.words.is_hard(user)
 
         total_count = all_words.count()
         active_count = active_words.count()
         inactive_count = inactive_words.count()
         learned_count = learned_words.count()
-        hard_count = hard_words.count()
 
         # Эффективность
         # Формула: (активные слова / все слова) * 100%
@@ -122,20 +120,16 @@ class StatisticsView(LoginRequiredMixin, TemplateView):
 
         # Слова за последний месяц
         words_added_month = all_words.filter(created_at__gte=month_ago).count()
-        words_learned_month = learned_words.filter(
-            updated_at__gte=month_ago
-        ).count()
+        words_learned_month = learned_words.filter(updated_at__gte=month_ago).count()
 
         # Активность (тренировки за последние 30 дней)
-        sessions = TrainingSession.objects.filter(
-            user=user, started_at__gte=month_ago
-        )
+        sessions = TrainingSession.objects.filter(user=user, started_at__gte=month_ago)
         sessions_count = sessions.count()
         total_trainings = (
-            sessions.aggregate(total=models.Sum('total_words'))['total'] or 0
+            sessions.aggregate(total=models.Sum("total_words"))["total"] or 0
         )
         correct_trainings = (
-            sessions.aggregate(total=models.Sum('correct_words'))['total'] or 0
+            sessions.aggregate(total=models.Sum("correct_words"))["total"] or 0
         )
 
         avg_accuracy = 0
@@ -145,21 +139,20 @@ class StatisticsView(LoginRequiredMixin, TemplateView):
         context.update(
             {
                 # Статистика слов
-                'total_count': total_count,
-                'active_count': active_count,
-                'inactive_count': inactive_count,
-                'learned_count': learned_count,
-                'hard_count': hard_count,
-                'efficiency': efficiency,
-                'learning_progress': learning_progress,
+                "total_count": total_count,
+                "active_count": active_count,
+                "inactive_count": inactive_count,
+                "learned_count": learned_count,
+                "efficiency": efficiency,
+                "learning_progress": learning_progress,
                 # Динамика за месяц
-                'words_added_month': words_added_month,
-                'words_learned_month': words_learned_month,
+                "words_added_month": words_added_month,
+                "words_learned_month": words_learned_month,
                 # Активность тренировок
-                'sessions_count': sessions_count,
-                'total_trainings': total_trainings,
-                'correct_trainings': correct_trainings,
-                'avg_accuracy': avg_accuracy,
+                "sessions_count": sessions_count,
+                "total_trainings": total_trainings,
+                "correct_trainings": correct_trainings,
+                "avg_accuracy": avg_accuracy,
             }
         )
 
