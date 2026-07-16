@@ -152,9 +152,9 @@ def inactive_words_url():
 
 
 @fixture
-def word_detail_url(pk_for_args):
+def word_detail_url(new_word):
     """Юрл с детальным отображением объекта слова."""
-    return Word.get_absolute_url()
+    return new_word.get_absolute_url()
 
 
 @fixture

@@ -17,44 +17,175 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='TrainingSession',
+            name="TrainingSession",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('started_at', models.DateTimeField(auto_now_add=True)),
-                ('ended_at', models.DateTimeField(blank=True, null=True)),
-                ('total_words', models.IntegerField(default=0)),
-                ('correct_words', models.IntegerField(default=0)),
-                ('incorrect_words', models.IntegerField(default=0)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("started_at", models.DateTimeField(auto_now_add=True)),
+                ("ended_at", models.DateTimeField(blank=True, null=True)),
+                ("total_words", models.IntegerField(default=0)),
+                ("correct_words", models.IntegerField(default=0)),
+                ("incorrect_words", models.IntegerField(default=0)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Word',
+            name="Word",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('repetition_count', models.IntegerField(default=0, help_text='Сколько раз пользователь ответил "Знаю"', verbose_name='Количество успешных повторений')),
-                ('next_review_date', models.DateTimeField(default=django.utils.timezone.now, help_text='Когда слово снова станет активным', verbose_name='Дата следующего повторения')),
-                ('is_active', models.BooleanField(default=False, help_text='Отметьте, если слово должно отображаться в тренировке', verbose_name='Активно')),
-                ('is_learned', models.BooleanField(default=False, help_text='Отметьте, если слово хорошо усвоили', verbose_name='Изучено')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата и время создания слова')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Дата и время обновления слова')),
-                ('word', models.CharField(help_text='Обязательное поле', max_length=150, verbose_name='Слово')),
-                ('is_hard', models.BooleanField(default=False, help_text='Отметьте, если слово вызывает трудности', verbose_name='Сложное слово')),
-                ('definition', models.CharField(blank=True, help_text='Определение слова. Количество символов не более 200. Можно заполнить позже.', max_length=200, null=True, verbose_name='Определение слова')),
-                ('example', models.TextField(blank=True, help_text='Пример использования слова. Можно заполнить позже.', null=True, verbose_name='Пример использования')),
-                ('language', models.CharField(choices=[('en', 'Английское'), ('ru', 'Русское'), ('unknown', 'Не определено')], max_length=10, verbose_name='Язык слова')),
-                ('image', models.ImageField(blank=True, help_text='Загрузить изображение для слова', null=True, upload_to='images/', verbose_name='Изображение')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "repetition_count",
+                    models.IntegerField(
+                        default=0,
+                        help_text='Сколько раз пользователь ответил "Знаю"',
+                        verbose_name="Количество успешных повторений",
+                    ),
+                ),
+                (
+                    "next_review_date",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now,
+                        help_text="Когда слово снова станет активным",
+                        verbose_name="Дата следующего повторения",
+                    ),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Отметьте, если слово должно отображаться в тренировке",
+                        verbose_name="Активно",
+                    ),
+                ),
+                (
+                    "is_learned",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Отметьте, если слово хорошо усвоили",
+                        verbose_name="Изучено",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Дата и время создания слова"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="Дата и время обновления слова"
+                    ),
+                ),
+                (
+                    "word",
+                    models.CharField(
+                        help_text="Обязательное поле",
+                        max_length=150,
+                        verbose_name="Слово",
+                    ),
+                ),
+                (
+                    "is_hard",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Отметьте, если слово вызывает трудности",
+                        verbose_name="Сложное слово",
+                    ),
+                ),
+                (
+                    "definition",
+                    models.CharField(
+                        blank=True,
+                        help_text="Определение слова. Количество символов не более 200. Можно заполнить позже.",
+                        max_length=200,
+                        null=True,
+                        verbose_name="Определение слова",
+                    ),
+                ),
+                (
+                    "example",
+                    models.TextField(
+                        blank=True,
+                        help_text="Пример использования слова. Можно заполнить позже.",
+                        null=True,
+                        verbose_name="Пример использования",
+                    ),
+                ),
+                (
+                    "language",
+                    models.CharField(
+                        choices=[
+                            ("en", "Английское"),
+                            ("ru", "Русское"),
+                            ("unknown", "Не определено"),
+                        ],
+                        max_length=10,
+                        verbose_name="Язык слова",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        help_text="Загрузить изображение для слова",
+                        null=True,
+                        upload_to="images/",
+                        verbose_name="Изображение",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Пользователь",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'слово',
-                'verbose_name_plural': 'слова',
-                'ordering': ('-updated_at',),
-                'indexes': [models.Index(fields=['user', 'next_review_date'], name='training_wo_user_id_fe7ed5_idx'), models.Index(fields=['user', 'is_active'], name='training_wo_user_id_dfff1b_idx')],
-                'constraints': [models.UniqueConstraint(fields=('word', 'user'), name='unique_words_for_user')],
+                "verbose_name": "слово",
+                "verbose_name_plural": "слова",
+                "ordering": ("-updated_at",),
+                "indexes": [
+                    models.Index(
+                        fields=["user", "next_review_date"],
+                        name="training_wo_user_id_fe7ed5_idx",
+                    ),
+                    models.Index(
+                        fields=["user", "is_active"],
+                        name="training_wo_user_id_dfff1b_idx",
+                    ),
+                ],
+                "constraints": [
+                    models.UniqueConstraint(
+                        fields=("word", "user"), name="unique_words_for_user"
+                    )
+                ],
             },
             managers=[
-                ('words', django.db.models.manager.Manager()),
+                ("words", django.db.models.manager.Manager()),
             ],
         ),
     ]

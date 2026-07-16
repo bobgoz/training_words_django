@@ -16,22 +16,86 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Phrase',
+            name="Phrase",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('repetition_count', models.IntegerField(default=0, help_text='Сколько раз пользователь ответил "Знаю"', verbose_name='Количество успешных повторений')),
-                ('next_review_date', models.DateTimeField(default=django.utils.timezone.now, help_text='Когда слово снова станет активным', verbose_name='Дата следующего повторения')),
-                ('is_active', models.BooleanField(default=False, help_text='Отметьте, если слово должно отображаться в тренировке', verbose_name='Активно')),
-                ('is_learned', models.BooleanField(default=False, help_text='Отметьте, если слово хорошо усвоили', verbose_name='Изучено')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата и время создания слова')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Дата и время обновления слова')),
-                ('phrase', models.CharField(help_text='Обязательное поле', max_length=500, verbose_name='Словосочетание')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "repetition_count",
+                    models.IntegerField(
+                        default=0,
+                        help_text='Сколько раз пользователь ответил "Знаю"',
+                        verbose_name="Количество успешных повторений",
+                    ),
+                ),
+                (
+                    "next_review_date",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now,
+                        help_text="Когда слово снова станет активным",
+                        verbose_name="Дата следующего повторения",
+                    ),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Отметьте, если слово должно отображаться в тренировке",
+                        verbose_name="Активно",
+                    ),
+                ),
+                (
+                    "is_learned",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Отметьте, если слово хорошо усвоили",
+                        verbose_name="Изучено",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Дата и время создания слова"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="Дата и время обновления слова"
+                    ),
+                ),
+                (
+                    "phrase",
+                    models.CharField(
+                        help_text="Обязательное поле",
+                        max_length=500,
+                        verbose_name="Словосочетание",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Пользователь",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'словосочетание',
-                'verbose_name_plural': 'словосочетания',
-                'constraints': [models.UniqueConstraint(fields=('phrase', 'user'), name='unique_phrase_for_user')],
+                "verbose_name": "словосочетание",
+                "verbose_name_plural": "словосочетания",
+                "constraints": [
+                    models.UniqueConstraint(
+                        fields=("phrase", "user"), name="unique_phrase_for_user"
+                    )
+                ],
             },
         ),
     ]

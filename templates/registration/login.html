@@ -4,27 +4,29 @@
 {% block title %}Вход в систему{% endblock %}
 
 {% block content %}
- <div class="row justify-content-center">
-  <div class="col-md-6 col-lg-5">
-   <div class="card shadow-sm border-0 mt-5">
-    <div class="card-body p-4 p-lg-5">
-     <h1 class="h3 mb-2 text-center">Вход в аккаунт</h1>
-     <p class="text-muted text-center mb-4">Войдите, чтобы продолжить</p>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm border-0 mt-5">
+        <div class="card-body p-4 p-lg-5">
+          <h1 class="h3 mb-2 text-center">Вход в аккаунт</h1>
+          <p class="text-muted text-center mb-4">Войдите, чтобы продолжить</p>
 
-     <form method="post">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-      <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 mt-2">
-       Войти
-      </button>
-     </form>
+          <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 mt-2">
+              Войти
+            </button>
+          </form>
 
-     <div class="text-center mt-4">
-      <p class="mb-1">Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
-      <p><a href="{% url 'index' %}">На главную</a></p>
-     </div>
+          <div class="text-center mt-4">
+            <p class="mb-1">
+              Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a>
+            </p>
+            <p><a href="{% url 'index' %}">На главную</a></p>
+          </div>
+        </div>
+      </div>
     </div>
-   </div>
   </div>
- </div>
 {% endblock %}

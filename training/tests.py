@@ -100,17 +100,17 @@ class TestWordUrls:
         auth_client,
         edit_word_url,
         word_ru,
-        detail_url,
+        word_detail_url,
         form_data,
     ):
         """Тестирование редактирования слов"""
 
-        response = auth_client.get(detail_url)
+        response = auth_client.get(word_detail_url)
         word_obj = response.context["word"]
         assert word_obj.word == word_ru.word
         # Редактирование слова
         edit_response = auth_client.post(edit_word_url, data=form_data)
         assert edit_response.status_code == 302
-        response = auth_client.get(detail_url)
+        response = auth_client.get(word_detail_url)
         word_obj = response.context["word"]
         assert word_obj.word != word_ru.word

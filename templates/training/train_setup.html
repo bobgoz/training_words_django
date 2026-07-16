@@ -4,67 +4,68 @@
 {% block title %}Настройка тренировки{% endblock %}
 
 {% block content %}
- <div class="container py-4">
-  <div class="row justify-content-center">
-   <div class="col-lg-6 col-md-8">
-    <!-- Карточка настроек -->
-    <div class="card border-0 shadow-sm">
-     <h4 class="mb-0 fw-semibold">Настройка тренировки</h4>
+  <div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <!-- Карточка настроек -->
+        <div class="card border-0 shadow-sm">
+          <h4 class="mb-0 fw-semibold">Настройка тренировки</h4>
 
-     <div class="card-body p-4 p-lg-5">
-      <form method="post">
-       {% csrf_token %}
-       {% bootstrap_form form %}
-       {% bootstrap_button "Начать тренировку" button_type="submit" button_class="btn-primary rounded-pill" %}
-       {% url 'index' as index %}
-       {% bootstrap_button "На главную страницу" button_type="link" href=index button_class="btn btn-dark rounded-pill" %}
-      </form>
-     </div>
+          <div class="card-body p-4 p-lg-5">
+            <form method="post">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {% bootstrap_button "Начать тренировку" button_type="submit" button_class="btn-primary rounded-pill" %}
+              {% url 'index' as index %}
+              {% bootstrap_button "На главную страницу" button_type="link" href=index button_class="btn btn-dark rounded-pill" %}
+            </form>
+          </div>
+        </div>
+        <!-- Дополнительная информация -->
+        <div class="text-center mt-4">
+          <small class="text-muted">
+            💡 Слова с истекшим сроком повторения будут автоматически
+            добавлены в тренировку
+          </small>
+        </div>
+      </div>
     </div>
-    <!-- Дополнительная информация -->
-    <div class="text-center mt-4">
-     <small class="text-muted">
-      💡 Слова с истекшим сроком повторения будут автоматически добавлены в тренировку
-     </small>
-    </div>
-   </div>
   </div>
- </div>
 
- <style>
-  /* Стилизация radio/checkbox */
-  .form-check-input:checked {
-   border-color: #0d6efd;
-   background-color: #0d6efd;
-  }
+  <style>
+    /* Стилизация radio/checkbox */
+    .form-check-input:checked {
+      border-color: #0d6efd;
+      background-color: #0d6efd;
+    }
 
-  .form-check-input:focus {
-   border-color: #86b7fe;
-   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-  }
+    .form-check-input:focus {
+      border-color: #86b7fe;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
 
-  /* Стилизация числового поля */
-  input[type='number'] {
-   width: 100%;
-   padding: 0.5rem 0.75rem;
-   border: 1px solid #ced4da;
-   border-radius: 0.5rem;
-   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
+    /* Стилизация числового поля */
+    input[type='number'] {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.5rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
 
-  input[type='number']:focus {
-   border-color: #86b7fe;
-   outline: 0;
-   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-  }
+    input[type='number']:focus {
+      border-color: #86b7fe;
+      outline: 0;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
 
-  /* Radio кнопки в ряд */
-  .form-check {
-   margin-bottom: 0.5rem;
-  }
+    /* Radio кнопки в ряд */
+    .form-check {
+      margin-bottom: 0.5rem;
+    }
 
-  .form-check:last-child {
-   margin-bottom: 0;
-  }
- </style>
+    .form-check:last-child {
+      margin-bottom: 0;
+    }
+  </style>
 {% endblock %}

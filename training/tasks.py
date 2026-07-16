@@ -12,9 +12,9 @@ def upload_image_to_dropbox(word_id):
         word = Word.objects.get(id=word_id)
         if word.image:
             filename = os.path.basename(word.image.name)
-            clean_path = f'images/{filename}'
+            clean_path = f"images/{filename}"
 
-            with word.image.open('rb') as f:
+            with word.image.open("rb") as f:
                 word.image.save(clean_path, ContentFile(f.read()), save=True)
 
     except Exception as e:

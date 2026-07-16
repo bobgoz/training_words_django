@@ -4,54 +4,56 @@
 {% block title %}Редактирование словосочетания{% endblock %}
 
 {% block content %}
- <div class="form-panel">
-  <div class="page-header">
-   <div>
-    <h1 class="page-title-sm">Редактирование слова</h1>
-    <p class="page-subtitle">
-     Измени карточку слова, обнови изображение или скорректируй параметры тренировки.
-    </p>
-   </div>
-   <a href="{% url 'phrase_detail' pk_phrase=phrase.pk %}" class="back-link">К карточке слова</a>
-  </div>
-
-  <div class="surface-card form-card">
-   <div class="col-md-7">
-    <form method="post" enctype="multipart/form-data" autocomplete="off">
-     {% csrf_token %}
-     {% bootstrap_form form %}
-     <div class="form-actions">
-      <button type="submit" class="btn btn-primary px-4">Сохранить изменения</button>
-      <a href="{% url 'phrase_detail' pk_phrase=phrase.pk %}" class="btn btn-outline-secondary px-4">Отмена</a>
-     </div>
-    </form>
-   </div>
-  </div>
-
-  <div class="surface-card surface-card__body mt-4">
-   <div class="meta-grid">
-    <div>
-     <span class="meta-label">Создано</span>
-     <span class="meta-value">{{ word.created_at|date:"d.m.Y H:i" }}</span>
+  <div class="form-panel">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title-sm">Редактирование слова</h1>
+        <p class="page-subtitle">
+          Измени карточку слова, обнови изображение или скорректируй
+          параметры тренировки.
+        </p>
+      </div>
+      <a href="{% url 'phrase_detail' pk_phrase=phrase.pk %}" class="back-link">К карточке слова</a>
     </div>
-    <div>
-     <span class="meta-label">Последнее изменение</span>
-     <span class="meta-value">{{ word.updated_at|date:"d.m.Y H:i" }}</span>
-    </div>
-   </div>
-  </div>
 
-  <div class="text-center mt-3">
-   <form action="{% url 'delete_phrase' pk_phrase=phrase.pk %}" method="post" class="d-inline">
-    {% csrf_token %}
-    <button
-     type="submit"
-     onclick="return confirm('Вы уверены, что хотите удалить слово «{{ word.word }}»?')"
-     class="btn btn-link text-danger text-decoration-none"
-    >
-     Удалить слово
-    </button>
-   </form>
+    <div class="surface-card form-card">
+      <div class="col-md-7">
+        <form method="post" enctype="multipart/form-data" autocomplete="off">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary px-4">Сохранить изменения</button>
+            <a href="{% url 'phrase_detail' pk_phrase=phrase.pk %}" class="btn btn-outline-secondary px-4"
+            >Отмена</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="surface-card surface-card__body mt-4">
+      <div class="meta-grid">
+        <div>
+          <span class="meta-label">Создано</span>
+          <span class="meta-value">{{ word.created_at|date:"d.m.Y H:i" }}</span>
+        </div>
+        <div>
+          <span class="meta-label">Последнее изменение</span>
+          <span class="meta-value">{{ word.updated_at|date:"d.m.Y H:i" }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-3">
+      <form action="{% url 'delete_phrase' pk_phrase=phrase.pk %}" method="post" class="d-inline">
+        {% csrf_token %}
+        <button
+          type="submit"
+          onclick="return confirm('Вы уверены, что хотите удалить слово «{{ word.word }}»?')"
+          class="btn btn-link text-danger text-decoration-none"
+        >
+          Удалить слово
+        </button>
+      </form>
+    </div>
   </div>
- </div>
 {% endblock %}

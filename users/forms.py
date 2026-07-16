@@ -10,26 +10,26 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ("username",)
 
 
 class SimplePasswordForm(forms.Form):
     """Простая форма смены пароля (без старого пароля)"""
 
     new_password1 = forms.CharField(
-        label='Новый пароль',
-        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label="Новый пароль",
+        widget=forms.PasswordInput(attrs={"class": "form-control"}),
     )
     new_password2 = forms.CharField(
-        label='Подтверждение пароля',
-        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label="Подтверждение пароля",
+        widget=forms.PasswordInput(attrs={"class": "form-control"}),
     )
 
     def clean(self):
         cleaned_data = super().clean()
-        p1 = cleaned_data.get('new_password1')
-        p2 = cleaned_data.get('new_password2')
+        p1 = cleaned_data.get("new_password1")
+        p2 = cleaned_data.get("new_password2")
 
         if p1 and p2 and p1 != p2:
-            raise forms.ValidationError('Пароли не совпадают')
+            raise forms.ValidationError("Пароли не совпадают")
         return cleaned_data

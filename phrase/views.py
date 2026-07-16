@@ -46,31 +46,31 @@ class DetailPhraseView(
     """Вью  для детального отображения."""
 
     model = Phrase
-    template_name = 'phrase/detail.html'
-    pk_url_kwarg = 'pk_phrase'
+    template_name = "phrase/detail.html"
+    pk_url_kwarg = "pk_phrase"
 
 
 class EditPhraseView(LoginRequiredMixin, UpdateView):
     """Вью для редактирования объектов."""
 
     model = Phrase
-    template_name = 'phrase/edit.html'
-    fields = ('phrase', 'is_active')
-    pk_url_kwarg = 'pk_phrase'
+    template_name = "phrase/edit.html"
+    fields = ("phrase", "is_active")
+    pk_url_kwarg = "pk_phrase"
 
 
 class DeletePhraseView(LoginRequiredMixin, DeleteView):
     """Вью для удаления объектов."""
 
     model = Phrase
-    pk_url_kwarg = 'pk_phrase'
-    context_object_name = 'phrase'
+    pk_url_kwarg = "pk_phrase"
+    context_object_name = "phrase"
     template_name = None
-    success_url = reverse_lazy('phrase_manager')
+    success_url = reverse_lazy("phrase_manager")
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, 'Удалено!')
+        messages.success(self.request, "Удалено!")
         return response
 
 
@@ -84,7 +84,7 @@ class ShowActivePhrasesView(BaseShowingViewMixin):
     """Вью для отображения актианых словосочетаний."""
 
     model = Phrase
-    page_title = 'Активные словосочетания (участвуют в тренировке)'
+    page_title = "Активные словосочетания (участвуют в тренировке)"
     empty_message = "Нет активныз словосочетаний"
 
     def get_queryset(self):
