@@ -47,7 +47,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
 
-          docker system prune -a
+          docker system prune -f
           sudo journalctl --vacuum-time=1d
           cd opt/training
           docker-compose -f docker-compose.prod.yml down
