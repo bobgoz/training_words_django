@@ -109,7 +109,12 @@ class EditWordForm(forms.ModelForm):
         instance = super().save(commit=False)
         if self.cleaned_data.get("delete_image"):
             if instance.image:
-                instance.image.delete()
+                # Если картинка есть в хранилище:
+                if instance.image.storage.exists(instance.image.name):
+                    instance.image.delete()
+                # Если в хранилище нет, но есть имя в БД
+                else:
+                    instance.image = None
         if commit:
             instance.save()
         return instance
