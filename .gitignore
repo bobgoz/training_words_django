@@ -212,7 +212,6 @@ gunicorn.ctl
 backups/
 prod/
 deploy.sh
-ex.py
 *.sh
 .vscode/
 *.json
