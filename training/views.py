@@ -24,8 +24,6 @@ from .forms import (
 )
 from .mixins import (
     BaseShowingViewMixin,
-    GetSuccessUrlMixin,
-    NextUrlMixin,
     WordAcessMixin,
 )
 from .models import TrainingSession, Word
@@ -113,7 +111,6 @@ class ShowLearnedView(BaseShowingViewMixin):
 class DetailWordView(
     LoginRequiredMixin,
     WordAcessMixin,
-    NextUrlMixin,
     DetailView,
 ):
     """Вью для детального отображения."""
@@ -126,7 +123,6 @@ class DetailWordView(
 class DeleteWordView(
     LoginRequiredMixin,
     WordAcessMixin,
-    GetSuccessUrlMixin,
     DeleteView,
 ):
     """Вью для удаление слов."""
@@ -148,8 +144,6 @@ class DeleteWordView(
 
 class EditWordView(
     WordAcessMixin,
-    NextUrlMixin,
-    GetSuccessUrlMixin,
     UpdateView,
 ):
     """Редактирование слов."""
