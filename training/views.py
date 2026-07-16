@@ -301,7 +301,6 @@ class TrainAnswerView(LoginRequiredMixin, View):
         word_id = request.POST.get("word_id")
         is_known: bool = request.POST.get("is_known") == "true"
         is_abort: bool = request.POST.get("is_abort") == "true"
-        user_input: str = request.POST.get("user_input", "").strip().lower()
 
         if is_abort:
             return redirect("train_complete")
