@@ -17,3 +17,9 @@ repos:
     hooks:
     - id: djangofmt
       args: [--indent-width, '2']
+
+-   repo: https://github.com/PyCQA/autoflake
+    rev: v2.3.3
+    hooks:
+    -   id: autoflake
+        args: [--remove-all-unused-imports,--ignore-init-module-imports, --in-place]
