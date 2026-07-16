@@ -1,13 +1,9 @@
 from http import HTTPStatus
 
 import pytest
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
-from pytest_lazy_fixtures import lf
 
 from training.models import Word
-
-from .forms import EditWordForm
 
 
 @pytest.mark.django_db

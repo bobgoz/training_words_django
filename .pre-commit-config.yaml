@@ -22,4 +22,4 @@ repos:
     rev: v2.3.3
     hooks:
     -   id: autoflake
-        args: [--remove-all-unused-imports,--ignore-init-module-imports, --in-place]
+        args: [--remove-all-unused-imports, --ignore-init-module-imports, --in-place]
