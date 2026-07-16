@@ -25,3 +25,4 @@ class TestUser(TestCase):
             "profile_info",
             "profile_edit",
         ]
+
