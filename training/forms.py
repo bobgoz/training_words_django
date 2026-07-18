@@ -102,17 +102,14 @@ class EditWordForm(forms.ModelForm):
     def save(self, commit=True):
         """Удаление картинки."""
         instance = super().save(commit=False)
-        if self.cleaned_data.get("delete_image"):
-            if instance.image:
-                # Если картинка есть в хранилище:
-                if instance.image.storage.exists(instance.image.name):
-                    instance.image.delete()
-                # Если в хранилище нет, но есть имя в БД
-                else:
-                    instance.image = None
-        if commit:
-            instance.save()
-        return instance
+        if self.cleaned_data.get("delete_image") and instance.image:
+            # Если картинка есть в хранилище:
+            if instance.image.storage.exists(instance.image.name):
+                instance.image.delete()
+            # Если в хранилище нет, но есть название в БД
+            else:
+                instance.image = None
+        return super().save(commit)
 
     class Meta:
         model = Word
