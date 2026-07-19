@@ -134,6 +134,7 @@ class DeleteWordView(
     # подтверждение осуществляется через
     # всплывающее окно в браузере.
     template_name = None
+    success_url = reverse_lazy("word_manager")
 
     def form_valid(self, form):
         """Отправка сообщения при успешном действии."""
