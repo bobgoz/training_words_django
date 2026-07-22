@@ -194,7 +194,7 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
         Word.ensure_min_active_words(request.user)
 
-        form = TrainingSettingsForm()
+        form = TrainingSettingsForm(user=request.user)
         return render(request, "training/train_setup.html", {"form": form})
 
     def post(self, request):

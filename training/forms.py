@@ -167,8 +167,12 @@ class TrainingSettingsForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         """Динамическое добавление полей."""
+        user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
-        if Word.objects.filter(language="en").exists():
+        if Word.objects.filter(
+            language="en",
+            user=user,
+        ).exists():
             self.fields["only_en_words"] = forms.BooleanField(
                 label="Только английские слова",
                 help_text="Начни тренировку английских слов",
