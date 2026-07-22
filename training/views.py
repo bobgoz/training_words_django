@@ -242,9 +242,9 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
         # Фильтр по типу слов
         if word_type == "all":
-            queryset = queryset.is_active(user).order_by("updated_at")
+            queryset = queryset.is_active(user).order_by("-updated_at")
         elif word_type == "learned":
-            queryset = queryset.is_learned(user).order_by("updated_at")
+            queryset = queryset.is_learned(user).order_by("-updated_at")
         if only_en_words:
             queryset = queryset.filter(language="en")
         elif only_ru_words:
