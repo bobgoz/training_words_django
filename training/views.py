@@ -199,7 +199,7 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
     def post(self, request):
         """Обрабатывает настройки тренировки."""
-        form = TrainingSettingsForm(request.POST)
+        form = TrainingSettingsForm(request.POST, user=request.user)
 
         if not form.is_valid():
             return render(request, "training/train_setup.html", {"form": form})
