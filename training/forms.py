@@ -61,11 +61,6 @@ class EditWordForm(forms.ModelForm):
         widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
     )
 
-    is_learned = forms.BooleanField(
-        label="Изученное слово",
-        required=False,
-        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
-    )
 
     image = forms.ImageField(
         label="Изображение",
@@ -88,12 +83,7 @@ class EditWordForm(forms.ModelForm):
         сбрасывается дата следующей тренировки.
         """
         is_active = self.cleaned_data.get("is_active")
-        is_learned = self.cleaned_data.get("is_learned")
 
-        if is_active and is_learned:
-            raise forms.ValidationError(
-                "Слово не может быть одновременно активным и изученным.",
-            )
         if is_active:
             self.cleaned_data["next_review_date"] = timezone.now()
 
@@ -118,7 +108,6 @@ class EditWordForm(forms.ModelForm):
             "definition",
             "example",
             "is_active",
-            "is_learned",
             "image",
             "next_review_date",
         )
