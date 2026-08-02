@@ -163,6 +163,10 @@ class Word(
 
         return reverse("detail", kwargs={"pk_word": self.pk})
 
+    def get_text(self):
+        """Возвращает слово."""
+        return self.word
+
 
 class TrainingSession(models.Model):
     """Сессия тренировки"""

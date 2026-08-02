@@ -17,6 +17,8 @@ from django.views.generic import (
     UpdateView,
 )
 
+from phrase.models import Phrase
+
 from .forms import (
     CreateWordForm,
     EditWordForm,
@@ -215,7 +217,7 @@ class TrainingSetupView(LoginRequiredMixin, View):
         request.session.setdefault("training_settings", settings)
 
         # Формируем список слов
-        word_ids = self._get_word_ids(request.user, form.cleaned_data)
+        word_ids, type = self._get_word_ids(request.user, form.cleaned_data)
 
         if not word_ids:
             messages.warning(
@@ -223,14 +225,20 @@ class TrainingSetupView(LoginRequiredMixin, View):
             )
             return redirect("training_setup")
 
-        request.session.setdefault("training_words", word_ids)
+        request.session.setdefault(
+            "training_words",
+            {
+                'ids': word_ids,
+                'type': type,
+            },
+        )
         request.session.setdefault("training_current_index", 0)
         request.session.setdefault("training_session_id", None)
 
         # Переходим к первому слову
         return redirect("train_card")
 
-    def _get_word_ids(self, user, cleaned_data) -> list[int]:
+    def _get_word_ids(self, user, cleaned_data) -> list:
         """Формирует список ID слов по настройкам."""
         queryset = Word.words
 
@@ -241,20 +249,25 @@ class TrainingSetupView(LoginRequiredMixin, View):
         count = cleaned_data.get("count")
 
         # Фильтр по типу слов
-        if word_type == "all":
+        if word_type == "words":
             queryset = queryset.is_active(user).order_by("-updated_at")
-        elif word_type == "learned":
-            queryset = queryset.is_learned(user).order_by("-updated_at")
+        elif word_type == "phrases":
+            queryset = Phrase.objects.filter(
+                user=user,
+                is_learned=False,
+                is_active=True,
+            )
         if only_en_words:
             queryset = queryset.filter(language="en")
         elif only_ru_words:
             queryset = queryset.filter(language="ru")
 
         # Ограничиваем количество
-        words = list(queryset.values_list("id", flat=True)[:count])
+        object_ids: list = list(queryset.values_list("id", flat=True)[:count])
+
         if is_arbitrary:
-            shuffle(words)
-        return words
+            shuffle(object_ids)
+        return object_ids, word_type
 
 
 class TrainCardView(LoginRequiredMixin, View):
@@ -265,8 +278,15 @@ class TrainCardView(LoginRequiredMixin, View):
         training_words = request.session.get("training_words")
         current_index = request.session.get("training_current_index")
 
-        word_id = training_words[current_index]
-        word = Word.objects.get(id=word_id, user=request.user)
+        object_type = training_words['type']
+        ids = training_words['ids']
+        object_id = ids[current_index]
+        if object_type == 'words':
+            current_object = Word.objects.get(pk=object_id, user=request.user)
+        else:
+            current_object = Phrase.objects.get(
+                pk=object_id, user=request.user
+            )
 
         # Прогресс
         progress: dict = {
@@ -276,7 +296,7 @@ class TrainCardView(LoginRequiredMixin, View):
         }
 
         context: dict = {
-            "word": word,
+            "object": current_object,
             "progress": progress,
             "word_type": request.session["training_settings"]["word_type"],
         }

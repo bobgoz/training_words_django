@@ -1,6 +1,5 @@
 """Модуль с моделями для приложения Phrase."""
 
-
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -40,3 +39,7 @@ class Phrase(
     def get_absolute_url(self):
         """Возвращает аюсолютный юрл объекта."""
         return reverse("phrase_detail", kwargs={"pk_phrase": self.pk})
+
+    def get_text(self):
+        """Возвращает словосочетание."""
+        return self.phrase

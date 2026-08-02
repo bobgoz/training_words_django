@@ -61,7 +61,6 @@ class EditWordForm(forms.ModelForm):
         widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
     )
 
-
     image = forms.ImageField(
         label="Изображение",
         required=False,
@@ -129,15 +128,15 @@ class TrainingSettingsForm(forms.Form):
     COUNT_CHOICES = [(i, str(i)) for i in NUMBER_OF_WORD]
 
     WORD_TYPE_CHOICES = [
-        ("all", "Активные"),
-        ("learned", "Изученные"),
+        ("words", "Слова"),
+        ("phrases", "Словосочетания"),
     ]
 
     word_type = forms.ChoiceField(
         choices=WORD_TYPE_CHOICES,
         widget=forms.RadioSelect,
         initial=WORD_TYPE_CHOICES[0],
-        label="Тип слов",
+        label="Тип тренировки",
     )
 
     count = forms.TypedChoiceField(
