@@ -114,3 +114,5 @@ class TestWordUrls:
         response = auth_client.get(word_detail_url)
         word_obj = response.context["word"]
         assert word_obj.word != word_ru.word
+        
+

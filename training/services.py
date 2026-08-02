@@ -1,6 +1,5 @@
 def clean_session(request):
     """Очистка сессии."""
-    # Очищаем сессию
     request.session.pop("training_words", None)
     request.session.pop("training_current_index", None)
     request.session.pop("training_settings", None)

@@ -75,17 +75,26 @@ class EditWordForm(forms.ModelForm):
     def clean(self):
         """Очищает данные формы.
 
-        Нельзя использовать два флага
-        is_active и is_learned одновременно.
-
         Если Пользователь выбрал слово как активное,
         сбрасывается дата следующей тренировки.
+
+        Если объект сохраняется
+        с флагом is_active, флаг
+        is_learned становится False
+        для корректного поддержания
+        структуры в БД.
+
         """
         is_active = self.cleaned_data.get("is_active")
 
         if is_active:
+            self.cleaned_data['is_learned'] = False
             self.cleaned_data["next_review_date"] = timezone.now()
-
+        else:
+            # Неактивный объект с флагом is_learned = False становится
+            # неизученным объектом.
+            self.cleaned_data["next_review_date"] = timezone.now()
+            self.cleaned_data['is_learned'] = False
         return super().clean()
 
     def save(self, commit=True):
@@ -173,7 +182,15 @@ class TrainingSettingsForm(forms.Form):
             )
 
     def clean(self):
-        """Очистка данных формы."""
+        """
+        Очистка данных формы.
+
+        Если объект сохраняется
+        с флагом is_active, флаг
+        is_learned становится False
+        для корректного поддержания
+        структуры в БД.
+        """
         only_en_words = self.cleaned_data.get("only_en_words")
         only_ru_words = self.cleaned_data.get("only_ru_words")
         if only_en_words and only_ru_words:

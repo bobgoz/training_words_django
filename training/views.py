@@ -217,9 +217,9 @@ class TrainingSetupView(LoginRequiredMixin, View):
         request.session.setdefault("training_settings", settings)
 
         # Формируем список слов
-        word_ids, type = self._get_word_ids(request.user, form.cleaned_data)
+        object_ids = self._get_word_ids(request.user, form.cleaned_data)
 
-        if not word_ids:
+        if not object_ids:
             messages.warning(
                 request, "Нет слов для тренировки с выбранными параметрами!"
             )
@@ -228,8 +228,8 @@ class TrainingSetupView(LoginRequiredMixin, View):
         request.session.setdefault(
             "training_words",
             {
-                'ids': word_ids,
-                'type': type,
+                'ids': object_ids,
+                'type': word_type,
             },
         )
         request.session.setdefault("training_current_index", 0)
@@ -240,7 +240,6 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
     def _get_word_ids(self, user, cleaned_data) -> list:
         """Формирует список ID слов по настройкам."""
-        queryset = Word.words
 
         only_en_words = cleaned_data.get("only_en_words")
         only_ru_words = cleaned_data.get("only_ru_words")
@@ -250,13 +249,13 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
         # Фильтр по типу слов
         if word_type == "words":
-            queryset = queryset.is_active(user).order_by("-updated_at")
+            queryset = Word.words.is_active(user).order_by("-updated_at")
         elif word_type == "phrases":
             queryset = Phrase.objects.filter(
                 user=user,
                 is_learned=False,
                 is_active=True,
-            )
+            ).order_by("-updated_at")
         if only_en_words:
             queryset = queryset.filter(language="en")
         elif only_ru_words:
@@ -267,7 +266,7 @@ class TrainingSetupView(LoginRequiredMixin, View):
 
         if is_arbitrary:
             shuffle(object_ids)
-        return object_ids, word_type
+        return object_ids
 
 
 class TrainCardView(LoginRequiredMixin, View):
@@ -277,10 +276,10 @@ class TrainCardView(LoginRequiredMixin, View):
         """Показать карточку текущего слова."""
         training_words = request.session.get("training_words")
         current_index = request.session.get("training_current_index")
+        training_ids = training_words['ids']
 
         object_type = training_words['type']
-        ids = training_words['ids']
-        object_id = ids[current_index]
+        object_id = training_ids[current_index]
         if object_type == 'words':
             current_object = Word.objects.get(pk=object_id, user=request.user)
         else:
@@ -291,8 +290,8 @@ class TrainCardView(LoginRequiredMixin, View):
         # Прогресс
         progress: dict = {
             "current": current_index + 1,
-            "total": len(training_words),
-            "percent": (current_index + 1) / len(training_words) * 100,
+            "total": len(training_ids),
+            "percent": (current_index + 1) / len(training_ids) * 100,
         }
 
         context: dict = {
@@ -309,17 +308,26 @@ class TrainAnswerView(LoginRequiredMixin, View):
 
     def post(self, request):
         """Обработка действий пользователя."""
-        word_id = request.POST.get("word_id")
+        object_id = request.POST.get("word_id")
+
+        training_words = request.session.get("training_words")
+        object_type = training_words['type']
+        training_ids = training_words['ids']
+        # object_id = request.session.get("training_current_index")
+
         is_known: bool = request.POST.get("is_known") == "true"
         is_abort: bool = request.POST.get("is_abort") == "true"
 
         if is_abort:
             return redirect("train_complete")
 
-        word = Word.objects.get(id=word_id, user=request.user)
+        if object_type == 'words':
+            object = Word.objects.get(pk=object_id, user=request.user)
+        else:
+            object = Phrase.objects.get(pk=object_id, user=request.user)
 
         # Меняем поле is_active на False уже тут
-        word.update_review_schedule(is_known)
+        object.update_review_schedule(is_known)
 
         # Создаём сессию тренировки, если ещё нет
         if not request.session["training_session_id"]:
@@ -350,9 +358,7 @@ class TrainAnswerView(LoginRequiredMixin, View):
         current_index = request.session.get("training_current_index", 0)
         request.session["training_current_index"] = current_index + 1
 
-        training_words = request.session.get("training_words", [])
-
-        if current_index + 1 >= len(training_words):
+        if current_index + 1 >= len(training_ids):
             return redirect("train_complete")
 
         return redirect("train_card")

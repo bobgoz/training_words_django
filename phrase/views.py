@@ -11,7 +11,7 @@ from django.views.generic import (
 
 from training.mixins import LoginRequiredMixin
 
-from .forms import CreatePhraseForm
+from .forms import CreatePhraseForm, EditPhraseForm
 from .mixins import BaseShowingViewMixin
 from .models import Phrase
 
@@ -55,7 +55,7 @@ class EditPhraseView(LoginRequiredMixin, UpdateView):
 
     model = Phrase
     template_name = "phrase/edit.html"
-    fields = ("phrase", "is_active")
+    form_class = EditPhraseForm
     pk_url_kwarg = "pk_phrase"
 
 
