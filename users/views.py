@@ -97,7 +97,7 @@ class StatisticsView(LoginRequiredMixin, TemplateView):
         # Базовые данные
         all_words = Word.objects.filter(user=user)
         active_words = Word.words.is_active(user)
-        inactive_words = Word.words.is_not_active(user)
+        inactive_words = Word.words.inactive(user)
         learned_words = Word.words.is_learned(user)
 
         total_count = all_words.count()
@@ -120,10 +120,14 @@ class StatisticsView(LoginRequiredMixin, TemplateView):
 
         # Слова за последний месяц
         words_added_month = all_words.filter(created_at__gte=month_ago).count()
-        words_learned_month = learned_words.filter(updated_at__gte=month_ago).count()
+        words_learned_month = learned_words.filter(
+            updated_at__gte=month_ago
+        ).count()
 
         # Активность (тренировки за последние 30 дней)
-        sessions = TrainingSession.objects.filter(user=user, started_at__gte=month_ago)
+        sessions = TrainingSession.objects.filter(
+            user=user, started_at__gte=month_ago
+        )
         sessions_count = sessions.count()
         total_trainings = (
             sessions.aggregate(total=models.Sum("total_words"))["total"] or 0

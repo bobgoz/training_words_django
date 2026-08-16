@@ -3,7 +3,7 @@ from django.utils import timezone
 
 
 class WordManager(models.Manager):
-    """Кастомный менеджер для модели Word"""
+    """Кастомный менеджер для модели Word."""
 
     def all_self(self, user):
         """Все слова пользователя."""
@@ -11,7 +11,9 @@ class WordManager(models.Manager):
 
     def activate_due_words(self, user):
         """Активация истекших слов"""
-        self.is_learned(user).filter(next_review_date__lte=timezone.now(),).update(
+        self.is_learned(user).filter(
+            next_review_date__lte=timezone.now(),
+        ).update(
             is_active=True,
             is_learned=False,
         )
@@ -25,7 +27,7 @@ class WordManager(models.Manager):
             is_learned=False,
         )
 
-    def is_not_active(self, user):
+    def inactive(self, user):
         """Только неактивные слова"""
         return self.all_self(user).filter(
             is_active=False,
@@ -58,10 +60,6 @@ class WordManager(models.Manager):
     def count_all_learned(self, user):
         """Количество всех изученных слов"""
         return self.is_learned(user).count()
-
-    def random_words(self, user):
-        """Рандомные слова"""
-        return self.is_active(user).order_by("?")
 
     # ----------Локализация----------
     def language_ru(self, user):

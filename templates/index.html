@@ -4,131 +4,225 @@
 {% block title %}Главная страница{% endblock %}
 
 {% block content %}
-  <div class="row justify-content-center">
-    <div class="col-lg-10 col-xl-9">
-      {% if user.is_authenticated %}
-        <div class="page-header page-header--center">
-          <div>
-            <h1 class="page-title">Привет, {{ user.first_name|default:user.username }}.</h1>
-            <p class="page-subtitle">
-              Здесь собраны твои слова, текущий прогресс и быстрые
-              действия для тренировки.
-            </p>
-          </div>
-        </div>
-        <div class="row g-3 stats-grid">
-          <div class="col-6 col-lg-3">
-            <a href="{% url 'word_manager' %}" class="text-decoration-none">
-              <div class="surface-card surface-card__body stat-card stat-card--primary hover-lift">
-                <div class="stat-card__value">{{ total_words }}</div>
-                <div class="stat-card__label">Всего слов</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-6 col-lg-3">
-            <a href="{% url 'inactive_words' %}" class="text-decoration-none">
-              <div class="surface-card surface-card__body stat-card stat-card--warning hover-lift">
-                <div class="stat-card__value">{{ count_inactive }}</div>
-                <div class="stat-card__label">Ожидающие изучения</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-6 col-lg-3">
-            <a href="{% url 'active_words' %} " class="text-decoration-none">
-              <div class="surface-card surface-card__body stat-card stat-card--success hover-lift">
-                <div class="stat-card__value">{{ active_words }}</div>
-                <div class="stat-card__label">Активных</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-6 col-lg-3">
-            <a href="{% url 'learned_words' %}" class="text-decoration-none">
-              <div class="surface-card surface-card__body stat-card stat-card--teal hover-lift">
-                <div class="stat-card__value">{{ learned_words }}</div>
-                <div class="stat-card__label">Изученных</div>
-              </div>
-            </a>
-          </div>
-        </div>
+<div class="row justify-content-center">
+  <div class="col-lg-10 col-xl-9">
 
-        <div class="action-row action-row--center">
-          <a href="{% url 'training_setup' %}" class="btn btn-primary rounded-pill"
-          >Начать тренировку</a>
-          <a href="{% url 'add_word' %}" class="btn btn-outline-primary rounded-pill">Добавить слово</a>
+    {% if user.is_authenticated %}
+      <!-- Приветствие -->
+      <div class="page-header page-header--center">
+        <div>
+          <h1 class="page-title">Привет, {{ user.first_name|default:user.username }}.</h1>
+          <p class="page-subtitle">
+            Здесь собраны твои слова, текущий прогресс и быстрые действия для тренировки.
+          </p>
         </div>
+      </div>
 
-        <div class="info-banner">
-          <div class="info-banner__icon">i</div>
-          <div>
-            <strong class="info-banner__title"
-            >Лучший эффект дает регулярная практика</strong>
-            <p class="info-banner__text">
-              Даже короткая ежедневная тренировка помогает запоминать
-              новые слова заметно быстрее.
-            </p>
-          </div>
-        </div>
-      {% else %}
-        <div class="page-header page-header--center">
-          <div>
-            <h1 class="page-title">Учи слова спокойно и системно.</h1>
-            <p class="page-subtitle">
-              Добавляй новые слова, возвращайся к сложным и отслеживай
-              прогресс в одном месте.
-            </p>
-          </div>
-        </div>
+      <!-- Табы -->
+      <ul class="nav nav-tabs mb-4" id="statsTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="words-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#words"
+            type="button"
+            role="tab"
+            aria-controls="words"
+            aria-selected="true"
+          >
+            Слова
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="phrases-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#phrases"
+            type="button"
+            role="tab"
+            aria-controls="phrases"
+            aria-selected="false"
+          >
+            Словосочетания
+          </button>
+        </li>
+      </ul>
 
-        <div class="row g-3">
-          <div class="col-md-4">
-            <div class="surface-card surface-card__body feature-card hover-lift">
-              <div class="feature-card__icon">1</div>
-              <h2 class="h5 feature-card__title">Собирай словарь</h2>
-              <p class="feature-card__text">
-                Храни свои слова, определения, примеры и изображения в
-                личной базе.
-              </p>
+      <!-- Контент табов -->
+      <div class="tab-content" id="statsTabContent">
+
+        <!-- ============================================================ -->
+        <!-- Вкладка: Слова -->
+        <!-- ============================================================ -->
+        <div
+          class="tab-pane fade show active"
+          id="words"
+          role="tabpanel"
+          aria-labelledby="words-tab"
+        >
+          <div class="row g-3 stats-grid">
+            <div class="col-6 col-lg-3">
+              <a href="{% url 'word_manager' %}" class="text-decoration-none">
+                <div class="surface-card surface-card__body stat-card stat-card--primary hover-lift">
+                  <div class="stat-card__value">{{ total_words }}</div>
+                  <div class="stat-card__label">Всего слов</div>
+                </div>
+              </a>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="surface-card surface-card__body feature-card hover-lift">
-              <div class="feature-card__icon">2</div>
-              <h2 class="h5 feature-card__title">Тренируйся регулярно</h2>
-              <p class="feature-card__text">
-                Работай с активными словами, возвращайся к сложным и
-                переключайся на случайные подборки.
-              </p>
+            <div class="col-6 col-lg-3">
+              <a href="{% url 'inactive_words' %}" class="text-decoration-none">
+                <div class="surface-card surface-card__body stat-card stat-card--warning hover-lift">
+                  <div class="stat-card__value">{{ count_inactive }}</div>
+                  <div class="stat-card__label">Ожидающие изучения</div>
+                </div>
+              </a>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="surface-card surface-card__body feature-card hover-lift">
-              <div class="feature-card__icon">3</div>
-              <h2 class="h5 feature-card__title">Следи за прогрессом</h2>
-              <p class="feature-card__text">
-                Смотри, сколько слов уже освоено, а какие требуют
-                дополнительного повторения.
-              </p>
+            <div class="col-6 col-lg-3">
+              <a href="{% url 'active_words' %}" class="text-decoration-none">
+                <div class="surface-card surface-card__body stat-card stat-card--success hover-lift">
+                  <div class="stat-card__value">{{ active_words }}</div>
+                  <div class="stat-card__label">Активных</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-6 col-lg-3">
+              <a href="{% url 'learned_words' %}" class="text-decoration-none">
+                <div class="surface-card surface-card__body stat-card stat-card--teal hover-lift">
+                  <div class="stat-card__value">{{ learned_words }}</div>
+                  <div class="stat-card__label">Изученных</div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="action-row action-row--center mt-4">
-          <a href="{% url 'login' %}" class="btn btn-primary px-4 rounded-pill">Войти</a>
-          <a href="{% url 'register' %}" class="btn btn-outline-primary px-4 rounded-pill"
-          >Создать аккаунт</a>
+        <!-- ============================================================ -->
+        <!-- Вкладка: Словосочетания -->
+        <!-- ============================================================ -->
+        <div
+          class="tab-pane fade"
+          id="phrases"
+          role="tabpanel"
+          aria-labelledby="phrases-tab"
+        >
+          <div class="row g-3 stats-grid">
+            <div class="col-6 col-lg-3">
+              <a href="{% url 'phrase_manager' %}" class="text-decoration-none">
+                <div class="surface-card surface-card__body stat-card stat-card--primary hover-lift">
+                  <div class="stat-card__value">{{ total_phrases }}</div>
+                  <div class="stat-card__label">Всего словосочетаний</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-6 col-lg-3">
+              <a href="{% url 'inactive_phrases' %}" class="text-decoration-none">
+                <div class="surface-card surface-card__body stat-card stat-card--warning hover-lift">
+                  <div class="stat-card__value">{{ inactive_phrases }}</div>
+                  <div class="stat-card__label">Ожидающие изучения</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-6 col-lg-3">
+              <a href="{% url 'active_phrases' %}" class="text-decoration-none">
+                <div class="surface-card surface-card__body stat-card stat-card--success hover-lift">
+                  <div class="stat-card__value">{{ active_phrases }}</div>
+                  <div class="stat-card__label">Активных</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-6 col-lg-3">
+              <a href="{% url 'learned_phrases' %}" class="text-decoration-none">
+                <div class="surface-card surface-card__body stat-card stat-card--teal hover-lift">
+                  <div class="stat-card__value">{{ learned_phrases }}</div>
+                  <div class="stat-card__label">Изученных</div>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div class="info-banner">
-          <div class="info-banner__icon">+</div>
-          <div>
-            <strong class="info-banner__title">Начни с нескольких слов</strong>
-            <p class="info-banner__text">
-              Небольшой словарь уже даст тебе материал для первой
-              регулярной практики.
+      </div>
+
+      <!-- Кнопки действий -->
+      <div class="action-row action-row--center mt-4">
+        <a href="{% url 'training_setup' %}" class="btn btn-primary rounded-pill">
+          Начать тренировку
+        </a>
+        <a href="{% url 'add_word' %}" class="btn btn-outline-primary rounded-pill">
+          Добавить слово
+        </a>
+      </div>
+
+      <!-- Инфо-баннер -->
+      <div class="info-banner">
+        <div class="info-banner__icon">i</div>
+        <div>
+          <strong class="info-banner__title">Лучший эффект дает регулярная практика</strong>
+          <p class="info-banner__text">
+            Даже короткая ежедневная тренировка помогает запоминать новые слова заметно быстрее.
+          </p>
+        </div>
+      </div>
+
+    {% else %}
+      <!-- Неавторизованный пользователь -->
+      <div class="page-header page-header--center">
+        <div>
+          <h1 class="page-title">Учи слова спокойно и системно.</h1>
+          <p class="page-subtitle">
+            Добавляй новые слова, возвращайся к сложным и отслеживай прогресс в одном месте.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="surface-card surface-card__body feature-card hover-lift">
+            <div class="feature-card__icon">1</div>
+            <h2 class="h5 feature-card__title">Собирай словарь</h2>
+            <p class="feature-card__text">
+              Храни свои слова, определения, примеры и изображения в личной базе.
             </p>
           </div>
         </div>
-      {% endif %}
-    </div>
+        <div class="col-md-4">
+          <div class="surface-card surface-card__body feature-card hover-lift">
+            <div class="feature-card__icon">2</div>
+            <h2 class="h5 feature-card__title">Тренируйся регулярно</h2>
+            <p class="feature-card__text">
+              Работай с активными словами, возвращайся к сложным и переключайся на случайные подборки.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="surface-card surface-card__body feature-card hover-lift">
+            <div class="feature-card__icon">3</div>
+            <h2 class="h5 feature-card__title">Следи за прогрессом</h2>
+            <p class="feature-card__text">
+              Смотри, сколько слов уже освоено, а какие требуют дополнительного повторения.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-row action-row--center mt-4">
+        <a href="{% url 'login' %}" class="btn btn-primary px-4 rounded-pill">Войти</a>
+        <a href="{% url 'register' %}" class="btn btn-outline-primary px-4 rounded-pill">Создать аккаунт</a>
+      </div>
+
+      <div class="info-banner">
+        <div class="info-banner__icon">+</div>
+        <div>
+          <strong class="info-banner__title">Начни с нескольких слов</strong>
+          <p class="info-banner__text">
+            Небольшой словарь уже даст тебе материал для первой регулярной практики.
+          </p>
+        </div>
+      </div>
+    {% endif %}
+
   </div>
+</div>
 {% endblock %}

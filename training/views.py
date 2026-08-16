@@ -81,7 +81,7 @@ class ShowInactiveWordsView(BaseShowingViewMixin):
 
     def get_queryset(self):
         """Возвращает список неактивных слов."""
-        return Word.words.is_not_active(self.request.user)
+        return Word.words.inactive(self.request.user)
 
     def get_context_data(self, **kwargs):
         """Передача данных в контекст."""

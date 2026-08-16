@@ -132,7 +132,7 @@ class Word(
 
             # Приоритет слова, обновленные давно
             ids_to_activate = list(
-                cls.words.is_not_active(
+                cls.words.inactive(
                     user,
                 )
                 .filter(
