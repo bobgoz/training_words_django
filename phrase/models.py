@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
+from phrase.managers import PhraseManager
 from training.constants import PHRASE_MAX_LENGTH
 from training.mixins import BaseIntervalLogicMixin, BaseTimestampMixin
 
@@ -25,6 +26,9 @@ class Phrase(
         help_text="Обязательное поле",
     )
 
+    phrases = PhraseManager()
+    objects = models.Manager()
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
@@ -43,3 +47,6 @@ class Phrase(
     def get_text(self):
         """Возвращает словосочетание."""
         return self.phrase
+    
+    def __str__(self):
+        return f'{self.phrase} -> {self.user}'

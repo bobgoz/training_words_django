@@ -8,7 +8,7 @@ class PhraseManager(models.Manager):
     """Кастомный менеджер для модели Phrase."""
 
     def all_self(self, user):
-        """Все слова пользователя."""
+        """Все словосочетания пользователя."""
         return super().get_queryset().filter(user=user)
 
     def activate_due_words(self, user):
@@ -23,6 +23,7 @@ class PhraseManager(models.Manager):
     def is_active(self, user):
         """Только активные словосочетания с активацией просроченных."""
         self.activate_due_words(user)
+        print('Активировано!')
 
         return self.all_self(user).filter(
             is_active=True,

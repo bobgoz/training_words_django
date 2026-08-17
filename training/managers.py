@@ -21,6 +21,7 @@ class WordManager(models.Manager):
     def is_active(self, user):
         """Только активные слова с активацией просроченных"""
         self.activate_due_words(user)
+        print('Активировано!')
 
         return self.all_self(user).filter(
             is_active=True,

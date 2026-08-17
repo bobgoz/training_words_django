@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 
+from phrase.models import Phrase
 from training.models import Word
 
 
@@ -9,21 +10,40 @@ class IndexView(TemplateView):
     template_name = "index.html"
 
     def get_context_data(self, **kwargs):
-        """Передача в контекст количества слов"""
+        """Передача в контекст количества"""
         context = super().get_context_data(**kwargs)
 
-        if self.request.user.is_authenticated:
+        user = self.request.user
+
+        if user.is_authenticated:
+            # Слова.
             context["learned_words"] = Word.words.count_all_learned(
-                self.request.user,
+                user,
             )
             context["total_words"] = Word.words.count_all_words(
-                self.request.user,
+                user,
             )
             context["active_words"] = Word.words.count_active(
-                self.request.user,
+                user,
             )
             context["count_inactive"] = Word.words.count_inactive(
-                self.request.user,
+                user,
+            )
+            # Словосочетания.
+            context["total_phrases"] = Phrase.phrases.count_inactive(
+                user,
+            )
+            context["inactive_phrases"] = Phrase.phrases.count_inactive(
+                user,
+            )
+            context["inactive_phrases"] = Phrase.phrases.count_inactive(
+                user,
+            )
+            context["active_phrases"] = Phrase.phrases.count_inactive(
+                user,
+            )
+            context["learned_phrases"] = Phrase.phrases.count_inactive(
+                user,
             )
 
         return context

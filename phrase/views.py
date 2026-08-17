@@ -88,7 +88,7 @@ class ShowActivePhrasesView(BaseShowingViewMixin):
     empty_message = "Нет активныз словосочетаний"
 
     def get_queryset(self):
-        return super().get_queryset().filter(is_active=True, is_learned=False)
+        return Phrase.phrases.is_active(self.request.user)
 
 
 class ShowInactivePhrasesView(BaseShowingViewMixin):
@@ -99,7 +99,7 @@ class ShowInactivePhrasesView(BaseShowingViewMixin):
     empty_message = "Нет новых словосочетаний"
 
     def get_queryset(self):
-        return super().get_queryset().filter(is_active=False, is_learned=False)
+        return Phrase.phrases.inactive(self.request.user)
 
 
 class ShowLearnedPhrasesView(BaseShowingViewMixin):
@@ -110,4 +110,4 @@ class ShowLearnedPhrasesView(BaseShowingViewMixin):
     empty_message = "Нет выученных словосочетаний"
 
     def get_queryset(self):
-        return super().get_queryset().filter(is_active=False, is_learned=True)
+        return Phrase.phrases.is_learned(self.request.user)
