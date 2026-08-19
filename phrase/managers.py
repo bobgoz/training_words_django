@@ -23,7 +23,7 @@ class PhraseManager(models.Manager):
     def is_active(self, user):
         """Только активные словосочетания с активацией просроченных."""
         self.activate_due_words(user)
-        print('Активировано!')
+        ('Активировано!')
 
         return self.all_self(user).filter(
             is_active=True,

@@ -1,23 +1,21 @@
 import csv
+from pathlib import Path
 
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
+from phrase.models import Phrase
 from training.models import Word
+
+BASE_DIR = Path(__file__).parent
 
 User = get_user_model()
 
 
 class Command(BaseCommand):
-    help = 'Импорт слов из CSV-файла'
+    help = 'Импорт объектов из CSV-файла'
 
     def add_arguments(self, parser):
-        parser.add_argument(
-            '--file_path',
-            type=str,
-            help='Путь к CSV-файлу',
-            default=r'training/data/words.csv',
-        )
         parser.add_argument(
             '--username',
             type=str,
@@ -26,52 +24,61 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        file_path = options['file_path']
+        # Очищаем все записи в таблице.
+        User.objects.all().delete()
+        Phrase.objects.all().delete()
+        Word.objects.all().delete()
+
         username = options['username']
 
-        # Получаем или создаём пользователя
-        user, created = User.objects.get_or_create(
+        password = 'frikazoid'
+
+        # Создание пользователя
+        user = User.objects.create_user(
             username=username,
+            password=password,
         )
-        if created:
-            user.set_password('frikazoid')
-            user.save()
 
-        self.stdout.write(f'Пользователь: {user.username}')
-
-        # Читаем CSV
+        # Чтение CSV.
         try:
+            # Чтение из файла words.csv
+            file_path = BASE_DIR / 'words.csv'
             with open(file_path, 'r', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
                 count = 0
-                skipped = 0
 
                 for row in reader:
-                    word_text = row.get('word', '').strip()
-                    if not word_text:
-                        skipped += 1
-                        continue
-
-                    # Проверяем, есть ли уже такое слово у пользователя
-                    if Word.objects.filter(user=user, word=word_text).exists():
-                        self.stdout.write(
-                            f'Слово "{word_text}" уже существует'
-                        )
-                        skipped += 1
-                        continue
+                    word_from_csv = row.get('word').strip()
 
                     # Создаём слово
                     Word.objects.create(
                         user=user,
-                        word=word_text,
+                        word=word_from_csv,
                         definition=row.get('definition', '').strip(),
                     )
                     count += 1
-                    self.stdout.write(f'Добавлено: {word_text}')
+
+                self.stdout.write(self.style.SUCCESS(f'Создано {count} слов.'))
+
+                # Чтение из файла phrase.csv
+                file_path = BASE_DIR / 'phrases.csv'
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    count = 0
+                    for row in reader:
+                        phrase_from_csv = row.get('phrase').strip()
+                        Phrase.objects.create(
+                            user=user,
+                            phrase=phrase_from_csv,
+                        )
+                        count += 1
 
                 self.stdout.write(
+                    self.style.SUCCESS(f'Создано {count} словосочетаний.')
+                )
+                self.stdout.write(
                     self.style.SUCCESS(
-                        f'Готово! Добавлено: {count}, Пропущено: {skipped}'
+                        f'Данные для входа:\nusername: {username}, пароль: {password}'
                     )
                 )
 
