@@ -20,7 +20,7 @@ class PhraseCreateView(LoginRequiredMixin, CreateView):
     """Вью для создания словосочетания"""
 
     model = Phrase
-    template_name = "training/create_phrase.html"
+    template_name = "phrase/create_phrase.html"
     form_class = CreatePhraseForm
     success_url = reverse_lazy("add_phrase")
 
