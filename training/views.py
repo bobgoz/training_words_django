@@ -195,6 +195,7 @@ class TrainingSetupView(LoginRequiredMixin, View):
         clean_session(request)
 
         Word.ensure_min_active_words(request.user)
+        Phrase.ensure_min_active_phrases(request.user)
 
         form = TrainingSettingsForm(user=request.user)
         return render(request, "training/train_setup.html", {"form": form})
@@ -251,11 +252,7 @@ class TrainingSetupView(LoginRequiredMixin, View):
         if word_type == "words":
             queryset = Word.words.is_active(user).order_by("-updated_at")
         elif word_type == "phrases":
-            queryset = Phrase.objects.filter(
-                user=user,
-                is_learned=False,
-                is_active=True,
-            ).order_by("-updated_at")
+            queryset = Phrase.phrases.is_active(user).order_by("-updated_at")
         if only_en_words:
             queryset = queryset.filter(language="en")
         elif only_ru_words:
@@ -413,6 +410,7 @@ class TrainCompleteView(LoginRequiredMixin, View):
               полностью очищаются.
         """
         Word.ensure_min_active_words(request.user)
+        Phrase.ensure_min_active_phrases(request.user)
 
         settings = request.session.get("training_settings")
 

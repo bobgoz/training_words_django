@@ -30,19 +30,16 @@ class IndexView(TemplateView):
                 user,
             )
             # Словосочетания.
-            context["total_phrases"] = Phrase.phrases.count_inactive(
+            context["total_phrases"] = Phrase.phrases.count_all_phrases(
                 user,
             )
             context["inactive_phrases"] = Phrase.phrases.count_inactive(
                 user,
             )
-            context["inactive_phrases"] = Phrase.phrases.count_inactive(
+            context["active_phrases"] = Phrase.phrases.count_active(
                 user,
             )
-            context["active_phrases"] = Phrase.phrases.count_inactive(
-                user,
-            )
-            context["learned_phrases"] = Phrase.phrases.count_inactive(
+            context["learned_phrases"] = Phrase.phrases.count_all_learned(
                 user,
             )
 

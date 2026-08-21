@@ -129,7 +129,6 @@ class Word(
         if active_count < MIN_ACTIVE_WORDS:
             # Сколько нужно добавить
             needed = MIN_ACTIVE_WORDS - active_count
-
             # Приоритет слова, обновленные давно
             ids_to_activate = list(
                 cls.words.inactive(

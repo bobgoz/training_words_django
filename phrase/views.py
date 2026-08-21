@@ -83,7 +83,6 @@ class PhraseManagerView(LoginRequiredMixin, TemplateView):
 class ShowActivePhrasesView(BaseShowingViewMixin):
     """Вью для отображения актианых словосочетаний."""
 
-    model = Phrase
     page_title = "Активные словосочетания (участвуют в тренировке)"
     empty_message = "Нет активныз словосочетаний"
 
@@ -94,7 +93,6 @@ class ShowActivePhrasesView(BaseShowingViewMixin):
 class ShowInactivePhrasesView(BaseShowingViewMixin):
     """Вью для отображения новых (неактивных) словосочетаний"""
 
-    model = Phrase
     page_title = "Новые словосочетания, в ожидании изучения"
     empty_message = "Нет новых словосочетаний"
 
@@ -105,7 +103,6 @@ class ShowInactivePhrasesView(BaseShowingViewMixin):
 class ShowLearnedPhrasesView(BaseShowingViewMixin):
     """Вью для отображения изученных словосочетаний"""
 
-    model = Phrase
     page_title = "Выученные словосочетания"
     empty_message = "Нет выученных словосочетаний"
 
