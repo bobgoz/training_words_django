@@ -95,6 +95,14 @@
                 </a>
               </div>
             </div>
+            <div class="text-center">
+              <a href="{% url 'add_word' %}" class="btn btn-outline-primary rounded-pill">
+                Добавить слово
+              </a>
+              <a href="{% url 'training_setup' %}" class="btn btn-primary rounded-pill">
+                Начать тренировку
+              </a>
+            </div>
           </div>
 
           <!-- ============================================================ -->
@@ -139,18 +147,16 @@
                   </div>
                 </a>
               </div>
+              <div class="text-center">
+                <a href="{% url 'add_phrase' %}" class="btn btn-outline-primary rounded-pill">
+                  Добавить словосочетание
+                </a>
+                <a href="{% url 'training_setup' %}" class="btn btn-primary rounded-pill">
+                  Начать тренировку
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- Кнопки действий -->
-        <div class="action-row action-row--center mt-4">
-          <a href="{% url 'training_setup' %}" class="btn btn-primary rounded-pill">
-            Начать тренировку
-          </a>
-          <a href="{% url 'add_word' %}" class="btn btn-outline-primary rounded-pill">
-            Добавить слово
-          </a>
         </div>
 
         <!-- Инфо-баннер -->

@@ -1,3 +1,5 @@
+"""Модуль с кастомной командой для пополнения БД данными."""
+
 import csv
 from pathlib import Path
 
@@ -13,28 +15,36 @@ User = get_user_model()
 
 
 class Command(BaseCommand):
-    help = 'Импорт объектов из CSV-файла'
+    """Класс кастомной команды."""
+
+    help = "Импорт объектов из CSV-файла"
 
     def add_arguments(self, parser):
+        """Добавляет аргументы командной строки для импорта данных."""
         parser.add_argument(
-            '--username',
+            "--username",
             type=str,
-            default='admin',
-            help='Имя пользователя (по умолчанию: admin)',
+            default="admin",
+            help="Имя пользователя (по умолчанию: admin)",
         )
 
     def handle(self, *args, **options):
+        """Выполняет импорт данных из CSV-файлов.
+
+        Очищает БД, создаёт суперпользователя и загружает
+        слова и словосочетания.
+        """
         # Очищаем все записи в таблице.
         User.objects.all().delete()
         Phrase.objects.all().delete()
         Word.objects.all().delete()
 
-        username = options['username']
+        username = options["username"]
 
-        password = 'frikazoid'
+        password = "frikazoid"
 
         # Создание пользователя
-        user = User.objects.create_user(
+        user = User.objects.create_superuser(
             username=username,
             password=password,
         )
@@ -42,31 +52,31 @@ class Command(BaseCommand):
         # Чтение CSV.
         try:
             # Чтение из файла words.csv
-            file_path = BASE_DIR / 'words.csv'
-            with open(file_path, 'r', encoding='utf-8') as f:
+            path_to_words_file = BASE_DIR / "words.csv"
+            with open(path_to_words_file, "r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
                 count = 0
 
                 for row in reader:
-                    word_from_csv = row.get('word').strip()
+                    word_from_csv = row.get("word").strip()
 
                     # Создаём слово
                     Word.objects.create(
                         user=user,
                         word=word_from_csv,
-                        definition=row.get('definition', '').strip(),
+                        definition=row.get("definition", "").strip(),
                     )
                     count += 1
 
-                self.stdout.write(self.style.SUCCESS(f'Создано {count} слов.'))
+                self.stdout.write(self.style.SUCCESS(f"Создано {count} слов."))
 
                 # Чтение из файла phrase.csv
-                file_path = BASE_DIR / 'phrases.csv'
-                with open(file_path, 'r', encoding='utf-8') as f:
+                path_to_phrases_file = BASE_DIR / "phrases.csv"
+                with open(path_to_phrases_file, "r", encoding="utf-8") as f:
                     reader = csv.DictReader(f)
                     count = 0
                     for row in reader:
-                        phrase_from_csv = row.get('phrase').strip()
+                        phrase_from_csv = row.get("phrase").strip()
                         Phrase.objects.create(
                             user=user,
                             phrase=phrase_from_csv,
@@ -74,15 +84,20 @@ class Command(BaseCommand):
                         count += 1
 
                 self.stdout.write(
-                    self.style.SUCCESS(f'Создано {count} словосочетаний.')
+                    self.style.SUCCESS(f"Создано {count} словосочетаний.")
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
-                        f'Данные для входа:\nusername: {username}, пароль: {password}'
+                        f"Создан пользователь {username} с правами " "администратора"
+                    )
+                )
+                self.stdout.write(
+                    self.style.SUCCESS(
+                        f"Данные для входа:\nusername: {username}, пароль: {password}"
                     )
                 )
 
         except FileNotFoundError:
-            self.stdout.write(self.style.ERROR(f'Файл не найден: {file_path}'))
+            self.stdout.write(self.style.ERROR(f"Файл не найден: {file_path}"))
         except Exception as e:
-            self.stdout.write(self.style.ERROR(f'Ошибка: {e}'))
+            self.stdout.write(self.style.ERROR(f"Ошибка: {e}"))
