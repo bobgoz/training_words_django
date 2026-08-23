@@ -12,7 +12,7 @@ from .constants import (
 )
 from .managers import WordManager
 from .mixins import BaseIntervalLogicMixin, BaseTimestampMixin
-from .service import translator
+from .services import image_unique_name, translator
 
 User = get_user_model()
 
@@ -62,7 +62,7 @@ class Word(
     )
     image = models.ImageField(
         "Изображение",
-        upload_to="images/",
+        upload_to=image_unique_name,
         blank=True,
         null=True,
         help_text="Загрузить изображение для слова",

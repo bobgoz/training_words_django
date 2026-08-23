@@ -97,7 +97,5 @@ class Command(BaseCommand):
                     )
                 )
 
-        except FileNotFoundError:
-            self.stdout.write(self.style.ERROR(f"Файл не найден: {file_path}"))
         except Exception as e:
             self.stdout.write(self.style.ERROR(f"Ошибка: {e}"))
