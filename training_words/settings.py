@@ -27,6 +27,7 @@ load_dotenv(dotenv_path=BASE_DIR / ".env")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG", "True") == "true"
+print(DEBUG)
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost").split(",")
 
@@ -191,15 +192,15 @@ if DROPBOX_USE:
 # Redis
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
-
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_HSTS_SECONDS = 31536000
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-ALLOWED_HOSTS = ["training-word.duckdns.org", "localhost", "127.0.0.1"]
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    ALLOWED_HOSTS = ["training-word.duckdns.org", "localhost", "127.0.0.1"]
 
 
 CACHES = {
@@ -208,5 +209,3 @@ CACHES = {
         "LOCATION": REDIS_URL,
     }
 }
-
-TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"
