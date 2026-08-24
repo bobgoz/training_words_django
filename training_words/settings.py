@@ -208,3 +208,35 @@ CACHES = {
         "LOCATION": REDIS_URL,
     }
 }
+
+
+# Logging
+
+LOG_DIR = BASE_DIR / "logs"
+LOG_DIR.mkdir(exist_ok=True)
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": LOG_DIR / "django.log",
+            "formatter": "verbose",
+            "level": "DEBUG",
+        },
+    },
+    "loggers": {
+        "training": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
+}
