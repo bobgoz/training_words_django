@@ -125,8 +125,8 @@ dependencies = [
 ]
 
 
-[tool.uv.scripts]
-manage = "python src/training_words_django/manage.py"
+[project.scripts]
+manage = "training_words_django.script:main"
 
 
 [build-system]
