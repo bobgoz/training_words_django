@@ -1,7 +1,6 @@
 from django.views.generic import TemplateView
-
-from training_words_django.phrase.models import Phrase
-from training_words_django.training.models import Word
+from phrase.models import Phrase
+from training.models import Word
 
 
 class IndexView(TemplateView):

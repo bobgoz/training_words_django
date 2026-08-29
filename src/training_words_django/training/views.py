@@ -16,8 +16,7 @@ from django.views.generic import (
     TemplateView,
     UpdateView,
 )
-
-from training_words_django.phrase.models import Phrase
+from phrase.models import Phrase
 
 from .forms import (
     CreateWordForm,

@@ -13,7 +13,6 @@ from django.views.generic import (
     TemplateView,
     UpdateView,
 )
-
 from training.models import TrainingSession, Word
 
 from .forms import RegisterForm, SimplePasswordForm

@@ -5,9 +5,8 @@ from pathlib import Path
 
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
-
-from training_words_django.phrase.models import Phrase
-from training_words_django.training.models import Word
+from phrase.models import Phrase
+from training.models import Word
 
 BASE_DIR = Path(__file__).parent
 

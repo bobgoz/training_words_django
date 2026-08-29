@@ -4,10 +4,9 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-
-from training_words_django.phrase.managers import PhraseManager
-from training_words_django.training.constants import PHRASE_MAX_LENGTH
-from training_words_django.training.mixins import (
+from phrase.managers import PhraseManager
+from training.constants import PHRASE_MAX_LENGTH
+from training.mixins import (
     BaseIntervalLogicMixin,
     BaseTimestampMixin,
 )

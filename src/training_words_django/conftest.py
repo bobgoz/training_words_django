@@ -4,8 +4,8 @@ from django.test.client import Client
 from django.urls import reverse
 from pytest import fixture
 
-from training_words_django.phrase.models import Phrase
-from training_words_django.training.models import Word
+from .phrase.models import Phrase
+from .training.models import Word
 
 
 # Объекты

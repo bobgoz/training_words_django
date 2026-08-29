@@ -1,5 +1,4 @@
 from django.views.generic import ListView
-
 from training.mixins import LoginRequiredMixin
 
 
