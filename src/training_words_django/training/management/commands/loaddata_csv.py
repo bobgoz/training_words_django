@@ -6,8 +6,8 @@ from pathlib import Path
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
-from phrase.models import Phrase
-from training.models import Word
+from training_words_django.phrase.models import Phrase
+from training_words_django.training.models import Word
 
 BASE_DIR = Path(__file__).parent
 
@@ -88,12 +88,14 @@ class Command(BaseCommand):
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
-                        f"Создан пользователь {username} с правами " "администратора"
+                        f"Создан пользователь {username} с правами "
+                        "администратора"
                     )
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
-                        f"Данные для входа:\nusername: {username}, пароль: {password}"
+                        "Данные для входа:"
+                        f"\nusername: {username}, пароль: {password}"
                     )
                 )
 

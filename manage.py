@@ -1,1 +1,0 @@
-src/training_words_django/manage.py

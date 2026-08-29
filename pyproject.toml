@@ -1,5 +1,5 @@
 [project]
-name = "training-words-django"
+name = "training_words_django"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -31,12 +31,9 @@ dependencies = [
     "django==5.2.16",
     "django-bootstrap-icons==0.9.0",
     "django-bootstrap5==26.2",
-    "django-debug-toolbar==6.2.0",
     "django-extensions==4.1",
     "django-redis==6.0.0",
     "django-storages==1.14.6",
-    "django-year-calendar==0.5.0",
-    "djangofmt==0.2.9",
     "dropbox==12.0.2",
     "dulwich==1.2.1",
     "eng-to-ru==0.1.1",
@@ -44,7 +41,6 @@ dependencies = [
     "fastjsonschema==2.21.2",
     "filelock==3.29.0",
     "findpython==0.8.0",
-    "flake8==7.3.0",
     "gunicorn==25.1.0",
     "h11==0.16.0",
     "httpcore==1.0.9",
@@ -124,11 +120,50 @@ dependencies = [
     "werkzeug==3.1.8",
 ]
 
+[dependency-groups]
+dev = [
+    "ruff>=0.16.5",
+    "djangofmt==0.2.9",
+    "django-debug-toolbar==6.2.0",
+    "flake8==7.3.0",
 
-[project.scripts]
-manage = "training_words_django.script:main"
+]
 
 
 [build-system]
 requires = ["uv_build>=0.12.6,<0.13.0"]
 build-backend = "uv_build"
+
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    "migrations",
+]
+

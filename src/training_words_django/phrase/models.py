@@ -5,9 +5,12 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-from phrase.managers import PhraseManager
-from training.constants import PHRASE_MAX_LENGTH
-from training.mixins import BaseIntervalLogicMixin, BaseTimestampMixin
+from training_words_django.phrase.managers import PhraseManager
+from training_words_django.training.constants import PHRASE_MAX_LENGTH
+from training_words_django.training.mixins import (
+    BaseIntervalLogicMixin,
+    BaseTimestampMixin,
+)
 
 from .constants import MIN_ACTIVE_WORDS
 

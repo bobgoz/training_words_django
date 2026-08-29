@@ -9,7 +9,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from training.mixins import LoginRequiredMixin
+from training_words_django.training.mixins import LoginRequiredMixin
 
 from .forms import CreatePhraseForm, EditPhraseForm
 from .mixins import BaseShowingViewMixin
