@@ -1,11 +1,17 @@
 """Модуль, содержащий  фикстуры для Pytest."""
 
+import os
+
+import django
 from django.test.client import Client
 from django.urls import reverse
 from pytest import fixture
 
-from .phrase.models import Phrase
-from .training.models import Word
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'training_words.settings')
+django.setup()
+
+from phrase.models import Phrase
+from training.models import Word
 
 
 # Объекты

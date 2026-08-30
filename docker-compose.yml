@@ -2,10 +2,12 @@ services:
   db:
     image: postgres:16-alpine
     container_name: db
+    env_file:
+      - src/training_words_django/.env
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: test
+      POSTGRES_USER: frik
+      POSTGRES_PASSWORD: frikazoid
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -13,10 +15,12 @@ services:
     restart: unless-stopped
 
   web:
-    build: .
-    container_name: web
+    build:
+      context: .
+      dockerfile: src/training_words_django/Dockerfile
+    container_name: django_web
     env_file:
-      - .env
+      - src/training_words_django/.env
     volumes:
       - media:/app/media
       - static:/app/staticfiles
@@ -27,7 +31,7 @@ services:
     restart: unless-stopped
 
   gateway:
-    build: ./nginx
+    build: ./nginx_dev
     container_name: gateway
     ports:
       - "80:80"
@@ -36,6 +40,8 @@ services:
     volumes:
       - media:/media:ro
       - static:/static:ro
+    restart: unless-stopped
+
   redis:
     image: redis:latest
     container_name: redis
