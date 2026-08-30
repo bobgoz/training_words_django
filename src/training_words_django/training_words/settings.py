@@ -18,7 +18,6 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
 
 load_dotenv(dotenv_path=BASE_DIR / ".env")
 
@@ -26,6 +25,9 @@ load_dotenv(dotenv_path=BASE_DIR / ".env")
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 SECRET_KEY = os.getenv("SECRET_KEY")
+
+if not SECRET_KEY:
+    raise ImproperlyConfigured('Не найдена переменная "SECRET_KEY" в .env!')
 
 DEBUG = os.getenv("DEBUG", "True") == "true"
 
@@ -85,7 +87,6 @@ WSGI_APPLICATION = "training_words.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-
 if os.getenv("POSTGRES_USE") == "true":
     DATABASES = {
         "default": {
@@ -101,7 +102,7 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": BASE_DIR.parent.parent / "db.sqlite3",
         }
     }
 
@@ -137,13 +138,10 @@ USE_I18N = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 STATIC_URL = "static/"
-# STATIC_ROOT = "/app/staticfiles/"
 STATIC_ROOT = BASE_DIR / "staticfiles/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 MEDIA_URL = "media/"
-
-# MEDIA_ROOT = "/app/media/"
 MEDIA_ROOT = BASE_DIR / "media/"
 
 # Auth
@@ -152,6 +150,7 @@ LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "/login"
 AUTH_USER_MODEL = "users.User"
 
+# Django ToolBar
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
@@ -203,6 +202,7 @@ if not DEBUG:
     ALLOWED_HOSTS = ["training-word.duckdns.org", "localhost", "127.0.0.1"]
 
 
+# Caches
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
@@ -212,7 +212,6 @@ CACHES = {
 
 
 # Logging
-
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 

@@ -216,3 +216,7 @@ deploy.sh
 .vscode/
 *.json
 *.sql
+pyrightconfig.json
+
+
+
