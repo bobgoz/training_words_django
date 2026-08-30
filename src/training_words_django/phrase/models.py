@@ -5,13 +5,12 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from phrase.managers import PhraseManager
-from training.constants import PHRASE_MAX_LENGTH
 from training.mixins import (
     BaseIntervalLogicMixin,
     BaseTimestampMixin,
 )
 
-from .constants import MIN_ACTIVE_WORDS
+from .constants import MIN_ACTIVE_WORDS, PHRASE_MAX_LENGTH
 
 
 class Phrase(
@@ -54,7 +53,7 @@ class Phrase(
         return self.phrase
 
     def __str__(self):
-        return f'{self.phrase} -> {self.user}'
+        return f"{self.phrase} -> {self.user}"
 
     @classmethod
     def ensure_min_active_phrases(cls, user):

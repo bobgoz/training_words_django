@@ -4,6 +4,10 @@ __pycache__/
 *.so
 .venv/
 .mypy_cache/
+*.pyc
+*.pyo
+.pytest_cache
+.ruff_cache
 
 # Git
 .git/
@@ -19,7 +23,6 @@ prod/
 # База данных (SQLite)
 *.sqlite3
 *.db
-db.sqlite3
 
 # Бэкапы
 *.json
@@ -48,6 +51,3 @@ media/
 
 # Логи
 *.log
-
-
-

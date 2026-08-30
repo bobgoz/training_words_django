@@ -1,3 +1,5 @@
 # Количество слов для активации
-COUNT_WORDS_FOR_ACTIVATE = 10
-MIN_ACTIVE_WORDS = 10
+MIN_ACTIVE_WORDS = 5
+
+# Модель  Phrase
+PHRASE_MAX_LENGTH = 500
