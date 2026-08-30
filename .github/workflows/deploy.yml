@@ -20,7 +20,8 @@ jobs:
     - name: Build and push image Web
       uses: docker/build-push-action@v7.1.0
       with:
-        context: ./src/training_words_django/
+        context: .
+        file: ./src/training_words_django/Dockerfile
         push: true
         tags: ${{ vars.DOCKER_TAG_WEB }}
     - name: Build and push image Gateway
