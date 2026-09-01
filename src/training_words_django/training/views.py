@@ -1,10 +1,10 @@
 """Модуль содержащий Views приложения Training."""
 
+import logging
 from random import shuffle
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import IntegrityError
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -30,6 +30,8 @@ from .mixins import (
 from .models import TrainingSession, Word
 from .services import clean_session
 
+logger = logging.getLogger(__name__)
+
 
 class WordCreateView(LoginRequiredMixin, CreateView):
     """Вью для создания слов."""
@@ -46,13 +48,16 @@ class WordCreateView(LoginRequiredMixin, CreateView):
             response = super().form_valid(form)
             messages.success(self.request, "Слово добавлено!")
             return response
-        except IntegrityError:
-            word = form.cleaned_data["word"]
-            messages.warning(
-                self.request,
-                f"Слово {word} уже существует!",
-            )
+        except Exception as e:
+            logging.warning(f"Ошибка: {e}")
+            messages.warning(self.request, "Возникла ошибка.")
             return self.form_invalid(form)
+
+    def get_form_kwargs(self):
+        """Передача объекта request в форму."""
+        kwargs = super().get_form_kwargs()
+        kwargs["request"] = self.request
+        return kwargs
 
 
 class ShowActiveWordsView(BaseShowingViewMixin):
@@ -126,7 +131,7 @@ class DeleteWordView(
     WordAcessMixin,
     DeleteView,
 ):
-    """Вью для удаление слов."""
+    """Вью для удаления слов."""
 
     model = Word
     pk_url_kwarg = "pk_word"
@@ -164,8 +169,9 @@ class EditWordView(
             response = super().form_valid(form)
             messages.success(self.request, "Успешно!")
             return response
-        except IntegrityError as e:
-            messages.warning(self.request, f"Ошибка: {e}")
+        except Exception as e:
+            logging.warning(f"Ошибка: {e}")
+            messages.warning(self.request, "Возникла ошибка.")
             return self.form_invalid(form)
 
 
@@ -228,8 +234,8 @@ class TrainingSetupView(LoginRequiredMixin, View):
         request.session.setdefault(
             "training_words",
             {
-                'ids': object_ids,
-                'type': word_type,
+                "ids": object_ids,
+                "type": word_type,
             },
         )
         request.session.setdefault("training_current_index", 0)
@@ -272,16 +278,14 @@ class TrainCardView(LoginRequiredMixin, View):
         """Показать карточку текущего слова."""
         training_words = request.session.get("training_words")
         current_index = request.session.get("training_current_index")
-        training_ids = training_words['ids']
+        training_ids = training_words["ids"]
 
-        object_type = training_words['type']
+        object_type = training_words["type"]
         object_id = training_ids[current_index]
-        if object_type == 'words':
+        if object_type == "words":
             current_object = Word.objects.get(pk=object_id, user=request.user)
         else:
-            current_object = Phrase.objects.get(
-                pk=object_id, user=request.user
-            )
+            current_object = Phrase.objects.get(pk=object_id, user=request.user)
 
         # Прогресс
         progress: dict = {
@@ -307,8 +311,8 @@ class TrainAnswerView(LoginRequiredMixin, View):
         object_id = request.POST.get("word_id")
 
         training_words = request.session.get("training_words")
-        object_type = training_words['type']
-        training_ids = training_words['ids']
+        object_type = training_words["type"]
+        training_ids = training_words["ids"]
         # object_id = request.session.get("training_current_index")
 
         is_known: bool = request.POST.get("is_known") == "true"
@@ -317,7 +321,7 @@ class TrainAnswerView(LoginRequiredMixin, View):
         if is_abort:
             return redirect("train_complete")
 
-        if object_type == 'words':
+        if object_type == "words":
             object = Word.objects.get(pk=object_id, user=request.user)
         else:
             object = Phrase.objects.get(pk=object_id, user=request.user)

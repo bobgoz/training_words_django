@@ -3,6 +3,7 @@ import re
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 from .constants import (
@@ -95,13 +96,14 @@ class Word(
 
         Добавление перевода для английского слова.
         """
-        self.word = self.word.capitalize().strip()
+        if self.word:
+            self.word = self.word.capitalize().strip()
+            if not self.definition and self._detect_language() == "en":
+                self.definition = translator(self.word)
         if self.definition:
             self.definition = self.definition.capitalize().strip()
         if self.example:
             self.example = self.example.capitalize().strip()
-        if not self.definition and self._detect_language() == "en":
-            self.definition = translator(self.word)
 
         return super().clean()
 
@@ -115,7 +117,17 @@ class Word(
         return "en"
 
     def save(self, *args, **kwargs):
+        """Изменение данных перед сохранением.
+
+        Назначает перевод слова, если пользователь не передал свой перевод.
+
+        Удаляет старую картинку, если пользователь хочет сохранить новую.
+        """
         self.language = self._detect_language()
+        if self.image:
+            old_image = Word.objects.get(pk=self.pk).image
+            if old_image:
+                old_image.delete()
         return super().save(*args, **kwargs)
 
     @classmethod
@@ -158,7 +170,6 @@ class Word(
         return self.next_review_date and self.next_review_date > timezone.now()
 
     def get_absolute_url(self):
-        from django.urls import reverse
 
         return reverse("detail", kwargs={"pk_word": self.pk})
 

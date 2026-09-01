@@ -1,14 +1,21 @@
 """Модуль содержащий  формы Django."""
 
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils import timezone
 
 from .constants import COUNT_INITIAL_VALUE, NUMBER_OF_WORD
 from .models import Word
 
 
-class CreateWordForm(forms.ModelForm):
+class CreateWordForm(
+    forms.ModelForm,
+):
     """Форма для создания слова."""
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super().__init__(*args, **kwargs)
 
     class Meta:
         model = Word
@@ -20,8 +27,23 @@ class CreateWordForm(forms.ModelForm):
             "is_active",
         )
 
+    def clean_word(self):
+        """Валидация для поля Word."""
+        word = self.cleaned_data.get("word").capitalize()
+        if Word.objects.filter(
+            user=self.request.user,
+            word=word,
+        ).exists():
+            raise ValidationError(
+                f"Слово {word} уже существует!",
+            )
 
-class EditWordForm(forms.ModelForm):
+        return word
+
+
+class EditWordForm(
+    forms.ModelForm,
+):
     """Форма редактирования слова."""
 
     word = forms.CharField(
@@ -88,13 +110,13 @@ class EditWordForm(forms.ModelForm):
         is_active = self.cleaned_data.get("is_active")
 
         if is_active:
-            self.cleaned_data['is_learned'] = False
+            self.cleaned_data["is_learned"] = False
             self.cleaned_data["next_review_date"] = timezone.now()
         else:
             # Неактивный объект с флагом is_learned = False становится
             # неизученным объектом.
             self.cleaned_data["next_review_date"] = timezone.now()
-            self.cleaned_data['is_learned'] = False
+            self.cleaned_data["is_learned"] = False
         return super().clean()
 
     def save(self, commit=True):
@@ -164,7 +186,7 @@ class TrainingSettingsForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         """Динамическое добавление полей."""
-        user = kwargs.pop('user')
+        user = kwargs.pop("user")
         super().__init__(*args, **kwargs)
         if Word.objects.filter(
             language="en",
