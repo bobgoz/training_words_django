@@ -244,6 +244,6 @@ LOGGING = {
     },
     "root": {
         "handlers": ["file"],
-        "level": "DEBUG",
+        "level": os.getenv("LOGGING_LEVEL", "INFO"),
     },
 }
