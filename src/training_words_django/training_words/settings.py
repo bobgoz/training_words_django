@@ -239,7 +239,11 @@ LOGGING = {
         "training": {
             "handlers": ["file"],
             "level": "DEBUG",
-            "propagate": True,
+            "propagate": False,
         },
+    },
+    "root": {
+        "handlers": ["file"],
+        "level": "DEBUG",
     },
 }

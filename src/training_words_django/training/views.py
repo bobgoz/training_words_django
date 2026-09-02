@@ -49,7 +49,7 @@ class WordCreateView(LoginRequiredMixin, CreateView):
             messages.success(self.request, "Слово добавлено!")
             return response
         except Exception as e:
-            logging.warning(f"Ошибка: {e}")
+            logger.warning(f"Ошибка: {e}")
             messages.warning(self.request, "Возникла ошибка.")
             return self.form_invalid(form)
 
@@ -170,7 +170,7 @@ class EditWordView(
             messages.success(self.request, "Успешно!")
             return response
         except Exception as e:
-            logging.warning(f"Ошибка: {e}")
+            logger.warning(f"Ошибка: {e}")
             messages.warning(self.request, "Возникла ошибка.")
             return self.form_invalid(form)
 
