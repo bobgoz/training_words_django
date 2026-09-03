@@ -25,7 +25,7 @@ services:
       - media:/app/media
       - staticfiles:/app/staticfiles
       - static:/app/static
-      - logs:/app/logs
+      - /logs:/app/logs
     restart: unless-stopped
     networks:
     - training_network
@@ -65,4 +65,5 @@ volumes:
   postgres_data:
   media:
   static:
+  staticfiles:
   redis_data:
