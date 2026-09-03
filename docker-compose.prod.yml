@@ -23,7 +23,9 @@ services:
       - db
     volumes:
       - media:/app/media
-      - static:/app/staticfiles
+      - staticfiles:/app/staticfiles
+      - static:/app/static
+      - logs:/app/logs
     restart: unless-stopped
     networks:
     - training_network
