@@ -285,7 +285,10 @@ class TrainCardView(LoginRequiredMixin, View):
         if object_type == "words":
             current_object = Word.objects.get(pk=object_id, user=request.user)
         else:
-            current_object = Phrase.objects.get(pk=object_id, user=request.user)
+            current_object = Phrase.objects.get(
+                pk=object_id,
+                user=request.user,
+            )
 
         # Прогресс
         progress: dict = {
