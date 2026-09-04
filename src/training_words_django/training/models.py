@@ -177,6 +177,20 @@ class Word(
         """Возвращает слово."""
         return self.word
 
+    @property
+    def safe_image_url(self):
+        """Безопасное получение URL картинки."""
+        if not self.image:
+            return None
+        try:
+            if self.image.storage.exists(self.image.name):
+                return self.image.url
+        except Exception:
+            # Если файл не найден - очищаем поле в БД
+            self.image = None
+            self.save(update_fields=["image"])
+        return None
+
 
 class TrainingSession(models.Model):
     """Сессия тренировки"""

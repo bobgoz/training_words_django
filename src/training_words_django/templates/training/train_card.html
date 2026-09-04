@@ -5,138 +5,143 @@
 {% block title %}Тренировка{% endblock %}
 
 {% block content %}
- <div class="container py-4">
-  <div class="row justify-content-center">
-   <div class="col-lg-6 col-md-8">
-    <!-- Прогресс -->
-    <div class="mb-4">
-     <div class="d-flex justify-content-between small text-muted mb-1">
-      <span>Прогресс</span>
-      <span>{{ progress.current }} / {{ progress.total }}</span>
-     </div>
-     <div class="progress" style="height: 6px">
-      <div class="progress-bar bg-primary" style="width: {{ progress.percent }}%;"></div>
-     </div>
-    </div>
-
-    <!-- Карточка слова -->
-    <div class="card border-0 shadow-sm">
-     <div class="card-body p-4 p-lg-5 text-center">
-      <!-- Слово -->
-      <h2 class="display-5 fw-bold mb-4">{{ object.get_text }}</h2>
-
-      <!-- Статистика слова -->
-      <div class="row g-2 small text-muted mb-4 pb-2 border-bottom">
-       <div class="col-6">
-        <div class="fw-bold text-primary">{{ object.repetition_count }}</div>
-        <div>повторений</div>
-       </div>
-       <div class="col-6">
-        <div class="fw-bold text-info">
-         {% if object.is_learned %}
-          {% bs_icon 'check2-square' size="30px" color="green" %}<br>Изучено
-         {% else %}
-          {% bs_icon 'rocket-takeoff' size="30px" color="green" %}<br> <small class="text-primary">Активно</small>
-         {% endif %}
-        </div>
-       </div>
-      </div>
-
-      <!-- Кнопки действий -->
-      <div class="d-flex mt-4 mb-4">
-       <form method="post" action="{% url 'train_answer' %}" class="flex-grow-1">
-        {% csrf_token %}
-        <input type="hidden" name="word_id" value="{{ object.id }}">
-        <div class="d-flex gap-3">
-         {% bootstrap_button "Знаю" button_class="btn btn-success rounded-pill py-2 flex-grow-1" button_type="submit" name="is_known" value="true" %}
-         {% bootstrap_button "Не знаю" button_class="btn btn-outline-danger rounded-pill py-2 flex-grow-1" button_type="submit" name="is_known" value="false" %}
-        </div>
-       </form>
-      </div>
-
-      <!-- Подсказки (коллапс) -->
-      <div class="mt-3 pt-2 border-top">
-       <div class="small text-muted mb-2">📖 Подсказки:</div>
-
-       <!-- Определение -->
-       {% if object.definition %}
-        <div class="mb-2">
-         <button
-          class="btn btn-sm btn-outline-secondary w-100 text-start"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#definitionHint"
-         >
-          📝 Определение
-         </button>
-         <div class="collapse mt-2" id="definitionHint">
-          <div class="small bg-light p-3 rounded">
-           {{ object.definition }}
+  <div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <!-- Прогресс -->
+        <div class="mb-4">
+          <div class="d-flex justify-content-between small text-muted mb-1">
+            <span>Прогресс</span>
+            <span>{{ progress.current }} / {{ progress.total }}</span>
           </div>
-         </div>
-        </div>
-       {% endif %}
-
-       <!-- Пример использования -->
-       {% if object.example %}
-        <div class="mb-2">
-         <button
-          class="btn btn-sm btn-outline-secondary w-100 text-start"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#exampleHint"
-         >
-          💡 Пример использования
-         </button>
-         <div class="collapse mt-2" id="exampleHint">
-          <div class="small bg-light p-3 rounded fst-italic">
-           "{{ object.example }}"
+          <div class="progress" style="height: 6px">
+            <div class="progress-bar bg-primary" style="width: {{ progress.percent }}%;"></div>
           </div>
-         </div>
         </div>
-       {% endif %}
 
-       <!-- Изображение -->
-       {% if object.image %}
-        <div class="mb-2">
-         <button
-          class="btn btn-sm btn-outline-secondary w-100 text-start"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#imageHint"
-         >
-          🖼️ Изображение
-         </button>
-         <div class="collapse mt-2" id="imageHint">
-          <div class="text-center bg-light p-3 rounded">
-           <img
-            src="{{ object.image.url }}"
-            alt="{{ object.object }}"
-            class="img-fluid rounded"
-            style="max-height: 200px"
-           >
+        <!-- Карточка слова -->
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4 p-lg-5 text-center">
+            <!-- Слово -->
+            <h2 class="display-5 fw-bold mb-4">{{ object.get_text }}</h2>
+
+            <!-- Статистика слова -->
+            <div class="row g-2 small text-muted mb-4 pb-2 border-bottom">
+              <div class="col-6">
+                <div class="fw-bold text-primary">{{ object.repetition_count }}</div>
+                <div>повторений</div>
+              </div>
+              <div class="col-6">
+                <div class="fw-bold text-info">
+                  {% if object.is_learned %}
+                    {% bs_icon 'check2-square' size="30px" color="green" %}<br>Изучено
+                  {% else %}
+                    {% bs_icon 'rocket-takeoff' size="30px" color="green" %}<br> <small class="text-primary"
+                    >Активно</small>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <!-- Кнопки действий -->
+            <div class="d-flex mt-4 mb-4">
+              <form method="post" action="{% url 'train_answer' %}" class="flex-grow-1">
+                {% csrf_token %}
+                <input type="hidden" name="word_id" value="{{ object.id }}">
+                <div class="d-flex gap-3">
+                  {% bootstrap_button "Знаю" button_class="btn btn-success rounded-pill py-2 flex-grow-1" button_type="submit" name="is_known" value="true" %}
+                  {% bootstrap_button "Не знаю" button_class="btn btn-outline-danger rounded-pill py-2 flex-grow-1" button_type="submit" name="is_known" value="false" %}
+                </div>
+              </form>
+            </div>
+
+            <!-- Подсказки (коллапс) -->
+            <div class="mt-3 pt-2 border-top">
+              <div class="small text-muted mb-2">📖 Подсказки:</div>
+
+              <!-- Определение -->
+              {% if object.definition %}
+                <div class="mb-2">
+                  <button
+                    class="btn btn-sm btn-outline-secondary w-100 text-start"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#definitionHint"
+                  >
+                    📝 Определение
+                  </button>
+                  <div class="collapse mt-2" id="definitionHint">
+                    <div class="small bg-light p-3 rounded">
+                      {{ object.definition }}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              <!-- Пример использования -->
+              {% if object.example %}
+                <div class="mb-2">
+                  <button
+                    class="btn btn-sm btn-outline-secondary w-100 text-start"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#exampleHint"
+                  >
+                    💡 Пример использования
+                  </button>
+                  <div class="collapse mt-2" id="exampleHint">
+                    <div class="small bg-light p-3 rounded fst-italic">
+                      "{{ object.example }}"
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              <!-- Изображение -->
+              {% if object.image %}
+                <div class="mb-2">
+                  <button
+                    class="btn btn-sm btn-outline-secondary w-100 text-start"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#imageHint"
+                  >
+                    🖼️ Изображение
+                  </button>
+                  <div class="collapse mt-2" id="imageHint">
+                    <div class="text-center bg-light p-3 rounded">
+                      {% if object.safe_image_url %}
+                        <img
+                          src="{{ object.safe_image_url }}"
+                          alt="{{ object.object }}"
+                          class="img-fluid rounded"
+                          style="max-height: 200px"
+                        >
+                      {% else %}
+                        <p class="text-muted mb-0">Изображение недоступно</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              <!-- Сообщение, если нет подсказок -->
+              {% if not object.definition and not object.example and not object.image %}
+                <div class="text-muted small text-center py-2">
+                  Нет подсказок для этого слова
+                </div>
+              {% endif %}
+            </div>
           </div>
-         </div>
         </div>
-       {% endif %}
-
-       <!-- Сообщение, если нет подсказок -->
-       {% if not object.definition and not object.example and not object.image %}
-        <div class="text-muted small text-center py-2">
-         Нет подсказок для этого слова
+        <!-- Прервать тренировку -->
+        <div class="text-center">
+          <form action="{% url 'train_answer' %}" method="post">
+            {% csrf_token %}
+            {% bootstrap_button "Прервать тренировку" button_class="btn btn-outline-warning rounded-pill py-2" button_type="submit" name="is_abort" value="true" %}
+          </form>
         </div>
-       {% endif %}
       </div>
-     </div>
     </div>
-    <!-- Прервать тренировку -->
-    <div class="text-center">
-     <form action="{% url 'train_answer' %}" method="post">
-      {% csrf_token %}
-      {% bootstrap_button "Прервать тренировку" button_class="btn btn-outline-warning rounded-pill py-2" button_type="submit" name="is_abort" value="true" %}
-     </form>
-    </div>
-   </div>
   </div>
- </div>
 {% endblock %}
