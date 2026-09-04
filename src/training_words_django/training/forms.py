@@ -121,21 +121,20 @@ class EditWordForm(
         return cleaned_data
 
     def save(self, commit=True):
-        """Удаление картинки.
-
-        Если Картинка существует в БД (есть запись),
-        но нет в хранилище-картинка удаляется из хранилища.
-        Иногда такое может быть, когда в БД есть картинка,
-        а в хранилище нет. Данная логика удаления поможет
-        защититься от таких случаев.
-        """
+        """Удаление картинки при установленном флаге delete_image."""
         instance = super().save(commit=False)
+
+        # Если пользователь поставил галочку "Удалить картинку"
         if self.cleaned_data.get("delete_image") and instance.image:
-            # Если картинка есть в хранилище:
-            if instance.image.storage.exists(instance.image.name):
-                instance.image.delete(save=False)
-                # Если в хранилище нет, но есть путь в базе данных:
-                # instance.image = None
+            # Удаляем файл из хранилища, если он существует
+            try:
+                if instance.image.storage.exists(instance.image.name):
+                    instance.image.delete(save=False)
+            except Exception:
+                pass  # Файл не найден — не критично
+            # Очищаем поле в БД
+            instance.image = None
+
         if commit:
             instance.save()
         return instance
