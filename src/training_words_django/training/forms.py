@@ -134,8 +134,8 @@ class EditWordForm(
             # Если картинка есть в хранилище:
             if instance.image.storage.exists(instance.image.name):
                 instance.image.delete(save=False)
-            # Если в хранилище нет, но есть путь в базе данных:
-            instance.image = None
+                # Если в хранилище нет, но есть путь в базе данных:
+                instance.image = None
         if commit:
             instance.save()
         return instance
