@@ -123,28 +123,8 @@ class Word(
         """Изменение данных перед сохранением.
 
         Назначает перевод слова, если пользователь не передал свой перевод.
-
-        Удаляет старую картинку при загрузке новой.
         """
         self.language = self._detect_language()
-
-        # Безопасное удаление старой картинки при загрузке новой
-        if self.pk:
-            try:
-                old_instance = Word.objects.get(pk=self.pk)
-                # Если была старая картинка и сейчас загружается новая
-                if old_instance.image and self.image:
-                    # Проверяем существование файла перед удалением
-                    storage = old_instance.image.storage
-                    if storage.exists(old_instance.image.name):
-                        old_instance.image.delete(save=False)
-                        logger.info("Картинка удалена из хранилища.")
-
-            except Word.DoesNotExist:
-                pass  # Новый объект, старой картинки нет
-            except Exception:
-                pass  # Ошибка при удалении — не критично
-
         return super().save(*args, **kwargs)
 
     @classmethod
