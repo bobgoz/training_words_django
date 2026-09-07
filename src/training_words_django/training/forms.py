@@ -1,11 +1,15 @@
 """Модуль содержащий  формы Django."""
 
+import logging
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 
 from .constants import COUNT_INITIAL_VALUE, NUMBER_OF_WORD
 from .models import Word
+
+logger = logging.getLogger(__name__)
 
 
 class CreateWordForm(
@@ -130,10 +134,15 @@ class EditWordForm(
             try:
                 if instance.image.storage.exists(instance.image.name):
                     instance.image.delete(save=False)
+                    logger.info(
+                        "Картинка удалена из хранилища через " "instance.image.delete."
+                    )
+
             except Exception:
                 pass  # Файл не найден — не критично
             # Очищаем поле в БД
             instance.image = None
+            logger.info("Путь к картинке удален через instance.image = None")
 
         if commit:
             instance.save()

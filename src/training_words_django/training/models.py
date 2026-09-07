@@ -1,3 +1,4 @@
+import logging
 import re
 
 from django.conf import settings
@@ -16,6 +17,8 @@ from .mixins import BaseIntervalLogicMixin, BaseTimestampMixin
 from .services import image_unique_name, translator
 
 User = get_user_model()
+
+logger = logging.getLogger(__name__)
 
 
 class Word(
@@ -135,6 +138,8 @@ class Word(
                     storage = old_instance.image.storage
                     if storage.exists(old_instance.image.name):
                         old_instance.image.delete(save=False)
+                        logger.info("Картинка удалена из хранилища.")
+
             except Word.DoesNotExist:
                 pass  # Новый объект, старой картинки нет
             except Exception:
