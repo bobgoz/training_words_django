@@ -223,7 +223,7 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
-            "format": "({levelname} - {asctime} - %(funcName)s - %(lineno)d - {message})",
+            "format": "{levelname} - {asctime} - {funcName} - {lineno} - {message}",
             "style": "{",
         },
     },
