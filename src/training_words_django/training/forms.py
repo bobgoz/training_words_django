@@ -139,7 +139,7 @@ class EditWordForm(
                 #     "Картинка удалена из хранилища через "
                 #     "default_storage.delete в форме."
                 # )
-                instance.image.delete()
+                instance.image = None
                 logger.debug(
                     "Картинка полностью удалена через отдельные вызовы "
                     "default_storage.delete(instance.image.name) и "
