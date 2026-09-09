@@ -134,16 +134,38 @@ class EditWordForm(
             try:
                 if instance.image.storage.exists(instance.image.name):
                     instance.image.delete(save=False)
-                    logger.info(
+                    logger.debug(
                         "Картинка удалена из хранилища через " "instance.image.delete."
                     )
 
-            except Exception:
-                pass  # Файл не найден — не критично
-            # Очищаем поле в БД
-            instance.image = None
-            logger.info("Путь к картинке удален через instance.image = None")
-
+            except Exception as e:
+                instance.image = None
+                logger.debug(
+                    "Путь к картинке удален через "
+                    "instance.image = None."
+                    f"Ошибка исключения: {e}"
+                )
+        # Если пользователь передал новую картинку
+        # И в БД есть старая:
+        elif self.cleaned_data.get("image") and instance.image:
+            self.instance.image = self.cleaned_data["image"]
+            logger.debug("Новая картинка присвоилась через self.instance.image = new")
+            # try:
+            #     # Сначала проверяем, есть ли картинка в хранилище.
+            #     # if default_storage.exists(instance.image.name):
+            #     instance.image.delete()
+            #     logger.debug(
+            #         'При загрузке новой картинки, старая была '
+            #         'удалена через instance.image.name.delete().'
+            #     )
+            # # Если картинки нет в хранилище, но есть ссылка на неё в БД.
+            # except Exception as e:
+            #     instance.image = None
+            #     logger.debug(
+            #         'При загрузке новой картинки, старая была '
+            #         'удалена через instance.image = None. '
+            #         f'Исключение {e}.'
+            #     )
         if commit:
             instance.save()
         return instance
