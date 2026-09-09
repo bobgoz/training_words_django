@@ -135,18 +135,14 @@ class EditWordForm(
 
             try:  # if default_storage.exists(instance.image.name):
                 default_storage.delete(instance.image.name)
-                # logger.debug(
-                #     "Картинка удалена из хранилища через "
-                #     "default_storage.delete в форме."
-                # )
-                instance.image = None
                 logger.debug(
-                    "Картинка полностью удалена через отдельные вызовы "
-                    "default_storage.delete(instance.image.name) и "
-                    "instance.image = None"
+                    "Картинка удалена из хранилища через "
+                    "default_storage.delete в форме."
                 )
             except Exception as e:
+                instance.image = None
                 logger.warning(f"Ошибка: {e}")
+                logger.debug("Картинка удалилась через instance.image = None")
         if commit:
             instance.save()
         return instance
