@@ -5,6 +5,7 @@ import logging
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+from dropbox.exceptions import ApiError
 
 from .constants import COUNT_INITIAL_VALUE, NUMBER_OF_WORD
 from .models import Word
@@ -137,10 +138,14 @@ class EditWordForm(
                     "Картинка удалена из хранилища через "
                     "default_storage.delete в форме."
                 )
-            except Exception as e:
+            # Исключение ApiError выбрасывается, если в хранилище нет картинки.
+            except ApiError:
                 instance.image = None
-                logger.warning(f"Ошибка: {e}")
                 logger.debug("Картинка удалилась через instance.image = None")
+
+            except Exception as e:
+                logger.warning(f"Ошибка: {e}")
+                raise
         if commit:
             instance.save()
         return instance
