@@ -17,10 +17,8 @@ def delete_old_image_on_update(sender, instance, **kwargs):
     if not instance.pk:
         return
     # Получение старого объекта из БД.6666
-    old_instance = sender.objects.get(pk=instance.pk)
-    old_image = old_instance.image
-    new_image = instance.image
-    if old_image and old_image != new_image:
+    old_image = sender.objects.get(pk=instance.pk).image
+    if old_image:
         if default_storage.exists(old_image.name):
             old_image.delete()
             logging.debug("Картинка удалилась из хранилища через сигнал.")

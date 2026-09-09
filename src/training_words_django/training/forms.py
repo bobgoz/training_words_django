@@ -132,17 +132,21 @@ class EditWordForm(
         # Если пользователь поставил галочку "Удалить картинку"
         if self.cleaned_data.get("delete_image") and instance.image:
             # Удаляем файл из хранилища, если он существует
-            if default_storage.exists(instance.image.name):
+
+            try:  # if default_storage.exists(instance.image.name):
                 default_storage.delete(instance.image.name)
+                # logger.debug(
+                #     "Картинка удалена из хранилища через "
+                #     "default_storage.delete в форме."
+                # )
+                instance.image.delete()
                 logger.debug(
-                    "Картинка удалена из хранилища через "
-                    "default_storage.delete в форме."
+                    "Картинка полностью удалена через отдельные вызовы "
+                    "default_storage.delete(instance.image.name) и "
+                    "instance.image = None"
                 )
-            else:
-                instance.image = None
-                logger.debug(
-                    "Путь к картинке удален через " "instance.image = None.",
-                )
+            except Exception as e:
+                logger.warning(f"Ошибка: {e}")
         if commit:
             instance.save()
         return instance
