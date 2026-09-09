@@ -131,8 +131,7 @@ class EditWordForm(
         # Если пользователь поставил галочку "Удалить картинку"
         if self.cleaned_data.get("delete_image") and instance.image:
             # Удаляем файл из хранилища, если он существует
-
-            try:  # if default_storage.exists(instance.image.name):
+            try:
                 instance.image.delete(save=False)
                 logger.debug(
                     "Картинка удалена из хранилища через "
