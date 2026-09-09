@@ -4,7 +4,6 @@ import logging
 
 from django import forms
 from django.core.exceptions import ValidationError
-from django.core.files.storage import default_storage
 from django.utils import timezone
 
 from .constants import COUNT_INITIAL_VALUE, NUMBER_OF_WORD
@@ -134,7 +133,7 @@ class EditWordForm(
             # Удаляем файл из хранилища, если он существует
 
             try:  # if default_storage.exists(instance.image.name):
-                default_storage.delete(instance.image.name)
+                instance.image.delete(save=False)
                 logger.debug(
                     "Картинка удалена из хранилища через "
                     "default_storage.delete в форме."
