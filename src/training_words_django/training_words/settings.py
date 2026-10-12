@@ -200,9 +200,7 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://training-word.duckdns.org",
-]
+CSRF_TRUSTED_ORIGINS = [os.getenv("DOMAIN").split(",")]
 
 
 # Caches

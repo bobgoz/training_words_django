@@ -40,7 +40,7 @@ class Command(BaseCommand):
 
         username = options["username"]
 
-        password = "frikazoid"
+        password = "password"
 
         # Создание пользователя
         user = User.objects.create_superuser(
@@ -87,8 +87,7 @@ class Command(BaseCommand):
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
-                        f"Создан пользователь {username} с правами "
-                        "администратора"
+                        f"Создан пользователь {username} с правами " "администратора"
                     )
                 )
                 self.stdout.write(

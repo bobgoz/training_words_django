@@ -210,11 +210,8 @@ __marimo__/
 
 # Файлы и папки проекта
 gunicorn.ctl
-backups/
-prod/
-deploy.sh
 *.sh
 .vscode/
-*.json
 *.sql
 pyrightconfig.json
+media/

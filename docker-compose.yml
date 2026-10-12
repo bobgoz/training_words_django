@@ -6,8 +6,8 @@ services:
       - src/training_words_django/.env
     environment:
       POSTGRES_DB: test
-      POSTGRES_USER: frik
-      POSTGRES_PASSWORD: frikazoid
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
