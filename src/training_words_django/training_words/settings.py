@@ -200,7 +200,14 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-CSRF_TRUSTED_ORIGINS = [os.getenv("DOMAIN").split(",")]
+DOMAIN = os.getenv("DOMAIN", "")
+
+if not DEBUG and not DOMAIN:
+    raise ImproperlyConfigured(
+        "Не найдено переменной окружения DOMAIN. Укажите её в .env",
+    )
+
+CSRF_TRUSTED_ORIGINS = [d.strip() for d in DOMAIN.split(",")]
 
 
 # Caches
