@@ -1,68 +1,69 @@
 {% extends "base.html" %}
+{% load bootstrap_icons %}
 
 {% block title %}Меню пользователя{% endblock %}
 
 {% block content %}
- <div class="container mt-4">
-  <div class="row g-4">
-   <!-- Левая колонка: меню -->
-   <div class="col-md-3">
-    {% with request.resolver_match.url_name as action %}
-     <div class="list-group shadow-sm">
-      <a
-       href="{% url 'profile_info' %}"
-       class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'profile_info' %}active{% endif %}"
-      >
-       <span class="fs-5">👤</span>
-       <span>Информация</span>
-      </a>
-      <a
-       href="{% url 'statistics' %}"
-       class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'statistics' %}active{% endif %}"
-      >
-       <span class="fs-5">📊</span>
-       <span>Статистика</span>
-      </a>
-      <a
-       href="#"
-       class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'profile_plan' %}active{% endif %}"
-      >
-       <span class="fs-5">📅</span>
-       <span>План</span>
-      </a>
-      <a
-       href="{% url 'profile_edit' %}"
-       class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'profile_edit' %}active{% endif %}"
-      >
-       <span class="fs-5">✏️</span>
-       <span>Редактировать</span>
-      </a>
-      <a
-       href="{% url 'word_manager' %}"
-       class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'word_manager' or action == 'active_words' or action == 'inactive_words' or action == 'learned_words' %}active{% endif %}"
-      >
-       <span class="fs-5">📚</span>
-       <span>Менеджер слов</span>
-      </a>
-      <a
-       href="{% url 'phrase_manager' %}"
-       class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'phrase_manager' or action == 'active_phrases' or action == 'inactive_phrases' or action == 'learned_phrases' %}active{% endif %}"
-      >
-       <span class="fs-5">📚</span>
-       <span>Менеджер словосочетаний</span>
-      </a>
-     </div>
-    {% endwith %}
-   </div>
+  <div class="profile-layout">
+    <div class="row g-4">
+      <!-- Левая колонка: меню -->
+      <div class="col-lg-3">
+        {% with request.resolver_match.url_name as action %}
+          <nav class="profile-nav" aria-label="Разделы профиля">
+            <a
+              href="{% url 'profile_info' %}"
+              class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'profile_info' %}active{% endif %}"
+            >
+              <span>{% bs_icon 'person' %}</span>
+              <span>Информация</span>
+            </a>
+            <a
+              href="{% url 'statistics' %}"
+              class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'statistics' %}active{% endif %}"
+            >
+              <span>{% bs_icon 'bar-chart' %}</span>
+              <span>Статистика</span>
+            </a>
+            <a
+              href="#"
+              class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'profile_plan' %}active{% endif %}"
+            >
+              <span>{% bs_icon 'calendar3' %}</span>
+              <span>План</span>
+            </a>
+            <a
+              href="{% url 'profile_edit' %}"
+              class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'profile_edit' %}active{% endif %}"
+            >
+              <span>{% bs_icon 'pencil-square' %}</span>
+              <span>Редактировать</span>
+            </a>
+            <a
+              href="{% url 'word_manager' %}"
+              class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'word_manager' or action == 'active_words' or action == 'inactive_words' or action == 'learned_words' %}active{% endif %}"
+            >
+              <span>{% bs_icon 'collection' %}</span>
+              <span>Менеджер слов</span>
+            </a>
+            <a
+              href="{% url 'phrase_manager' %}"
+              class="list-group-item list-group-item-action d-flex align-items-center gap-3 {% if action == 'phrase_manager' or action == 'active_phrases' or action == 'inactive_phrases' or action == 'learned_phrases' %}active{% endif %}"
+            >
+              <span>{% bs_icon 'chat-square-text' %}</span>
+              <span>Менеджер словосочетаний</span>
+            </a>
+          </nav>
+        {% endwith %}
+      </div>
 
-   <!-- Правая колонка: контент -->
-   <div class="col-md-9">
-    <div class="card shadow-sm border-0">
-     <div class="card-body p-4">
-      {% block profile_content %}{% endblock %}
-     </div>
+      <!-- Правая колонка: контент -->
+      <div class="col-lg-9">
+        <div class="surface-card profile-content">
+          <div class="surface-card__body">
+            {% block profile_content %}{% endblock %}
+          </div>
+        </div>
+      </div>
     </div>
-   </div>
   </div>
- </div>
 {% endblock %}

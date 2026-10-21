@@ -7,19 +7,21 @@
   <div class="row justify-content-center">
     <div class="col-lg-10 col-xl-9">
       {% if user.is_authenticated %}
-        <!-- Приветствие -->
-        <div class="page-header page-header--center">
+        <section class="dashboard-hero">
           <div>
+            <span class="eyebrow">Твоя практика</span>
             <h1 class="page-title">Привет, {{ user.first_name|default:user.username }}.</h1>
             <p class="page-subtitle">
-              Здесь собраны твои слова, текущий прогресс и быстрые
-              действия для тренировки.
+              Небольшое повторение сегодня помогает словам остаться с
+              тобой надолго.
             </p>
           </div>
-        </div>
+          <a href="{% url 'training_setup' %}" class="btn btn-primary btn-lg rounded-pill"
+          >Начать тренировку</a>
+        </section>
 
         <!-- Табы -->
-        <ul class="nav nav-tabs mb-4" id="statsTab" role="tablist">
+        <ul class="nav app-segmented-tabs mb-4" id="statsTab" role="tablist">
           <li class="nav-item" role="presentation">
             <button
               class="nav-link active"
@@ -95,7 +97,7 @@
                 </a>
               </div>
             </div>
-            <div class="text-center">
+            <div class="action-row action-row--center">
               <a href="{% url 'add_word' %}" class="btn btn-outline-primary rounded-pill">
                 Добавить слово
               </a>
@@ -147,7 +149,7 @@
                   </div>
                 </a>
               </div>
-              <div class="text-center">
+              <div class="col-12 action-row action-row--center">
                 <a href="{% url 'add_phrase' %}" class="btn btn-outline-primary rounded-pill">
                   Добавить словосочетание
                 </a>
@@ -159,9 +161,8 @@
           </div>
         </div>
 
-        <!-- Инфо-баннер -->
         <div class="info-banner">
-          <div class="info-banner__icon">i</div>
+          <div class="info-banner__icon">+</div>
           <div>
             <strong class="info-banner__title"
             >Лучший эффект дает регулярная практика</strong>
@@ -172,16 +173,14 @@
           </div>
         </div>
       {% else %}
-        <!-- Неавторизованный пользователь -->
-        <div class="page-header page-header--center">
-          <div>
-            <h1 class="page-title">Учи слова спокойно и системно.</h1>
-            <p class="page-subtitle">
-              Добавляй новые слова, возвращайся к сложным и отслеживай
-              прогресс в одном месте.
-            </p>
-          </div>
-        </div>
+        <section class="landing-hero">
+          <span class="eyebrow">Личный тренажёр слов</span>
+          <h1 class="page-title">Учи слова спокойно<br>и системно.</h1>
+          <p class="page-subtitle">
+            Добавляй новые слова, возвращайся к сложным и отслеживай
+            прогресс в одном месте.
+          </p>
+        </section>
 
         <div class="row g-3">
           <div class="col-md-4">
