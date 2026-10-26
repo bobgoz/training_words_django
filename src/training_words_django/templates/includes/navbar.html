@@ -1,9 +1,6 @@
 {% load bootstrap_icons %}
 <div class="container">
-  <a class="navbar-brand" href="{% url 'index' %}">
-    <span class="brand-mark">W</span>
-    <span>Wordspace</span>
-  </a>
+  <a class="navbar-brand" href="{% url 'index' %}">Тренажер слов</a>
 
   <button
     class="navbar-toggler"
@@ -25,23 +22,22 @@
             <a
               class="nav-link {% if action == 'training_setup' %}active{% endif %}"
               href="{% url 'training_setup' %}"
-            >{% bs_icon 'play-fill' %} Тренировка</a>
+            >Тренировка</a>
           </li>
           <li class="nav-item dropdown">
             <button
               class="nav-link dropdown-toggle"
               data-bs-toggle="dropdown"
               type="button"
-              id="addDropdown"
+              id="dropdownMenuButton1"
               aria-expanded="false"
             >
               Добавить
             </button>
-            <ul class="dropdown-menu" aria-labelledby="addDropdown">
-              <li><a class="dropdown-item" href="{% url 'add_word' %}">{% bs_icon 'plus-lg' %} Слово</a></li>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="{% url 'add_word' %}">Слово</a></li>
               <li>
-                <a class="dropdown-item" href="{% url 'add_phrase' %}">{% bs_icon 'plus-lg' %}
-                  Словосочетание</a>
+                <a class="dropdown-item" href="{% url 'add_phrase' %}">Словосочетание</a>
               </li>
             </ul>
           </li>
@@ -51,19 +47,14 @@
               class="nav-link dropdown-toggle"
               data-bs-toggle="dropdown"
               type="button"
-              id="managerDropdown"
+              id="dropdownMenuButton1"
               aria-expanded="false"
             >
               Менеджер
             </button>
-            <ul class="dropdown-menu" aria-labelledby="managerDropdown">
-              <li>
-                <a class="dropdown-item" href="{% url 'word_manager' %}">{% bs_icon 'collection' %} Слова</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'phrase_manager' %}">{% bs_icon 'chat-square-text' %}
-                  Словосочетания</a>
-              </li>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="{% url 'word_manager' %}">Слов</a></li>
+              <li><a class="dropdown-item" href="{% url 'phrase_manager' %}">Словосочетаний</a></li>
             </ul>
           </li>
           <form class="d-flex ms-auto" role="search" method="get" action="{% url 'search' %}">
@@ -77,8 +68,8 @@
                 value="{{ request.GET.q|default:'' }}"
                 autocomplete="off"
               >
-              <button class="btn btn-outline-primary" type="submit" aria-label="Найти">
-                {% bs_icon 'search' %}
+              <button class="btn btn-outline-primary" type="submit">
+                🔍
               </button>
             </div>
           </form>
@@ -97,17 +88,18 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <span class="user-avatar">{{ user.username|first|upper }}</span>{{ user.username }}
+            {{ user.username }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
             {% comment %} Меню Администратора {% endcomment %}
             {% if user.is_staff %}
               <li>
-                <a class="dropdown-item" href="/admin/">{% bs_icon 'gear' %} Администрирование</a>
+                <a class="dropdown-item" href="/admin/">⚙️Меню Администратора</a>
               </li>
             {% endif %}
             <li>
-              <a class="dropdown-item" href="{% url 'profile' %}">{% bs_icon 'person' %} Мой профиль</a>
+              <a class="dropdown-item" href="{% url 'profile' %}">Профиль
+                {{ user.username }}</a>
             </li>
             <li><hr class="dropdown-divider"></li>
             <li>
@@ -123,7 +115,7 @@
           <a class="nav-link" href="{% url 'login' %}">Войти</a>
         </li>
         <li class="nav-item">
-          <a class="btn btn-light btn-sm nav-register" href="{% url 'register' %}">Создать аккаунт</a>
+          <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
         </li>
       {% endif %}
     </ul>

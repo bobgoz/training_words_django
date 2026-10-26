@@ -5,7 +5,7 @@
 {% block title %}Тренировка{% endblock %}
 
 {% block content %}
-  <div class="training-layout">
+  <div class="container py-4">
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8">
         <!-- Прогресс -->
@@ -14,30 +14,30 @@
             <span>Прогресс</span>
             <span>{{ progress.current }} / {{ progress.total }}</span>
           </div>
-          <div class="progress training-progress">
-            <div class="progress-bar" style="width: {{ progress.percent }}%;"></div>
+          <div class="progress" style="height: 6px">
+            <div class="progress-bar bg-primary" style="width: {{ progress.percent }}%;"></div>
           </div>
         </div>
 
         <!-- Карточка слова -->
-        <div class="surface-card train-card">
-          <div class="surface-card__body p-4 p-lg-5 text-center">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4 p-lg-5 text-center">
             <!-- Слово -->
-            <span class="eyebrow">Карточка для повторения</span>
-            <h1 class="display-5 fw-bold mb-4">{{ object.get_text }}</h1>
+            <h2 class="display-5 fw-bold mb-4">{{ object.get_text }}</h2>
 
             <!-- Статистика слова -->
-            <div class="row g-2 small text-muted mb-4 pb-3 border-bottom">
+            <div class="row g-2 small text-muted mb-4 pb-2 border-bottom">
               <div class="col-6">
-                <div class="fw-bold train-stat-value">{{ object.repetition_count }}</div>
+                <div class="fw-bold text-primary">{{ object.repetition_count }}</div>
                 <div>повторений</div>
               </div>
               <div class="col-6">
-                <div class="fw-bold train-stat-value">
+                <div class="fw-bold text-info">
                   {% if object.is_learned %}
-                    {% bs_icon 'check2-circle' size="24px" %}<br>Изучено
+                    {% bs_icon 'check2-square' size="30px" color="green" %}<br>Изучено
                   {% else %}
-                    {% bs_icon 'arrow-repeat' size="24px" %}<br>Активно
+                    {% bs_icon 'rocket-takeoff' size="30px" color="green" %}<br> <small class="text-primary"
+                    >Активно</small>
                   {% endif %}
                 </div>
               </div>
@@ -49,15 +49,15 @@
                 {% csrf_token %}
                 <input type="hidden" name="word_id" value="{{ object.id }}">
                 <div class="d-flex gap-3">
-                  {% bootstrap_button "Помню" button_class="btn btn-primary rounded-pill py-2 flex-grow-1" button_type="submit" name="is_known" value="true" %}
-                  {% bootstrap_button "Повторить" button_class="btn btn-outline-secondary rounded-pill py-2 flex-grow-1" button_type="submit" name="is_known" value="false" %}
+                  {% bootstrap_button "Знаю" button_class="btn btn-success rounded-pill py-2 flex-grow-1" button_type="submit" name="is_known" value="true" %}
+                  {% bootstrap_button "Не знаю" button_class="btn btn-outline-danger rounded-pill py-2 flex-grow-1" button_type="submit" name="is_known" value="false" %}
                 </div>
               </form>
             </div>
 
             <!-- Подсказки (коллапс) -->
             <div class="mt-3 pt-2 border-top">
-              <div class="small text-muted mb-2">Подсказки</div>
+              <div class="small text-muted mb-2">📖 Подсказки:</div>
 
               <!-- Определение -->
               {% if object.definition %}
@@ -68,7 +68,7 @@
                     data-bs-toggle="collapse"
                     data-bs-target="#definitionHint"
                   >
-                    Определение
+                    📝 Определение
                   </button>
                   <div class="collapse mt-2" id="definitionHint">
                     <div class="small bg-light p-3 rounded">
@@ -87,7 +87,7 @@
                     data-bs-toggle="collapse"
                     data-bs-target="#exampleHint"
                   >
-                    Пример использования
+                    💡 Пример использования
                   </button>
                   <div class="collapse mt-2" id="exampleHint">
                     <div class="small bg-light p-3 rounded fst-italic">
@@ -106,7 +106,7 @@
                     data-bs-toggle="collapse"
                     data-bs-target="#imageHint"
                   >
-                    Изображение
+                    🖼️ Изображение
                   </button>
                   <div class="collapse mt-2" id="imageHint">
                     <div class="text-center bg-light p-3 rounded">
@@ -138,7 +138,7 @@
         <div class="text-center">
           <form action="{% url 'train_answer' %}" method="post">
             {% csrf_token %}
-            {% bootstrap_button "Завершить тренировку" button_class="btn btn-link text-muted rounded-pill py-2" button_type="submit" name="is_abort" value="true" %}
+            {% bootstrap_button "Прервать тренировку" button_class="btn btn-outline-warning rounded-pill py-2" button_type="submit" name="is_abort" value="true" %}
           </form>
         </div>
       </div>

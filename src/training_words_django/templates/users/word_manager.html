@@ -1,49 +1,66 @@
 {% extends "users/profile_base.html" %}
-{% load bootstrap_icons %}
 
 {% block title %}Менеджер слов{% endblock %}
 
 {% block profile_content %}
-  <span class="eyebrow">Личный словарь</span>
-  <h1 class="page-title-sm">Менеджер слов</h1>
-  <p class="page-subtitle mb-4">
-    Выберите подборку, с которой хотите продолжить.
-  </p>
-  <div class="row g-4">
+ <div class="row">
+  <div class="col-12">
+   <h2 class="h3 mb-4">📚 Менеджер слов</h2>
+   <p class="text-muted mb-4">
+    Управление словами: просмотр, фильтрация и массовые операции
+   </p>
+   <div class="row g-4">
+    <!-- Карточка активных слов -->
     <div class="col-md-6">
-      <a href="{% url 'active_words' %}" class="surface-card surface-card__body manager-card h-100">
-        <div class="d-flex align-items-center">
-          <span class="manager-card__icon">{% bs_icon 'arrow-repeat' %}</span>
-          <div>
-            <h2 class="h5 mb-1">Активные слова</h2>
-            <p class="mb-0 text-muted small">Слова, которые участвуют в тренировке.</p>
-          </div>
+     <a href="{% url 'active_words' %}">
+      <div class="card h-100 shadow-sm">
+       <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+         <span class="fs-1 me-3">📖</span>
+         <div>
+          <h5 class="card-title mb-0">Активные слова</h5>
+          <small class="text-muted">Слова, которые участвуют в тренировка</small>
+         </div>
         </div>
-      </a>
+       </div>
+      </div>
+     </a>
     </div>
+
+    <!-- Карточка неактивных слов -->
     <div class="col-md-6">
-      <a href="{% url 'inactive_words' %}" class="surface-card surface-card__body manager-card h-100">
-        <div class="d-flex align-items-center">
-          <span class="manager-card__icon manager-card__icon--warning">{% bs_icon 'pause-circle' %}</span>
-          <div>
-            <h2 class="h5 mb-1">Неактивные слова</h2>
-            <p class="mb-0 text-muted small">
-              Слова, которые пока не участвуют в тренировках.
-            </p>
-          </div>
+     <a href="{% url 'inactive_words' %}">
+      <div class="card h-100 shadow-sm">
+       <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+         <span class="fs-1 me-3">💤</span>
+         <div>
+          <h5 class="card-title mb-0">Неактивные слова</h5>
+          <small class="text-muted">Слова, которые временно не участвуют в тренировках</small>
+         </div>
         </div>
-      </a>
+       </div>
+      </div>
+     </a>
     </div>
+
+    <!-- Карточка выученных слов -->
     <div class="col-md-6">
-      <a href="{% url 'learned_words' %}" class="surface-card surface-card__body manager-card h-100">
-        <div class="d-flex align-items-center">
-          <span class="manager-card__icon manager-card__icon--success">{% bs_icon 'check2-circle' %}</span>
-          <div>
-            <h2 class="h5 mb-1">Выученные слова</h2>
-            <p class="mb-0 text-muted small">Слова, которые уже освоены.</p>
-          </div>
+     <a href="{% url 'learned_words' %}">
+      <div class="card h-100 shadow-sm">
+       <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+         <span class="fs-1 me-3">🎓</span>
+         <div>
+          <h5 class="card-title mb-0">Выученные слова</h5>
+          <small class="text-muted">Слова, которые уже изучены</small>
+         </div>
         </div>
-      </a>
+       </div>
+      </div>
+     </a>
     </div>
+   </div>
   </div>
+ </div>
 {% endblock %}

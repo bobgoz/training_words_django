@@ -1,89 +1,128 @@
 {% extends "users/profile_base.html" %}
+{% load static %}
 
 {% block title %}Статистика{% endblock %}
 
 {% block profile_content %}
-  <span class="eyebrow">Твой прогресс</span>
-  <h1 class="page-title-sm mb-4">Статистика</h1>
+ <div class="container">
+  <h2 class="mb-4">📊 Статистика</h2>
+
+  <!-- Основные показатели -->
   <div class="row g-3 mb-4">
-    <div class="col-6 col-lg-3">
-      <div class="surface-card surface-card__body stat-card stat-card--primary">
-        <div class="stat-card__value">{{ total_count }}</div>
-        <div class="stat-card__label">Всего слов</div>
-      </div>
+   <div class="col-md-3">
+    <div class="card text-center border-primary">
+     <div class="card-body">
+      <div class="display-4 fw-bold text-primary">{{ total_count }}</div>
+      <div class="text-muted">всего слов</div>
+     </div>
     </div>
-    <div class="col-6 col-lg-3">
-      <div class="surface-card surface-card__body stat-card stat-card--success">
-        <div class="stat-card__value">{{ active_count }}</div>
-        <div class="stat-card__label">Активных</div>
-      </div>
+   </div>
+   <div class="col-md-3">
+    <div class="card text-center border-success">
+     <div class="card-body">
+      <div class="display-4 fw-bold text-success">{{ active_count }}</div>
+      <div class="text-muted">активных слов</div>
+     </div>
     </div>
-    <div class="col-6 col-lg-3">
-      <div class="surface-card surface-card__body stat-card stat-card--warning">
-        <div class="stat-card__value">{{ inactive_count }}</div>
-        <div class="stat-card__label">Ожидают изучения</div>
-      </div>
+   </div>
+   <div class="col-md-3">
+    <div class="card text-center border-warning">
+     <div class="card-body">
+      <div class="display-4 fw-bold text-warning">{{ inactive_count }}</div>
+      <div class="text-muted">неактивных слов</div>
+     </div>
     </div>
-    <div class="col-6 col-lg-3">
-      <div class="surface-card surface-card__body stat-card stat-card--teal">
-        <div class="stat-card__value">{{ learned_count }}</div>
-        <div class="stat-card__label">Изученных</div>
-      </div>
+   </div>
+   <div class="col-md-3">
+    <div class="card text-center border-info">
+     <div class="card-body">
+      <div class="display-4 fw-bold text-info">{{ learned_count }}</div>
+      <div class="text-muted">изученных слов</div>
+     </div>
     </div>
+   </div>
   </div>
-  <section class="surface-card progress-summary mb-4">
-    <div class="surface-card__header">
-      <span class="eyebrow">Общий результат</span><h2 class="h5 mb-0">
-        Прогресс изучения
-      </h2>
-    </div>
-    <div class="surface-card__body text-center">
+
+  <!-- 📚 Прогресс изучения (на всю ширину) -->
+  <div class="row g-3 mb-4">
+   <div class="col-12">
+    <!-- ← на всю ширину -->
+    <div class="card">
+     <div class="card-header bg-success text-white">
+      <h5 class="mb-0">📚 Прогресс изучения</h5>
+     </div>
+     <div class="card-body text-center">
       <div class="display-1 fw-bold">{{ learning_progress }}%</div>
-      <p class="text-muted">изученных слов от общего количества</p>
-      <div class="progress training-progress" style="height: 10px">
-        <div class="progress-bar" style="width: {{ learning_progress }}%;"></div>
+      <p class="text-muted">
+       изученных слов от общего количества
+      </p>
+      <div class="progress" style="height: 10px">
+       <div class="progress-bar bg-success" style="width: {{ learning_progress }}%;"></div>
       </div>
+     </div>
     </div>
-  </section>
-  <div class="row g-3">
-    <div class="col-md-4">
-      <section class="surface-card metric-panel h-100">
-        <div class="surface-card__header"><h2 class="h6 mb-0">За последний месяц</h2></div>
-        <div class="surface-card__body text-center">
-          <div class="h2 fw-bold">{{ sessions_count }}</div>
-          <div class="text-muted">тренировок</div>
-          <hr>
-          <div class="h2 fw-bold">{{ words_added_month }}</div>
-          <div class="text-muted">добавлено слов</div>
-          <hr>
-          <div class="h2 fw-bold">{{ words_learned_month }}</div>
-          <div class="text-muted">изучено слов</div>
-        </div>
-      </section>
-    </div>
-    <div class="col-md-4">
-      <section class="surface-card metric-panel h-100">
-        <div class="surface-card__header"><h2 class="h6 mb-0">Всего тренировок</h2></div>
-        <div class="surface-card__body text-center">
-          <div class="display-4 fw-bold">{{ total_trainings }}</div>
-          <div class="text-muted">всего слов пройдено</div>
-          <hr>
-          <div class="h2 fw-bold text-success">{{ correct_trainings }}</div>
-          <div class="text-muted">правильных ответов</div>
-        </div>
-      </section>
-    </div>
-    <div class="col-md-4">
-      <section class="surface-card metric-panel h-100">
-        <div class="surface-card__header"><h2 class="h6 mb-0">Точность</h2></div>
-        <div class="surface-card__body text-center">
-          <div class="display-4 fw-bold">{{ avg_accuracy }}%</div>
-          <p class="text-muted">средняя точность ответов</p>
-          <div class="progress training-progress" style="height: 10px">
-            <div class="progress-bar" style="width: {{ avg_accuracy }}%;"></div>
-          </div>
-        </div>
-      </section>
-    </div>
+   </div>
   </div>
+
+  <!-- Эффективность и прогресс (два блока в ряд) -->
+  <div class="row g-3 mb-4">
+   <div class="col-md-6">
+    <!-- если что-то будет -->
+   </div>
+   <div class="col-md-6">
+    <!-- если что-то будет -->
+   </div>
+  </div>
+
+  <!-- Активность за месяц -->
+  <div class="row g-3 mb-4">
+   <div class="col-md-4">
+    <div class="card">
+     <div class="card-header bg-info text-white">
+      <h5 class="mb-0">📅 За последний месяц</h5>
+     </div>
+     <div class="card-body text-center">
+      <div class="h2 fw-bold">{{ sessions_count }}</div>
+      <div class="text-muted">тренировок</div>
+      <hr>
+      <div class="h2 fw-bold">{{ words_added_month }}</div>
+      <div class="text-muted">добавлено слов</div>
+      <hr>
+      <div class="h2 fw-bold">{{ words_learned_month }}</div>
+      <div class="text-muted">изучено слов</div>
+     </div>
+    </div>
+   </div>
+   <div class="col-md-4">
+    <div class="card">
+     <div class="card-header bg-warning text-dark">
+      <h5 class="mb-0">📈 Всего тренировок</h5>
+     </div>
+     <div class="card-body text-center">
+      <div class="display-1 fw-bold">{{ total_trainings }}</div>
+      <div class="text-muted">всего слов пройдено</div>
+      <hr>
+      <div class="h2 fw-bold text-success">{{ correct_trainings }}</div>
+      <div class="text-muted">правильных ответов</div>
+     </div>
+    </div>
+   </div>
+   <div class="col-md-4">
+    <div class="card">
+     <div class="card-header bg-danger text-white">
+      <h5 class="mb-0">🎓 Точность</h5>
+     </div>
+     <div class="card-body text-center">
+      <div class="display-1 fw-bold">{{ avg_accuracy }}%</div>
+      <p class="text-muted">
+       средняя точность ответов
+      </p>
+      <div class="progress" style="height: 10px">
+       <div class="progress-bar bg-danger" style="width: {{ avg_accuracy }}%;"></div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
 {% endblock %}

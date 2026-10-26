@@ -2,51 +2,49 @@
 {% load django_bootstrap5 %}
 
 {% block profile_content %}
-  <div class="list-page-header">
-    <div>
-      <span class="eyebrow">Личный словарь</span>
-      <h1 class="page-title-sm">{{ page_title }}</h1>
-    </div>
-    <span class="badge-soft badge-soft--secondary">{{ count_words }} записей</span>
+ <div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="h3 mb-0">{{ page_title }}</h2>
+  <div>
+   <span class="badge bg-primary">{{ count_words }} слов</span>
   </div>
+ </div>
 
-  {% if phrases %}
-    <div class="mb-4">
-      <form action="{% url 'download:download' %}" method="post">
-        {% csrf_token %}
-        {% bootstrap_button 'Скачать 10 активных слов' button_type='submit' %}
-      </form>
+ {% if phrases %}
+  <div class="mb-4">
+   <form action="{% url 'download:download' %}" method="post">
+    {% csrf_token %}
+    {% bootstrap_button 'Скачать 10 активных слов' button_type='submit' %}
+   </form>
+  </div>
+  <div class="list-group">
+   {% for phrase in phrases %}
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+     <div>
+      <a href="{% url 'phrase_detail' pk_phrase=phrase.pk %}">
+       <strong>
+        {{ phrase.phrase }}
+       </strong>
+      </a>
+     </div>
+     <div class="btn-group">
+      <a
+       href="{% url 'edit_phrase' pk_phrase=phrase.pk %}"
+       class="btn btn-sm"
+      >
+       Редактировать
+      </a>
+     </div>
     </div>
-    <div class="list-stack">
-      {% for phrase in phrases %}
-        <div class="surface-card word-list-item">
-          <div>
-            <a href="{% url 'phrase_detail' pk_phrase=phrase.pk %}">
-              <strong>
-                {{ phrase.phrase }}
-              </strong>
-            </a>
-          </div>
-          <div class="btn-group">
-            <a
-              href="{% url 'edit_phrase' pk_phrase=phrase.pk %}"
-              class="btn btn-sm btn-outline-primary rounded-pill"
-            >
-              Редактировать
-            </a>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-    <!-- Пагинация -->
-    <div class="mt-4 justify-content-center">
-      {% bootstrap_pagination page_obj pages_to_show=3 extra=request.GET.urlencode %}
-    </div>
-  {% else %}
-    <div class="empty-state">
-      <div class="empty-state__icon">+</div>
-      <h2 class="empty-state__title">Здесь пока пусто</h2>
-      <p class="empty-state__text">{{ empty_message }}</p>
-    </div>
-  {% endif %}
+   {% endfor %}
+  </div>
+  <!-- Пагинация -->
+  <div class="mt-4 justify-content-center">
+   {% bootstrap_pagination page_obj pages_to_show=3 extra=request.GET.urlencode %}
+  </div>
+ {% else %}
+  <div class="text-center py-5">
+   <div class="mb-3 fs-1">📭</div>
+   <p class="text-muted">{{ empty_message }}</p>
+  </div>
+ {% endif %}
 {% endblock %}

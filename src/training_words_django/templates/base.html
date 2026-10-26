@@ -4,34 +4,34 @@
 
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
-    <title>{% block title %}Тренажёр слов{% endblock %}</title>
-  </head>
-  <body class="app-body">
-    <div class="app-shell">
-      <nav class="navbar navbar-expand-lg navbar-dark app-navbar">
-        {% include 'includes/navbar.html' %}
-      </nav>
-      <main class="app-main">
-        <div class="container page-section">
-          {% bootstrap_messages %}
-          {% block content %}{% endblock %}
-        </div>
-      </main>
-
-      <footer class="app-footer">
-        {% include 'includes/footer.html' %}
-      </footer>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+  <title>{% block title %}Тренажёр слов{% endblock %}</title>
+ </head>
+ <body>
+  <div class="app-shell">
+   <nav class="navbar navbar-expand-lg navbar-dark app-navbar">
+    {% include 'includes/navbar.html' %}
+   </nav>
+   <main class="app-main">
+    <div class="container page-section">
+     {% bootstrap_messages %}
+     {% block content %}{% endblock %}
     </div>
-    {% block extra_js %}{% endblock %}
-  </body>
+   </main>
+
+   <footer class="app-footer">
+    {% include 'includes/footer.html' %}
+   </footer>
+  </div>
+  {% block extra_js %}{% endblock %}
+ </body>
 </html>
