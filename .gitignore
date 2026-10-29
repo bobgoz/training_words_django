@@ -215,3 +215,4 @@ gunicorn.ctl
 *.sql
 pyrightconfig.json
 media/
+staticfiles/
