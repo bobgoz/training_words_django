@@ -89,7 +89,8 @@ class Word(
 
         verbose_name = "слово"
         verbose_name_plural = "слова"
-        ordering = ("-updated_at",)
+        # ordering = ("-updated_at",)
+        ordering = ("word",)
 
     def clean(self):
         """
