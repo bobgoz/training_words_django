@@ -14,4 +14,9 @@ urlpatterns = [
         name="simple_password_change",
     ),
     path("statistics/", views.StatisticsView.as_view(), name="statistics"),
+    path(
+        "verify-email/<uidb64>/<token>/",
+        views.verify_email,
+        name="verify_email",
+    ),
 ]

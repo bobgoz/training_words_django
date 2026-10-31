@@ -216,3 +216,4 @@ gunicorn.ctl
 pyrightconfig.json
 media/
 staticfiles/
+sent_emails

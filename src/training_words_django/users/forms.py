@@ -8,9 +8,17 @@ User = get_user_model()
 class RegisterForm(UserCreationForm):
     """Форма регистрации и авторизации"""
 
-    class Meta:
+    email = forms.EmailField(
+        label="Электронная почта",
+        widget=forms.EmailInput(attrs={"class": "form-control"}),
+    )
+
+    class Meta(UserCreationForm.Meta):
         model = User
-        fields = ("username",)
+        fields = (
+            "username",
+            "email",
+        )
 
 
 class SimplePasswordForm(forms.Form):

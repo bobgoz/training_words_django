@@ -3,9 +3,16 @@ from datetime import timedelta
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import models
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import send_mail
+from django.db import models, transaction
+from django.http import HttpResponseBadRequest
+from django.shortcuts import redirect
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -26,6 +33,61 @@ class RegistrationView(CreateView):
     template_name = "registration/registration.html"
     form_class = RegisterForm
     success_url = "/login"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        user = self.object
+        activation_url = self.request.build_absolute_uri(
+            reverse_lazy(
+                "verify_email",
+                kwargs={
+                    "uidb64": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "token": default_token_generator.make_token(user),
+                },
+            )
+        )
+        message = render_to_string(
+            "registration/verify_email.txt",
+            {
+                "user": user,
+                "activation_url": activation_url,
+            },
+        )
+        transaction.on_commit(
+            lambda: send_mail(
+                subject="Подтвердите адрес электронной почты",
+                message=message,
+                from_email=None,
+                recipient_list=[user.email],
+            )
+        )
+        messages.info(
+            self.request,
+            "Аккаунт создан. Мы отправили ссылку для подтверждения почты — "
+            "но пользоваться сайтом можно уже сейчас.",
+        )
+        return response
+
+
+def verify_email(request, uidb64, token):
+    """Подтверждение электронной почты."""
+    try:
+        user_id = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=user_id)
+    except (TypeError, ValueError, OverflowError):
+        return HttpResponseBadRequest("Некорректная ссылка подтверждения")
+    if not default_token_generator.check_token(user, token):
+        return HttpResponseBadRequest(
+            "Ссылка недействительна или срок её действия истёк",
+        )
+    if user.email_verifed:
+        messages.info(request, "Этот адрес электронной почты уже подтверждён.")
+    else:
+        user.email_verifed = True
+        user.save(update_fields=["email_verifed"])
+        messages.success(request, "Адрес электронной почты подтверждён.")
+
+    return redirect("profile")
 
 
 class ProfileView(LoginRequiredMixin, DetailView):
@@ -119,14 +181,10 @@ class StatisticsView(LoginRequiredMixin, TemplateView):
 
         # Слова за последний месяц
         words_added_month = all_words.filter(created_at__gte=month_ago).count()
-        words_learned_month = learned_words.filter(
-            updated_at__gte=month_ago
-        ).count()
+        words_learned_month = learned_words.filter(updated_at__gte=month_ago).count()
 
         # Активность (тренировки за последние 30 дней)
-        sessions = TrainingSession.objects.filter(
-            user=user, started_at__gte=month_ago
-        )
+        sessions = TrainingSession.objects.filter(user=user, started_at__gte=month_ago)
         sessions_count = sessions.count()
         total_trainings = (
             sessions.aggregate(total=models.Sum("total_words"))["total"] or 0
