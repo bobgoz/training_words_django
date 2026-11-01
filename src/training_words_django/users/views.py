@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.db import models
@@ -10,6 +11,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.http import urlsafe_base64_decode
+from django.views.decorators.http import require_POST
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -20,7 +22,7 @@ from django.views.generic import (
 from training.models import TrainingSession, Word
 
 from .forms import RegisterForm, SimplePasswordForm
-from .utils import send_activation_url
+from .utils import send_verification_email
 
 User = get_user_model()
 
@@ -34,30 +36,18 @@ class RegistrationView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        send_activation_url(self)
-        return response
-
-
-def verify_email(request, uidb64, token):
-    """Подтверждение электронной почты."""
-    try:
-        user_id = urlsafe_base64_decode(uidb64).decode()
-        user = User.objects.get(pk=user_id)
-    except (TypeError, ValueError, OverflowError):
-        return HttpResponseBadRequest("Некорректная ссылка подтверждения")
-
-    if not default_token_generator.check_token(user, token):
-        return HttpResponseBadRequest(
-            "Ссылка недействительна или срок её действия истёк",
+        request = self.request
+        send_verification_email(
+            request=request,
+            user=self.object,
         )
-    if user.email_verifed:
-        messages.info(request, "Этот адрес электронной почты уже подтверждён.")
-    else:
-        user.email_verifed = True
-        user.save(update_fields=["email_verifed"])
-        messages.success(request, "Адрес электронной почты подтверждён.")
+        messages.info(
+            request,
+            "Аккаунт создан. Мы отправили ссылку для подтверждения почты — "
+            "но пользоваться сайтом можно уже сейчас.",
+        )
 
-    return redirect("profile")
+        return response
 
 
 class ProfileView(LoginRequiredMixin, DetailView):
@@ -188,3 +178,44 @@ class StatisticsView(LoginRequiredMixin, TemplateView):
         )
 
         return context
+
+
+def verify_email(request, uidb64, token):
+    """Вью для одтверждение электронной почты."""
+    try:
+        user_id = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=user_id)
+    except (TypeError, ValueError, OverflowError):
+        return HttpResponseBadRequest("Некорректная ссылка подтверждения")
+
+    if not default_token_generator.check_token(user, token):
+        return HttpResponseBadRequest(
+            "Ссылка недействительна или срок её действия истёк",
+        )
+    if user.email_verifed:
+        messages.info(request, "Этот адрес электронной почты уже подтверждён.")
+    else:
+        user.email_verifed = True
+        user.save(update_fields=["email_verifed"])
+        messages.success(request, "Адрес электронной почты подтверждён.")
+
+    return redirect("profile_info")
+
+
+@login_required
+@require_POST
+def resend_verificaction_email(request):
+    """Вью для переотправки сообщения для подтверждения электронной почты."""
+    user = request.user
+    if user.email_verifed:
+        messages.info(request, "Адрес электронной почты уже подтверждён")
+    else:
+        send_verification_email(
+            request=request,
+            user=user,
+        )
+        messages.success(
+            request,
+            "Новое письмо со ссылкой для подтверждения отправлено.",
+        )
+    return redirect("profile_info")

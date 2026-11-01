@@ -1,6 +1,5 @@
 """Утилиты для приложения users."""
 
-from django.contrib import messages
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.db import transaction
@@ -10,11 +9,10 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
 
-def send_activation_url(self):
-    """Отправка ссылки для подтверждения элеsктронной почты."""
-    user = self.object
+def send_verification_email(*, request, user):
+    """Отправляет пользователю ссылку для подтверждения почты."""
 
-    activation_url = self.request.build_absolute_uri(
+    verification_url = request.build_absolute_uri(
         reverse_lazy(
             "verify_email",
             kwargs={
@@ -27,7 +25,7 @@ def send_activation_url(self):
         "registration/verify_email.txt",
         {
             "user": user,
-            "activation_url": activation_url,
+            "activation_url": verification_url,
         },
     )
     transaction.on_commit(
@@ -37,9 +35,4 @@ def send_activation_url(self):
             from_email=None,
             recipient_list=[user.email],
         )
-    )
-    messages.info(
-        self.request,
-        "Аккаунт создан. Мы отправили ссылку для подтверждения почты — "
-        "но пользоваться сайтом можно уже сейчас.",
     )

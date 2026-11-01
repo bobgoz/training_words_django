@@ -1,2 +1,5 @@
 [flake8]
-exclude = src/training_words_django/training_words/settings.py
+exclude =
+    src/training_words_django/training_words/settings.py,
+    migrations,
+    .venv,

@@ -8,7 +8,12 @@ class User(AbstractUser):
     """Расширенная модель пользователя"""
 
     bio = models.TextField("О себе", max_length=500, blank=True, null=True)
-    avatar = models.ImageField("Аватар", upload_to="avatars/", blank=True, null=True)
+    avatar = models.ImageField(
+        "Аватар",
+        upload_to="avatars/",
+        blank=True,
+        null=True,
+    )
     email_verifed = models.BooleanField(
         "Почта подтверждена",
         default=False,

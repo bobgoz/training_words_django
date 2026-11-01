@@ -19,4 +19,9 @@ urlpatterns = [
         views.verify_email,
         name="verify_email",
     ),
+    path(
+        "me/email/resend-verification/",
+        views.resend_verificaction_email,
+        name="resend_verification_email",
+    ),
 ]
