@@ -77,6 +77,26 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy("profile")
 
+    def form_valid(self, form):
+        """Сброс флага email_verifed
+
+        Сравнивает старый и новый емейл и сбрасывает
+        флаг, чтобы пользователь мог подтвердить новый емейл.
+        """
+        user = self.object
+        old_email = User.objects.get(pk=user.pk).email
+        new_email = user.email
+        if old_email != new_email:
+            user.email_verifed = False
+            user.save(update_fields=["email_verifed"])
+            messages.success(
+                self.request,
+                "Новые данные сохранены. Новую электронную почту " "нужно подтвердить",
+            )
+        else:
+            messages.success(self.request, "Новые данные сохранены.")
+        return super().form_valid(form)
+
 
 class ProfileInfoView(LoginRequiredMixin, DetailView):
     """Информация о профиле"""
