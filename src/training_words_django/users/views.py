@@ -4,15 +4,12 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import send_mail
-from django.db import models, transaction
+from django.db import models
 from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect
-from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_decode
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -23,6 +20,7 @@ from django.views.generic import (
 from training.models import TrainingSession, Word
 
 from .forms import RegisterForm, SimplePasswordForm
+from .utils import send_activation_url
 
 User = get_user_model()
 
@@ -36,36 +34,7 @@ class RegistrationView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        user = self.object
-        activation_url = self.request.build_absolute_uri(
-            reverse_lazy(
-                "verify_email",
-                kwargs={
-                    "uidb64": urlsafe_base64_encode(force_bytes(user.pk)),
-                    "token": default_token_generator.make_token(user),
-                },
-            )
-        )
-        message = render_to_string(
-            "registration/verify_email.txt",
-            {
-                "user": user,
-                "activation_url": activation_url,
-            },
-        )
-        transaction.on_commit(
-            lambda: send_mail(
-                subject="Подтвердите адрес электронной почты",
-                message=message,
-                from_email=None,
-                recipient_list=[user.email],
-            )
-        )
-        messages.info(
-            self.request,
-            "Аккаунт создан. Мы отправили ссылку для подтверждения почты — "
-            "но пользоваться сайтом можно уже сейчас.",
-        )
+        send_activation_url(self)
         return response
 
 
@@ -76,6 +45,7 @@ def verify_email(request, uidb64, token):
         user = User.objects.get(pk=user_id)
     except (TypeError, ValueError, OverflowError):
         return HttpResponseBadRequest("Некорректная ссылка подтверждения")
+
     if not default_token_generator.check_token(user, token):
         return HttpResponseBadRequest(
             "Ссылка недействительна или срок её действия истёк",
