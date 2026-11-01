@@ -150,6 +150,11 @@ LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "/login"
 AUTH_USER_MODEL = "users.User"
 
+AUTHENTICATION_BACKENDS = [
+    "users.backends.EmailBackend",
+]
+
+
 # Django ToolBar
 INTERNAL_IPS = [
     "127.0.0.1",

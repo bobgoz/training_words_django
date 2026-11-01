@@ -1,8 +1,18 @@
+from django.contrib.auth.views import LoginView
 from django.urls import include, path
 
 from . import views
+from .forms import EmailAuthenticationForm
 
 urlpatterns = [
+    path(
+        "login/",
+        LoginView.as_view(
+            authentication_form=EmailAuthenticationForm,
+            template_name="registration/login.html",
+        ),
+        name="login",
+    ),
     path("", include("django.contrib.auth.urls")),
     path("register/", views.RegistrationView.as_view(), name="register"),
     path("me/", views.ProfileView.as_view(), name="profile"),
