@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.views import PasswordChangeView
 from django.core.cache import cache
 from django.db import models
 from django.http import HttpResponseBadRequest
@@ -16,13 +17,12 @@ from django.views.decorators.http import require_POST
 from django.views.generic import (
     CreateView,
     DetailView,
-    FormView,
     TemplateView,
     UpdateView,
 )
 from training.models import TrainingSession, Word
 
-from .forms import RegisterForm, SimplePasswordForm
+from .forms import RegisterForm
 from .utils import send_verification_email
 
 User = get_user_model()
@@ -84,7 +84,8 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
         флаг, чтобы пользователь мог подтвердить новый емейл.
         """
         user = self.object
-        old_email = User.objects.get(pk=user.pk).email
+        old_instance = User.objects.get(pk=user.pk)
+        old_email = old_instance.email
         new_email = user.email
         if old_email != new_email:
             user.email_verifed = False
@@ -95,6 +96,7 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
             )
         else:
             messages.success(self.request, "Новые данные сохранены.")
+
         return super().form_valid(form)
 
 
@@ -108,19 +110,13 @@ class ProfileInfoView(LoginRequiredMixin, DetailView):
         return self.request.user
 
 
-class SimplePasswordChangeView(LoginRequiredMixin, FormView):
-    """Вью  для переназначения пароля в профиле."""
+class SimplePasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    """Вью для смены пароля с проверкой текущего."""
 
     template_name = "registration/simple_password_change.html"
-    form_class = SimplePasswordForm
-    success_url = reverse_lazy("profile")
+    success_url = reverse_lazy("profile_info")
 
     def form_valid(self, form):
-        user = self.request.user
-        new_password = form.cleaned_data["new_password1"]
-        user.set_password(new_password)
-        user.save()
-
         messages.success(self.request, "Пароль успешно изменён!")
         return super().form_valid(form)
 
