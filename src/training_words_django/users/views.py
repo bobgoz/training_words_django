@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
+from django.core.cache import cache
 from django.db import models
 from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect
@@ -209,7 +210,16 @@ def resend_verificaction_email(request):
     user = request.user
     if user.email_verifed:
         messages.info(request, "Адрес электронной почты уже подтверждён")
+
+    cache_key = f"email-verification-last-sent:{user.pk}"
+
+    if cache.get(cache_key):
+        messages.warning(
+            request,
+            ("Письмо уже отправлено недавно. " "Попробуйте снова через 1 минуту."),
+        )
     else:
+        cache.set(cache_key, True, timeout=60)
         send_verification_email(
             request=request,
             user=user,
@@ -218,4 +228,5 @@ def resend_verificaction_email(request):
             request,
             "Новое письмо со ссылкой для подтверждения отправлено.",
         )
+
     return redirect("profile_info")

@@ -204,12 +204,13 @@ CSRF_TRUSTED_ORIGINS = [os.getenv("DOMAIN")]
 
 
 # Caches
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": REDIS_URL,
+if not DEBUG:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": REDIS_URL,
+        }
     }
-}
 
 
 # Logging
