@@ -4,7 +4,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.db import transaction
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
+from django.urls import reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
@@ -13,7 +13,7 @@ def send_verification_email(*, request, user):
     """Отправляет пользователю ссылку для подтверждения почты."""
 
     verification_url = request.build_absolute_uri(
-        reverse_lazy(
+        reverse(
             "verify_email",
             kwargs={
                 "uidb64": urlsafe_base64_encode(force_bytes(user.pk)),

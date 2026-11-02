@@ -19,7 +19,7 @@ class EmailBackend(ModelBackend):
             user = User.objects.get(email__iexact=email)
         except User.DoesNotExist:
             # Выполняем хеширование для снижения разницы во времени ответа.
-            User().setз_password(password)
+            User().set_password(password)
             return None
 
         if user.check_password(password) and self.user_can_authenticate(user):

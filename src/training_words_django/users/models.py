@@ -21,6 +21,7 @@ class User(AbstractUser):
     email = models.EmailField(
         "Электронная почта",
         unique=True,
+        help_text="Введите свой актуальный адрес электронной почты",
     )
 
     class Meta:

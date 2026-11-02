@@ -33,17 +33,16 @@ class RegistrationView(CreateView):
 
     template_name = "registration/registration.html"
     form_class = RegisterForm
-    success_url = "/login"
+    success_url = reverse_lazy("login")
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        request = self.request
         send_verification_email(
-            request=request,
+            request=self.request,
             user=self.object,
         )
         messages.info(
-            request,
+            self.request,
             "Аккаунт создан. Мы отправили ссылку для подтверждения почты — "
             "но пользоваться сайтом можно уже сейчас.",
         )
@@ -202,7 +201,7 @@ def verify_email(request, uidb64, token):
     try:
         user_id = urlsafe_base64_decode(uidb64).decode()
         user = User.objects.get(pk=user_id)
-    except (TypeError, ValueError, OverflowError):
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         return HttpResponseBadRequest("Некорректная ссылка подтверждения")
 
     if not default_token_generator.check_token(user, token):
@@ -221,28 +220,29 @@ def verify_email(request, uidb64, token):
 
 @login_required
 @require_POST
-def resend_verificaction_email(request):
+def resend_verification_email(request):
     """Вью для переотправки сообщения для подтверждения электронной почты."""
     user = request.user
     if user.email_verifed:
         messages.info(request, "Адрес электронной почты уже подтверждён")
+        return redirect("profile_info")
 
     cache_key = f"email-verification-last-sent:{user.pk}"
 
     if cache.get(cache_key):
         messages.warning(
             request,
-            ("Письмо уже отправлено недавно. " "Попробуйте снова через 1 минуту."),
+            ("Письмо уже отправлено недавно. Попробуйте снова через 1 минуту."),
         )
-    else:
-        cache.set(cache_key, True, timeout=60)
-        send_verification_email(
-            request=request,
-            user=user,
-        )
-        messages.success(
-            request,
-            "Новое письмо со ссылкой для подтверждения отправлено.",
-        )
+        return redirect("profile_info")
+    cache.set(cache_key, True, timeout=60)
+    send_verification_email(
+        request=request,
+        user=user,
+    )
+    messages.success(
+        request,
+        "Новое письмо со ссылкой для подтверждения отправлено.",
+    )
 
     return redirect("profile_info")

@@ -31,7 +31,7 @@ urlpatterns = [
     ),
     path(
         "me/email/resend-verification/",
-        views.resend_verificaction_email,
+        views.resend_verification_email,
         name="resend_verification_email",
     ),
 ]

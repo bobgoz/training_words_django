@@ -10,6 +10,9 @@ class RegisterForm(UserCreationForm):
 
     email = forms.EmailField(
         label="Электронная почта",
+        help_text=(
+            "Введите актуальный адрес — он нужен для входа " "и восстановления доступа."
+        ),
         widget=forms.EmailInput(attrs={"class": "form-control"}),
     )
 

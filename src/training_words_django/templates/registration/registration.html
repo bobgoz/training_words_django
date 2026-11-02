@@ -16,11 +16,9 @@
 
       <form method="post" class="auth-form">
         {% csrf_token %}
-
         {% if form.non_field_errors %}
           <div class="alert alert-danger">{{ form.non_field_errors }}</div>
         {% endif %}
-
         <div class="form-group">
           <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
           {{ form.username }}
@@ -37,6 +35,9 @@
           {{ form.email }}
           {% if form.email.errors %}
             <div class="text-danger mt-2 small">{{ form.email.errors }}</div>
+          {% endif %}
+          {% if form.email.help_text %}
+            <div class="form-text mt-2">{{ form.email.help_text }}</div>
           {% endif %}
         </div>
 
