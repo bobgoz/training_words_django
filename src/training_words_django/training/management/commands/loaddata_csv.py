@@ -107,13 +107,14 @@ class Command(BaseCommand):
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
-                        f"Создан пользователь {username} с правами "  # fmt: skip
-                        "администратора"
+                        f"Создан пользователь {username} с правами " "администратора"
                     )
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
-                        "Данные для входа:" f"\nemail: {email}" f"\nпароль: {password}"
+                        "Данные для входа: "
+                        f"\nemail: {email} "
+                        f"\nпароль: {password}"
                     )
                 )
 
