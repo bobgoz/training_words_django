@@ -87,7 +87,8 @@ WSGI_APPLICATION = "training_words.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-if os.getenv("POSTGRES_USE") == "true":
+POSTGRES_USE = os.getenv("POSTGRES_USE")
+if POSTGRES_USE:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",

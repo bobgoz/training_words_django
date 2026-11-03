@@ -3,8 +3,9 @@
 import csv
 from pathlib import Path
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from phrase.models import Phrase
 from training.models import Word
 
@@ -39,6 +40,12 @@ class Command(BaseCommand):
         Очищает БД, создаёт суперпользователя и загружает
         слова и словосочетания.
         """
+        if settings.POSTGRES_USE:
+            raise CommandError(
+                "Команду нельзя выполнять при "
+                "POSTGRES_USE=true: "
+                "она полностью очищает базу данных."
+            )
         # Очищаем все записи в таблице.
         User.objects.all().delete()
         Phrase.objects.all().delete()
