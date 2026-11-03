@@ -36,6 +36,10 @@ class RegistrationView(CreateView):
     success_url = reverse_lazy("login")
 
     def form_valid(self, form):
+        """Отправка информативного сообщения.
+
+        После регистрации отправляется сообщение на почту для ее подтверждения.
+        """
         response = super().form_valid(form)
         send_verification_email(
             request=self.request,
@@ -156,8 +160,12 @@ class StatisticsView(LoginRequiredMixin, TemplateView):
             learning_progress = round(learned_count / total_count * 100, 1)
 
         # Слова за последний месяц
-        words_added_month = all_words.filter(created_at__gte=month_ago).count()
-        words_learned_month = learned_words.filter(updated_at__gte=month_ago).count()
+        words_added_month = all_words.filter(
+            created_at__gte=month_ago,
+        ).count()
+        words_learned_month = learned_words.filter(
+            updated_at__gte=month_ago,
+        ).count()
 
         # Активность (тренировки за последние 30 дней)
         sessions = TrainingSession.objects.filter(user=user, started_at__gte=month_ago)
@@ -232,7 +240,7 @@ def resend_verification_email(request):
     if cache.get(cache_key):
         messages.warning(
             request,
-            ("Письмо уже отправлено недавно. Попробуйте снова через 1 минуту."),
+            ("Письмо уже отправлено недавно. " "Попробуйте снова через 1 минуту."),
         )
         return redirect("profile_info")
     cache.set(cache_key, True, timeout=60)

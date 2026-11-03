@@ -18,6 +18,9 @@ from django.views.generic import (
 )
 from phrase.models import Phrase
 
+from training_words_django.phrase.constants import MIN_ACTIVE_PHRASES
+
+from .constants import MIN_ACTIVE_WORDS
 from .forms import (
     CreateWordForm,
     EditWordForm,
@@ -198,9 +201,10 @@ class TrainingSetupView(LoginRequiredMixin, View):
     def get(self, request):
         """Показать форму настроек."""
         clean_session(request)
+        user = request.user
 
-        Word.ensure_min_active_words(request.user)
-        Phrase.ensure_min_active_phrases(request.user)
+        Word.ensure_min_active_items(user, MIN_ACTIVE_WORDS)
+        Phrase.ensure_min_active_items(user, MIN_ACTIVE_PHRASES)
 
         form = TrainingSettingsForm(user=request.user)
         return render(request, "training/train_setup.html", {"form": form})
@@ -375,7 +379,7 @@ class TrainCompleteView(LoginRequiredMixin, View):
 
         Выполняет следующие действия:
             1. Восполняет активные слова до минимального
-               количества (ensure_min_active_words).
+               количества (ensure_min_active_items).
             2. Проверяет, что тренировка действительно
                завершена (все слова отвечены).
             3. Извлекает статистику из сессии
@@ -415,8 +419,8 @@ class TrainCompleteView(LoginRequiredMixin, View):
               браузера и после сохранения
               полностью очищаются.
         """
-        Word.ensure_min_active_words(request.user)
-        Phrase.ensure_min_active_phrases(request.user)
+        Word.ensure_min_active_items(request.user, MIN_ACTIVE_WORDS)
+        Phrase.ensure_min_active_items(request.user, MIN_ACTIVE_PHRASES)
 
         settings = request.session.get("training_settings")
 

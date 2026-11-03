@@ -7,13 +7,16 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
+from training_words_django.learning.model_mixins import (
+    BaseIntervalLogicMixin,
+    BaseTimestampMixin,
+)
+
 from .constants import (
     DEFINITION_FIELD_MAX_LENGTH,
-    MIN_ACTIVE_WORDS,
     WORD_FIELD_MAX_LENGTH,
 )
 from .managers import WordManager
-from .mixins import BaseIntervalLogicMixin, BaseTimestampMixin
 from .services import image_unique_name, translator
 
 User = get_user_model()
@@ -26,6 +29,8 @@ class Word(
     BaseTimestampMixin,
 ):
     """Класс слова"""
+
+    active_items_manager_name = "words"
 
     LANGUAGE_CHOICES = [
         ("en", "Английское"),
@@ -128,47 +133,13 @@ class Word(
         self.language = self._detect_language()
         return super().save(*args, **kwargs)
 
-    @classmethod
-    def ensure_min_active_words(cls, user):
-        """
-        Обеспечивает минимальное количество активных слов.
-        """
-
-        active_count = cls.words.is_active(user).count()
-
-        if active_count < MIN_ACTIVE_WORDS:
-            # Сколько нужно добавить
-            needed = MIN_ACTIVE_WORDS - active_count
-            # Приоритет слова, обновленные давно
-            ids_to_activate = list(
-                cls.words.inactive(
-                    user,
-                )
-                .filter(
-                    next_review_date__lte=timezone.now(),
-                )
-                .order_by(
-                    "updated_at",
-                )
-                .values_list("id", flat=True)[:needed]
-            )
-
-            if ids_to_activate:
-                count = cls.objects.filter(id__in=ids_to_activate).update(
-                    is_active=True,
-                    is_learned=False,
-                )
-                return count
-
-        return 0
-
     @property
     def is_due_for_review(self) -> bool:
         """Проверяет, что дата повторения в будущем"""
         return self.next_review_date and self.next_review_date > timezone.now()
 
     def get_absolute_url(self):
-
+        """Возвращает абсолютный url объекта."""
         return reverse("detail", kwargs={"pk_word": self.pk})
 
     def get_text(self):

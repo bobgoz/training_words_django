@@ -10,5 +10,4 @@ MIN_ACTIVE_WORDS = 5
 
 # Форма настройки тренировки
 COUNT_INITIAL_VALUE = 10
-INTERVALS = (1, 3, 7, 14, 30, 60, 90, 180, 365)
 NUMBER_OF_WORD = (10, 20, 30, 40, 50, 80, 100)
