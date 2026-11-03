@@ -26,6 +26,12 @@ class Command(BaseCommand):
             default="admin",
             help="Имя пользователя (по умолчанию: admin)",
         )
+        parser.add_argument(
+            "--email",
+            type=str,
+            default="admin@example.ru",
+            help="Email для входа",
+        )
 
     def handle(self, *args, **options):
         """Выполняет импорт данных из CSV-файлов.
@@ -39,11 +45,12 @@ class Command(BaseCommand):
         Word.objects.all().delete()
 
         username = options["username"]
-
+        email = options["email"]
         password = "password"
 
         # Создание пользователя
         user = User.objects.create_superuser(
+            email=email,
             username=username,
             password=password,
         )
@@ -93,8 +100,7 @@ class Command(BaseCommand):
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
-                        "Данные для входа:"
-                        f"\nusername: {username}, пароль: {password}"
+                        "Данные для входа:" f"\nemail: {email}" f"\nпароль: {password}"
                     )
                 )
 
