@@ -87,7 +87,8 @@ class Command(BaseCommand):
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
-                        (f"Создан пользователь {username} с правами " "администратора")
+                        f"Создан пользователь {username} с правами "  # fmt: skip
+                        "администратора"
                     )
                 )
                 self.stdout.write(
