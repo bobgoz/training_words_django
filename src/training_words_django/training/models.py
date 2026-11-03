@@ -7,7 +7,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-from training_words_django.learning.model_mixins import (
+from learning.model_mixins import (
     BaseIntervalLogicMixin,
     BaseTimestampMixin,
 )
