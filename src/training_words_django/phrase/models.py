@@ -3,14 +3,13 @@
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from phrase.managers import PhraseManager
-
-from training_words_django.learning.model_mixins import (
+from learning.model_mixins import (
     BaseIntervalLogicMixin,
     BaseTimestampMixin,
 )
 
 from .constants import PHRASE_MAX_LENGTH
+from .managers import PhraseManager
 
 
 class Phrase(

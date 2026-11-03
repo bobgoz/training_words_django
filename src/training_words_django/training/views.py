@@ -18,7 +18,7 @@ from django.views.generic import (
 )
 from phrase.models import Phrase
 
-from training_words_django.phrase.constants import MIN_ACTIVE_PHRASES
+from phrase.constants import MIN_ACTIVE_PHRASES
 
 from .constants import MIN_ACTIVE_WORDS
 from .forms import (
