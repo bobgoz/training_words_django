@@ -167,3 +167,6 @@ exclude = [
 
 [tool.uv]
 package = false
+
+[tool.ruff.format]
+quote-style = "single"
