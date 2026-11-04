@@ -19,91 +19,91 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(dotenv_path=BASE_DIR / ".env")
+load_dotenv(dotenv_path=BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 if not SECRET_KEY:
     raise ImproperlyConfigured('Не найдена переменная "SECRET_KEY" в .env!')
 
-DEBUG = os.getenv("DEBUG", "True") == "true"
+DEBUG = os.getenv('DEBUG', 'true').lower() == 'true'
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost").split(",")
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
 
 # Application definition
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "users",
-    "training",
-    "index",
-    "download",
-    "phrase",
-    "debug_toolbar",
-    "django_bootstrap5",
-    "django_extensions",
-    "django_bootstrap_icons",
-    "storages",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'users',
+    'training',
+    'index',
+    'download',
+    'phrase',
+    'debug_toolbar',
+    'django_bootstrap5',
+    'django_extensions',
+    'django_bootstrap_icons',
+    'storages',
 ]
 
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = "training_words.urls"
+ROOT_URLCONF = 'training_words.urls'
 
 TEMPLATES = [
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = "training_words.wsgi.application"
+WSGI_APPLICATION = 'training_words.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-POSTGRES_USE = os.getenv("POSTGRES_USE") == "true"
+POSTGRES_USE = os.getenv('POSTGRES_USE', 'false').lower() == 'true'
 if POSTGRES_USE:
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("DB_NAME"),
-            "USER": os.getenv("DB_USER"),
-            "PASSWORD": os.getenv("DB_PASSWORD"),
-            "HOST": os.getenv("DB_HOST"),
-            "PORT": os.getenv("DB_PORT"),
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
         }
     }
 else:
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR.parent.parent / "db.sqlite3",
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR.parent.parent / 'db.sqlite3',
         }
     }
 
@@ -113,16 +113,16 @@ else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -131,71 +131,71 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
 # USE_TZ = True
-LANGUAGE_CODE = "ru-ru"
-TIME_ZONE = "Europe/Moscow"
+LANGUAGE_CODE = 'ru-ru'
+TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
-MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media/"
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
 
 # Auth
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
-LOGIN_URL = "/login"
-AUTH_USER_MODEL = "users.User"
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/login'
+AUTH_USER_MODEL = 'users.User'
 
 AUTHENTICATION_BACKENDS = [
-    "users.backends.EmailBackend",
+    'users.backends.EmailBackend',
 ]
 
 
 # Django ToolBar
 INTERNAL_IPS = [
-    "127.0.0.1",
+    '127.0.0.1',
 ]
 
 
 # Bootstrap
-BS_ICONS_CACHE = os.path.join(STATIC_ROOT, "icon_cache")
-BS_ICONS_NOT_FOUND = "Icon does not exist"
+BS_ICONS_CACHE = os.path.join(STATIC_ROOT, 'icon_cache')
+BS_ICONS_NOT_FOUND = 'Icon does not exist'
 
 
 # Dropbox
-DROPBOX_USE = os.getenv("DROPBOX_USE") == "true"
+DROPBOX_USE = os.getenv('DROPBOX_USE', 'false').lower() == 'true'
 
 if not DROPBOX_USE and not DEBUG:
     raise ImproperlyConfigured(
-        "В продакшене нужно установить переменную DROPBOX_USE=true " "в файле .env!"
+        'В продакшене нужно установить переменную DROPBOX_USE=true в файле .env!'
     )
 
 if DROPBOX_USE:
     STORAGES = {
-        "default": {
-            "BACKEND": "storages.backends.dropbox.DropboxStorage",
-            "OPTIONS": {
-                "app_key": os.getenv("APP_KEY"),
-                "app_secret": os.getenv("APP_SECRET"),
-                "oauth2_refresh_token": os.getenv("REFRESH_TOKEN"),
-                "root_path": os.getenv("ROOT_PATH"),
-                "write_mode": os.getenv("WRITE_MODE"),  # 'add' или 'overwrite'
-                "timeout": 100,
+        'default': {
+            'BACKEND': 'storages.backends.dropbox.DropboxStorage',
+            'OPTIONS': {
+                'app_key': os.getenv('APP_KEY'),
+                'app_secret': os.getenv('APP_SECRET'),
+                'oauth2_refresh_token': os.getenv('REFRESH_TOKEN'),
+                'root_path': os.getenv('ROOT_PATH'),
+                'write_mode': os.getenv('WRITE_MODE'),  # 'add' или 'overwrite'
+                'timeout': 100,
             },
         },
-        "staticfiles": {
-            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        'staticfiles': {
+            'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
         },
     }
 
 
 # Redis
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
 
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
@@ -204,68 +204,68 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-CSRF_TRUSTED_ORIGINS = [os.getenv("DOMAIN")]
+CSRF_TRUSTED_ORIGINS = [os.getenv('DOMAIN')]
 
 
 # Caches
 if not DEBUG:
     CACHES = {
-        "default": {
-            "BACKEND": "django.core.cache.backends.redis.RedisCache",
-            "LOCATION": REDIS_URL,
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': REDIS_URL,
         }
     }
 
 
 # Logging
-LOG_DIR = BASE_DIR / "logs"
+LOG_DIR = BASE_DIR / 'logs'
 LOG_DIR.mkdir(exist_ok=True)
 
 LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "{levelname} - {asctime} - {funcName} - {lineno} - {message}",
-            "style": "{",
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} - {asctime} - {funcName} - {lineno} - {message}',
+            'style': '{',
         },
     },
-    "handlers": {
-        "file": {
-            "class": "logging.FileHandler",
-            "filename": LOG_DIR / "django.log",
-            "formatter": "verbose",
-            "level": "DEBUG",
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': LOG_DIR / 'django.log',
+            'formatter': 'verbose',
+            'level': 'DEBUG',
         },
     },
-    "loggers": {
-        "training": {
-            "handlers": ["file"],
-            "level": "DEBUG",
-            "propagate": False,
+    'loggers': {
+        'training': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
         },
     },
-    "root": {
-        "handlers": ["file"],
-        "level": os.getenv("LOGGING_LEVEL", "INFO"),
+    'root': {
+        'handlers': ['file'],
+        'level': os.getenv('LOGGING_LEVEL', 'INFO'),
     },
 }
 
 # Email settings
-if os.getenv("USE_SMTP_EMAIL", "false").lower() == "true":
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+if os.getenv('USE_SMTP_EMAIL', 'false').lower() == 'true':
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     DEFAULT_FROM_EMAIL = os.getenv(
-        "DEFAULT_FROM_EMAIL", "Тренажёр слов <no-reply@example.com>"
+        'DEFAULT_FROM_EMAIL', 'Тренажёр слов <no-reply@example.com>'
     )
-    EMAIL_HOST = os.getenv("EMAIL_HOST")
-    EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
-    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-    EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "true").lower() == "true"
-    EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "false").lower() == "true"
+    EMAIL_HOST = os.getenv('EMAIL_HOST')
+    EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
+    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+    EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'true').lower() == 'true'
+    EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'false').lower() == 'true'
 else:
-    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-    EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
-    DEFAULT_FROM_EMAIL = "Тренажёр слов <no-reply@example.com>"
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+    DEFAULT_FROM_EMAIL = 'Тренажёр слов <no-reply@example.com>'
