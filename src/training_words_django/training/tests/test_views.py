@@ -20,6 +20,8 @@ from training.views import (
     WordManagerView,
 )
 
+from ..models import Word
+
 
 class TrainingUrlsTest(SimpleTestCase):
     @classmethod
@@ -92,8 +94,12 @@ class WordLifecycleViewTest(TestCase):
             "test@example.ru",
             "password",
         )
+        self.args = (1,)
         self.client.force_login(self.user)
         self.url_add_word = reverse("add_word")
+        self.delete_url = reverse("delete_word", args=self.args)
+        self.edit_url = reverse("edit_word", args=self.args)
+        self.detail_url = reverse("detail", args=self.args)
 
     def test_user_can_create_edit_and_delete_word(self):
         create_response = self.client.post(
@@ -104,3 +110,19 @@ class WordLifecycleViewTest(TestCase):
             ),
         )
         self.assertRedirects(create_response, self.url_add_word)
+        word = Word.objects.filter(pk=1).exists()
+        self.assertEqual(word, True)
+
+        new_data = dict(word="Новое")
+        edit_response = self.client.post(
+            self.edit_url,
+            data=new_data,
+        )
+        self.assertRedirects(edit_response, self.detail_url)
+        word = Word.objects.get(pk=1)
+        self.assertEqual(word.word, new_data["word"])
+
+        delete_response = self.client.post(self.delete_url)
+        self.assertRedirects(delete_response, reverse("word_manager"))
+        word = Word.objects.filter(pk=1).exists()
+        self.assertFalse(word)
