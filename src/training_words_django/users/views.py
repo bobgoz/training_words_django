@@ -38,7 +38,8 @@ class RegistrationView(CreateView):
     def form_valid(self, form):
         """Отправка информативного сообщения.
 
-        После регистрации отправляется сообщение на почту для ее подтверждения.
+        После регистрации отправляется сообщение
+        на почту для ее подтверждения.
         """
         response = super().form_valid(form)
         send_verification_email(
