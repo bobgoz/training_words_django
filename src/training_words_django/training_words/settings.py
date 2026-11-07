@@ -138,11 +138,11 @@ USE_I18N = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
 # Auth
@@ -185,7 +185,7 @@ if DROPBOX_USE:
                 'oauth2_refresh_token': os.getenv('REFRESH_TOKEN'),
                 'root_path': os.getenv('ROOT_PATH'),
                 'write_mode': os.getenv('WRITE_MODE'),  # 'add' или 'overwrite'
-                'timeout': 100,
+                'timeout': 10,
             },
         },
         'staticfiles': {

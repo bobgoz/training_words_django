@@ -71,10 +71,10 @@
             </div>
 
             <!-- Изображение -->
-            {% if word.safe_image_url %}
+            {% if word.image %}
               <div class="mb-4 text-center">
                 <img
-                  src="{{ word.safe_image_url }}"
+                  src="{{ word.image.url }}"
                   alt="{{ word.word }}"
                   class="img-fluid rounded"
                   style="max-height: 250px"

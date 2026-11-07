@@ -110,9 +110,9 @@
                   </button>
                   <div class="collapse mt-2" id="imageHint">
                     <div class="text-center bg-light p-3 rounded">
-                      {% if object.safe_image_url %}
+                      {% if object.image %}
                         <img
-                          src="{{ object.safe_image_url }}"
+                          src="{{ object.image.url }}"
                           alt="{{ object.object }}"
                           class="img-fluid rounded"
                           style="max-height: 200px"

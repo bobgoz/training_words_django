@@ -30,51 +30,51 @@ class Word(
 ):
     """Класс слова"""
 
-    active_items_manager_name = "words"
+    active_items_manager_name = 'words'
 
     LANGUAGE_CHOICES = [
-        ("en", "Английское"),
-        ("ru", "Русское"),
-        ("unknown", "Не определено"),
+        ('en', 'Английское'),
+        ('ru', 'Русское'),
+        ('unknown', 'Не определено'),
     ]
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        verbose_name="Пользователь",
+        verbose_name='Пользователь',
     )
     word = models.CharField(
-        "Слово",
+        'Слово',
         max_length=WORD_FIELD_MAX_LENGTH,
-        help_text="Обязательное поле",
+        help_text='Обязательное поле',
     )
 
     definition = models.CharField(
-        "Определение слова",
+        'Определение слова',
         max_length=DEFINITION_FIELD_MAX_LENGTH,
-        help_text="Определение слова."
-        f" Количество символов не более {DEFINITION_FIELD_MAX_LENGTH}. "
-        "Можно заполнить позже.",
+        help_text='Определение слова.'
+        f' Количество символов не более {DEFINITION_FIELD_MAX_LENGTH}. '
+        'Можно заполнить позже.',
         blank=True,
         null=True,
     )
     example = models.TextField(
-        "Пример использования",
+        'Пример использования',
         blank=True,
         null=True,
-        help_text="Пример использования слова. Можно заполнить позже.",
+        help_text='Пример использования слова. Можно заполнить позже.',
     )
     language = models.CharField(
-        "Язык слова",
+        'Язык слова',
         choices=LANGUAGE_CHOICES,
         max_length=10,
     )
     image = models.ImageField(
-        "Изображение",
+        'Изображение',
         upload_to=image_unique_name,
         blank=True,
         null=True,
-        help_text="Загрузить изображение для слова",
+        help_text='Загрузить изображение для слова',
     )
 
     words = WordManager()
@@ -83,19 +83,19 @@ class Word(
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["word", "user"],
-                name="unique_words_for_user",
+                fields=['word', 'user'],
+                name='unique_words_for_user',
             ),
         ]
         indexes = [
-            models.Index(fields=["user", "next_review_date"]),
-            models.Index(fields=["user", "is_active"]),
+            models.Index(fields=['user', 'next_review_date']),
+            models.Index(fields=['user', 'is_active']),
         ]
 
-        verbose_name = "слово"
-        verbose_name_plural = "слова"
+        verbose_name = 'слово'
+        verbose_name_plural = 'слова'
         # ordering = ("-updated_at",)
-        ordering = ("word",)
+        ordering = ('word',)
 
     def clean(self):
         """
@@ -107,7 +107,7 @@ class Word(
         """
         if self.word:
             self.word = self.word.capitalize().strip()
-            if not self.definition and self._detect_language() == "en":
+            if not self.definition and self._detect_language() == 'en':
                 self.definition = translator(self.word)
         if self.definition:
             self.definition = self.definition.capitalize().strip()
@@ -117,13 +117,13 @@ class Word(
         return super().clean()
 
     def __str__(self):
-        return f"{self.word} -> {self.user}"
+        return f'{self.word} -> {self.user}'
 
     def _detect_language(self) -> str:
         """Определяет язык слова"""
-        if re.search("[а-яА-ЯёЁ]", self.word):
-            return "ru"
-        return "en"
+        if re.search('[а-яА-ЯёЁ]', self.word):
+            return 'ru'
+        return 'en'
 
     def save(self, *args, **kwargs):
         """Изменение данных перед сохранением.
@@ -140,25 +140,11 @@ class Word(
 
     def get_absolute_url(self):
         """Возвращает абсолютный url объекта."""
-        return reverse("detail", kwargs={"pk_word": self.pk})
+        return reverse('detail', kwargs={'pk_word': self.pk})
 
     def get_text(self):
         """Возвращает слово."""
         return self.word
-
-    @property
-    def safe_image_url(self):
-        """Безопасное получение URL картинки."""
-        if not self.image:
-            return None
-        try:
-            if self.image.storage.exists(self.image.name):
-                return self.image.url
-        except Exception:
-            # Если файл не найден - очищаем поле в БД
-            self.image = None
-            self.save(update_fields=["image"])
-        return None
 
 
 class TrainingSession(models.Model):
