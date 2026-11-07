@@ -20,4 +20,8 @@ def delete_old_image_on_update(sender, instance, **kwargs):
     new_image = instance.image
     if old_image and old_image.name != new_image.name:
         old_image.delete(save=False)
-        logging.debug('Картинка удалилась из хранилища через сигнал.')
+        logging.debug(
+            'Удалёна картинка в сигнале слова %s: %s',
+            instance.pk,
+            old_image.name,
+        )

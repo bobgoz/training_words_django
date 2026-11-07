@@ -5,7 +5,6 @@ import logging
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils import timezone
-from dropbox.exceptions import ApiError
 
 from .constants import COUNT_INITIAL_VALUE, NUMBER_OF_WORD
 from .models import Word
@@ -19,28 +18,28 @@ class CreateWordForm(
     """Форма для создания слова."""
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request")
+        self.request = kwargs.pop('request')
         super().__init__(*args, **kwargs)
 
     class Meta:
         model = Word
         fields = (
-            "word",
-            "definition",
-            "example",
-            "image",
-            "is_active",
+            'word',
+            'definition',
+            'example',
+            'image',
+            'is_active',
         )
 
     def clean_word(self):
         """Валидация для поля Word."""
-        word = self.cleaned_data.get("word").capitalize()
+        word = self.cleaned_data.get('word').capitalize()
         if Word.objects.filter(
             user=self.request.user,
             word=word,
         ).exists():
             raise ValidationError(
-                f"Слово {word} уже существует!",
+                f'Слово {word} уже существует!',
             )
 
         return word
@@ -52,46 +51,46 @@ class EditWordForm(
     """Форма редактирования слова."""
 
     word = forms.CharField(
-        label="Слово",
+        label='Слово',
         widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Введите слово"}
+            attrs={'class': 'form-control', 'placeholder': 'Введите слово'}
         ),
     )
 
     definition = forms.CharField(
-        label="Определение",
+        label='Определение',
         required=False,
         widget=forms.Textarea(
             attrs={
-                "class": "form-control",
-                "rows": 3,
-                "placeholder": "Определение слова",
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Определение слова',
             }
         ),
     )
 
     example = forms.CharField(
-        label="Пример использования",
+        label='Пример использования',
         required=False,
         widget=forms.Textarea(
             attrs={
-                "class": "form-control",
-                "rows": 2,
-                "placeholder": "Пример использования слова",
+                'class': 'form-control',
+                'rows': 2,
+                'placeholder': 'Пример использования слова',
             }
         ),
     )
 
     is_active = forms.BooleanField(
-        label="Активное слово",
+        label='Активное слово',
         required=False,
-        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
 
     image = forms.ImageField(
-        label="Изображение",
+        label='Изображение',
         required=False,
-        widget=forms.FileInput(attrs={"class": "form-control"}),
+        widget=forms.FileInput(attrs={'class': 'form-control'}),
     )
 
     next_review_date = forms.DateTimeField(
@@ -113,16 +112,16 @@ class EditWordForm(
         """
 
         cleaned_data = super().clean()
-        is_active = self.cleaned_data.get("is_active")
+        is_active = self.cleaned_data.get('is_active')
 
         if is_active:
-            self.cleaned_data["is_learned"] = False
-            self.cleaned_data["next_review_date"] = timezone.now()
+            self.cleaned_data['is_learned'] = False
+            self.cleaned_data['next_review_date'] = timezone.now()
         else:
             # Неактивный объект с флагом is_learned = False становится
             # неизученным объектом.
-            self.cleaned_data["next_review_date"] = timezone.now()
-            self.cleaned_data["is_learned"] = False
+            self.cleaned_data['next_review_date'] = timezone.now()
+            self.cleaned_data['is_learned'] = False
         return cleaned_data
 
     def save(self, commit=True):
@@ -130,22 +129,9 @@ class EditWordForm(
         instance = super().save(commit=False)
 
         # Если пользователь поставил галочку "Удалить картинку"
-        if self.cleaned_data.get("delete_image") and instance.image:
-            # Удаляем файл из хранилища, если он существует
-            try:
-                instance.image.delete(save=False)
-                logger.debug(
-                    "Картинка удалена из хранилища через "
-                    "default_storage.delete в форме."
-                )
-            # Исключение ApiError выбрасывается, если в хранилище нет картинки.
-            except ApiError:
-                instance.image = None
-                logger.debug("Картинка удалилась через instance.image = None")
-
-            except Exception as e:
-                logger.warning(f"Ошибка: {e}")
-                raise
+        if self.cleaned_data.get('delete_image') and instance.image:
+            instance.image = None
+            logger.debug('Картинка удалилась через instance.image = None')
         if commit:
             instance.save()
         return instance
@@ -153,20 +139,20 @@ class EditWordForm(
     class Meta:
         model = Word
         fields = (
-            "word",
-            "definition",
-            "example",
-            "is_active",
-            "image",
-            "next_review_date",
+            'word',
+            'definition',
+            'example',
+            'is_active',
+            'image',
+            'next_review_date',
         )
 
     def __init__(self, *args, **kwargs):
         """Добавление поля формы, если есть изображение."""
         super(EditWordForm, self).__init__(*args, **kwargs)
         if self.instance.image:
-            self.fields["delete_image"] = forms.BooleanField(
-                label="Удалить картинку",
+            self.fields['delete_image'] = forms.BooleanField(
+                label='Удалить картинку',
                 required=False,
                 widget=forms.CheckboxInput(),
             )
@@ -178,47 +164,46 @@ class TrainingSettingsForm(forms.Form):
     COUNT_CHOICES = [(i, str(i)) for i in NUMBER_OF_WORD]
 
     WORD_TYPE_CHOICES = [
-        ("words", "Слова"),
-        ("phrases", "Словосочетания"),
+        ('words', 'Слова'),
+        ('phrases', 'Словосочетания'),
     ]
 
     word_type = forms.ChoiceField(
         choices=WORD_TYPE_CHOICES,
         widget=forms.RadioSelect,
         initial=WORD_TYPE_CHOICES[0],
-        label="Тип тренировки",
+        label='Тип тренировки',
     )
 
     count = forms.TypedChoiceField(
         choices=COUNT_CHOICES,
         initial=COUNT_INITIAL_VALUE,
         coerce=int,
-        label="Количество слов",
-        help_text="Сколько слов включить в тренировку? ",
+        label='Количество слов',
+        help_text='Сколько слов включить в тренировку? ',
     )
     is_arbitrary = forms.BooleanField(
-        label="В произвольном порядке",
-        help_text="Если не выбрано, слова будут отображаться в упорядоченном "
-        "порядке.",
+        label='В произвольном порядке',
+        help_text='Если не выбрано, слова будут отображаться в упорядоченном порядке.',
         required=False,
     )
 
     def __init__(self, *args, **kwargs):
         """Динамическое добавление полей."""
-        user = kwargs.pop("user")
+        user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
         if Word.objects.filter(
-            language="en",
+            language='en',
             user=user,
         ).exists():
-            self.fields["only_en_words"] = forms.BooleanField(
-                label="Только английские слова",
-                help_text="Начни тренировку английских слов",
+            self.fields['only_en_words'] = forms.BooleanField(
+                label='Только английские слова',
+                help_text='Начни тренировку английских слов',
                 required=False,
             )
-            self.fields["only_ru_words"] = forms.BooleanField(
-                label="Только русские слова",
-                help_text="Начни тренировку русских слов",
+            self.fields['only_ru_words'] = forms.BooleanField(
+                label='Только русские слова',
+                help_text='Начни тренировку русских слов',
                 required=False,
             )
 
@@ -232,10 +217,10 @@ class TrainingSettingsForm(forms.Form):
         для корректного поддержания
         структуры в БД.
         """
-        only_en_words = self.cleaned_data.get("only_en_words")
-        only_ru_words = self.cleaned_data.get("only_ru_words")
+        only_en_words = self.cleaned_data.get('only_en_words')
+        only_ru_words = self.cleaned_data.get('only_ru_words')
         if only_en_words and only_ru_words:
             raise forms.ValidationError(
-                "Выберите либо русские, либо английские слова!",
+                'Выберите либо русские, либо английские слова!',
             )
         return super().clean()
