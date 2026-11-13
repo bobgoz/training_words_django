@@ -110,6 +110,7 @@ dependencies = [
     "typing-extensions==4.15.0",
     "tzdata==2025.3",
     "tzlocal==5.4.3",
+    "unidecode>=1.4.0",
     "urllib3==2.7.0",
     "vine==5.1.0",
     "virtualenv==21.3.1",

@@ -104,12 +104,12 @@
             <!-- Кнопки действий -->
             <div class="d-flex gap-3 mt-4 pt-3">
               <a
-                href="{% url 'edit_word' pk_word=word.pk %}"
+                href="{% url 'edit_word' slug_word=word.slug %}"
                 class="btn btn-outline-primary flex-grow-1 py-2 fw-semibold"
               >
                 ✏️ Редактировать
               </a>
-              <form action="{% url 'delete_word' pk_word=word.pk %}" method="post" class="flex-grow-1">
+              <form action="{% url 'delete_word' slug_word=word.slug %}" method="post" class="flex-grow-1">
                 {% csrf_token %}
                 <button
                   type="submit"

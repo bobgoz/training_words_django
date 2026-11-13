@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-
 from learning.model_mixins import (
     BaseIntervalLogicMixin,
     BaseTimestampMixin,
@@ -17,7 +16,7 @@ from .constants import (
     WORD_FIELD_MAX_LENGTH,
 )
 from .managers import WordManager
-from .services import image_unique_name, translator
+from .services import generate_slug, image_unique_name, translator
 
 User = get_user_model()
 
@@ -77,6 +76,13 @@ class Word(
         help_text='Загрузить изображение для слова',
     )
 
+    slug = models.SlugField(
+        'Slug слова',
+        blank=True,
+        null=False,
+        unique=True,
+    )
+
     words = WordManager()
     objects = models.Manager()
 
@@ -131,6 +137,8 @@ class Word(
         Назначает перевод слова, если пользователь не передал свой перевод.
         """
         self.language = self._detect_language()
+        if not self.slug:
+            self.slug = generate_slug(self.word)
         return super().save(*args, **kwargs)
 
     @property
@@ -140,7 +148,7 @@ class Word(
 
     def get_absolute_url(self):
         """Возвращает абсолютный url объекта."""
-        return reverse('detail', kwargs={'pk_word': self.pk})
+        return reverse('detail', kwargs={'slug_word': self.slug})
 
     def get_text(self):
         """Возвращает слово."""

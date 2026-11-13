@@ -126,7 +126,8 @@ class DetailWordView(
 
     model = Word
     template_name = 'training/detail_word.html'
-    pk_url_kwarg = 'pk_word'
+    slug_url_kwarg = 'slug_word'
+    slug_field = 'slug'
 
 
 class DeleteWordView(
@@ -137,7 +138,7 @@ class DeleteWordView(
     """Вью для удаления слов."""
 
     model = Word
-    pk_url_kwarg = 'pk_word'
+    slug_url_kwarg = 'slug_word'
     context_object_name = 'word'
     # Нет шаблона подтверждения удаления,
     # подтверждение осуществляется через
@@ -161,7 +162,7 @@ class EditWordView(
     model = Word
     template_name = 'training/edit_word.html'
     form_class = EditWordForm
-    pk_url_kwarg = 'pk_word'
+    slug_url_kwarg = 'slug_word'
 
     def form_valid(self, form):
         """Очистка данных  формы.
