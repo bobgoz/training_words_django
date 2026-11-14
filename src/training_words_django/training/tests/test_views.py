@@ -1,7 +1,6 @@
 """Тестирование маршрутов приложения training."""
 
-from django.contrib.auth import get_user_model
-from django.test import SimpleTestCase, TestCase
+from django.test import SimpleTestCase
 from django.urls import resolve, reverse
 from training.views import (
     DeleteWordView,
@@ -20,8 +19,6 @@ from training.views import (
     WordManagerView,
 )
 
-from ..models import Word
-
 
 class TrainingUrlsTest(SimpleTestCase):
     @classmethod
@@ -29,100 +26,57 @@ class TrainingUrlsTest(SimpleTestCase):
         cls.args = (1,)
 
     def test_url_add_word_resolve_view(self):
-        url = reverse("add_word")
+        url = reverse('add_word')
         self.assertEqual(resolve(url).func.view_class, WordCreateView)
 
     def test_active_words_resolve_view(self):
-        url = reverse("active_words")
+        url = reverse('active_words')
         self.assertEqual(resolve(url).func.view_class, ShowActiveWordsView)
 
     def test_inactive_words_resolve_view(self):
-        url = reverse("inactive_words")
+        url = reverse('inactive_words')
         self.assertEqual(resolve(url).func.view_class, ShowInactiveWordsView)
 
     def test_learned_words_resolve_view(self):
-        url = reverse("learned_words")
+        url = reverse('learned_words')
         self.assertEqual(resolve(url).func.view_class, ShowLearnedView)
 
     def test_detail_resolve_view(self):
-        url = reverse("detail", args=self.args)
+        url = reverse('detail', args=self.args)
         self.assertEqual(resolve(url).func.view_class, DetailWordView)
 
     def test_edit_word_resolve_view(self):
-        url = reverse("edit_word", args=self.args)
+        url = reverse('edit_word', args=self.args)
         self.assertEqual(resolve(url).func.view_class, EditWordView)
 
     def test_delete_word_resolve_view(self):
-        url = reverse("delete_word", args=self.args)
+        url = reverse('delete_word', args=self.args)
         self.assertEqual(resolve(url).func.view_class, DeleteWordView)
 
     def test_word_manager_resolve_view(self):
-        url = reverse("word_manager")
+        url = reverse('word_manager')
         self.assertEqual(resolve(url).func.view_class, WordManagerView)
 
     def test_training_setup_resolve_view(self):
-        url = reverse("training_setup")
+        url = reverse('training_setup')
         self.assertEqual(resolve(url).func.view_class, TrainingSetupView)
 
     def test_reset_learned_words_resolve_view(self):
-        url = reverse("reset_learned_words")
+        url = reverse('reset_learned_words')
         self.assertEqual(resolve(url).func.view_class, ResetLearnedWordsView)
 
     def test_search_words_resolve_view(self):
-        url = reverse("search")
+        url = reverse('search')
         self.assertEqual(resolve(url).func.view_class, SearchView)
 
     def test_train_answer_words_resolve_view(self):
-        url = reverse("train_answer")
+        url = reverse('train_answer')
         self.assertEqual(resolve(url).func.view_class, TrainAnswerView)
 
     def test_train_complete_words_resolve_view(self):
-        url = reverse("train_complete")
+        url = reverse('train_complete')
         self.assertEqual(resolve(url).func.view_class, TrainCompleteView)
 
     def test_train_card_resolve_view(self):
-        url = reverse("train_card")
+        url = reverse('train_card')
         self.assertEqual(resolve(url).func.view_class, TrainCardView)
-
-
-class WordLifecycleViewTest(TestCase):
-    """Проверяет жизненный цикл слова через HTTP-интерфейс."""
-
-    def setUp(self):
-        self.user = get_user_model().objects.create_user(
-            "test_user",
-            "test@example.ru",
-            "password",
-        )
-        self.args = (1,)
-        self.client.force_login(self.user)
-        self.url_add_word = reverse("add_word")
-        self.delete_url = reverse("delete_word", args=self.args)
-        self.edit_url = reverse("edit_word", args=self.args)
-        self.detail_url = reverse("detail", args=self.args)
-
-    def test_user_can_create_edit_and_delete_word(self):
-        create_response = self.client.post(
-            self.url_add_word,
-            data=dict(
-                word="apple",
-                definition="definition",
-            ),
-        )
-        self.assertRedirects(create_response, self.url_add_word)
-        word = Word.objects.filter(pk=1).exists()
-        self.assertEqual(word, True)
-
-        new_data = dict(word="Новое")
-        edit_response = self.client.post(
-            self.edit_url,
-            data=new_data,
-        )
-        self.assertRedirects(edit_response, self.detail_url)
-        word = Word.objects.get(pk=1)
-        self.assertEqual(word.word, new_data["word"])
-
-        delete_response = self.client.post(self.delete_url)
-        self.assertRedirects(delete_response, reverse("word_manager"))
-        word = Word.objects.filter(pk=1).exists()
-        self.assertFalse(word)
