@@ -26,8 +26,7 @@ class BaseShowingViewMixin(LoginRequiredMixin, ListView):
     empty_message = None
 
     ordering_map = dict(
-        alphabet='word',
-        updated='-updated_at',
+        alphabet='word', updated='-updated_at', repetition_count='-repetition_count'
     )
     default_order = 'alphabet'
 

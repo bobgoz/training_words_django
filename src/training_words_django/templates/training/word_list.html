@@ -21,19 +21,32 @@
       Сортировка
     </p>
 
-    <div class="btn-group mb-2" role="group" aria-label="Сортировка слов">
+    <div
+      class="btn-group mb-3 d-flex justify-content-center"
+      role="group"
+      aria-label="Сортировка слов"
+    >
       <a
         href="?order=alphabet"
         class="btn {% if current_order == 'alphabet' %}btn-primary{% else %}btn-outline-primary{% endif %}"
       >
         В алфавитном порядке
       </a>
+
       <a
         href="?order=updated"
         class="btn {% if current_order == 'updated' %}btn-primary{% else %}btn-outline-primary{% endif %}"
       >
         По дате изменения
       </a>
+
+      {% if request.resolver_match.url_name == 'learned_words' %}
+        <a
+          href="?order=repetition_count"
+          class="btn {% if current_order == 'repetition_count' %}btn-primary{% else %}btn-outline-primary{% endif %}"
+        >По количеству повторений
+        </a>
+      {% endif %}
     </div>
     <div class="list-group">
       {% for word in words %}
