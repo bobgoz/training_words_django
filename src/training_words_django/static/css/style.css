@@ -82,9 +82,6 @@ a {
     box-shadow: var(--shadow-sm);
 }
 
-.page-section {
-    padding: 1rem 0 3rem;
-}
 
 .page-header {
     display: flex;
@@ -671,10 +668,6 @@ a {
 }
 
 @media (max-width: 767.98px) {
-    .page-section {
-        padding-top: 0.25rem;
-    }
-
     .surface-card__body,
     .surface-card__header,
     .surface-card__footer {
