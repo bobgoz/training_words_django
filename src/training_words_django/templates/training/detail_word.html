@@ -52,24 +52,25 @@
             <!-- Определение -->
             {% if word.definition %}
               <div class="mb-4">
-                <h3 class="h6 fw-semibold text-muted mb-2">📖 Определение</h3>
+                <h3 class="h6 fw-semibold text-muted mb-2">{% bs_icon 'book' %}Определение</h3>
                 <p class="mb-0">{{ word.definition }}</p>
               </div>
             {% endif %}
 
             <!-- Пример использования -->
-            <div class="mb-4">
-              <h3 class="h6 fw-semibold text-muted mb-2">💡 Пример использования</h3>
-              <div class="bg-light p-3 rounded">
-                <p class="mb-0 {% if word.example %}fst-italic{% else %}text-muted{% endif %}">
-                  {% if word.example %}
-                    "{{ word.example }}"
-                  {% else %}
-                    Пример не добавлен
-                  {% endif %}
-                </p>
+            {% if word.example %}
+              <div class="mb-4">
+                <h3 class="h6 fw-semibold text-muted mb-2">
+                  {% bs_icon 'journal-text' %}
+                  Пример использования<
+                </h3>
+                <div class="bg-light p-3 rounded">
+                  <p class="mb-0">
+                    {{ word.example }}
+                  </p>
+                </div>
               </div>
-            </div>
+            {% endif %}
 
             <!-- Изображение -->
             {% if word.image %}
@@ -86,10 +87,10 @@
             <!-- Детальная информация -->
             <div class="row g-3 small text-muted pt-2 border-top">
               <div class="col-sm-6">
-                <span class="fw-semibold">📅 Создано:</span> {{ word.created_at|date:"d.m.Y H:i" }}
+                <span class="fw-semibold">Создано:</span> {{ word.created_at|date:"d.m.Y H:i" }}
               </div>
               <div class="col-sm-6">
-                <span class="fw-semibold">🔄 Обновлено:</span> {{ word.updated_at|date:"d.m.Y H:i" }}
+                <span class="fw-semibold">Обновлено:</span> {{ word.updated_at|date:"d.m.Y H:i" }}
               </div>
               {% if word.language %}
                 <div class="col-sm-6">
@@ -106,18 +107,20 @@
             <div class="d-flex gap-3 mt-4 pt-3">
               <a
                 href="{% url 'edit_word' slug_word=word.slug %}"
-                class="btn btn-outline-primary flex-grow-1 py-2 fw-semibold"
+                class="btn btn-primary flex-grow-1 py-2 fw-semibold"
               >
-                ✏️ Редактировать
+                {% bs_icon 'pencil-square' %}
+                Редактировать
               </a>
               <form action="{% url 'delete_word' slug_word=word.slug %}" method="post" class="flex-grow-1">
                 {% csrf_token %}
                 <button
                   type="submit"
                   onclick="return confirm('Вы уверены, что хотите удалить слово «{{ word.word }}»?')"
-                  class="btn btn-outline-danger w-100 py-2 fw-semibold"
+                  class="btn btn-danger w-100 py-2 fw-semibold"
                 >
-                  🗑️ Удалить
+                  {% bs_icon 'basket2-fill' %}
+                  Удалить
                 </button>
               </form>
             </div>
