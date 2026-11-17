@@ -26,9 +26,11 @@ class BaseShowingViewMixin(LoginRequiredMixin, ListView):
     empty_message = None
 
     ordering_map = dict(
-        alphabet='word', updated='-updated_at', repetition_count='-repetition_count'
+        alphabet='word',
+        updated='-updated_at',
+        repetition_count='repetition_count',
     )
-    default_order = 'alphabet'
+    default_order = 'repetition_count'
 
     def apply_erdering(self, queryset):
         """Сортирует queryset по разрешённому параметру order."""
