@@ -10,17 +10,17 @@ urlpatterns = [
         name='reset_learned_words',
     ),
     path(
-        'manager/active/',
+        'word_manager/active/',
         views.ShowActiveWordsView.as_view(),
         name='active_words',
     ),
     path(
-        'manager/inactive/',
+        'word_manager/inactive/',
         views.ShowInactiveWordsView.as_view(),
         name='inactive_words',
     ),
     path(
-        'manager/learned/',
+        'word_manager/learned/',
         views.ShowLearnedView.as_view(),
         name='learned_words',
     ),
@@ -55,10 +55,5 @@ urlpatterns = [
         'train/complete/',
         views.TrainCompleteView.as_view(),
         name='train_complete',
-    ),
-    path(
-        'word_manager/',
-        views.WordManagerView.as_view(),
-        name='word_manager',
     ),
 ]

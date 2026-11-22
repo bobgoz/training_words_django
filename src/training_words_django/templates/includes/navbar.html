@@ -53,8 +53,8 @@
               Менеджер
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="{% url 'word_manager' %}">Слов</a></li>
-              <li><a class="dropdown-item" href="{% url 'phrase_manager' %}">Словосочетаний</a></li>
+              <li><a class="dropdown-item" href="{% url 'active_words' %}">Слов</a></li>
+              <li><a class="dropdown-item" href="{% url 'active_phrases' %}">Словосочетаний</a></li>
             </ul>
           </li>
           <form class="d-flex ms-auto" role="search" method="get" action="{% url 'search' %}">

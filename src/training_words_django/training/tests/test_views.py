@@ -16,7 +16,6 @@ from training.views import (
     TrainCompleteView,
     TrainingSetupView,
     WordCreateView,
-    WordManagerView,
 )
 
 
@@ -52,10 +51,6 @@ class TrainingUrlsTest(SimpleTestCase):
     def test_delete_word_resolve_view(self):
         url = reverse('delete_word', args=self.args)
         self.assertEqual(resolve(url).func.view_class, DeleteWordView)
-
-    def test_word_manager_resolve_view(self):
-        url = reverse('word_manager')
-        self.assertEqual(resolve(url).func.view_class, WordManagerView)
 
     def test_training_setup_resolve_view(self):
         url = reverse('training_setup')

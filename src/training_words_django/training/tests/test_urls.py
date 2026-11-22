@@ -15,7 +15,6 @@ class TestTrainingUrl(TestCase):
             reverse('active_words'),
             reverse('inactive_words'),
             reverse('learned_words'),
-            reverse('word_manager'),
         ]
 
         self.user = get_user_model().objects.create_user(

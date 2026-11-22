@@ -42,6 +42,6 @@ class WordLifecycleViewTest(TestCase):
         self.assertEqual(word.word, new_data['word'])
 
         delete_response = self.client.post(self.delete_url)
-        self.assertRedirects(delete_response, reverse('word_manager'))
+        self.assertRedirects(delete_response, reverse('active_words'))
         word = Word.objects.filter(word=self.word).exists()
         self.assertFalse(word)

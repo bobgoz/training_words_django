@@ -13,7 +13,6 @@ from django.views.generic import (
     CreateView,
     DeleteView,
     DetailView,
-    TemplateView,
     UpdateView,
 )
 from phrase.constants import MIN_ACTIVE_PHRASES
@@ -144,7 +143,7 @@ class DeleteWordView(
     # подтверждение осуществляется через
     # всплывающее окно в браузере.
     template_name = None
-    success_url = reverse_lazy('word_manager')
+    success_url = reverse_lazy('active_words')
 
     def form_valid(self, form):
         """Отправка сообщения при успешном действии."""
@@ -475,10 +474,4 @@ class ResetLearnedWordsView(LoginRequiredMixin, View):
             is_learned=False,
             next_review_date=timezone.now(),
         )
-        return redirect('word_manager')
-
-
-class WordManagerView(LoginRequiredMixin, TemplateView):
-    """Вью для менеджера  слов."""
-
-    template_name = 'users/word_manager.html'
+        return redirect('active_words')
