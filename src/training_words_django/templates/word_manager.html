@@ -4,14 +4,14 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-3 col-md-3">
+    <div class="col-3 col-sm-auto">
       <div class="btn-group-vertical" role="group" aria-label="group">
         <a class="btn btn-primary" href="{% url 'active_words' %}">Активные слова</a>
         <a class="btn btn-primary" href="{% url 'inactive_words' %}">Новые слова</a>
         <a class="btn btn-primary" href="{% url 'learned_words' %}">Выученные слова</a>
       </div>
     </div>
-    <div class="col-6 col-md-6">
+    <div class="col-6 col-sm-auto">
       <div>
         {% block items_content %}{% endblock items_content %}
       </div>
