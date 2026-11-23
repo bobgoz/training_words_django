@@ -10,13 +10,6 @@
   </div>
 
   {% if words %}
-    <div class="mb-4">
-      <form action="{% url 'download:download' %}" method="post">
-        {% csrf_token %}
-        {% bootstrap_button 'Скачать 10 активных слов' button_type='submit' %}
-      </form>
-    </div>
-
     <p>
       Сортировка
     </p>

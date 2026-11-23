@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'users',
     'training',
     'index',
-    'download',
     'phrase',
     'debug_toolbar',
     'django_bootstrap5',

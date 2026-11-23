@@ -27,7 +27,6 @@ urlpatterns = [
     path('', include('phrase.urls')),
     path('', include('index.urls')),
     path('', include('users.urls')),
-    path('', include('download.urls')),
 ]
 
 if settings.DEBUG:
