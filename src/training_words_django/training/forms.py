@@ -224,3 +224,12 @@ class TrainingSettingsForm(forms.Form):
                 'Выберите либо русские, либо английские слова!',
             )
         return super().clean()
+
+
+class CSVUploadForm(forms.Form):
+    """Форма для загрузки файла с данными."""
+
+    file = forms.FileField(
+        label='Выберите файл',
+        help_text='Загрузить CSV файл',
+    )

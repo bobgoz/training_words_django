@@ -56,4 +56,9 @@ urlpatterns = [
         views.TrainCompleteView.as_view(),
         name='train_complete',
     ),
+    path(
+        'download-file/',
+        views.CSVDownloadWordsView.as_view(),
+        name='download',
+    ),
 ]

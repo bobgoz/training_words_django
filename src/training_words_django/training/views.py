@@ -1,5 +1,7 @@
 """Модуль содержащий Views приложения Training."""
 
+import csv
+import io
 import logging
 from random import shuffle
 
@@ -21,6 +23,7 @@ from phrase.models import Phrase
 from .constants import MIN_ACTIVE_WORDS
 from .forms import (
     CreateWordForm,
+    CSVUploadForm,
     EditWordForm,
     TrainingSettingsForm,
 )
@@ -59,6 +62,11 @@ class WordCreateView(LoginRequiredMixin, CreateView):
         kwargs = super().get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['file_form'] = CSVUploadForm()
+        return context
 
 
 class ShowActiveWordsView(BaseShowingViewMixin):
@@ -475,3 +483,37 @@ class ResetLearnedWordsView(LoginRequiredMixin, View):
             next_review_date=timezone.now(),
         )
         return redirect('active_words')
+
+
+class CSVDownloadWordsView(View):
+    """Вью для обработки загрузки csv-файла с данными."""
+
+    def post(self, request):
+        """Обработка post-запроса."""
+
+        form = CSVUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = form.cleaned_data.get('file')
+            text_stream = io.TextIOWrapper(
+                uploaded_file.file,
+                encoding='utf-8',
+                newline='',
+            )
+            csv_reader = csv.DictReader(text_stream)
+            try:
+                for row in csv_reader:
+                    word = row.get('word')
+                    if not Word.words.filter(word=word, user=request.user).exists():
+                        Word.objects.create(word, user=request.user)
+                messages.success(
+                    request,
+                    f'Успешно загружены слова в словарь из файла.',
+                )
+            except Exception as e:
+                messages.warning(
+                    request,
+                    'Произошла ошибка на стороне сервера.',
+                )
+                logger.warning(e)
+
+        return redirect('add_word')
