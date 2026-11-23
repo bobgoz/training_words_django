@@ -4,15 +4,23 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-3">
+    <div class="col-md-3 mt-3">
       <div class="btn-group-vertical" role="group" aria-label="group">
-        <a class="btn btn-primary" href="{% url 'active_phrases' %}">Активные словосочетания</a>
-        <a class="btn btn-primary" href="{% url 'inactive_phrases' %}">Новые словосочетания</a>
-        <a class="btn btn-primary" href="{% url 'learned_phrases' %}"
+        <a
+          class="btn btn-outline-primary {% if request.resolver_match.url_name == 'active_phrases' %}active{% endif %}"
+          href="{% url 'active_phrases' %}"
+        >Активные словосочетания</a>
+        <a
+          class="btn btn-outline-primary {% if request.resolver_match.url_name == 'inactive_phrases' %}active{% endif %}"
+          href="{% url 'inactive_phrases' %}"
+        >Новые словосочетания</a>
+        <a
+          class="btn btn-outline-primary {% if request.resolver_match.url_name == 'learned_phrases' %}active{% endif %}"
+          href="{% url 'learned_phrases' %}"
         >Выученные словосочетания</a>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-md-7 mt-3">
       <div>
         {% block items_content %}{% endblock items_content %}
       </div>
