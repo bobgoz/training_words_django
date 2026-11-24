@@ -34,4 +34,9 @@ urlpatterns = [
         views.EditPhraseView.as_view(),
         name='edit_phrase',
     ),
+    path(
+        'download-phrases/',
+        views.CSVDownloadPhrasesView.as_view(),
+        name='download_phrases',
+    ),
 ]

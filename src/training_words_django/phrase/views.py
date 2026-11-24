@@ -1,17 +1,26 @@
+import csv
+import io
+import logging
+
 from django.contrib import messages
 from django.db import IntegrityError
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import (
     CreateView,
     DeleteView,
     DetailView,
     UpdateView,
 )
+from training.forms import CSVUploadForm
 from training.mixins import LoginRequiredMixin
 
 from .forms import CreatePhraseForm, EditPhraseForm
 from .mixins import BaseShowingViewMixin
 from .models import Phrase
+
+logger = logging.getLogger(__name__)
 
 
 class PhraseCreateView(LoginRequiredMixin, CreateView):
@@ -35,6 +44,11 @@ class PhraseCreateView(LoginRequiredMixin, CreateView):
                 f'Словосочетание {phrase} уже существует!',
             )
             return self.form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['file_form'] = CSVUploadForm()
+        return context
 
 
 class DetailPhraseView(
@@ -100,3 +114,47 @@ class ShowLearnedPhrasesView(BaseShowingViewMixin):
 
     def get_queryset(self):
         return Phrase.phrases.is_learned(self.request.user)
+
+
+class CSVDownloadPhrasesView(View):
+    """Вью для обработки загрузки csv-файла с данными."""
+
+    def post(self, request):
+        """Обработка post-запроса."""
+
+        form = CSVUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = form.cleaned_data.get('file')
+            text_stream = io.TextIOWrapper(
+                uploaded_file.file,
+                encoding='utf-8',
+                newline='',
+            )
+            csv_reader = csv.DictReader(text_stream)
+            try:
+                for row in csv_reader:
+                    phrase = row['phrase']
+                    if not Phrase.objects.filter(
+                        phrase=phrase, user=request.user
+                    ).exists():
+                        Phrase.objects.create(phrase=phrase, user=request.user)
+                messages.success(
+                    request,
+                    'Успешно загружены словосочетания в словарь из файла.',
+                )
+            except KeyError as e:
+                messages.warning(
+                    request,
+                    'В загруженном файле не найдено ключевое слово "phrase".',
+                )
+                logger.warning(e)
+
+            except Exception as e:
+                messages.warning(
+                    request,
+                    'Произошла ошибка на стороне сервера.',
+                )
+                logger.warning(e)
+                raise
+
+        return redirect('add_word')

@@ -4,27 +4,40 @@
 {% block title %}Добавить новое словосочетание{% endblock %}
 
 {% block content %}
- <div class="form-panel">
-  <div class="page-header">
-   <div>
-    <h1 class="page-title-sm">Добавить новое словосочетание</h1>
-   </div>
-   <a href="{% url 'index' %}" class="back-link">На главный экран</a>
-  </div>
+  <div class="form-panel">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title-sm">Добавить новое словосочетание</h1>
+      </div>
+      <a href="{% url 'index' %}" class="back-link">На главный экран</a>
+    </div>
 
-  <div class="surface-card form-card">
-   <div class="surface-card__body">
-    <form method="post" enctype="multipart/form-data" autocomplete="off">
-     {% csrf_token %}
-     {% bootstrap_form form %}
-     <button type="submit" class="btn btn-primary rounded-pill flex-grow-1">
-      Сохранить
-     </button>
-     <button type="reset" class="btn btn-outline-secondary rounded-pill flex-grow-1">
-      Сбросить форму
-     </button>
-    </form>
-   </div>
+    <div class="surface-card form-card">
+      <div class="surface-card__body">
+        <form method="post" enctype="multipart/form-data" autocomplete="off">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <button type="submit" class="btn btn-primary rounded-pill flex-grow-1">
+            Сохранить
+          </button>
+          <button type="reset" class="btn btn-outline-secondary rounded-pill flex-grow-1">
+            Сбросить форму
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">
+          Можно загрузить файл с расширением .csv для загрузки
+          словосочетаний
+        </p>
+        <form method="post" action="{% url 'download_phrases' %}" enctype="multipart/form-data" autocomplete="off">
+          {% csrf_token %}
+          {% bootstrap_form file_form %}
+          <button type="submit" class="btn btn-primary">Загрузить слова</button>
+        </form>
+      </div>
+    </div>
   </div>
- </div>
 {% endblock %}

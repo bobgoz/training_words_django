@@ -502,18 +502,26 @@ class CSVDownloadWordsView(View):
             csv_reader = csv.DictReader(text_stream)
             try:
                 for row in csv_reader:
-                    word = row.get('word')
+                    word = row['word']
                     if not Word.words.filter(word=word, user=request.user).exists():
                         Word.objects.create(word, user=request.user)
                 messages.success(
                     request,
                     f'Успешно загружены слова в словарь из файла.',
                 )
+            except KeyError as e:
+                messages.warning(
+                    request,
+                    'В загруженном файле не найдено ключевое слово "word".',
+                )
+                logger.warning(e)
+
             except Exception as e:
                 messages.warning(
                     request,
                     'Произошла ошибка на стороне сервера.',
                 )
                 logger.warning(e)
+                raise
 
         return redirect('add_word')

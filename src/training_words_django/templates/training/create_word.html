@@ -33,7 +33,7 @@
         <p class="card-text">
           Можно загрузить файл с расширением .csv для загрузки слов
         </p>
-        <form method="post" action="{% url 'download' %}" enctype="multipart/form-data" autocomplete="off">
+        <form method="post" action="{% url 'download_words' %}" enctype="multipart/form-data" autocomplete="off">
           {% csrf_token %}
           {% bootstrap_form file_form %}
           <button type="submit" class="btn btn-primary">Загрузить слова</button>
