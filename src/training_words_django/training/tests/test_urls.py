@@ -8,19 +8,21 @@ from django.urls import reverse
 
 
 class TestTrainingUrl(TestCase):
-    """Тестирование маршрутов приложения training."""
-
     def setUp(self):
         self.urls = [
+            # reverse('reset_learned_words'),
             reverse('active_words'),
             reverse('inactive_words'),
             reverse('learned_words'),
+            reverse('word_manager'),
+            # reverse('detail'),
+            # reverse('edit_word'),
+            # reverse('delete_word'),
+            # reverse('train_answer'),
+            # reverse('train_complete'),
         ]
 
-        self.user = get_user_model().objects.create_user(
-            'user',
-            'user@mail.ru',
-        )
+        self.user = get_user_model().objects.create_user('user', 'user@mail.ru')
 
         self.client.force_login(self.user)
 
