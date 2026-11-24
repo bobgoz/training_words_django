@@ -35,7 +35,7 @@ class Phrase(
     objects = models.Manager()
 
     class Meta:
-        constraints = [
+        constraints = [ # noqa: RUF012
             models.UniqueConstraint(
                 fields=["phrase", "user"],
                 name="unique_phrase_for_user",
@@ -45,9 +45,14 @@ class Phrase(
         verbose_name_plural = "словосочетания"
         ordering = ("-created_at",)
 
+    def clean(self):
+        """Автоматичесская заглавная буква в начале словосочетниая."""
+        if self.phrase:
+            self.phrase = self.phrase.capitalize().strip()
+        return super().clean()
+
     def get_absolute_url(self):
         """Возвращает абсолютный url объекта."""
-
         return reverse("phrase_detail", kwargs={"pk_phrase": self.pk})
 
     def get_text(self):
