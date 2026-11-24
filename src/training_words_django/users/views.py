@@ -96,7 +96,8 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
             user.save(update_fields=["email_verifed"])
             messages.success(
                 self.request,
-                "Новые данные сохранены. Новую электронную почту " "нужно подтвердить",
+                "Новые данные сохранены. Новую электронную почту "
+                "нужно подтвердить",
             )
         else:
             messages.success(self.request, "Новые данные сохранены.")
@@ -169,7 +170,9 @@ class StatisticsView(LoginRequiredMixin, TemplateView):
         ).count()
 
         # Активность (тренировки за последние 30 дней)
-        sessions = TrainingSession.objects.filter(user=user, started_at__gte=month_ago)
+        sessions = TrainingSession.objects.filter(
+            user=user, started_at__gte=month_ago
+        )
         sessions_count = sessions.count()
         total_trainings = (
             sessions.aggregate(total=models.Sum("total_words"))["total"] or 0
@@ -241,7 +244,10 @@ def resend_verification_email(request):
     if cache.get(cache_key):
         messages.warning(
             request,
-            ("Письмо уже отправлено недавно. " "Попробуйте снова через 1 минуту."),
+            (
+                "Письмо уже отправлено недавно. Попробуйте снова "
+                "через 1 минуту."
+            ),
         )
         return redirect("profile_info")
     cache.set(cache_key, True, timeout=60)

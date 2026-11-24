@@ -52,9 +52,11 @@ class WordCreateView(LoginRequiredMixin, CreateView):
             response = super().form_valid(form)
             messages.success(self.request, 'Слово добавлено!')
             return response
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             logger.warning(f'Ошибка: {e}')
-            messages.warning(self.request, 'Возникла ошибка.')
+            messages.warning(
+                self.request, 'Возникла ошибка на стороне сервера.'
+            )
             return self.form_invalid(form)
 
     def get_form_kwargs(self):
@@ -180,7 +182,7 @@ class EditWordView(
             response = super().form_valid(form)
             messages.success(self.request, 'Успешно!')
             return response
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             logger.warning(f'Ошибка: {e}')
             messages.warning(self.request, 'Возникла ошибка.')
             return self.form_invalid(form)
@@ -503,11 +505,14 @@ class CSVDownloadWordsView(View):
             try:
                 for row in csv_reader:
                     word = row['word']
-                    if not Word.words.filter(word=word, user=request.user).exists():
+                    if not Word.words.filter(
+                        word=word,
+                        user=request.user,
+                    ).exists():
                         Word.objects.create(word, user=request.user)
                 messages.success(
                     request,
-                    f'Успешно загружены слова в словарь из файла.',
+                    'Успешно загружены слова в словарь из файла.',
                 )
             except KeyError as e:
                 messages.warning(

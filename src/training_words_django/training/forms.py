@@ -149,7 +149,7 @@ class EditWordForm(
 
     def __init__(self, *args, **kwargs):
         """Добавление поля формы, если есть изображение."""
-        super(EditWordForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if self.instance.image:
             self.fields['delete_image'] = forms.BooleanField(
                 label='Удалить картинку',
@@ -161,12 +161,10 @@ class EditWordForm(
 class TrainingSettingsForm(forms.Form):
     """Форма настройки тренировки."""
 
-    COUNT_CHOICES = [(i, str(i)) for i in NUMBER_OF_WORD]
-
-    WORD_TYPE_CHOICES = [
+    WORD_TYPE_CHOICES = (
         ('words', 'Слова'),
         ('phrases', 'Словосочетания'),
-    ]
+    )
 
     word_type = forms.ChoiceField(
         choices=WORD_TYPE_CHOICES,
@@ -176,7 +174,7 @@ class TrainingSettingsForm(forms.Form):
     )
 
     count = forms.TypedChoiceField(
-        choices=COUNT_CHOICES,
+        choices=[(i, str(i)) for i in NUMBER_OF_WORD],
         initial=COUNT_INITIAL_VALUE,
         coerce=int,
         label='Количество слов',
@@ -184,7 +182,8 @@ class TrainingSettingsForm(forms.Form):
     )
     is_arbitrary = forms.BooleanField(
         label='В произвольном порядке',
-        help_text='Если не выбрано, слова будут отображаться в упорядоченном порядке.',
+        help_text='Если не выбрано, слова будут отображаться в упорядоченном'
+        ' порядке.',
         required=False,
     )
 

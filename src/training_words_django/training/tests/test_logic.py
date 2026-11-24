@@ -22,7 +22,9 @@ class WordLifecycleViewTest(TestCase):
         self.slug = self.word.lower()
         self.client.force_login(self.user)
         self.url_add_word = reverse('add_word')
-        self.delete_url = reverse('delete_word', kwargs={'slug_word': self.slug})
+        self.delete_url = reverse(
+            'delete_word', kwargs={'slug_word': self.slug}
+        )
         self.edit_url = reverse('edit_word', kwargs={'slug_word': self.slug})
         self.detail_url = reverse('detail', kwargs={'slug_word': self.slug})
 
@@ -30,12 +32,13 @@ class WordLifecycleViewTest(TestCase):
         """Тестирование создания, редактирования и удаления слова."""
         create_response = self.client.post(
             self.url_add_word,
-            data=dict(word=self.word, definition='definition'),
+            data={'word': self.word, 'definition': 'definition'},
         )
         self.assertRedirects(create_response, self.url_add_word)
         self.assertTrue(Word.objects.filter(word=self.word).exists())
 
-        new_data = dict(word='Новое')
+        new_data = {'word': 'Новое'}
+
         edit_response = self.client.post(self.edit_url, data=new_data)
         self.assertRedirects(edit_response, self.detail_url)
         word = Word.objects.get(slug=self.word.lower())

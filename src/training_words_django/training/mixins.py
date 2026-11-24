@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from django.contrib.auth.mixins import AccessMixin, LoginRequiredMixin
 from django.http import Http404
 from django.views.generic import ListView
@@ -25,17 +27,21 @@ class BaseShowingViewMixin(LoginRequiredMixin, ListView):
     page_title = None
     empty_message = None
 
-    ordering_map = dict(
-        alphabet='word',
-        updated='-updated_at',
-        repetition_count='repetition_count',
-    )
+    ordering_map: ClassVar[dict[str, str]] = {
+        'alphabet': 'word',
+        'updated': '-updated_at',
+        'repetition_count': 'repetition_count',
+    }
+
     default_order = 'repetition_count'
 
     def apply_erdering(self, queryset):
         """Сортирует queryset по разрешённому параметру order."""
         order = self.request.GET.get('order', self.default_order)
-        ordering = self.ordering_map.get(order, self.ordering_map[self.default_order])
+        ordering = self.ordering_map.get(
+            order,
+            self.ordering_map[self.default_order],
+        )
         return queryset.order_by(ordering)
 
     def get_context_data(self, **kwargs):

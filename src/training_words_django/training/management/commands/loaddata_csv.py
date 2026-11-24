@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand, CommandError
 from phrase.models import Phrase
+
 from training.models import Word
 
 BASE_DIR = Path(__file__).parent
@@ -107,7 +108,8 @@ class Command(BaseCommand):
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
-                        f"Создан пользователь {username} с правами администратора."
+                        f"Создан пользователь {username} с правами"
+                        " администратора."
                     )
                 )
                 self.stdout.write(
@@ -118,5 +120,5 @@ class Command(BaseCommand):
                     )
                 )
 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             self.stdout.write(self.style.ERROR(f"Ошибка: {e}"))
