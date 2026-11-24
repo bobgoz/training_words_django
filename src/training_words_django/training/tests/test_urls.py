@@ -10,7 +10,6 @@ from django.urls import reverse
 class TestTrainingUrl(TestCase):
     def setUp(self):
         self.urls = [
-            # reverse('reset_learned_words'),
             reverse('active_words'),
             reverse('inactive_words'),
             reverse('learned_words'),
