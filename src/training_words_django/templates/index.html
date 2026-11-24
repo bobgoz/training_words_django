@@ -99,7 +99,7 @@
                 </a>
               </div>
             </div>
-            <div class="text-center">
+            <div class="d-flex justify-content-center gap-5">
               <a href="{% url 'add_word' %}" class="btn btn-outline-primary rounded-pill">
                 Добавить слово
               </a>
@@ -118,7 +118,7 @@
             role="tabpanel"
             aria-labelledby="phrases-tab"
           >
-            <div class="row g-3 stats-grid">
+            <div class="row g-3">
               <div class="col-6 col-lg-3">
                 <a href="{% url 'active_phrases' %}" class="text-decoration-none">
                   <div class="surface-card surface-card__body stat-card stat-card--primary hover-lift">
@@ -151,7 +151,7 @@
                   </div>
                 </a>
               </div>
-              <div class="text-center">
+              <div class="d-flex justify-content-center gap-5">
                 <a href="{% url 'add_phrase' %}" class="btn btn-outline-primary rounded-pill">
                   Добавить словосочетание
                 </a>
