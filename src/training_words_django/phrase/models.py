@@ -35,7 +35,7 @@ class Phrase(
     objects = models.Manager()
 
     class Meta:
-        constraints = [ # noqa: RUF012
+        constraints = [  # noqa: RUF012
             models.UniqueConstraint(
                 fields=["phrase", "user"],
                 name="unique_phrase_for_user",
