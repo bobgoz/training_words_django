@@ -7,7 +7,3 @@ COUNT_RANDOM_WORDS = 10
 
 # Количество слов для активации
 MIN_ACTIVE_WORDS = 5
-
-# Форма настройки тренировки
-COUNT_INITIAL_VALUE = 10
-NUMBER_OF_WORD = (10, 20, 30, 40, 50, 80, 100)

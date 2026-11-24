@@ -227,12 +227,10 @@ class TrainingSetupView(LoginRequiredMixin, View):
             return render(request, 'training/train_setup.html', {'form': form})
 
         word_type = form.cleaned_data.get('word_type')
-        count = form.cleaned_data.get('count')
 
         # Сохраняем настройки в сессию
         settings: dict = {
             'word_type': word_type,
-            'count': count,
         }
         request.session.setdefault('training_settings', settings)
 
@@ -264,8 +262,6 @@ class TrainingSetupView(LoginRequiredMixin, View):
         only_en_words = cleaned_data.get('only_en_words')
         only_ru_words = cleaned_data.get('only_ru_words')
         word_type = cleaned_data.get('word_type')
-        is_arbitrary = cleaned_data.get('is_arbitrary')
-        count = cleaned_data.get('count')
 
         # Фильтр по типу слов
         if word_type == 'words':
@@ -278,10 +274,9 @@ class TrainingSetupView(LoginRequiredMixin, View):
             queryset = queryset.filter(language='ru')
 
         # Ограничиваем количество
-        object_ids: list = list(queryset.values_list('id', flat=True)[:count])
+        object_ids: list = list(queryset.values_list('id', flat=True))
 
-        if is_arbitrary:
-            shuffle(object_ids)
+        shuffle(object_ids)
         return object_ids
 
 

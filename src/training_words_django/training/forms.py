@@ -6,7 +6,6 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 
-from .constants import COUNT_INITIAL_VALUE, NUMBER_OF_WORD
 from .models import Word
 
 logger = logging.getLogger(__name__)
@@ -169,22 +168,8 @@ class TrainingSettingsForm(forms.Form):
     word_type = forms.ChoiceField(
         choices=WORD_TYPE_CHOICES,
         widget=forms.RadioSelect,
-        initial=WORD_TYPE_CHOICES[0],
         label='Тип тренировки',
-    )
-
-    count = forms.TypedChoiceField(
-        choices=[(i, str(i)) for i in NUMBER_OF_WORD],
-        initial=COUNT_INITIAL_VALUE,
-        coerce=int,
-        label='Количество слов',
-        help_text='Сколько слов включить в тренировку? ',
-    )
-    is_arbitrary = forms.BooleanField(
-        label='В произвольном порядке',
-        help_text='Если не выбрано, слова будут отображаться в упорядоченном'
-        ' порядке.',
-        required=False,
+        required=True,
     )
 
     def __init__(self, *args, **kwargs):
